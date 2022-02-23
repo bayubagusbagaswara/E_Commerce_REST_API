@@ -16,8 +16,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Kota extends BaseEntity {
 
+    @Column(name = "code", nullable = false)
     private String code;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
