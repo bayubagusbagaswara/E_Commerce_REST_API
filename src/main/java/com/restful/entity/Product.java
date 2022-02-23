@@ -1,5 +1,7 @@
 package com.restful.entity;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +23,11 @@ public class Product extends BaseEntity {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    @Min(1)
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
+    @Min(0)
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
@@ -31,7 +35,7 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "id_product_detail", foreignKey = @ForeignKey(name = "fk_product_product_detail"))
     private ProductDetail productDetail;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_category", foreignKey = @ForeignKey(name = "fk_product_category"))
     private Category category;
 
