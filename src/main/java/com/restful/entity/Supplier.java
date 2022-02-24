@@ -1,6 +1,7 @@
 package com.restful.entity;
 
 import com.restful.entity.enumerator.Gender;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "suppliers")
+@Table(name = "suppliers", uniqueConstraints = {
+        @UniqueConstraint(name = "suppliers_unique_email", columnNames = "email"),
+        @UniqueConstraint(name = "suppliers_unique_mobile_phone", columnNames = "mobile_phone")
+})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,6 +25,7 @@ public class Supplier extends BaseEntity {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    @Email
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
