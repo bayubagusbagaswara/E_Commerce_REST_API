@@ -11,9 +11,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     // get product by name containing ignore case
     List<Product> findAllByNameContainingIgnoreCase(String name);
 
-    // get all product sorting by price
-    List<Product> findAllAndOrderByPrice();
-
     // get product by price between
     List<Product> findAllByPriceBetween(BigDecimal priceMin, BigDecimal priceMax);
 
