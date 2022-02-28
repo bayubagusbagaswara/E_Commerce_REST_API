@@ -1,11 +1,13 @@
 package com.restful.service;
 
 import com.restful.dto.product.CreateProductRequestDto;
+import com.restful.exception.CategoryNotFoundException;
+import com.restful.exception.ProductDetailNotFoundException;
 
 public interface ProductService {
 
     // create new product
-    CreateProductRequestDto createProduct(CreateProductRequestDto createProductRequestDto);
+    CreateProductRequestDto createProduct(CreateProductRequestDto createProductRequestDto) throws CategoryNotFoundException, ProductDetailNotFoundException;
 
     // get product by id
 
