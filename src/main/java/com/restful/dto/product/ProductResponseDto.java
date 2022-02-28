@@ -24,7 +24,13 @@ public class ProductResponseDto {
     private Integer quantity;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    // ini apa diganti dengan ProductDetailResponseDto
     private ProductDetail productDetail;
+
+    // ini apa diganti dengan CategoryResponseDto
     private Category category;
+
+    // ini apa diganti dengan SupplierResponseDto
     private Set<Supplier> suppliers;
 }
