@@ -1,6 +1,7 @@
 package com.restful.service.impl;
 
 import com.restful.dto.product.CreateProductRequestDto;
+import com.restful.dto.product.ProductResponseDto;
 import com.restful.entity.Category;
 import com.restful.entity.Product;
 import com.restful.entity.ProductDetail;
@@ -47,5 +48,19 @@ public class ProductServiceImpl implements ProductService {
         product.setCreatedAt(LocalDateTime.now());
         productRepository.save(product);
         return null;
+    }
+
+    private ProductResponseDto mapProductToProductResponseDto(Product product) {
+        ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setId(product.getId());
+        productResponseDto.setName(product.getName());
+        productResponseDto.setPrice(product.getPrice());
+        productResponseDto.setQuantity(product.getQuantity());
+        productResponseDto.setProductDetail(product.getProductDetail());
+        productResponseDto.setCategory(product.getCategory());
+        productResponseDto.setSuppliers(product.getSuppliers());
+        productResponseDto.setCreatedAt(product.getCreatedAt());
+        productResponseDto.setUpdatedAt(product.getUpdatedAt());
+        return productResponseDto;
     }
 }
