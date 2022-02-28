@@ -1,4 +1,4 @@
-package com.restful.dto;
+package com.restful.dto.product;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
