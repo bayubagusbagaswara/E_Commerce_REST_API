@@ -11,17 +11,12 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListAllProvinsiResponseDto {
+public class ListProvinsiResponseDto {
 
-    private List<ProvinsiResponseDto> provinsiResponseDtoList;
-
+    private List<ProvinsiResponseDto> provinsiResponses;
     private Integer pageNo;
-
     private Integer pageSize;
-
     private Long totalElements;
-
     private Integer totalPages;
-
     private boolean last;
 }
