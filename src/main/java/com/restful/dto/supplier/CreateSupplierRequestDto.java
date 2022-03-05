@@ -1,6 +1,5 @@
 package com.restful.dto.supplier;
 
-import com.restful.entity.Address;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
