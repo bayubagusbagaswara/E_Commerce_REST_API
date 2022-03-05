@@ -1,4 +1,4 @@
-package com.restful.dto.provinsi;
+package com.restful.dto.kota;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListAllProvinsiRequestDto {
+public class ListKotaRequestDto {
 
     @NotNull(message = "Page Index can not null")
     @Min(value = 0, message = "Page Index must not be less than zero")
