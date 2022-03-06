@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListAllProductRequestDto {
+public class ListProductRequestDto {
 
     @NotNull(message = "Page Index can not null")
     @Min(value = 0, message = "Page Index must not be less than zero")
