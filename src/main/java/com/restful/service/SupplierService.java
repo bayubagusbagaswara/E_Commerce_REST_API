@@ -5,6 +5,7 @@ public interface SupplierService {
     // create supplier
     // user baru harus mengirimkan data:
     // name, email, mobile phone, gender, address
+    // address terdiri dari street, postal code, dan kelurahan id
 
     // get supplier by id
 
