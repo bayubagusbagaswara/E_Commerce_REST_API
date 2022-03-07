@@ -52,7 +52,6 @@ public class WilayahMapper {
     // Mapping from Kelurahan to KelurahanResponseDto
     public static KelurahanResponseDto mapKelurahanToKelurahanResponseDto(Kelurahan kelurahan) {
         KelurahanResponseDto dto = new KelurahanResponseDto();
-        dto.setPostalCode(kelurahan.getPostalCode());
         dto.setId(kelurahan.getId());
         dto.setCode(kelurahan.getCode());
         dto.setName(kelurahan.getName());
