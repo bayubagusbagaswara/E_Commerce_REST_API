@@ -3,10 +3,12 @@ package com.restful.repository;
 import com.restful.entity.address.Kelurahan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface KelurahanRepository extends JpaRepository<Kelurahan, String> {
 
-    // get kelurahan by postal code
-    // get kelurahan by name ignore case
-    // get kelurahan by code
-    // get kelurahan by name containing ignore case
+    Optional<Kelurahan> findAllByCode(String code);
+    Optional<Kelurahan> findAllByNameIgnoreCase(String name);
+    List<Kelurahan> findAllByNameContainingIgnoreCase(String name);
 }
