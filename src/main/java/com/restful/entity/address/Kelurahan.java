@@ -10,8 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "kelurahan", uniqueConstraints = {
-        @UniqueConstraint(name = "kelurahan_unique_code", columnNames = "code"),
-        @UniqueConstraint(name = "kelurahan_unique_postal_code", columnNames = "postal_code")
+        @UniqueConstraint(name = "kelurahan_unique_code", columnNames = "code")
 })
 @Getter
 @Setter
@@ -25,8 +24,7 @@ public class Kelurahan extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "postal_code", nullable = false)
-    private String postalCode;
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_kecamatan", foreignKey = @ForeignKey(name = "fk_kelurahan_kecamatan"))
