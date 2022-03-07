@@ -13,22 +13,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateSupplierRequestDto {
 
-    @NotBlank
+    @NotBlank(message = "Name must not be blank")
     private String name;
 
-    @Email
-    @NotBlank
+    @Email(message = "Email must be formatted")
+    @NotBlank(message = "Email must not be blank")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Gender must not be blank")
     private String gender;
 
-    @NotBlank
+    @NotBlank(message = "Mobile phone must not be blank")
     private String mobilePhone;
 
-    @NotBlank
-    private String kelurahanId;
-
-    @NotBlank
+    @NotBlank(message = "Street must not be blank")
     private String street;
+
+    @NotBlank(message = "Kelurahan ID must not be blank")
+    private String kelurahanId;
 }
