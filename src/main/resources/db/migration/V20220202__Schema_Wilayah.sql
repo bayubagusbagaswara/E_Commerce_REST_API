@@ -1,4 +1,3 @@
-
 -- PROVINSI
 create table provinsi (
     id character varying(64) not null primary key default uuid_generate_v4(),
@@ -60,13 +59,10 @@ create table kelurahan (
     updated_by character varying(255),
     code character varying(255) not null,
     name character varying(255) not null,
-    postal_code character varying(255) not null,
     id_kecamatan character varying(64)
 );
 
 alter table kelurahan
     add constraint kelurahan_unique_code unique (code);
-alter table kelurahan
-    add constraint kelurahan_unique_postal_code unique (postal_code);
 alter table kelurahan
     add constraint fk_kelurahan_kecamatan foreign key (id_kecamatan) references kecamatan(id);
