@@ -2,6 +2,7 @@ package com.restful.dto.supplier;
 
 import com.restful.dto.product.ProductResponseDto;
 import com.restful.entity.Address;
+import com.restful.entity.enumerator.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class SupplierResponseDto {
 
     private String mobilePhone;
 
-    private String gender;
+    private Gender gender;
 
     private LocalDateTime createdAt;
 
