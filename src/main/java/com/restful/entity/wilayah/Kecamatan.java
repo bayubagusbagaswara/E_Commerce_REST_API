@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -16,6 +18,8 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE kecamatan SET status_record = 'INACTIVE' WHERE id = ?")
+@Where(clause = "status_record = 'ACTIVE'")
 public class Kecamatan extends BaseEntity {
 
     @Column(name = "code", nullable = false)

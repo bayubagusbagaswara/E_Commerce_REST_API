@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +20,8 @@ import javax.persistence.UniqueConstraint;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE product_detail SET status_record = 'INACTIVE' WHERE id = ?")
+@Where(clause = "status_record = 'ACTIVE'")
 public class ProductDetail extends BaseEntity {
 
     @Column(name = "SKU", nullable = false, length = 50)

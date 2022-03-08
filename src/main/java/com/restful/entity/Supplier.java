@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -20,6 +22,8 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE suppliers SET status_record = 'INACTIVE' WHERE id = ?")
+@Where(clause = "status_record = 'ACTIVE'")
 public class Supplier extends BaseEntity {
     
     @Column(name = "name", nullable = false, length = 100)
