@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,6 +17,10 @@ public class AddressResponseDto {
     private String id;
 
     private String street;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 
     private KelurahanResponseDto kelurahanResponseDto;
 }
