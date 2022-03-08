@@ -3,26 +3,23 @@ package com.restful.service;
 import com.restful.dto.category.*;
 import com.restful.exception.CategoryNotFoundException;
 
+import java.util.List;
+
 public interface CategoryService {
 
-    // create category
     CategoryResponseDto createCategory(CreateCategoryRequestDto createCategoryRequestDto);
 
-    // get category by id
     CategoryResponseDto getCategoryById(String categoryId) throws CategoryNotFoundException;
 
-    // get all category
     ListAllCategoryResponseDto getAllCategories(ListAllCategoryRequestDto listAllCategoryRequestDto);
 
-    // update category
     CategoryResponseDto updateCategory(String categoryId, UpdateCategoryRequestDto updateCategoryRequestDto) throws CategoryNotFoundException;
 
-    // delete category
     void deleteCategory(String categoryId);
 
-    // get category by name
-    CategoryResponseDto getCategoryByName(String name);
+    CategoryResponseDto getCategoryByName(String name) throws CategoryNotFoundException;
 
-    // get category by name starting with
-    CategoryResponseDto getCategoryStartingWithName(String name);
+    List<CategoryResponseDto> getCategoryByNameContains(String name);
+
+    List<CategoryResponseDto> getCategoryStartingWithName(String name);
 }
