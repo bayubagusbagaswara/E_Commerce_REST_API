@@ -8,8 +8,7 @@ import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<Category, String> {
 
-    // get category by name
-    Optional<Category> findByNameContainingIgnoreCase(String name);
-
-    List<Category> findByNameIgnoreCaseStartsWith(String name);
+    Optional<Category> findAllByNameIgnoreCase(String name);
+    List<Category> findAllByNameContainingIgnoreCase(String name);
+    List<Category> findAllByNameIgnoreCaseStartsWith(String name);
 }
