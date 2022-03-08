@@ -1,6 +1,7 @@
 package com.restful.service.impl;
 
 import com.restful.dto.product.*;
+import com.restful.dto.supplier.SupplierResponseDto;
 import com.restful.entity.Category;
 import com.restful.entity.Product;
 import com.restful.entity.ProductDetail;
@@ -153,33 +154,61 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private ProductResponseDto mapProductToProductResponseDto(Product product) {
-        ProductResponseDto productResponseDto = new ProductResponseDto();
-        productResponseDto.setId(product.getId());
-        productResponseDto.setName(product.getName());
-        productResponseDto.setPrice(product.getPrice());
-        productResponseDto.setQuantity(product.getQuantity());
-        productResponseDto.setProductDetail(product.getProductDetail());
-        productResponseDto.setCategory(product.getCategory());
-        productResponseDto.setSuppliers(product.getSuppliers());
-        productResponseDto.setCreatedAt(product.getCreatedAt());
-        productResponseDto.setUpdatedAt(product.getUpdatedAt());
-        return productResponseDto;
+        ProductResponseDto dto = new ProductResponseDto();
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setPrice(product.getPrice());
+        dto.setQuantity(product.getQuantity());
+        dto.setProductDetail(product.getProductDetail());
+        dto.setCategory(product.getCategory());
+        dto.setCreatedAt(product.getCreatedAt());
+        dto.setUpdatedAt(product.getUpdatedAt());
+        dto.setSuppliers(product.getSuppliers().stream()
+                .map(supplier -> {
+                    SupplierResponseDto supplierResponseDto = new SupplierResponseDto();
+                    supplierResponseDto.setId(supplier.getId());
+                    supplierResponseDto.setName(supplier.getName());
+                    supplierResponseDto.setEmail(supplier.getEmail());
+                    supplierResponseDto.setGender(supplier.getGender());
+                    supplierResponseDto.setMobilePhone(supplier.getMobilePhone());
+                    supplierResponseDto.setAddress(supplier.getAddress());
+                    supplierResponseDto.setCreatedAt(supplier.getCreatedAt());
+                    supplierResponseDto.setUpdatedAt(supplier.getUpdatedAt());
+                    return supplierResponseDto;
+                })
+                .collect(Collectors.toSet())
+        );
+        return dto;
     }
 
     private List<ProductResponseDto> mapProductListToProductResponseDtoList(List<Product> productList) {
         return productList.stream()
                 .map((product) -> {
-                    ProductResponseDto productResponseDto = new ProductResponseDto();
-                    productResponseDto.setId(product.getId());
-                    productResponseDto.setName(product.getName());
-                    productResponseDto.setPrice(product.getPrice());
-                    productResponseDto.setQuantity(product.getQuantity());
-                    productResponseDto.setProductDetail(product.getProductDetail());
-                    productResponseDto.setCategory(product.getCategory());
-                    productResponseDto.setSuppliers(product.getSuppliers());
-                    productResponseDto.setCreatedAt(product.getCreatedAt());
-                    productResponseDto.setUpdatedAt(product.getUpdatedAt());
-                    return productResponseDto;
+                    ProductResponseDto dto = new ProductResponseDto();
+                    dto.setId(product.getId());
+                    dto.setName(product.getName());
+                    dto.setPrice(product.getPrice());
+                    dto.setQuantity(product.getQuantity());
+                    dto.setProductDetail(product.getProductDetail());
+                    dto.setCategory(product.getCategory());
+                    dto.setCreatedAt(product.getCreatedAt());
+                    dto.setUpdatedAt(product.getUpdatedAt());
+                    dto.setSuppliers(product.getSuppliers().stream()
+                            .map(supplier -> {
+                                SupplierResponseDto supplierResponseDto = new SupplierResponseDto();
+                                supplierResponseDto.setId(supplier.getId());
+                                supplierResponseDto.setName(supplier.getName());
+                                supplierResponseDto.setEmail(supplier.getEmail());
+                                supplierResponseDto.setGender(supplier.getGender());
+                                supplierResponseDto.setMobilePhone(supplier.getMobilePhone());
+                                supplierResponseDto.setAddress(supplier.getAddress());
+                                supplierResponseDto.setCreatedAt(supplier.getCreatedAt());
+                                supplierResponseDto.setUpdatedAt(supplier.getUpdatedAt());
+                                return supplierResponseDto;
+                            })
+                            .collect(Collectors.toSet())
+                    );
+                    return dto;
                 })
                 .collect(Collectors.toList())
                 ;
