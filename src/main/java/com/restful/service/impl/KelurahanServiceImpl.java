@@ -2,14 +2,13 @@ package com.restful.service.impl;
 
 import com.restful.dto.WilayahMapper;
 import com.restful.dto.kelurahan.*;
-import com.restful.entity.address.Kecamatan;
-import com.restful.entity.address.Kelurahan;
+import com.restful.entity.wilayah.Kecamatan;
+import com.restful.entity.wilayah.Kelurahan;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KelurahanNotFoundException;
 import com.restful.repository.KecamatanRepository;
 import com.restful.repository.KelurahanRepository;
 import com.restful.service.KelurahanService;
-import com.restful.service.ProvinsiService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

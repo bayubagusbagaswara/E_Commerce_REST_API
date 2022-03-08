@@ -1,6 +1,6 @@
 package com.restful.repository;
 
-import com.restful.entity.address.Kelurahan;
+import com.restful.entity.wilayah.Kelurahan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

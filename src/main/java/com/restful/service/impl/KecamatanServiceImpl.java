@@ -2,8 +2,8 @@ package com.restful.service.impl;
 
 import com.restful.dto.WilayahMapper;
 import com.restful.dto.kecamatan.*;
-import com.restful.entity.address.Kecamatan;
-import com.restful.entity.address.Kota;
+import com.restful.entity.wilayah.Kecamatan;
+import com.restful.entity.wilayah.Kota;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.repository.KecamatanRepository;

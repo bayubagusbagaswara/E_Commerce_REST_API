@@ -2,7 +2,7 @@ package com.restful.service.impl;
 
 import com.restful.dto.WilayahMapper;
 import com.restful.dto.provinsi.*;
-import com.restful.entity.address.Provinsi;
+import com.restful.entity.wilayah.Provinsi;
 import com.restful.exception.ProvinsiNotFoundException;
 import com.restful.repository.ProvinsiRepository;
 import com.restful.service.ProvinsiService;

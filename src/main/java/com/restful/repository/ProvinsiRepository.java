@@ -1,6 +1,6 @@
 package com.restful.repository;
 
-import com.restful.entity.address.Provinsi;
+import com.restful.entity.wilayah.Provinsi;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.restful.entity;
 
-import com.restful.entity.address.Kelurahan;
+import com.restful.entity.wilayah.Kelurahan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -4,10 +4,10 @@ import com.restful.dto.kecamatan.KecamatanResponseDto;
 import com.restful.dto.kelurahan.KelurahanResponseDto;
 import com.restful.dto.kota.KotaResponseDto;
 import com.restful.dto.provinsi.ProvinsiResponseDto;
-import com.restful.entity.address.Kecamatan;
-import com.restful.entity.address.Kelurahan;
-import com.restful.entity.address.Kota;
-import com.restful.entity.address.Provinsi;
+import com.restful.entity.wilayah.Kecamatan;
+import com.restful.entity.wilayah.Kelurahan;
+import com.restful.entity.wilayah.Kota;
+import com.restful.entity.wilayah.Provinsi;
 
 import java.util.List;
 import java.util.stream.Collectors;
