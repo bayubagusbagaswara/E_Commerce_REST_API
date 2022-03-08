@@ -1,5 +1,8 @@
 package com.restful.dto.product;
 
+import com.restful.dto.category.CategoryResponseDto;
+import com.restful.dto.productdetail.ProductDetailResponseDto;
+import com.restful.dto.supplier.SupplierResponseDto;
 import com.restful.entity.Category;
 import com.restful.entity.ProductDetail;
 import com.restful.entity.Supplier;
@@ -25,12 +28,12 @@ public class ProductResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // ini apa diganti dengan ProductDetailResponseDto
     private ProductDetail productDetail;
 
-    // ini apa diganti dengan CategoryResponseDto
     private Category category;
 
-    // ini apa diganti dengan SupplierResponseDto
-    private Set<Supplier> suppliers;
+    // tapi ini inginnya hanya meload data supplier
+    // tidak reference ke product lagi
+    // harusnya isi data supplier adalah hasil dari getSupplierByProductsId dari SupplierRepository
+    private Set<SupplierResponseDto> suppliers;
 }
