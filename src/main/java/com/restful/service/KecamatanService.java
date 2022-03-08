@@ -2,13 +2,14 @@ package com.restful.service;
 
 import com.restful.dto.kecamatan.*;
 import com.restful.exception.KecamatanNotFoundException;
+import com.restful.exception.KotaNotFoundException;
 
 import java.util.List;
 
 public interface KecamatanService {
 
     // create kecamatan
-    KecamatanResponseDto createKecamatan(CreateKecamatanRequestDto createKecamatanRequestDto);
+    KecamatanResponseDto createKecamatan(CreateKecamatanRequestDto createKecamatanRequestDto) throws KotaNotFoundException;
 
     // get kecamatan by id
     KecamatanResponseDto getKecamatanById(String id) throws KecamatanNotFoundException;
@@ -17,7 +18,7 @@ public interface KecamatanService {
     ListKecamatanResponseDto getAllKecamatan(ListKecamatanRequestDto listKecamatanRequestDto);
 
     // update kecamatan
-    KecamatanResponseDto updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequestDto) throws KecamatanNotFoundException;
+    KecamatanResponseDto updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequestDto) throws KecamatanNotFoundException, KotaNotFoundException;
 
     // delete kecamatan
     void deleteKecamatan(String id);
