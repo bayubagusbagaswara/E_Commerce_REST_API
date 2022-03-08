@@ -11,4 +11,5 @@ public interface KecamatanRepository extends JpaRepository<Kecamatan, String> {
     Optional<Kecamatan> findAllByCode(String code);
     Optional<Kecamatan> findAllByNameIgnoreCase(String name);
     List<Kecamatan> findAllByNameContainingIgnoreCase(String name);
+    List<Kecamatan> findAllByKotaId(String kodaId);
 }
