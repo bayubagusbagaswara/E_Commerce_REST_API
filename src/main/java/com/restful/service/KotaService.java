@@ -2,13 +2,14 @@ package com.restful.service;
 
 import com.restful.dto.kota.*;
 import com.restful.exception.KotaNotFoundException;
+import com.restful.exception.ProvinsiNotFoundException;
 
 import java.util.List;
 
 public interface KotaService {
 
     // create kota
-    KotaResponseDto createKota(CreateKotaRequestDto createKotaRequestDto);
+    KotaResponseDto createKota(CreateKotaRequestDto createKotaRequestDto) throws ProvinsiNotFoundException;
 
     // get kota by id
     KotaResponseDto getKotaById(String id) throws KotaNotFoundException;
@@ -17,7 +18,7 @@ public interface KotaService {
     ListKotaResponseDto getAllKota(ListKotaRequestDto listKotaRequestDto);
 
     // update kota
-    KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequestDto) throws KotaNotFoundException;
+    KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequestDto) throws KotaNotFoundException, ProvinsiNotFoundException;
 
     // delete kota by id
     void deleteKota(String id);
