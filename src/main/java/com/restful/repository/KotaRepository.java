@@ -11,4 +11,5 @@ public interface KotaRepository extends JpaRepository<Kota, String> {
     Optional<Kota> findAllByCode(String code);
     Optional<Kota> findAllByNameIgnoreCase(String name);
     List<Kota> findAllByNameContainingIgnoreCase(String name);
+    List<Kota> findAllByProvinsiId(String provinsiId);
 }
