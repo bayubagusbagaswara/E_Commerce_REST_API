@@ -29,6 +29,10 @@ public class CreateSupplierRequestDto {
     @NotBlank(message = "Street must not be blank")
     private String street;
 
+    // kita kirim postal code dulu, tapi field street dan postal code akan disimpan di beda table
+    @NotBlank(message = "Postal code must not be blank")
+    private String postalCode;
+
     @NotBlank(message = "Kelurahan ID must not be blank")
     private String kelurahanId;
 }
