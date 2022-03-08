@@ -1,10 +1,7 @@
 package com.restful.service;
 
-import com.restful.dto.kecamatan.ListKecamatanRequestDto;
-import com.restful.dto.kelurahan.CreateKelurahanRequestDto;
-import com.restful.dto.kelurahan.KelurahanResponseDto;
-import com.restful.dto.kelurahan.ListKelurahanResponseDto;
-import com.restful.dto.kelurahan.UpdateKelurahanRequestDto;
+import com.restful.dto.kelurahan.*;
+import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KelurahanNotFoundException;
 
 import java.util.List;
@@ -12,16 +9,16 @@ import java.util.List;
 public interface KelurahanService {
 
     // create kelurahan
-    KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequestDto);
+    KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequestDto) throws KecamatanNotFoundException;
 
     // get kelurahan by id
     KelurahanResponseDto getKelurahanById(String id) throws KelurahanNotFoundException;
 
     // get all kelurahan
-    ListKelurahanResponseDto getAllKelurahan(ListKecamatanRequestDto listKecamatanRequestDto);
+    ListKelurahanResponseDto getAllKelurahan(ListKelurahanRequestDto listKelurahanRequestDto);
 
     // update kelurahan
-    KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequestDto) throws KelurahanNotFoundException;
+    KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequestDto) throws KelurahanNotFoundException, KecamatanNotFoundException;
 
     // delete kelurahan
     void deleteKelurahan(String id);
@@ -30,7 +27,7 @@ public interface KelurahanService {
     KelurahanResponseDto getKelurahanByName(String name) throws KelurahanNotFoundException;
 
     // get kelurahan by name contains
-    List<KelurahanResponseDto> getKelurananByNameContains(String name);
+    List<KelurahanResponseDto> getKelurahanByNameContains(String name);
 
     // get kelurahan by code
     KelurahanResponseDto getKelurahanByCode(String code) throws KelurahanNotFoundException;
