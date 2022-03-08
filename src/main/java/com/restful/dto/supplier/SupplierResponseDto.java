@@ -1,5 +1,7 @@
 package com.restful.dto.supplier;
 
+import com.restful.dto.address.AddressResponseDto;
+import com.restful.dto.product.ProductResponseDto;
 import com.restful.entity.Address;
 import com.restful.entity.Product;
 import com.restful.entity.enumerator.Gender;
@@ -10,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,9 +32,13 @@ public class SupplierResponseDto {
 
     private String gender;
 
-    // kita ganti dengan AddressResponseDto
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
     private Address address;
 
-    // kita ganti denga ProductResponseDto
-    private Set<Product> products = new HashSet<>();
+    // dan ini juga harusnya hasilnya dari findAllProductsBySupplierId dari ProductRepository
+    private Set<ProductResponseDto> products = new HashSet<>();
+//    private Set<Product> products = new HashSet<>();
 }
