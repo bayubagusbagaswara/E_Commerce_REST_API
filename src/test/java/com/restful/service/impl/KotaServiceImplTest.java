@@ -3,18 +3,29 @@ package com.restful.service.impl;
 import com.restful.dto.kota.*;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.exception.ProvinsiNotFoundException;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.function.Executable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Sql(scripts = {
+        "classpath:/sql/delete-data-kota.sql",
+        "classpath:/sql/delete-data-provinsi.sql",
+        "classpath:/sql/sample-data-provinsi.sql",
+        "classpath:/sql/sample-data-kota.sql"
+})
 class KotaServiceImplTest {
 
     private final static Logger log = LoggerFactory.getLogger(KotaServiceImplTest.class);
@@ -23,11 +34,13 @@ class KotaServiceImplTest {
     KotaServiceImpl kotaService;
 
     @Test
+    @Order(1)
     void createKota() throws ProvinsiNotFoundException {
         CreateKotaRequestDto requestDto = new CreateKotaRequestDto();
-        requestDto.setCode("");
-        requestDto.setName("");
-        requestDto.setProvinsiId("");
+        requestDto.setCode("35123");
+        requestDto.setName("Kota Test");
+        // provinsi Jawa Timur
+        requestDto.setProvinsiId("35");
 
         final KotaResponseDto kota = kotaService.createKota(requestDto);
         assertNotNull(kota.getId());
@@ -39,18 +52,22 @@ class KotaServiceImplTest {
     }
 
     @Test
+    @Order(2)
     void getKotaById() throws KotaNotFoundException {
-        String id = "";
+        // id kota Kediri, Jawa Timur
+        String id = "3571";
         final KotaResponseDto kota = kotaService.getKotaById(id);
         assertEquals(id, kota.getId());
         log.info("ID: {}", kota.getId());
     }
 
     @Test
+    @Order(3)
     void getAllKota() {
-        int totalSampleKota = 0;
+        // total sample kota 7
+        int totalSampleKota = 7;
         int pageNo = 0;
-        int pageSize = 5;
+        int pageSize = 3;
         String sortBy = "name";
         String sortDir = "asc";
 
@@ -66,12 +83,14 @@ class KotaServiceImplTest {
     }
 
     @Test
+    @Order(4)
     void updateKota() throws ProvinsiNotFoundException, KotaNotFoundException {
-        String id = "";
+        // update kota Denpasar pindah ke provinsi jawa timur
+        String id = "5171";
         UpdateKotaRequestDto requestDto = new UpdateKotaRequestDto();
-        requestDto.setCode("");
-        requestDto.setName("");
-        requestDto.setProvinsiId("");
+        requestDto.setCode("35123");
+        requestDto.setName("KOTA DENPASAR Update");
+        requestDto.setProvinsiId("35");
 
         final KotaResponseDto responseDto = kotaService.updateKota(id, requestDto);
         assertEquals(id, responseDto.getId());
@@ -81,8 +100,10 @@ class KotaServiceImplTest {
     }
 
     @Test
+    @Order(5)
     void deleteKota() {
-        String id = "";
+        // delete kota Denpasar
+        String id = "5171";
         kotaService.deleteKota(id);
         assertThrows(KotaNotFoundException.class, new Executable() {
             @Override
@@ -93,26 +114,31 @@ class KotaServiceImplTest {
     }
 
     @Test
+    @Order(6)
     void getKotaByName() throws KotaNotFoundException {
-        String name = "";
+        String name = "kota kediri";
         final KotaResponseDto kota = kotaService.getKotaByName(name);
         assertEquals(name, kota.getName().toLowerCase());
         log.info("Name: {}", kota.getName());
     }
 
     @Test
+    @Order(7)
     void getKotaByCode() throws KotaNotFoundException {
-        String code = "";
+        // code kota kediri
+        String code = "3571";
         final KotaResponseDto kota = kotaService.getKotaByCode(code);
         assertEquals(code, kota.getCode());
         log.info("Code: {}", kota.getCode());
     }
 
     @Test
+    @Order(8)
     void getKotaByNameContains() {
-        String name = "";
+        // contains name kediri [KAB KEDIRI, KOTA KEDIRI]
+        String name = "kediri";
         final List<KotaResponseDto> kotaList = kotaService.getKotaByNameContains(name);
-        assertEquals(3, kotaList.size());
+        assertEquals(2, kotaList.size());
         for (KotaResponseDto kota : kotaList) {
             log.info("Name: {}", kota.getName());
             log.info("=======");
@@ -120,10 +146,12 @@ class KotaServiceImplTest {
     }
 
     @Test
+    @Order(9)
     void getKotaByProvinsiId() {
-        String provinsiId = "";
+        // provinsi jawa timur [Kota Surabaya, Kota Kediri, Kab Kediri]
+        String provinsiId = "35";
         final List<KotaResponseDto> kotaList = kotaService.getKotaByProvinsiId(provinsiId);
-        assertEquals(5, kotaList.size());
+        assertEquals(3, kotaList.size());
         for (KotaResponseDto kota : kotaList) {
             log.info("Name: {}", kota.getName());
             log.info("=======");
