@@ -16,7 +16,6 @@ public class KelurahanResponseDto {
     private String id;
     private String name;
     private String code;
-    private String postalCode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private KecamatanResponseDto kecamatanResponseDto;
