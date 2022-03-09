@@ -28,8 +28,6 @@ public class Kelurahan extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_kecamatan", foreignKey = @ForeignKey(name = "fk_kelurahan_kecamatan"))
     private Kecamatan kecamatan;
