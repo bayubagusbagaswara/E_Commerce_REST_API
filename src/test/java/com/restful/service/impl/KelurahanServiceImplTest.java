@@ -3,17 +3,32 @@ package com.restful.service.impl;
 import com.restful.dto.kelurahan.*;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KelurahanNotFoundException;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Sql(scripts = {
+        "classpath:/sql/delete-data-kelurahan.sql",
+        "classpath:/sql/delete-data-kecamatan.sql",
+        "classpath:/sql/delete-data-kota.sql",
+        "classpath:/sql/delete-data-provinsi.sql",
+        "classpath:/sql/sample-data-provinsi.sql",
+        "classpath:/sql/sample-data-kota.sql",
+        "classpath:/sql/sample-data-kecamatan.sql",
+        "classpath:/sql/sample-data-kelurahan.sql"
+})
 class KelurahanServiceImplTest {
 
     private final static Logger log = LoggerFactory.getLogger(KelurahanServiceImplTest.class);
@@ -22,11 +37,13 @@ class KelurahanServiceImplTest {
     KelurahanServiceImpl kelurahanService;
 
     @Test
+    @Order(1)
     void createKelurahan() throws KecamatanNotFoundException {
         CreateKelurahanRequestDto requestDto = new CreateKelurahanRequestDto();
-        requestDto.setCode("");
-        requestDto.setName("");
-        requestDto.setKecamatanId("");
+        requestDto.setCode("3571038899");
+        requestDto.setName("Kelurahan di Pesantren");
+        // id kecamatan Pesantren
+        requestDto.setKecamatanId("357103");
 
         final KelurahanResponseDto responseDto = kelurahanService.createKelurahan(requestDto);
         assertNotNull(responseDto.getId());
@@ -35,15 +52,18 @@ class KelurahanServiceImplTest {
     }
 
     @Test
+    @Order(2)
     void getKelurahanById() throws KelurahanNotFoundException {
-        String id = "";
+        // id kelurahan Singonegaran, Kecamatan Pesantren
+        String id = "3571031005";
         final KelurahanResponseDto responseDto = kelurahanService.getKelurahanById(id);
         assertEquals(id, responseDto.getId());
     }
 
     @Test
+    @Order(3)
     void getAllKelurahan() {
-        int totalSampleKelurahan = 0;
+        int totalSampleKelurahan = 18;
         int pageNo = 0;
         int pageSize = 5;
         String sortBy = "name";
@@ -61,12 +81,15 @@ class KelurahanServiceImplTest {
     }
 
     @Test
+    @Order(4)
     void updateKelurahan() throws KelurahanNotFoundException, KecamatanNotFoundException {
-        String id = "";
+        // id kelurahan balowerti
+        String id = "3571021002";
         UpdateKelurahanRequestDto requestDto = new UpdateKelurahanRequestDto();
-        requestDto.setCode("");
-        requestDto.setName("");
-        requestDto.setKecamatanId("");
+        requestDto.setCode("3571021002");
+        requestDto.setName("Balowerti Update");
+        // pindah ke kecamatan Pesantren
+        requestDto.setKecamatanId("357103");
 
         final KelurahanResponseDto responseDto = kelurahanService.updateKelurahan(id, requestDto);
 
@@ -77,8 +100,10 @@ class KelurahanServiceImplTest {
     }
 
     @Test
+    @Order(5)
     void deleteKelurahan() {
-        String id = "";
+        // id kelurahan Ngronggo
+        String id = "3571021014";
         kelurahanService.deleteKelurahan(id);
         assertThrows(KelurahanNotFoundException.class, () -> {
             final KelurahanResponseDto kelurahan = kelurahanService.getKelurahanById(id);
@@ -86,26 +111,32 @@ class KelurahanServiceImplTest {
     }
 
     @Test
+    @Order(6)
     void getKelurahanByName() throws KelurahanNotFoundException {
-        String name = "";
+        // kelurahan singonegaran
+        String name = "singonegaran";
         final KelurahanResponseDto kelurahan = kelurahanService.getKelurahanByName(name);
         assertEquals(name, kelurahan.getName().toLowerCase());
         log.info("Name: {}", kelurahan.getName());
     }
 
     @Test
+    @Order(7)
     void getKelurahanByCode() throws KelurahanNotFoundException {
-        String code = "";
+        // code singonegaran
+        String code = "3571031005";
         final KelurahanResponseDto kelurahan = kelurahanService.getKelurahanByCode(code);
         assertEquals(code, kelurahan.getCode());
         log.info("Code: {}", kelurahan.getCode());
     }
 
     @Test
+    @Order(8)
     void getKelurahanByNameContains() {
-        String name = "";
+        // name "ma" [Manggarai, Kemayoran, Manyar Sabrangan]
+        String name = "ma";
         final List<KelurahanResponseDto> kelurahanList = kelurahanService.getKelurahanByNameContains(name);
-        assertEquals(5, kelurahanList.size());
+        assertEquals(3, kelurahanList.size());
         for (KelurahanResponseDto kelurahan : kelurahanList) {
             log.info("Name: {}", kelurahan.getName());
             log.info("========");
@@ -113,10 +144,12 @@ class KelurahanServiceImplTest {
     }
 
     @Test
+    @Order(9)
     void getKelurahanByKecamatanId() {
-        String kecamatanId = "";
+        // id kecamatan Pesantren
+        String kecamatanId = "357103";
         final List<KelurahanResponseDto> kelurahanList = kelurahanService.getKelurahanByKecamatanId(kecamatanId);
-        assertEquals(5, kelurahanList.size());
+        assertEquals(2, kelurahanList.size());
         for (KelurahanResponseDto kelurahan : kelurahanList) {
             log.info("Name: {}", kelurahan.getName());
             log.info("==========");
