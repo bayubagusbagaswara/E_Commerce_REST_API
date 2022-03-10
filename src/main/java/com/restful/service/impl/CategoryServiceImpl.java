@@ -1,9 +1,11 @@
 package com.restful.service.impl;
 
+import com.restful.dto.CategoryMapper;
 import com.restful.dto.category.*;
 import com.restful.entity.Category;
 import com.restful.exception.CategoryNotFoundException;
 import com.restful.repository.CategoryRepository;
+import com.restful.repository.ProductRepository;
 import com.restful.service.CategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,16 +16,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final CategoryMapper categoryMapper;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, ProductRepository productRepository, CategoryMapper categoryMapper) {
         this.categoryRepository = categoryRepository;
+        this.productRepository = productRepository;
+        this.categoryMapper = categoryMapper;
     }
 
     @Override
@@ -33,13 +38,13 @@ public class CategoryServiceImpl implements CategoryService {
         category.setDescription(createCategoryRequestDto.getDescription());
         category.setCreatedAt(LocalDateTime.now());
         categoryRepository.save(category);
-        return mapCategoryToCategoryResponseDto(category);
+        return categoryMapper.mapCategoryToCategoryResponseDto(category);
     }
 
     @Override
     public CategoryResponseDto getCategoryById(String categoryId) throws CategoryNotFoundException {
         Category category = getCategory(categoryId);
-        return mapCategoryToCategoryResponseDto(category);
+        return categoryMapper.mapCategoryToCategoryResponseDto(category);
     }
 
     @Override
@@ -54,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
         Page<Category> categories = categoryRepository.findAll(pageable);
         List<Category> categoryList = categories.getContent();
 
-        List<CategoryResponseDto> categoryResponseDtoList = mapCategoryListToCategoryResponseDtoList(categoryList);
+        List<CategoryResponseDto> categoryResponseDtoList = categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
 
         ListAllCategoryResponseDto listAllCategoryResponseDto = new ListAllCategoryResponseDto();
         listAllCategoryResponseDto.setCategoryResponseDtoList(categoryResponseDtoList);
@@ -73,19 +78,19 @@ public class CategoryServiceImpl implements CategoryService {
         category.setDescription(updateCategoryRequestDto.getDescription());
         category.setUpdatedAt(LocalDateTime.now());
         categoryRepository.save(category);
-        return mapCategoryToCategoryResponseDto(category);
+        return categoryMapper.mapCategoryToCategoryResponseDto(category);
     }
 
     @Override
     public CategoryResponseDto getCategoryByName(String name) throws CategoryNotFoundException {
         Category category = categoryRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new CategoryNotFoundException("Category name [" + name + "] not found"));
-        return mapCategoryToCategoryResponseDto(category);
+        return categoryMapper.mapCategoryToCategoryResponseDto(category);
     }
 
     @Override
     public List<CategoryResponseDto> getCategoryByNameContains(String name) {
         List<Category> categoryList = categoryRepository.findAllByNameContainingIgnoreCase(name);
-        return mapCategoryListToCategoryResponseDtoList(categoryList);
+        return categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
     }
 
     @Override
@@ -96,33 +101,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryResponseDto> getCategoryStartingWithName(String name) {
         List<Category> categoryList = categoryRepository.findAllByNameIgnoreCaseStartsWith(name);
-        return  mapCategoryListToCategoryResponseDtoList(categoryList);
-    }
-
-    private CategoryResponseDto mapCategoryToCategoryResponseDto(Category category) {
-        CategoryResponseDto dto = new CategoryResponseDto();
-        dto.setId(category.getId());
-        dto.setName(category.getName());
-        dto.setDescription(category.getDescription());
-        dto.setCreatedAt(category.getCreatedAt());
-        dto.setUpdatedAt(category.getUpdatedAt());
-        return dto;
-    }
-
-    private List<CategoryResponseDto> mapCategoryListToCategoryResponseDtoList(List<Category> categoryList) {
-        return categoryList
-                .stream()
-                .map((category) -> {
-                    CategoryResponseDto dto = new CategoryResponseDto();
-                    dto.setId(category.getId());
-                    dto.setName(category.getName());
-                    dto.setDescription(category.getDescription());
-                    dto.setCreatedAt(category.getCreatedAt());
-                    dto.setUpdatedAt(category.getUpdatedAt());
-                    return dto;
-                })
-                .collect(Collectors.toList())
-                ;
+        return categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
     }
 
     private Category getCategory(String categoryId) throws CategoryNotFoundException {
