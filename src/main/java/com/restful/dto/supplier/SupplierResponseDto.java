@@ -34,7 +34,5 @@ public class SupplierResponseDto {
 
     private Address address;
 
-    // dan ini juga harusnya hasilnya dari findAllProductsBySupplierId dari ProductRepository
     private Set<ProductResponseDto> products = new HashSet<>();
-//    private Set<Product> products = new HashSet<>();
 }
