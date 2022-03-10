@@ -6,6 +6,7 @@ values ('317103', 'Kemayoran', '317103', 'Current User', current_timestamp, 'ACT
 -- KECAMATAN DI JAKARTA SELATAN, PROVINSI JAKARTA
 insert into kecamatan (id, name, code, created_by, created_at, status_record, id_kota)
 values ('317401', 'Tebet', '317401', 'Current User', current_timestamp, 'ACTIVE', '3174'),
+        ('317405', 'Kebayoran Lama', '317405', 'Current User', current_timestamp, 'ACTIVE', '3174'),
         ('317407', 'Kebayoran Baru', '317407', 'Current User', current_timestamp, 'ACTIVE', '3174');
 
 -- KECAMATAN DI KOTA KEDIRI, PROVINSI JAWA TIMUR
@@ -17,7 +18,10 @@ values ('357101', 'Mojoroto', '357101', 'Current User', current_timestamp, 'ACTI
 -- KECAMATAN DI KOTA SURABAYA, PROVINSI JAWA TIMUR
 insert into kecamatan (id, name, code, created_by, created_at, status_record, id_kota)
 values ('357809', 'Sukolilo', '357809', 'Current User', current_timestamp, 'ACTIVE', '3578'),
-        ('357826', 'Mulyorejo', '357826', 'Current User', current_timestamp, 'ACTIVE', '3578');
+        ('357826', 'Mulyorejo', '357826', 'Current User', current_timestamp, 'ACTIVE', '3578'),
+        ('357811', 'Simokerto', '357811', 'Current User', current_timestamp, 'ACTIVE', '3578'),
+        ('357817', 'Kenjeran', '357817', 'Current User', current_timestamp, 'ACTIVE', '3578'),
+        ('357831', 'Sambikerep', '357831', 'Current User', current_timestamp, 'ACTIVE', '3578');
 
 -- KECAMATAN DI KAB BADUNG, PROVINSI BALI
 insert into kecamatan (id, name, code, created_by, created_at, status_record, id_kota)
@@ -25,4 +29,7 @@ values ('510301', 'Kuta', '510301', 'Current User', current_timestamp, 'ACTIVE',
 
 -- KECAMATAN DI KOTA DENPASAR, PROVINSI BALI
 insert into kecamatan (id, name, code, created_by, created_at, status_record, id_kota)
-values ('517101', 'Denpasar Selatan', '517101', 'Current User', current_timestamp, 'ACTIVE', '5171');
+values ('517101', 'Denpasar Selatan', '517101', 'Current User', current_timestamp, 'ACTIVE', '5171'),
+        ('517102', 'Denpasar Timur', '517102', 'Current User', current_timestamp,'ACTIVE', '5171'),
+        ('517103', 'Denpasar Barat', '517103', 'Current User', current_timestamp, 'ACTIVE', '5171'),
+        ('517104', 'Denpasar Utara', '517104', 'Current User', current_timestamp, 'ACTIVE', '5171');
