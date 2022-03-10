@@ -23,6 +23,15 @@
 - [ ] Unit Testing - Controller Layer
 - [ ] Integration Testing
 
+## Testing Service Layer
+
+- [x] Provinsi Service Test
+- [x] Kota Service Test
+- [x] Kecamatan Service Test
+- [x] Kelurahan Service Tets
+- [ ] Category Service Test (jika category dihapus, maka akan menghapus product), dan di Category dapat mengambil data product
+
+
 # Service Layer
 
 ## Product
