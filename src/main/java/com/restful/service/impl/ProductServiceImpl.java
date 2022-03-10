@@ -1,7 +1,7 @@
 package com.restful.service.impl;
 
+import com.restful.dto.ProductMapper;
 import com.restful.dto.product.*;
-import com.restful.dto.supplier.SupplierResponseDto;
 import com.restful.entity.Category;
 import com.restful.entity.Product;
 import com.restful.entity.ProductDetail;
@@ -11,6 +11,7 @@ import com.restful.exception.ProductNotFoundException;
 import com.restful.repository.CategoryRepository;
 import com.restful.repository.ProductDetailRepository;
 import com.restful.repository.ProductRepository;
+import com.restful.repository.SupplierRepository;
 import com.restful.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,30 +31,26 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ProductDetailRepository productDetailRepository;
+    private final ProductMapper productMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository, ProductDetailRepository productDetailRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository, ProductDetailRepository productDetailRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.productDetailRepository = productDetailRepository;
+        this.productMapper = productMapper;
     }
 
     @Override
     public ProductResponseDto createProduct(CreateProductRequestDto createProductRequestDto) throws CategoryNotFoundException, ProductDetailNotFoundException {
 
-        // find category by id
-        Category category = categoryRepository.findById(createProductRequestDto.getCategoryId()).orElseThrow(() -> new CategoryNotFoundException("Category ID ["+createProductRequestDto.getCategoryId()+"] not found"));
+        Category category = categoryRepository.findById(createProductRequestDto.getCategoryId())
+                .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + createProductRequestDto.getCategoryId() + "] not found"));
 
-        // saat kita create new product, otomatis kita input data baru product detail
-        // namun bedanya, data sku dan description itu ditaruh di table sendiri
-
-        // jadi kita tetap create new ProductDetail, lalu masukkan dto ke object ProductDetail
-        // lalu save di productDetailRepository, lalu masukkan ke productDetail di object product
         ProductDetail productDetail = new ProductDetail();
         productDetail.setSku(createProductRequestDto.getSku());
         productDetail.setDescription(createProductRequestDto.getDescription());
         productDetail.setCreatedAt(LocalDateTime.now());
 
-        // create object product
         Product product = new Product();
         product.setName(createProductRequestDto.getName());
         product.setPrice(createProductRequestDto.getPrice());
@@ -65,13 +61,13 @@ public class ProductServiceImpl implements ProductService {
 
         productDetailRepository.save(productDetail);
         productRepository.save(product);
-        return mapProductToProductResponseDto(product);
+        return productMapper.mapProductToProductResponseDto(product);
     }
 
     @Override
     public ProductResponseDto getProductById(String productId) throws ProductNotFoundException {
         Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product ID: [" + productId + "] not found"));
-        return mapProductToProductResponseDto(product);
+        return productMapper.mapProductToProductResponseDto(product);
     }
 
     @Override
@@ -86,7 +82,8 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         Page<Product> productPage = productRepository.findAll(pageable);
         List<Product> productList = productPage.getContent();
-        List<ProductResponseDto> productResponseDtoList = mapProductListToProductResponseDtoList(productList);
+
+        List<ProductResponseDto> productResponseDtoList = productMapper.mapProductListToProductResponseDtoList(productList);
 
         ListProductResponseDto dto = new ListProductResponseDto();
         dto.setProductResponseDtoList(productResponseDtoList);
@@ -100,24 +97,33 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto updateProduct(String productId, UpdateProductRequestDto updateProductRequestDto) throws ProductNotFoundException, CategoryNotFoundException {
-        // get product id
-        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product ID ["+productId+"] not found"));
+        final Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("Product ID [" + productId + "] not found"));
 
-        // get Category yang baru
-        categoryRepository.findById(updateProductRequestDto.getCategoryId()).orElseThrow(() -> new CategoryNotFoundException("Category ID ["+updateProductRequestDto.getCategoryId()+"] not found"));
+        final Category category = categoryRepository.findById(updateProductRequestDto.getCategoryId())
+                .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + updateProductRequestDto.getCategoryId() + "] not found"));
 
-        // update category
+        final ProductDetail productDetail = product.getProductDetail();
+        productDetail.setSku(updateProductRequestDto.getSku());
+        productDetail.setDescription(updateProductRequestDto.getDescription());
 
+        product.setName(updateProductRequestDto.getName());
+        product.setPrice(updateProductRequestDto.getPrice());
+        product.setQuantity(updateProductRequestDto.getQuantity());
+        product.setProductDetail(productDetail);
+        product.setCategory(category);
+        product.setUpdatedAt(LocalDateTime.now());
 
-        return null;
+        productDetailRepository.save(productDetail);
+        productRepository.save(product);
+        return productMapper.mapProductToProductResponseDto(product);
     }
 
     @Override
     public void deleteProduct(String productId) throws ProductNotFoundException {
         Optional<Product> productOptional = productRepository.findById(productId);
-
         if (productOptional.isEmpty()) {
-            throw new ProductNotFoundException("Product ID ["+productId+"] not found");
+            throw new ProductNotFoundException("Product ID [" + productId + " ] not found");
         }
         productOptional.get().removeSuppliers();
         productRepository.deleteById(productOptional.get().getId());
@@ -125,92 +131,33 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto getProductByName(String name) throws ProductNotFoundException {
-        Product product = productRepository.findProductByNameIgnoreCase(name).orElseThrow(() -> new ProductNotFoundException("Product name [" + name + "] not found"));
-        return mapProductToProductResponseDto(product);
+        Product product = productRepository.findProductByNameIgnoreCase(name)
+                .orElseThrow(() -> new ProductNotFoundException("Product name [" + name + "] not found"));
+        return productMapper.mapProductToProductResponseDto(product);
     }
 
     @Override
     public List<ProductResponseDto> getProductByContainingName(String name) {
         List<Product> productList = productRepository.findAllByNameContainingIgnoreCase(name);
-        return mapProductListToProductResponseDtoList(productList);
+        return productMapper.mapProductListToProductResponseDtoList(productList);
     }
 
     @Override
     public ProductResponseDto getProductBySku(String sku) throws ProductNotFoundException {
-        Product product = productRepository.findAllByProductDetailSku(sku).orElseThrow(() -> new ProductNotFoundException("Product SKU [" + sku + "] not found"));
-        return mapProductToProductResponseDto(product);
+        Product product = productRepository.findAllByProductDetailSku(sku)
+                .orElseThrow(() -> new ProductNotFoundException("Product SKU [" + sku + "] not found"));
+        return productMapper.mapProductToProductResponseDto(product);
     }
 
     @Override
     public List<ProductResponseDto> getProductByCategoryId(String categoryId) {
         List<Product> productList = productRepository.findAllByCategoryId(categoryId);
-        return mapProductListToProductResponseDtoList(productList);
+        return productMapper.mapProductListToProductResponseDtoList(productList);
     }
 
     @Override
     public List<ProductResponseDto> getProductBySuppliersId(String supplierId) {
         List<Product> productList = productRepository.findAllBySuppliersId(supplierId);
-        return mapProductListToProductResponseDtoList(productList);
-    }
-
-    private ProductResponseDto mapProductToProductResponseDto(Product product) {
-        ProductResponseDto dto = new ProductResponseDto();
-        dto.setId(product.getId());
-        dto.setName(product.getName());
-        dto.setPrice(product.getPrice());
-        dto.setQuantity(product.getQuantity());
-        dto.setProductDetail(product.getProductDetail());
-        dto.setCategory(product.getCategory());
-        dto.setCreatedAt(product.getCreatedAt());
-        dto.setUpdatedAt(product.getUpdatedAt());
-        dto.setSuppliers(product.getSuppliers().stream()
-                .map(supplier -> {
-                    SupplierResponseDto supplierResponseDto = new SupplierResponseDto();
-                    supplierResponseDto.setId(supplier.getId());
-                    supplierResponseDto.setName(supplier.getName());
-                    supplierResponseDto.setEmail(supplier.getEmail());
-                    supplierResponseDto.setGender(supplier.getGender());
-                    supplierResponseDto.setMobilePhone(supplier.getMobilePhone());
-                    supplierResponseDto.setAddress(supplier.getAddress());
-                    supplierResponseDto.setCreatedAt(supplier.getCreatedAt());
-                    supplierResponseDto.setUpdatedAt(supplier.getUpdatedAt());
-                    return supplierResponseDto;
-                })
-                .collect(Collectors.toSet())
-        );
-        return dto;
-    }
-
-    private List<ProductResponseDto> mapProductListToProductResponseDtoList(List<Product> productList) {
-        return productList.stream()
-                .map((product) -> {
-                    ProductResponseDto dto = new ProductResponseDto();
-                    dto.setId(product.getId());
-                    dto.setName(product.getName());
-                    dto.setPrice(product.getPrice());
-                    dto.setQuantity(product.getQuantity());
-                    dto.setProductDetail(product.getProductDetail());
-                    dto.setCategory(product.getCategory());
-                    dto.setCreatedAt(product.getCreatedAt());
-                    dto.setUpdatedAt(product.getUpdatedAt());
-                    dto.setSuppliers(product.getSuppliers().stream()
-                            .map(supplier -> {
-                                SupplierResponseDto supplierResponseDto = new SupplierResponseDto();
-                                supplierResponseDto.setId(supplier.getId());
-                                supplierResponseDto.setName(supplier.getName());
-                                supplierResponseDto.setEmail(supplier.getEmail());
-                                supplierResponseDto.setGender(supplier.getGender());
-                                supplierResponseDto.setMobilePhone(supplier.getMobilePhone());
-                                supplierResponseDto.setAddress(supplier.getAddress());
-                                supplierResponseDto.setCreatedAt(supplier.getCreatedAt());
-                                supplierResponseDto.setUpdatedAt(supplier.getUpdatedAt());
-                                return supplierResponseDto;
-                            })
-                            .collect(Collectors.toSet())
-                    );
-                    return dto;
-                })
-                .collect(Collectors.toList())
-                ;
+        return productMapper.mapProductListToProductResponseDtoList(productList);
     }
 }
