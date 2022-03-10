@@ -1,5 +1,6 @@
 package com.restful.service.impl;
 
+import com.restful.dto.SupplierMapper;
 import com.restful.dto.product.ProductResponseDto;
 import com.restful.dto.supplier.*;
 import com.restful.entity.Address;
@@ -34,12 +35,14 @@ public class SupplierServiceImpl implements SupplierService {
     private final ProductRepository productRepository;
     private final KelurahanRepository kelurahanRepository;
     private final AddressRepository addressRepository;
+    private final SupplierMapper supplierMapper;
 
-    public SupplierServiceImpl(SupplierRepository supplierRepository, ProductRepository productRepository, KelurahanRepository kelurahanRepository, AddressRepository addressRepository) {
+    public SupplierServiceImpl(SupplierRepository supplierRepository, ProductRepository productRepository, KelurahanRepository kelurahanRepository, AddressRepository addressRepository, SupplierMapper supplierMapper) {
         this.supplierRepository = supplierRepository;
         this.productRepository = productRepository;
         this.kelurahanRepository = kelurahanRepository;
         this.addressRepository = addressRepository;
+        this.supplierMapper = supplierMapper;
     }
 
     @Override
@@ -54,7 +57,7 @@ public class SupplierServiceImpl implements SupplierService {
         Page<Supplier> supplierPage = supplierRepository.findAll(pageable);
         List<Supplier> supplierList = supplierPage.getContent();
 
-        List<SupplierResponseDto> supplierResponseDtoList = mapSupplierListToSupplierResponseDtoList(supplierList);
+        List<SupplierResponseDto> supplierResponseDtoList = supplierMapper.mapSupplierListToSupplierResponseDtoList(supplierList);
 
         ListSupplierResponseDto dto = new ListSupplierResponseDto();
         dto.setSupplierResponseDtoList(supplierResponseDtoList);
@@ -70,7 +73,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResponseDto getSupplierByName(String name) throws SupplierNotFoundException {
         Supplier supplier = supplierRepository.findAllByNameIgnoreCase(name)
                 .orElseThrow(() -> new SupplierNotFoundException("Supplier name [" + name + "] not found"));
-        return mapSupplierToSupplierResponseDto(supplier);
+        return supplierMapper.mapSupplierToSupplierResponseDto(supplier);
     }
 
     @Override
@@ -98,13 +101,13 @@ public class SupplierServiceImpl implements SupplierService {
         addressRepository.save(address);
         supplierRepository.save(supplier);
 
-        return mapSupplierToSupplierResponseDto(supplier);
+        return supplierMapper.mapSupplierToSupplierResponseDto(supplier);
     }
 
     @Override
     public SupplierResponseDto getSupplierById(String supplierId) throws SupplierNotFoundException {
         Supplier supplier = getSupplier(supplierId);
-        return mapSupplierToSupplierResponseDto(supplier);
+        return supplierMapper.mapSupplierToSupplierResponseDto(supplier);
     }
 
     @Override
@@ -132,7 +135,7 @@ public class SupplierServiceImpl implements SupplierService {
         addressRepository.save(address);
         supplierRepository.save(supplier);
 
-        return mapSupplierToSupplierResponseDto(supplier);
+        return supplierMapper.mapSupplierToSupplierResponseDto(supplier);
     }
 
     @Override
@@ -149,19 +152,19 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResponseDto getSupplierByEmail(String email) throws SupplierNotFoundException {
         Supplier supplier = supplierRepository.findAllByEmail(email)
                 .orElseThrow(() -> new SupplierNotFoundException("Supplier email [" + email + "] not found"));
-        return mapSupplierToSupplierResponseDto(supplier);
+        return supplierMapper.mapSupplierToSupplierResponseDto(supplier);
     }
 
     @Override
     public List<SupplierResponseDto> getSupplierByNameContains(String name) {
         List<Supplier> supplierList = supplierRepository.findAllByNameContainingIgnoreCase(name);
-        return mapSupplierListToSupplierResponseDtoList(supplierList);
+        return supplierMapper.mapSupplierListToSupplierResponseDtoList(supplierList);
     }
 
     @Override
     public List<SupplierResponseDto> getSupplierByProductsId(String productId) {
         List<Supplier> supplierList = supplierRepository.findAllByProductsId(productId);
-        return mapSupplierListToSupplierResponseDtoList(supplierList);
+        return supplierMapper.mapSupplierListToSupplierResponseDtoList(supplierList);
     }
 
     @Override
@@ -170,62 +173,7 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier supplier = getSupplier(supplierId);
         supplier.getProducts().add(product);
         supplierRepository.save(supplier);
-        return mapSupplierToSupplierResponseDto(supplier);
-    }
-
-    private SupplierResponseDto mapSupplierToSupplierResponseDto(Supplier supplier) {
-        SupplierResponseDto dto = new SupplierResponseDto();
-        dto.setId(supplier.getId());
-        dto.setName(supplier.getName());
-        dto.setEmail(supplier.getEmail());
-        dto.setCreatedAt(supplier.getCreatedAt());
-        dto.setUpdatedAt(supplier.getUpdatedAt());
-        dto.setProducts(supplier.getProducts().stream()
-                .map(product -> {
-                    ProductResponseDto productResponseDto = new ProductResponseDto();
-                    productResponseDto.setId(product.getId());
-                    productResponseDto.setName(product.getName());
-                    productResponseDto.setPrice(product.getPrice());
-                    productResponseDto.setQuantity(product.getQuantity());
-                    productResponseDto.setProductDetail(product.getProductDetail());
-                    productResponseDto.setCategory(product.getCategory());
-                    productResponseDto.setCreatedAt(product.getCreatedAt());
-                    productResponseDto.setUpdatedAt(product.getUpdatedAt());
-                    return productResponseDto;
-                })
-                .collect(Collectors.toSet())
-        );
-        return dto;
-    }
-
-    private List<SupplierResponseDto> mapSupplierListToSupplierResponseDtoList(List<Supplier> supplierList) {
-        return supplierList.stream()
-                .map((supplier -> {
-                    SupplierResponseDto dto = new SupplierResponseDto();
-                    dto.setId(supplier.getId());
-                    dto.setName(supplier.getName());
-                    dto.setEmail(supplier.getEmail());
-                    dto.setCreatedAt(supplier.getCreatedAt());
-                    dto.setUpdatedAt(supplier.getUpdatedAt());
-                    dto.setProducts(supplier.getProducts().stream()
-                            .map(product -> {
-                                ProductResponseDto productResponseDto = new ProductResponseDto();
-                                productResponseDto.setId(product.getId());
-                                productResponseDto.setName(product.getName());
-                                productResponseDto.setPrice(product.getPrice());
-                                productResponseDto.setQuantity(product.getQuantity());
-                                productResponseDto.setProductDetail(product.getProductDetail());
-                                productResponseDto.setCategory(product.getCategory());
-                                productResponseDto.setCreatedAt(product.getCreatedAt());
-                                productResponseDto.setUpdatedAt(product.getUpdatedAt());
-                                return productResponseDto;
-                            })
-                            .collect(Collectors.toSet())
-                    );
-                    return dto;
-                }))
-                .collect(Collectors.toList())
-                ;
+        return supplierMapper.mapSupplierToSupplierResponseDto(supplier);
     }
 
     private Supplier getSupplier(String supplierId) throws SupplierNotFoundException {
