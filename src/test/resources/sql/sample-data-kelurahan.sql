@@ -40,7 +40,6 @@ values ('3578261001', 'Mulyorejo', '3578261001', 'Current User', current_timesta
 -- KELURAHAN DI KECAMATAN KUTA, KAB BADUNG, PROVINSI BALI
 insert into kelurahan (id, name, code, created_by, created_at, status_record, id_kecamatan)
 values ('5103011002', 'Kuta', '5103011002', 'Current User', current_timestamp, 'ACTIVE', '510301'),
-        ('5103011004', 'Legian', '5103011004', 'Current User', current_timestamp, 'ACTIVE', '510301'),
         ('5103011005', 'Seminyak', '5103011005', 'Current User', current_timestamp, 'ACTIVE', '510301');
 
 
