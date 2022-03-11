@@ -8,6 +8,7 @@ import com.restful.entity.wilayah.Kecamatan;
 import com.restful.entity.wilayah.Kelurahan;
 import com.restful.entity.wilayah.Kota;
 import com.restful.entity.wilayah.Provinsi;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 import java.util.stream.Collectors;
