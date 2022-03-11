@@ -28,16 +28,16 @@ public class BaseEntity {
     private String createdBy;
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "created_date", nullable = false)
+    private LocalDateTime createdDate;
 
     @LastModifiedBy
     @Column(name = "updated_by")
     private String updatedBy;
 
     @LastModifiedDate
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_record", nullable = false)
