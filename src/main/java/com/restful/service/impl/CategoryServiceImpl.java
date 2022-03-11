@@ -22,12 +22,10 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final ProductRepository productRepository;
     private final CategoryMapper categoryMapper;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, ProductRepository productRepository, CategoryMapper categoryMapper) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
         this.categoryRepository = categoryRepository;
-        this.productRepository = productRepository;
         this.categoryMapper = categoryMapper;
     }
 
@@ -36,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category();
         category.setName(createCategoryRequestDto.getName());
         category.setDescription(createCategoryRequestDto.getDescription());
-        category.setCreatedAt(LocalDateTime.now());
+        category.setCreatedDate(LocalDateTime.now());
         categoryRepository.save(category);
         return categoryMapper.mapCategoryToCategoryResponseDto(category);
     }
@@ -76,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = getCategory(categoryId);
         category.setName(updateCategoryRequestDto.getName());
         category.setDescription(updateCategoryRequestDto.getDescription());
-        category.setUpdatedAt(LocalDateTime.now());
+        category.setUpdatedDate(LocalDateTime.now());
         categoryRepository.save(category);
         return categoryMapper.mapCategoryToCategoryResponseDto(category);
     }
