@@ -4,10 +4,12 @@ import com.restful.dto.product.ProductResponseDto;
 import com.restful.dto.supplier.SupplierResponseDto;
 import com.restful.entity.Product;
 import com.restful.entity.Supplier;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Configuration
 public class SupplierMapper {
 
     private final CategoryMapper categoryMapper;
@@ -18,7 +20,8 @@ public class SupplierMapper {
         this.productDetailMapper = productDetailMapper;
     }
 
-    private ProductResponseDto productResponseDto(Product product) {
+    // tanpa supplier
+    public ProductResponseDto productResponseDto(Product product) {
         ProductResponseDto productDto = new ProductResponseDto();
         productDto.setId(productDto.getId());
         productDto.setName(productDto.getName());
@@ -31,7 +34,8 @@ public class SupplierMapper {
         return productDto;
     }
 
-    private SupplierResponseDto mapSupplierToSupplierResponseDto(Supplier supplier) {
+    // disini ada product
+    public SupplierResponseDto mapSupplierToSupplierResponseDto(Supplier supplier) {
         SupplierResponseDto dto = new SupplierResponseDto();
         dto.setId(supplier.getId());
         dto.setName(supplier.getName());
@@ -45,7 +49,7 @@ public class SupplierMapper {
         return dto;
     }
 
-    private List<SupplierResponseDto> mapSupplierListToSupplierResponseDtoList(List<Supplier> supplierList) {
+    public List<SupplierResponseDto> mapSupplierListToSupplierResponseDtoList(List<Supplier> supplierList) {
         return supplierList.stream()
                 .map(this::mapSupplierToSupplierResponseDto)
                 .collect(Collectors.toList())
