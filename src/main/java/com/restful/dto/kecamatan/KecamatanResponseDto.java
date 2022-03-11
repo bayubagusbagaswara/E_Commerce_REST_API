@@ -9,10 +9,11 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class KecamatanResponseDto {
+
     private String id;
     private String code;
     private String name;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private KotaResponseDto kotaResponseDto;
+    private KotaResponseDto kotaResponse;
 }
