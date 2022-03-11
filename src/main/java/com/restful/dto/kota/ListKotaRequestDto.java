@@ -18,9 +18,9 @@ public class ListKotaRequestDto {
     @Min(value = 1, message = "Page size must not be less than one")
     private Integer pageSize;
 
-    @NotBlank(message = "Sort by must not be blank")
+    @NotBlank(message = "Sort by certain data required")
     private String sortBy;
 
-    @NotBlank(message = "Sort direction must be asc or desc")
+    @NotBlank(message = "Sort direction must be asc or desc and required")
     private String sortDir;
 }
