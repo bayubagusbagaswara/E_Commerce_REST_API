@@ -31,7 +31,7 @@ public class ProvinsiServiceImpl implements ProvinsiService {
         Provinsi provinsi = new Provinsi();
         provinsi.setCode(createProvinsiRequestDto.getCode());
         provinsi.setName(createProvinsiRequestDto.getName());
-        provinsi.setCreatedAt(LocalDateTime.now());
+        provinsi.setCreatedDate(LocalDateTime.now());
         provinsiRepository.save(provinsi);
         return WilayahMapper.mapProvinsiToProvinsiResponseDto(provinsi);
     }
@@ -71,7 +71,7 @@ public class ProvinsiServiceImpl implements ProvinsiService {
         Provinsi provinsi = getProvinsi(provinsiId);
         provinsi.setCode(updateProvinsiRequestDto.getCode());
         provinsi.setName(updateProvinsiRequestDto.getName());
-        provinsi.setUpdatedAt(LocalDateTime.now());
+        provinsi.setUpdatedDate(LocalDateTime.now());
         provinsiRepository.save(provinsi);
         return WilayahMapper.mapProvinsiToProvinsiResponseDto(provinsi);
     }
