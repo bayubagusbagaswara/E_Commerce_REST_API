@@ -2,9 +2,9 @@ package com.restful.dto;
 
 import com.restful.dto.productdetail.ProductDetailResponseDto;
 import com.restful.entity.ProductDetail;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class ProductDetailMapper {
 
     public ProductDetailResponseDto mapToProductDetailResponse(ProductDetail productDetail) {
@@ -12,7 +12,7 @@ public class ProductDetailMapper {
         productDetailResponse.setId(productDetail.getId());
         productDetailResponse.setSku(productDetail.getSku());
         productDetailResponse.setDescription(productDetail.getDescription());
-        productDetailResponse.setCreatedAt(productDetail.getCreatedDate();
+        productDetailResponse.setCreatedAt(productDetail.getCreatedDate());
         productDetailResponse.setUpdatedAt(productDetail.getUpdatedDate());
         return productDetailResponse;
     }
