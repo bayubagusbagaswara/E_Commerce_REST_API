@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ProvinsiService {
 
-    ProvinsiResponseDto createProvinsi(CreateProvinsiRequestDto createProvinsiRequestDto);
+    ProvinsiResponseDto createProvinsi(CreateProvinsiRequestDto createProvinsiRequest);
 
     ProvinsiResponseDto getProvinsiById(String id) throws ProvinsiNotFoundException;
 
-    ListProvinsiResponseDto getAllProvinsi(ListProvinsiRequestDto listProvinsiRequestDto);
+    ListProvinsiResponseDto getAllProvinsi(ListProvinsiRequestDto listProvinsiRequest);
 
-    ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequestDto) throws ProvinsiNotFoundException;
+    ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException;
 
     void deleteProvinsi(String id);
 
