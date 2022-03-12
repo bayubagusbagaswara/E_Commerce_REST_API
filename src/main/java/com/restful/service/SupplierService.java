@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface SupplierService {
 
-    SupplierResponseDto createSupplier(CreateSupplierRequestDto createSupplierRequestDto) throws KelurahanNotFoundException;
+    SupplierResponseDto createSupplier(CreateSupplierRequestDto createSupplierRequest) throws KelurahanNotFoundException;
 
     SupplierResponseDto getSupplierById(String id) throws SupplierNotFoundException;
 
-    ListSupplierResponseDto getAllSuppliers(ListSupplierRequestDto listSupplierRequestDto);
+    ListSupplierResponseDto getAllSuppliers(ListSupplierRequestDto listSupplierRequest);
 
-    SupplierResponseDto updateSupplier(String id, UpdateSupplierRequestDto updateSupplierRequestDto) throws SupplierNotFoundException, KelurahanNotFoundException;
+    SupplierResponseDto updateSupplier(String id, UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException;
 
     void deleteSupplier(String id) throws SupplierNotFoundException;
 
