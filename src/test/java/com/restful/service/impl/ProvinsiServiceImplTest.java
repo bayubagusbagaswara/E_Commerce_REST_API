@@ -39,7 +39,7 @@ class ProvinsiServiceImplTest {
         ProvinsiResponseDto provinsi = provinsiService.createProvinsi(requestDto);
 
         assertNotNull(provinsi.getId());
-        assertNotNull(provinsi.getCreatedAt());
+        assertNotNull(provinsi.getCreatedDate());
         assertEquals("123", provinsi.getCode());
 
         log.info("ID: {}", provinsi.getId());
@@ -74,7 +74,7 @@ class ProvinsiServiceImplTest {
 
         ListProvinsiResponseDto responseDto = provinsiService.getAllProvinsi(requestDto);
         assertEquals(totalSampleData, responseDto.getTotalElements());
-        assertEquals(pageSize, responseDto.getProvinsiResponses().size());
+        assertEquals(pageSize, responseDto.getProvinsiList().size());
     }
 
     @Test
@@ -90,8 +90,8 @@ class ProvinsiServiceImplTest {
         ProvinsiResponseDto responseDto = provinsiService.updateProvinsi(id, requestDto);
 
         assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedAt());
-        assertNotEquals(responseDto.getCreatedAt(), responseDto.getUpdatedAt());
+        assertNotNull(responseDto.getUpdatedDate());
+        assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
     }
 
     @Test
