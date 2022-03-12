@@ -4,16 +4,15 @@ import com.restful.dto.category.CategoryResponseDto;
 import com.restful.dto.product.ProductResponseDto;
 import com.restful.entity.Category;
 import com.restful.entity.Product;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Configuration
+@Component
 public class CategoryMapper {
 
-    private final ProductDetailMapper productDetailMapper;;
+    private final ProductDetailMapper productDetailMapper;
 
     public CategoryMapper(ProductDetailMapper productDetailMapper) {
         this.productDetailMapper = productDetailMapper;
@@ -45,10 +44,8 @@ public class CategoryMapper {
     }
 
     public List<CategoryResponseDto> mapToCategoryResponseList(List<Category> categoryList) {
-        return categoryList
-                .stream()
+        return categoryList.stream()
                 .map(this::mapToCategoryResponse)
-                .collect(Collectors.toList())
-                ;
+                .collect(Collectors.toList());
     }
 }
