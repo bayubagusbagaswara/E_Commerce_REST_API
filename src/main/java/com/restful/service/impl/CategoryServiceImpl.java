@@ -5,7 +5,6 @@ import com.restful.dto.category.*;
 import com.restful.entity.Category;
 import com.restful.exception.CategoryNotFoundException;
 import com.restful.repository.CategoryRepository;
-import com.restful.repository.ProductRepository;
 import com.restful.service.CategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -46,27 +45,27 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ListAllCategoryResponseDto getAllCategories(ListAllCategoryRequestDto listAllCategoryRequestDto) {
-        int pageNo = listAllCategoryRequestDto.getPageNo();
-        int pageSize = listAllCategoryRequestDto.getPageSize();
-        String sortBy = listAllCategoryRequestDto.getSortBy();
-        String sortDir = listAllCategoryRequestDto.getSortDir();
+    public ListCategoryResponseDto getAllCategories(ListCategoryRequestDto listCategoryRequestDto) {
+        int pageNo = listCategoryRequestDto.getPageNo();
+        int pageSize = listCategoryRequestDto.getPageSize();
+        String sortBy = listCategoryRequestDto.getSortBy();
+        String sortDir = listCategoryRequestDto.getSortDir();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         Page<Category> categories = categoryRepository.findAll(pageable);
         List<Category> categoryList = categories.getContent();
 
-        List<CategoryResponseDto> categoryResponseDtoList = categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
+        List<CategoryResponseDto> categoryResponseList = categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
 
-        ListAllCategoryResponseDto listAllCategoryResponseDto = new ListAllCategoryResponseDto();
-        listAllCategoryResponseDto.setCategoryResponseDtoList(categoryResponseDtoList);
-        listAllCategoryResponseDto.setPageNo(categories.getNumber());
-        listAllCategoryResponseDto.setPageSize(categories.getSize());
-        listAllCategoryResponseDto.setTotalElements(categories.getTotalElements());
-        listAllCategoryResponseDto.setTotalPages(categories.getTotalPages());
-        listAllCategoryResponseDto.setLast(categories.isLast());
-        return listAllCategoryResponseDto;
+        ListCategoryResponseDto listCategoryResponseDto = new ListCategoryResponseDto();
+        listCategoryResponseDto.setCategoryResponseList(categoryResponseList);
+        listCategoryResponseDto.setPageNo(categories.getNumber());
+        listCategoryResponseDto.setPageSize(categories.getSize());
+        listCategoryResponseDto.setTotalElements(categories.getTotalElements());
+        listCategoryResponseDto.setTotalPages(categories.getTotalPages());
+        listCategoryResponseDto.setLast(categories.isLast());
+        return listCategoryResponseDto;
     }
 
     @Override
