@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ListSupplierResponseDto {
 
-    private List<SupplierResponseDto> supplierResponseDtoList;
+    private List<SupplierResponseDto> supplierList;
     private Integer pageNo;
     private Integer pageSize;
     private Long totalElements;
