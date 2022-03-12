@@ -8,12 +8,12 @@ import com.restful.entity.wilayah.Kecamatan;
 import com.restful.entity.wilayah.Kelurahan;
 import com.restful.entity.wilayah.Kota;
 import com.restful.entity.wilayah.Provinsi;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Configuration
+@Component
 public class WilayahMapper {
 
     public ProvinsiResponseDto mapToProvinsiResponse(Provinsi provinsi) {
