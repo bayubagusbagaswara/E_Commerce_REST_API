@@ -15,5 +15,5 @@ public class KecamatanResponseDto {
     private String name;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private KotaResponseDto kotaResponse;
+    private KotaResponseDto kota;
 }
