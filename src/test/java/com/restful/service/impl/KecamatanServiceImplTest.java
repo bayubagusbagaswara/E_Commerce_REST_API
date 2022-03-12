@@ -45,7 +45,7 @@ class KecamatanServiceImplTest {
 
         final KecamatanResponseDto responseDto = kecamatanService.createKecamatan(requestDto);
         assertNotNull(responseDto.getId());
-        assertNotNull(responseDto.getCreatedAt());
+        assertNotNull(responseDto.getCreatedDate());
         assertEquals(requestDto.getName(), responseDto.getName());
     }
 
@@ -75,7 +75,7 @@ class KecamatanServiceImplTest {
 
         final ListKecamatanResponseDto responseDto = kecamatanService.getAllKecamatan(requestDto);
         assertEquals(totalSampleKecamatan, responseDto.getTotalElements());
-        assertEquals(pageSize, responseDto.getKecamatanResponses().size());
+        assertEquals(pageSize, responseDto.getKecamatanList().size());
     }
 
     @Test
@@ -91,8 +91,8 @@ class KecamatanServiceImplTest {
 
         final KecamatanResponseDto responseDto = kecamatanService.updateKecamatan(id, requestDto);
         assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedAt());
-        assertNotEquals(responseDto.getCreatedAt(), responseDto.getUpdatedAt());
+        assertNotNull(responseDto.getUpdatedDate());
+        assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
         assertEquals(requestDto.getName(), responseDto.getName());
     }
 
