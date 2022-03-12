@@ -21,59 +21,61 @@ import java.util.List;
 public class ProvinsiServiceImpl implements ProvinsiService {
 
     private final ProvinsiRepository provinsiRepository;
+    private final WilayahMapper wilayahMapper;
 
-    public ProvinsiServiceImpl(ProvinsiRepository provinsiRepository) {
+    public ProvinsiServiceImpl(ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
         this.provinsiRepository = provinsiRepository;
+        this.wilayahMapper = wilayahMapper;
     }
 
     @Override
-    public ProvinsiResponseDto createProvinsi(CreateProvinsiRequestDto createProvinsiRequestDto) {
+    public ProvinsiResponseDto createProvinsi(CreateProvinsiRequestDto createProvinsiRequest) {
         Provinsi provinsi = new Provinsi();
-        provinsi.setCode(createProvinsiRequestDto.getCode());
-        provinsi.setName(createProvinsiRequestDto.getName());
+        provinsi.setCode(createProvinsiRequest.getCode());
+        provinsi.setName(createProvinsiRequest.getName());
         provinsi.setCreatedDate(LocalDateTime.now());
         provinsiRepository.save(provinsi);
-        return WilayahMapper.mapProvinsiToProvinsiResponseDto(provinsi);
+        return wilayahMapper.mapToProvinsiResponse(provinsi);
     }
 
     @Override
-    public ProvinsiResponseDto getProvinsiById(String provinsiId) throws ProvinsiNotFoundException {
-        Provinsi provinsi = getProvinsi(provinsiId);
-        return WilayahMapper.mapProvinsiToProvinsiResponseDto(provinsi);
+    public ProvinsiResponseDto getProvinsiById(String id) throws ProvinsiNotFoundException {
+        Provinsi provinsi = getProvinsi(id);
+        return wilayahMapper.mapToProvinsiResponse(provinsi);
     }
 
     @Override
-    public ListProvinsiResponseDto getAllProvinsi(ListProvinsiRequestDto listProvinsiRequestDto) {
-        int pageNo = listProvinsiRequestDto.getPageNo();
-        int pageSize = listProvinsiRequestDto.getPageSize();
-        String sortBy = listProvinsiRequestDto.getSortBy();
-        String sortDir = listProvinsiRequestDto.getSortDir();
+    public ListProvinsiResponseDto getAllProvinsi(ListProvinsiRequestDto listProvinsiRequest) {
+        Integer pageNo = listProvinsiRequest.getPageNo();
+        Integer pageSize = listProvinsiRequest.getPageSize();
+        String sortBy = listProvinsiRequest.getSortBy();
+        String sortDir = listProvinsiRequest.getSortDir();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         Page<Provinsi> provinsiPage = provinsiRepository.findAll(pageable);
         List<Provinsi> provinsiList = provinsiPage.getContent();
 
-        List<ProvinsiResponseDto> provinsiResponseList = WilayahMapper.mapProvinsiListToProvinsiResponseDtoList(provinsiList);
+        List<ProvinsiResponseDto> provinsiResponseList = wilayahMapper.mapToProvinsiResponseList(provinsiList);
 
-        ListProvinsiResponseDto dto = new ListProvinsiResponseDto();
-        dto.setProvinsiResponses(provinsiResponseList);
-        dto.setPageNo(provinsiPage.getNumber());
-        dto.setPageSize(provinsiPage.getSize());
-        dto.setTotalElements(provinsiPage.getTotalElements());
-        dto.setTotalPages(provinsiPage.getTotalPages());
-        dto.setLast(provinsiPage.isLast());
-        return dto;
+        ListProvinsiResponseDto listProvinsiResponse = new ListProvinsiResponseDto();
+        listProvinsiResponse.setProvinsiList(provinsiResponseList);
+        listProvinsiResponse.setPageNo(provinsiPage.getNumber());
+        listProvinsiResponse.setPageSize(provinsiPage.getSize());
+        listProvinsiResponse.setTotalElements(provinsiPage.getTotalElements());
+        listProvinsiResponse.setTotalPages(provinsiPage.getTotalPages());
+        listProvinsiResponse.setLast(provinsiPage.isLast());
+        return listProvinsiResponse;
     }
 
     @Override
-    public ProvinsiResponseDto updateProvinsi(String provinsiId, UpdateProvinsiRequestDto updateProvinsiRequestDto) throws ProvinsiNotFoundException {
-        Provinsi provinsi = getProvinsi(provinsiId);
-        provinsi.setCode(updateProvinsiRequestDto.getCode());
-        provinsi.setName(updateProvinsiRequestDto.getName());
+    public ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
+        Provinsi provinsi = getProvinsi(id);
+        provinsi.setCode(updateProvinsiRequest.getCode());
+        provinsi.setName(updateProvinsiRequest.getName());
         provinsi.setUpdatedDate(LocalDateTime.now());
         provinsiRepository.save(provinsi);
-        return WilayahMapper.mapProvinsiToProvinsiResponseDto(provinsi);
+        return wilayahMapper.mapToProvinsiResponse(provinsi);
     }
 
     @Override
@@ -83,23 +85,23 @@ public class ProvinsiServiceImpl implements ProvinsiService {
 
     @Override
     public ProvinsiResponseDto getProvinsiByName(String name) throws ProvinsiNotFoundException {
-        Provinsi provinsi = provinsiRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi name ["+name+"] Not Found"));
-        return WilayahMapper.mapProvinsiToProvinsiResponseDto(provinsi);
+        Provinsi provinsi = provinsiRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi name [" + name + "] not found"));
+        return wilayahMapper.mapToProvinsiResponse(provinsi);
     }
 
     @Override
     public ProvinsiResponseDto getProvinsiByCode(String code) throws ProvinsiNotFoundException {
-        Provinsi provinsi = provinsiRepository.findAllByCode(code).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi code ["+code+"] Not Found"));
-        return WilayahMapper.mapProvinsiToProvinsiResponseDto(provinsi);
+        Provinsi provinsi = provinsiRepository.findAllByCode(code).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi code [" + code + "] not found"));
+        return wilayahMapper.mapToProvinsiResponse(provinsi);
     }
 
     @Override
     public List<ProvinsiResponseDto> getProvinsiByNameContains(String name) {
         List<Provinsi> provinsiList = provinsiRepository.findAllByNameContainingIgnoreCase(name);
-        return WilayahMapper.mapProvinsiListToProvinsiResponseDtoList(provinsiList);
+        return wilayahMapper.mapToProvinsiResponseList(provinsiList);
     }
 
-    private Provinsi getProvinsi(String provinsiId) throws ProvinsiNotFoundException {
-        return provinsiRepository.findById(provinsiId).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ provinsiId +"] Not Found"));
+    private Provinsi getProvinsi(String id) throws ProvinsiNotFoundException {
+        return provinsiRepository.findById(id).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
     }
 }
