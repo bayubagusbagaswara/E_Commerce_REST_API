@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "product_detail", uniqueConstraints = {
-        @UniqueConstraint(name = "product_detail_unique_sku", columnNames = "SKU")
+        @UniqueConstraint(name = "product_detail_unique_sku", columnNames = "sku")
 })
 @Getter
 @Setter
@@ -24,7 +24,7 @@ import javax.persistence.UniqueConstraint;
 @Where(clause = "status_record = 'ACTIVE'")
 public class ProductDetail extends BaseEntity {
 
-    @Column(name = "SKU", nullable = false, length = 50)
+    @Column(name = "sku", nullable = false, length = 50)
     private String sku;
 
     @Column(name = "description", nullable = false, length = 500)
