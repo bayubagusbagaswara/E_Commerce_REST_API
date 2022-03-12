@@ -19,36 +19,35 @@ public class CategoryMapper {
         this.productDetailMapper = productDetailMapper;
     }
 
-    // tanpa category dan tanpa supplier
     public ProductResponseDto productResponseDto(Product product) {
-        ProductResponseDto productDto = new ProductResponseDto();
-        productDto.setId(productDto.getId());
-        productDto.setName(productDto.getName());
-        productDto.setPrice(product.getPrice());
-        productDto.setQuantity(product.getQuantity());
-        productDto.setProductDetail(productDetailMapper.mapProductDetailToProductDetailResponseDto(product.getProductDetail()));
-        productDto.setCreatedAt(product.getCreatedAt());
-        productDto.setUpdatedAt(product.getUpdatedAt());
-        return productDto;
+        ProductResponseDto productResponse = new ProductResponseDto();
+        productResponse.setId(product.getId());
+        productResponse.setName(product.getName());
+        productResponse.setPrice(product.getPrice());
+        productResponse.setQuantity(product.getQuantity());
+        productResponse.setProductDetail(productDetailMapper.mapToProductDetailResponse(product.getProductDetail()));
+        productResponse.setCreatedDate(product.getCreatedDate());
+        productResponse.setUpdatedDate(product.getUpdatedDate());
+        return productResponse;
     }
 
-    public CategoryResponseDto mapCategoryToCategoryResponseDto(Category category) {
-        CategoryResponseDto dto = new CategoryResponseDto();
-        dto.setId(category.getId());
-        dto.setName(category.getName());
-        dto.setDescription(category.getDescription());
-        dto.setCreatedAt(category.getCreatedAt());
-        dto.setUpdatedAt(category.getUpdatedAt());
-        dto.setProductList(category.getProducts().stream()
+    public CategoryResponseDto mapToCategoryResponse(Category category) {
+        CategoryResponseDto categoryResponse = new CategoryResponseDto();
+        categoryResponse.setId(category.getId());
+        categoryResponse.setName(category.getName());
+        categoryResponse.setDescription(category.getDescription());
+        categoryResponse.setCreatedDate(category.getCreatedDate());
+        categoryResponse.setUpdatedDate(category.getUpdatedDate());
+        categoryResponse.setProductList(category.getProducts().stream()
                 .map(this::productResponseDto)
                 .collect(Collectors.toList()));
-        return dto;
+        return categoryResponse;
     }
 
-    public List<CategoryResponseDto> mapCategoryListToCategoryResponseDtoList(List<Category> categoryList) {
+    public List<CategoryResponseDto> mapToCategoryResponseList(List<Category> categoryList) {
         return categoryList
                 .stream()
-                .map(this::mapCategoryToCategoryResponseDto)
+                .map(this::mapToCategoryResponse)
                 .collect(Collectors.toList())
                 ;
     }
