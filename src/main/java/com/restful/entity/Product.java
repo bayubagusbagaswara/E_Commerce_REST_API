@@ -39,7 +39,7 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "id_product_detail", foreignKey = @ForeignKey(name = "fk_product_product_detail"))
     private ProductDetail productDetail;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_category", foreignKey = @ForeignKey(name = "fk_product_category"))
     private Category category;
 
