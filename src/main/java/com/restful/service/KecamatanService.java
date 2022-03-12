@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface KecamatanService {
 
-    KecamatanResponseDto createKecamatan(CreateKecamatanRequestDto createKecamatanRequestDto) throws KotaNotFoundException;
+    KecamatanResponseDto createKecamatan(CreateKecamatanRequestDto createKecamatanRequest) throws KotaNotFoundException;
 
     KecamatanResponseDto getKecamatanById(String id) throws KecamatanNotFoundException;
 
-    ListKecamatanResponseDto getAllKecamatan(ListKecamatanRequestDto listKecamatanRequestDto);
+    ListKecamatanResponseDto getAllKecamatan(ListKecamatanRequestDto listKecamatanRequest);
 
-    KecamatanResponseDto updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequestDto) throws KecamatanNotFoundException, KotaNotFoundException;
+    KecamatanResponseDto updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
 
     void deleteKecamatan(String id);
 
