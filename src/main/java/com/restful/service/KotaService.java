@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface KotaService {
 
-    KotaResponseDto createKota(CreateKotaRequestDto createKotaRequestDto) throws ProvinsiNotFoundException;
+    KotaResponseDto createKota(CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException;
 
     KotaResponseDto getKotaById(String id) throws KotaNotFoundException;
 
-    ListKotaResponseDto getAllKota(ListKotaRequestDto listKotaRequestDto);
+    ListKotaResponseDto getAllKota(ListKotaRequestDto listKotaRequest);
 
-    KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequestDto) throws KotaNotFoundException, ProvinsiNotFoundException;
+    KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
 
     void deleteKota(String id);
 
