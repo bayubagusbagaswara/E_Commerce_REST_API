@@ -11,7 +11,6 @@ import com.restful.exception.ProductNotFoundException;
 import com.restful.repository.CategoryRepository;
 import com.restful.repository.ProductDetailRepository;
 import com.restful.repository.ProductRepository;
-import com.restful.repository.SupplierRepository;
 import com.restful.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,23 +40,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto createProduct(CreateProductRequestDto createProductRequestDto) throws CategoryNotFoundException, ProductDetailNotFoundException {
+    public ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException, ProductDetailNotFoundException {
 
-        Category category = categoryRepository.findById(createProductRequestDto.getCategoryId())
-                .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + createProductRequestDto.getCategoryId() + "] not found"));
+        Category category = categoryRepository.findById(createProductRequest.getCategoryId())
+                .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + createProductRequest.getCategoryId() + "] not found"));
 
         ProductDetail productDetail = new ProductDetail();
-        productDetail.setSku(createProductRequestDto.getSku());
-        productDetail.setDescription(createProductRequestDto.getDescription());
-        productDetail.setCreatedAt(LocalDateTime.now());
+        productDetail.setSku(createProductRequest.getSku());
+        productDetail.setDescription(createProductRequest.getDescription());
+        productDetail.setCreatedDate(LocalDateTime.now());
 
         Product product = new Product();
-        product.setName(createProductRequestDto.getName());
-        product.setPrice(createProductRequestDto.getPrice());
-        product.setQuantity(createProductRequestDto.getQuantity());
+        product.setName(createProductRequest.getName());
+        product.setPrice(createProductRequest.getPrice());
+        product.setQuantity(createProductRequest.getQuantity());
         product.setProductDetail(productDetail);
         product.setCategory(category);
-        product.setCreatedAt(LocalDateTime.now());
+        product.setCreatedDate(LocalDateTime.now());
 
         productDetailRepository.save(productDetail);
         productRepository.save(product);
