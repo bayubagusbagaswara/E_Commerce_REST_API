@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface KelurahanService {
 
-    KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequestDto) throws KecamatanNotFoundException;
+    KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException;
 
     KelurahanResponseDto getKelurahanById(String id) throws KelurahanNotFoundException;
 
-    ListKelurahanResponseDto getAllKelurahan(ListKelurahanRequestDto listKelurahanRequestDto);
+    ListKelurahanResponseDto getAllKelurahan(ListKelurahanRequestDto listKelurahanRequest);
 
-    KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequestDto) throws KelurahanNotFoundException, KecamatanNotFoundException;
+    KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException;
 
     void deleteKelurahan(String id);
 
