@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ListKelurahanResponseDto {
 
-    private List<KelurahanResponseDto> kelurahanResponseList;
+    private List<KelurahanResponseDto> kelurahanList;
     private Integer pageNo;
     private Integer pageSize;
     private Long totalElements;
