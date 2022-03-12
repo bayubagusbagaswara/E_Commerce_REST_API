@@ -4,12 +4,12 @@ import com.restful.dto.product.ProductResponseDto;
 import com.restful.dto.supplier.SupplierResponseDto;
 import com.restful.entity.Product;
 import com.restful.entity.Supplier;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Configuration
+@Component
 public class SupplierMapper {
 
     private final CategoryMapper categoryMapper;
