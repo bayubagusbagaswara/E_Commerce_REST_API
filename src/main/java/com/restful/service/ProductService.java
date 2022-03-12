@@ -9,15 +9,15 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductResponseDto createProduct(CreateProductRequestDto createProductRequestDto) throws CategoryNotFoundException, ProductDetailNotFoundException;
+    ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException, ProductDetailNotFoundException;
 
-    ProductResponseDto getProductById(String productId) throws ProductNotFoundException;
+    ProductResponseDto getProductById(String id) throws ProductNotFoundException;
 
-    ListProductResponseDto getAllProducts(ListProductRequestDto listProductRequestDto);
+    ListProductResponseDto getAllProducts(ListProductRequestDto listProductRequest);
 
-    ProductResponseDto updateProduct(String productId, UpdateProductRequestDto updateProductRequestDto) throws ProductNotFoundException, CategoryNotFoundException;
+    ProductResponseDto updateProduct(String productId, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException;
 
-    void deleteProduct(String productId) throws ProductNotFoundException;
+    void deleteProduct(String id) throws ProductNotFoundException;
 
     ProductResponseDto getProductByName(String name) throws ProductNotFoundException;
 
