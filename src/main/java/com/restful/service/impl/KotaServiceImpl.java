@@ -25,96 +25,100 @@ public class KotaServiceImpl implements KotaService {
 
     private final KotaRepository kotaRepository;
     private final ProvinsiRepository provinsiRepository;
+    private final WilayahMapper wilayahMapper;
 
-    public KotaServiceImpl(KotaRepository kotaRepository, ProvinsiRepository provinsiRepository) {
+    public KotaServiceImpl(KotaRepository kotaRepository, ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
         this.kotaRepository = kotaRepository;
         this.provinsiRepository = provinsiRepository;
+        this.wilayahMapper = wilayahMapper;
     }
 
     @Override
-    public KotaResponseDto createKota(CreateKotaRequestDto createKotaRequestDto) throws ProvinsiNotFoundException {
-        Provinsi provinsi = provinsiRepository.findById(createKotaRequestDto.getProvinsiId()).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+createKotaRequestDto.getProvinsiId()+"] not found"));
+    public KotaResponseDto createKota(CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException {
+        Provinsi provinsi = provinsiRepository.findById(createKotaRequest.getProvinsiId())
+                .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + createKotaRequest.getProvinsiId() + "] not found"));
         Kota kota = new Kota();
-        kota.setCode(createKotaRequestDto.getCode());
-        kota.setName(createKotaRequestDto.getName());
+        kota.setCode(createKotaRequest.getCode());
+        kota.setName(createKotaRequest.getName());
         kota.setProvinsi(provinsi);
-        kota.setCreatedAt(LocalDateTime.now());
+        kota.setCreatedDate(LocalDateTime.now());
         kotaRepository.save(kota);
-        return WilayahMapper.mapKotaToKotaResponseDto(kota);
+        return wilayahMapper.mapToKotaResponse(kota);
     }
 
     @Override
-    public KotaResponseDto getKotaById(String kotaId) throws KotaNotFoundException {
-        Kota kota = getKota(kotaId);
-        return WilayahMapper.mapKotaToKotaResponseDto(kota);
+    public KotaResponseDto getKotaById(String id) throws KotaNotFoundException {
+        Kota kota = getKota(id);
+        return wilayahMapper.mapToKotaResponse(kota);
     }
 
     @Override
-    public KotaResponseDto updateKota(String kotaId, UpdateKotaRequestDto updateKotaRequestDto) throws KotaNotFoundException, ProvinsiNotFoundException {
-        Provinsi provinsi = provinsiRepository.findById(updateKotaRequestDto.getProvinsiId()).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+updateKotaRequestDto.getProvinsiId()+"] Not Found"));
-        Kota kota = getKota(kotaId);
-        kota.setCode(updateKotaRequestDto.getCode());
-        kota.setName(updateKotaRequestDto.getName());
+    public KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
+        Provinsi provinsi = provinsiRepository.findById(updateKotaRequest.getProvinsiId())
+                .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
+        Kota kota = getKota(id);
+        kota.setCode(updateKotaRequest.getCode());
+        kota.setName(updateKotaRequest.getName());
         kota.setProvinsi(provinsi);
-        kota.setUpdatedAt(LocalDateTime.now());
+        kota.setUpdatedDate(LocalDateTime.now());
         kotaRepository.save(kota);
-        return WilayahMapper.mapKotaToKotaResponseDto(kota);
+        return wilayahMapper.mapToKotaResponse(kota);
     }
 
     @Override
-    public void deleteKota(String kotaId) {
-        kotaRepository.deleteById(kotaId);
+    public void deleteKota(String id) {
+        kotaRepository.deleteById(id);
     }
 
     @Override
-    public ListKotaResponseDto getAllKota(ListKotaRequestDto listKotaRequestDto) {
-        int pageNo = listKotaRequestDto.getPageNo();
-        int pageSize = listKotaRequestDto.getPageSize();
-        String sortBy = listKotaRequestDto.getSortBy();
-        String sortDir = listKotaRequestDto.getSortDir();
+    public ListKotaResponseDto getAllKota(ListKotaRequestDto listKotaRequest) {
+        Integer pageNo = listKotaRequest.getPageNo();
+        Integer pageSize = listKotaRequest.getPageSize();
+        String sortBy = listKotaRequest.getSortBy();
+        String sortDir = listKotaRequest.getSortDir();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         Page<Kota> kotaPage = kotaRepository.findAll(pageable);
         List<Kota> kotaList = kotaPage.getContent();
 
-        List<KotaResponseDto> kotaResponseDtoList = WilayahMapper.mapKotaListToKotaResponseDtoList(kotaList);
+        List<KotaResponseDto> kotaResponseList = wilayahMapper.mapToKotaResponseList(kotaList);
 
-        ListKotaResponseDto dto = new ListKotaResponseDto();
-        dto.setKotaResponses(kotaResponseDtoList);
-        dto.setPageNo(kotaPage.getNumber());
-        dto.setPageSize(kotaPage.getSize());
-        dto.setTotalElements(kotaPage.getTotalElements());
-        dto.setTotalPages(kotaPage.getTotalPages());
-        dto.setLast(kotaPage.isLast());
-        return dto;
+        ListKotaResponseDto listKotaResponse = new ListKotaResponseDto();
+        listKotaResponse.setKotaList(kotaResponseList);
+        listKotaResponse.setPageNo(kotaPage.getNumber());
+        listKotaResponse.setPageSize(kotaPage.getSize());
+        listKotaResponse.setTotalElements(kotaPage.getTotalElements());
+        listKotaResponse.setTotalPages(kotaPage.getTotalPages());
+        listKotaResponse.setLast(kotaPage.isLast());
+        return listKotaResponse;
     }
 
     @Override
     public KotaResponseDto getKotaByName(String name) throws KotaNotFoundException {
-        Kota kota = kotaRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name ["+name+"] not found"));
-        return WilayahMapper.mapKotaToKotaResponseDto(kota);
+        Kota kota = kotaRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name [" + name + "] not found"));
+        return wilayahMapper.mapToKotaResponse(kota);
     }
 
     @Override
     public KotaResponseDto getKotaByCode(String code) throws KotaNotFoundException {
-        Kota kota = kotaRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code ["+code+"] not found"));
-        return WilayahMapper.mapKotaToKotaResponseDto(kota);
+        Kota kota = kotaRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code [" + code + "] not found"));
+        return wilayahMapper.mapToKotaResponse(kota);
     }
 
     @Override
     public List<KotaResponseDto> getKotaByNameContains(String name) {
         List<Kota> kotaList = kotaRepository.findAllByNameContainingIgnoreCase(name);
-        return WilayahMapper.mapKotaListToKotaResponseDtoList(kotaList);
+        return wilayahMapper.mapToKotaResponseList(kotaList);
     }
 
     @Override
     public List<KotaResponseDto> getKotaByProvinsiId(String provinsiId) {
         List<Kota> kotaList = kotaRepository.findAllByProvinsiId(provinsiId);
-        return WilayahMapper.mapKotaListToKotaResponseDtoList(kotaList);
+        return wilayahMapper.mapToKotaResponseList(kotaList);
     }
 
-    private Kota getKota(String kotaId) throws KotaNotFoundException {
-        return kotaRepository.findById(kotaId).orElseThrow(() -> new KotaNotFoundException("Kota ID ["+ kotaId +"] Not Found"));
+    private Kota getKota(String id) throws KotaNotFoundException {
+        return kotaRepository.findById(id).orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
     }
 }
