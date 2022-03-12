@@ -1,10 +1,10 @@
 -- PROVINSI
 create table provinsi (
     id character varying(64) not null primary key default uuid_generate_v4(),
-    created_at timestamp not null default now(),
+    created_date timestamp not null default now(),
     created_by character varying(255) not null,
     status_record character varying(255) not null,
-    updated_at timestamp without time zone,
+    updated_date timestamp without time zone,
     updated_by character varying(255),
     code character varying(255) not null,
     name character varying(255) not null
@@ -16,10 +16,10 @@ alter table provinsi
 -- KOTA
 create table kota (
     id character varying(64) not null primary key default uuid_generate_v4(),
-    created_at timestamp not null default now(),
+    created_date timestamp not null default now(),
     created_by character varying(255) not null,
     status_record character varying(255) not null,
-    updated_at timestamp without time zone,
+    updated_date timestamp without time zone,
     updated_by character varying(255),
     code character varying(255) not null,
     name character varying(255) not null,
@@ -34,10 +34,10 @@ alter table kota
 -- KECAMATAN
 create table kecamatan (
     id character varying(64) not null primary key default uuid_generate_v4(),
-    created_at timestamp not null default now(),
+    created_date timestamp not null default now(),
     created_by character varying(255) not null,
     status_record character varying(255) not null,
-    updated_at timestamp without time zone,
+    updated_date timestamp without time zone,
     updated_by character varying(255),
     code character varying(255) not null,
     name character varying(255) not null,
@@ -52,10 +52,10 @@ alter table kecamatan
 -- KELURAHAN
 create table kelurahan (
     id character varying(64) not null primary key default uuid_generate_v4(),
-    created_at timestamp not null default now(),
+    created_date timestamp not null default now(),
     created_by character varying(255) not null,
     status_record character varying(255) not null,
-    updated_at timestamp without time zone,
+    updated_date timestamp without time zone,
     updated_by character varying(255),
     code character varying(255) not null,
     name character varying(255) not null,
