@@ -29,65 +29,65 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDto createCategory(CreateCategoryRequestDto createCategoryRequestDto) {
+    public CategoryResponseDto createCategory(CreateCategoryRequestDto createCategoryRequest) {
         Category category = new Category();
-        category.setName(createCategoryRequestDto.getName());
-        category.setDescription(createCategoryRequestDto.getDescription());
+        category.setName(createCategoryRequest.getName());
+        category.setDescription(createCategoryRequest.getDescription());
         category.setCreatedDate(LocalDateTime.now());
         categoryRepository.save(category);
-        return categoryMapper.mapCategoryToCategoryResponseDto(category);
+        return categoryMapper.mapToCategoryResponse(category);
     }
 
     @Override
-    public CategoryResponseDto getCategoryById(String categoryId) throws CategoryNotFoundException {
-        Category category = getCategory(categoryId);
-        return categoryMapper.mapCategoryToCategoryResponseDto(category);
+    public CategoryResponseDto getCategoryById(String id) throws CategoryNotFoundException {
+        Category category = getCategory(id);
+        return categoryMapper.mapToCategoryResponse(category);
     }
 
     @Override
-    public ListCategoryResponseDto getAllCategories(ListCategoryRequestDto listCategoryRequestDto) {
-        int pageNo = listCategoryRequestDto.getPageNo();
-        int pageSize = listCategoryRequestDto.getPageSize();
-        String sortBy = listCategoryRequestDto.getSortBy();
-        String sortDir = listCategoryRequestDto.getSortDir();
+    public ListCategoryResponseDto getAllCategories(ListCategoryRequestDto listCategoryRequest) {
+        Integer pageNo = listCategoryRequest.getPageNo();
+        Integer pageSize = listCategoryRequest.getPageSize();
+        String sortBy = listCategoryRequest.getSortBy();
+        String sortDir = listCategoryRequest.getSortDir();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
         Page<Category> categories = categoryRepository.findAll(pageable);
         List<Category> categoryList = categories.getContent();
 
-        List<CategoryResponseDto> categoryResponseList = categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
+        List<CategoryResponseDto> categoryResponseList = categoryMapper.mapToCategoryResponseList(categoryList);
 
-        ListCategoryResponseDto listCategoryResponseDto = new ListCategoryResponseDto();
-        listCategoryResponseDto.setCategoryResponseList(categoryResponseList);
-        listCategoryResponseDto.setPageNo(categories.getNumber());
-        listCategoryResponseDto.setPageSize(categories.getSize());
-        listCategoryResponseDto.setTotalElements(categories.getTotalElements());
-        listCategoryResponseDto.setTotalPages(categories.getTotalPages());
-        listCategoryResponseDto.setLast(categories.isLast());
-        return listCategoryResponseDto;
+        ListCategoryResponseDto listCategoryResponse = new ListCategoryResponseDto();
+        listCategoryResponse.setCategoryResponseList(categoryResponseList);
+        listCategoryResponse.setPageNo(categories.getNumber());
+        listCategoryResponse.setPageSize(categories.getSize());
+        listCategoryResponse.setTotalElements(categories.getTotalElements());
+        listCategoryResponse.setTotalPages(categories.getTotalPages());
+        listCategoryResponse.setLast(categories.isLast());
+        return listCategoryResponse;
     }
 
     @Override
-    public CategoryResponseDto updateCategory(String categoryId, UpdateCategoryRequestDto updateCategoryRequestDto) throws CategoryNotFoundException {
-        Category category = getCategory(categoryId);
-        category.setName(updateCategoryRequestDto.getName());
-        category.setDescription(updateCategoryRequestDto.getDescription());
+    public CategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException {
+        Category category = getCategory(id);
+        category.setName(updateCategoryRequest.getName());
+        category.setDescription(updateCategoryRequest.getDescription());
         category.setUpdatedDate(LocalDateTime.now());
         categoryRepository.save(category);
-        return categoryMapper.mapCategoryToCategoryResponseDto(category);
+        return categoryMapper.mapToCategoryResponse(category);
     }
 
     @Override
     public CategoryResponseDto getCategoryByName(String name) throws CategoryNotFoundException {
         Category category = categoryRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new CategoryNotFoundException("Category name [" + name + "] not found"));
-        return categoryMapper.mapCategoryToCategoryResponseDto(category);
+        return categoryMapper.mapToCategoryResponse(category);
     }
 
     @Override
     public List<CategoryResponseDto> getCategoryByNameContains(String name) {
         List<Category> categoryList = categoryRepository.findAllByNameContainingIgnoreCase(name);
-        return categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
+        return categoryMapper.mapToCategoryResponseList(categoryList);
     }
 
     @Override
@@ -98,10 +98,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryResponseDto> getCategoryStartingWithName(String name) {
         List<Category> categoryList = categoryRepository.findAllByNameIgnoreCaseStartsWith(name);
-        return categoryMapper.mapCategoryListToCategoryResponseDtoList(categoryList);
+        return categoryMapper.mapToCategoryResponseList(categoryList);
     }
 
-    private Category getCategory(String categoryId) throws CategoryNotFoundException {
-        return categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("Category ID: [" + categoryId + "] not found"));
+    private Category getCategory(String id) throws CategoryNotFoundException {
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category ID: [" + id + "] not found"));
     }
 }
