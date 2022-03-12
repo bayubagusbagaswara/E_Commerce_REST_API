@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException, ProductDetailNotFoundException;
+    ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException;
 
     ProductResponseDto getProductById(String id) throws ProductNotFoundException;
 
     ListProductResponseDto getAllProducts(ListProductRequestDto listProductRequest);
 
-    ProductResponseDto updateProduct(String productId, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException;
+    ProductResponseDto updateProduct(String id, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException;
 
     void deleteProduct(String id) throws ProductNotFoundException;
 
