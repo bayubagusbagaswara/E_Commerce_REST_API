@@ -44,7 +44,7 @@ class KotaServiceImplTest {
 
         final KotaResponseDto kota = kotaService.createKota(requestDto);
         assertNotNull(kota.getId());
-        assertNotNull(kota.getCreatedAt());
+        assertNotNull(kota.getCreatedDate());
         assertEquals(requestDto.getName(), kota.getName());
 
         log.info("ID: {}", kota.getId());
@@ -79,7 +79,7 @@ class KotaServiceImplTest {
 
         final ListKotaResponseDto responseDto = kotaService.getAllKota(requestDto);
         assertEquals(totalSampleKota, responseDto.getTotalElements());
-        assertEquals(pageSize, responseDto.getKotaResponses().size());
+        assertEquals(pageSize, responseDto.getKotaList().size());
     }
 
     @Test
@@ -94,8 +94,8 @@ class KotaServiceImplTest {
 
         final KotaResponseDto responseDto = kotaService.updateKota(id, requestDto);
         assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedAt());
-        assertNotEquals(responseDto.getCreatedAt(), responseDto.getUpdatedAt());
+        assertNotNull(responseDto.getUpdatedDate());
+        assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
         assertEquals(requestDto.getName(), responseDto.getName());
     }
 
