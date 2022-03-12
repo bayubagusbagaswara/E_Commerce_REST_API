@@ -6,7 +6,6 @@ import com.restful.entity.Category;
 import com.restful.entity.Product;
 import com.restful.entity.ProductDetail;
 import com.restful.exception.CategoryNotFoundException;
-import com.restful.exception.ProductDetailNotFoundException;
 import com.restful.exception.ProductNotFoundException;
 import com.restful.repository.CategoryRepository;
 import com.restful.repository.ProductDetailRepository;
@@ -40,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException, ProductDetailNotFoundException {
+    public ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException {
 
         Category category = categoryRepository.findById(createProductRequest.getCategoryId())
                 .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + createProductRequest.getCategoryId() + "] not found"));
@@ -60,21 +59,21 @@ public class ProductServiceImpl implements ProductService {
 
         productDetailRepository.save(productDetail);
         productRepository.save(product);
-        return productMapper.mapProductToProductResponseDto(product);
+        return productMapper.mapToProductResponse(product);
     }
 
     @Override
-    public ProductResponseDto getProductById(String productId) throws ProductNotFoundException {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product ID: [" + productId + "] not found"));
-        return productMapper.mapProductToProductResponseDto(product);
+    public ProductResponseDto getProductById(String id) throws ProductNotFoundException {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product ID: [" + id + "] not found"));
+        return productMapper.mapToProductResponse(product);
     }
 
     @Override
-    public ListProductResponseDto getAllProducts(ListProductRequestDto listProductRequestDto) {
-        int pageNo = listProductRequestDto.getPageNo();
-        int pageSize = listProductRequestDto.getPageSize();
-        String sortBy = listProductRequestDto.getSortBy();
-        String sortDir = listProductRequestDto.getSortDir();
+    public ListProductResponseDto getAllProducts(ListProductRequestDto listProductRequest) {
+        Integer pageNo = listProductRequest.getPageNo();
+        Integer pageSize = listProductRequest.getPageSize();
+        String sortBy = listProductRequest.getSortBy();
+        String sortDir = listProductRequest.getSortDir();
 
         // cek sortDir apakah ASC atau DESC, jika true maka sort by ascending, jika false maka sort by descending
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
@@ -82,47 +81,48 @@ public class ProductServiceImpl implements ProductService {
         Page<Product> productPage = productRepository.findAll(pageable);
         List<Product> productList = productPage.getContent();
 
-        List<ProductResponseDto> productResponseDtoList = productMapper.mapProductListToProductResponseDtoList(productList);
+        List<ProductResponseDto> productResponseList = productMapper.mapToProductResponseList(productList);
 
-        ListProductResponseDto dto = new ListProductResponseDto();
-        dto.setProductResponseDtoList(productResponseDtoList);
-        dto.setPageNo(productPage.getNumber());
-        dto.setPageSize(productPage.getSize());
-        dto.setTotalPages(productPage.getTotalPages());
-        dto.setTotalElements(productPage.getTotalElements());
-        dto.setLast(productPage.isLast());
-        return dto;
+        ListProductResponseDto listProductResponse = new ListProductResponseDto();
+        listProductResponse.setProductList(productResponseList);
+        listProductResponse.setPageNo(productPage.getNumber());
+        listProductResponse.setPageSize(productPage.getSize());
+        listProductResponse.setTotalPages(productPage.getTotalPages());
+        listProductResponse.setTotalElements(productPage.getTotalElements());
+        listProductResponse.setLast(productPage.isLast());
+        return listProductResponse;
     }
 
     @Override
-    public ProductResponseDto updateProduct(String productId, UpdateProductRequestDto updateProductRequestDto) throws ProductNotFoundException, CategoryNotFoundException {
-        final Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException("Product ID [" + productId + "] not found"));
+    public ProductResponseDto updateProduct(String id, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException {
+        final Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product ID [" + id + "] not found"));
 
-        final Category category = categoryRepository.findById(updateProductRequestDto.getCategoryId())
-                .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + updateProductRequestDto.getCategoryId() + "] not found"));
+        final Category category = categoryRepository.findById(updateProductRequest.getCategoryId())
+                .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + updateProductRequest.getCategoryId() + "] not found"));
 
-        final ProductDetail productDetail = product.getProductDetail();
-        productDetail.setSku(updateProductRequestDto.getSku());
-        productDetail.setDescription(updateProductRequestDto.getDescription());
+        ProductDetail productDetail = product.getProductDetail();
+        productDetail.setSku(updateProductRequest.getSku());
+        productDetail.setDescription(updateProductRequest.getDescription());
+        productDetail.setUpdatedDate(LocalDateTime.now());
 
-        product.setName(updateProductRequestDto.getName());
-        product.setPrice(updateProductRequestDto.getPrice());
-        product.setQuantity(updateProductRequestDto.getQuantity());
+        product.setName(updateProductRequest.getName());
+        product.setPrice(updateProductRequest.getPrice());
+        product.setQuantity(updateProductRequest.getQuantity());
         product.setProductDetail(productDetail);
         product.setCategory(category);
-        product.setUpdatedAt(LocalDateTime.now());
+        product.setUpdatedDate(LocalDateTime.now());
 
         productDetailRepository.save(productDetail);
         productRepository.save(product);
-        return productMapper.mapProductToProductResponseDto(product);
+        return productMapper.mapToProductResponse(product);
     }
 
     @Override
-    public void deleteProduct(String productId) throws ProductNotFoundException {
-        Optional<Product> productOptional = productRepository.findById(productId);
+    public void deleteProduct(String id) throws ProductNotFoundException {
+        Optional<Product> productOptional = productRepository.findById(id);
         if (productOptional.isEmpty()) {
-            throw new ProductNotFoundException("Product ID [" + productId + " ] not found");
+            throw new ProductNotFoundException("Product ID [" + id + " ] not found");
         }
         productOptional.get().removeSuppliers();
         productRepository.deleteById(productOptional.get().getId());
@@ -132,31 +132,31 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponseDto getProductByName(String name) throws ProductNotFoundException {
         Product product = productRepository.findProductByNameIgnoreCase(name)
                 .orElseThrow(() -> new ProductNotFoundException("Product name [" + name + "] not found"));
-        return productMapper.mapProductToProductResponseDto(product);
+        return productMapper.mapToProductResponse(product);
     }
 
     @Override
     public List<ProductResponseDto> getProductByContainingName(String name) {
         List<Product> productList = productRepository.findAllByNameContainingIgnoreCase(name);
-        return productMapper.mapProductListToProductResponseDtoList(productList);
+        return productMapper.mapToProductResponseList(productList);
     }
 
     @Override
     public ProductResponseDto getProductBySku(String sku) throws ProductNotFoundException {
         Product product = productRepository.findAllByProductDetailSku(sku)
                 .orElseThrow(() -> new ProductNotFoundException("Product SKU [" + sku + "] not found"));
-        return productMapper.mapProductToProductResponseDto(product);
+        return productMapper.mapToProductResponse(product);
     }
 
     @Override
     public List<ProductResponseDto> getProductByCategoryId(String categoryId) {
         List<Product> productList = productRepository.findAllByCategoryId(categoryId);
-        return productMapper.mapProductListToProductResponseDtoList(productList);
+        return productMapper.mapToProductResponseList(productList);
     }
 
     @Override
     public List<ProductResponseDto> getProductBySuppliersId(String supplierId) {
         List<Product> productList = productRepository.findAllBySuppliersId(supplierId);
-        return productMapper.mapProductListToProductResponseDtoList(productList);
+        return productMapper.mapToProductResponseList(productList);
     }
 }
