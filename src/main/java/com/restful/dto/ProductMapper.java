@@ -20,40 +20,38 @@ public class ProductMapper {
         this.productDetailMapper = productDetailMapper;
     }
 
-    // tanpa ada data product
-    public SupplierResponseDto supplierResponseDto(Supplier supplier) {
-        SupplierResponseDto supplierResponseDto = new SupplierResponseDto();
-        supplierResponseDto.setId(supplier.getId());
-        supplierResponseDto.setName(supplier.getName());
-        supplierResponseDto.setEmail(supplier.getEmail());
-        supplierResponseDto.setGender(supplier.getGender());
-        supplierResponseDto.setMobilePhone(supplier.getMobilePhone());
-        supplierResponseDto.setAddress(supplier.getAddress());
-        supplierResponseDto.setCreatedAt(supplier.getCreatedAt());
-        supplierResponseDto.setUpdatedAt(supplier.getUpdatedAt());
-        return supplierResponseDto;
+    public SupplierResponseDto supplierResponse(Supplier supplier) {
+        SupplierResponseDto supplierResponse = new SupplierResponseDto();
+        supplierResponse.setId(supplier.getId());
+        supplierResponse.setName(supplier.getName());
+        supplierResponse.setEmail(supplier.getEmail());
+        supplierResponse.setGender(supplier.getGender());
+        supplierResponse.setMobilePhone(supplier.getMobilePhone());
+        supplierResponse.setAddress(supplier.getAddress());
+        supplierResponse.setCreatedDate(supplier.getCreatedDate());
+        supplierResponse.setUpdatedDate(supplier.getUpdatedDate());
+        return supplierResponse;
     }
 
-    // disini dengan supplier
-    public ProductResponseDto mapProductToProductResponseDto(Product product) {
-        ProductResponseDto productDto = new ProductResponseDto();
-        productDto.setId(productDto.getId());
-        productDto.setName(productDto.getName());
-        productDto.setPrice(product.getPrice());
-        productDto.setQuantity(product.getQuantity());
-        productDto.setProductDetail(productDetailMapper.mapProductDetailToProductDetailResponseDto(product.getProductDetail()));
-        productDto.setCategory(categoryMapper.mapCategoryToCategoryResponseDto(product.getCategory()));
-        productDto.setSuppliers(product.getSuppliers().stream()
-                .map(this::supplierResponseDto)
+    public ProductResponseDto mapToProductResponse(Product product) {
+        ProductResponseDto productResponse = new ProductResponseDto();
+        productResponse.setId(product.getId());
+        productResponse.setName(product.getName());
+        productResponse.setPrice(product.getPrice());
+        productResponse.setQuantity(product.getQuantity());
+        productResponse.setCreatedDate(product.getCreatedDate());
+        productResponse.setUpdatedDate(product.getUpdatedDate());
+        productResponse.setProductDetail(productDetailMapper.mapToProductDetailResponse(product.getProductDetail()));
+        productResponse.setCategory(categoryMapper.mapToCategoryResponse(product.getCategory()));
+        productResponse.setSuppliers(product.getSuppliers().stream()
+                .map(this::supplierResponse)
                 .collect(Collectors.toSet()));
-        productDto.setCreatedAt(product.getCreatedAt());
-        productDto.setUpdatedAt(product.getUpdatedAt());
-        return productDto;
+        return productResponse;
     }
 
-    public List<ProductResponseDto> mapProductListToProductResponseDtoList(List<Product> productList) {
+    public List<ProductResponseDto> mapToProductResponseList(List<Product> productList) {
         return productList.stream()
-                .map(this::mapProductToProductResponseDto)
+                .map(this::mapToProductResponse)
                 .collect(Collectors.toList())
                 ;
     }
