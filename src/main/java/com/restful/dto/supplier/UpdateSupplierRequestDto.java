@@ -4,17 +4,12 @@ import com.restful.entity.enumerator.Gender;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class UpdateSupplierRequestDto {
-
 
     @NotBlank(message = "Name must not be blank")
     private String name;
@@ -32,7 +27,6 @@ public class UpdateSupplierRequestDto {
     @NotBlank(message = "Street must not be blank")
     private String street;
 
-    // kita kirim postal code dulu, tapi field street dan postal code akan disimpan di beda table
     @NotBlank(message = "Postal code must not be blank")
     private String postalCode;
 
