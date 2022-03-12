@@ -13,83 +13,76 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Configuration
 public class WilayahMapper {
 
-    // Mapping from Provinsi to ProvinsiResponseDto
-    public static ProvinsiResponseDto mapProvinsiToProvinsiResponseDto(Provinsi provinsi) {
-        ProvinsiResponseDto dto = new ProvinsiResponseDto();
-        dto.setId(provinsi.getId());
-        dto.setCode(provinsi.getCode());
-        dto.setName(provinsi.getName());
-        dto.setCreatedAt(provinsi.getCreatedAt());
-        dto.setUpdatedAt(provinsi.getUpdatedAt());
-        return dto;
+    public ProvinsiResponseDto mapToProvinsiResponse(Provinsi provinsi) {
+        ProvinsiResponseDto provinsiResponse = new ProvinsiResponseDto();
+        provinsiResponse.setId(provinsi.getId());
+        provinsiResponse.setCode(provinsi.getCode());
+        provinsiResponse.setName(provinsi.getName());
+        provinsiResponse.setCreatedDate(provinsi.getCreatedDate());
+        provinsiResponse.setUpdatedDate(provinsi.getUpdatedDate());
+        return provinsiResponse;
     }
 
-    // Mapping from Kota to KotaResponseDto
-    public static KotaResponseDto mapKotaToKotaResponseDto(Kota kota) {
-        KotaResponseDto dto = new KotaResponseDto();
-        dto.setId(kota.getId());
-        dto.setCode(kota.getCode());
-        dto.setName(kota.getName());
-        dto.setCreatedAt(kota.getCreatedAt());
-        dto.setUpdatedAt(kota.getUpdatedAt());
-        dto.setProvinsiResponseDto(mapProvinsiToProvinsiResponseDto(kota.getProvinsi()));
-        return dto;
+    public KotaResponseDto mapToKotaResponse(Kota kota) {
+        KotaResponseDto kotaResponse = new KotaResponseDto();
+        kotaResponse.setId(kota.getId());
+        kotaResponse.setCode(kota.getCode());
+        kotaResponse.setName(kota.getName());
+        kotaResponse.setCreatedDate(kota.getCreatedDate());
+        kotaResponse.setUpdatedDate(kota.getUpdatedDate());
+        kotaResponse.setProvinsi(mapToProvinsiResponse(kota.getProvinsi()));
+        return kotaResponse;
     }
 
-    // Mapping from Kecamatan to KecamatanResponseDto
-    public static KecamatanResponseDto mapKecamatanToKecamatanResponseDto(Kecamatan kecamatan) {
-        KecamatanResponseDto dto = new KecamatanResponseDto();
-        dto.setId(kecamatan.getId());
-        dto.setCode(kecamatan.getCode());
-        dto.setName(kecamatan.getName());
-        dto.setCreatedAt(kecamatan.getCreatedAt());
-        dto.setUpdatedAt(kecamatan.getUpdatedAt());
-        dto.setKotaResponseDto(mapKotaToKotaResponseDto(kecamatan.getKota()));
-        return dto;
+    public KecamatanResponseDto mapToKecamatanResponse(Kecamatan kecamatan) {
+        KecamatanResponseDto kecamatanResponse = new KecamatanResponseDto();
+        kecamatanResponse.setId(kecamatan.getId());
+        kecamatanResponse.setCode(kecamatan.getCode());
+        kecamatanResponse.setName(kecamatan.getName());
+        kecamatanResponse.setCreatedDate(kecamatan.getCreatedDate());
+        kecamatanResponse.setUpdatedDate(kecamatan.getUpdatedDate());
+        kecamatanResponse.setKota(mapToKotaResponse(kecamatan.getKota()));
+        return kecamatanResponse;
     }
 
-    // Mapping from Kelurahan to KelurahanResponseDto
-    public static KelurahanResponseDto mapKelurahanToKelurahanResponseDto(Kelurahan kelurahan) {
-        KelurahanResponseDto dto = new KelurahanResponseDto();
-        dto.setId(kelurahan.getId());
-        dto.setCode(kelurahan.getCode());
-        dto.setName(kelurahan.getName());
-        dto.setCreatedAt(kelurahan.getCreatedAt());
-        dto.setUpdatedAt(kelurahan.getUpdatedAt());
-        dto.setKecamatanResponseDto(mapKecamatanToKecamatanResponseDto(kelurahan.getKecamatan()));
-        return dto;
+    public KelurahanResponseDto mapToKelurahanResponse(Kelurahan kelurahan) {
+        KelurahanResponseDto kelurahanResponse = new KelurahanResponseDto();
+        kelurahanResponse.setId(kelurahan.getId());
+        kelurahanResponse.setCode(kelurahan.getCode());
+        kelurahanResponse.setName(kelurahan.getName());
+        kelurahanResponse.setCreatedDate(kelurahan.getCreatedDate());
+        kelurahanResponse.setUpdatedDate(kelurahan.getUpdatedDate());
+        kelurahanResponse.setKecamatan(mapToKecamatanResponse(kelurahan.getKecamatan()));
+        return kelurahanResponse;
     }
 
-    // Mapping from ProvinsiList to ProvinsiResponseList
-    public static List<ProvinsiResponseDto> mapProvinsiListToProvinsiResponseDtoList(List<Provinsi> provinsiList) {
+    public List<ProvinsiResponseDto> mapToProvinsiResponseList(List<Provinsi> provinsiList) {
         return provinsiList.stream()
-                .map(WilayahMapper::mapProvinsiToProvinsiResponseDto)
+                .map(this::mapToProvinsiResponse)
                 .collect(Collectors.toList())
                 ;
     }
 
-    // Mapping from KotaList to KotaResponseDtoList
-    public static List<KotaResponseDto> mapKotaListToKotaResponseDtoList(List<Kota> kotaList) {
+    public List<KotaResponseDto> mapToKotaResponseList(List<Kota> kotaList) {
         return kotaList.stream()
-                .map(WilayahMapper::mapKotaToKotaResponseDto)
+                .map(this::mapToKotaResponse)
                 .collect(Collectors.toList())
                 ;
     }
 
-    // Mapping from KecamatanList to KecamatanResponseDtoList
-    public static List<KecamatanResponseDto> mapKecamatanListToKecamatanDtoList(List<Kecamatan> kecamatanList) {
+    public List<KecamatanResponseDto> mapToKecamatanResponseList(List<Kecamatan> kecamatanList) {
         return kecamatanList.stream()
-                .map(WilayahMapper::mapKecamatanToKecamatanResponseDto)
+                .map(this::mapToKecamatanResponse)
                 .collect(Collectors.toList())
                 ;
     }
 
-    // Mapping from KelurahanList to KelurahanResponseDtoList
-    public static List<KelurahanResponseDto> mapKelurahanListToKelurahanDtoList(List<Kelurahan> kelurahanList) {
+    public List<KelurahanResponseDto> mapToKelurahanResponseList(List<Kelurahan> kelurahanList) {
         return kelurahanList.stream()
-                .map(WilayahMapper::mapKelurahanToKelurahanResponseDto)
+                .map(this::mapToKelurahanResponse)
                 .collect(Collectors.toList())
                 ;
     }
