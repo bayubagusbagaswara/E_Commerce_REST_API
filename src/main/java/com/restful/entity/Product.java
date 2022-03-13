@@ -1,7 +1,6 @@
 package com.restful.entity;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +42,7 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "id_category", foreignKey = @ForeignKey(name = "fk_product_category"))
     private Category category;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "product_supplier",
             joinColumns = @JoinColumn(name = "id_product"),
