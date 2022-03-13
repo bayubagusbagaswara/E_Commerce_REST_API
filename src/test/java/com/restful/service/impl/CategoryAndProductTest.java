@@ -54,13 +54,13 @@ public class CategoryAndProductTest {
         });
 
         // check di product, pastikan data productnya juga hilang
-        // [lenovo-legion-5, macbook-pro-2021]
-        String productId1 = "macbook-pro-2021";
+        // [legion, macbook]
+        String productId1 = "macbook";
         assertThrows(ProductNotFoundException.class, () -> {
             final ProductResponseDto product = productService.getProductById(productId1);
         });
 
-        String productId2 = "lenovo-legion-5";
+        String productId2 = "legion";
         assertThrows(ProductNotFoundException.class, () -> {
             final ProductResponseDto product = productService.getProductById(productId2);
         });
@@ -81,7 +81,7 @@ public class CategoryAndProductTest {
 
         // cek di product
         // caranya ambil data product, lalu bandingkan equals data categorynya
-        String productId = "macbook-pro-2021";
+        String productId = "macbook";
         final ProductResponseDto product = productService.getProductById(productId);
         assertEquals("Laptop Update", product.getCategory().getName());
         assertEquals("Laptop update description", product.getCategory().getDescription());
@@ -95,7 +95,7 @@ public class CategoryAndProductTest {
     void testDeleteProduct() throws ProductNotFoundException, CategoryNotFoundException {
         // jika kita delete product, maka hanya product nya yang di delete,
         // dan tidak akan delete category
-        String productId = "lenovo-legion-5";
+        String productId = "legion";
         productService.deleteProduct(productId);
         assertThrows(ProductNotFoundException.class, () -> {
             final ProductResponseDto product = productService.getProductById(productId);
