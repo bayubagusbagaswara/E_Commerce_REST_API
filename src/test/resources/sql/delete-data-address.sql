@@ -1,1 +1,1 @@
-delete form address;
+delete from address;
