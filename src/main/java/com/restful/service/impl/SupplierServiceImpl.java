@@ -161,7 +161,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResponseDto addProductToSupplier(String supplierId, String productId) throws SupplierNotFoundException, ProductNotFoundException {
         Product product = getProduct(productId);
         Supplier supplier = getSupplier(supplierId);
-        supplier.getProducts().add(product);
+        supplier.addProduct(product);
         supplierRepository.save(supplier);
         return supplierMapper.mapToSupplierResponse(supplier);
     }
