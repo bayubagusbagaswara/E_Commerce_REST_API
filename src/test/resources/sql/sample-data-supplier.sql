@@ -2,7 +2,7 @@
 -- supplier address from Singonegaran, Kediri
 insert into suppliers (id, name, email, gender, mobile_phone, id_address, created_by, created_date, status_record)
 values ('bayu', 'Bayu Bagaswara', 'bayu@mail.com', 'MALE', '085899551103', 'singonegaran-kdr', 'User Bayu', current_timestamp, 'ACTIVE'),
-        ('bagus', 'Bagus Putra', 'bagus@mail.com', 'MALE', '082211211209', 'singonegaran-kdr', 'User Bagus', current_timestamp, 'ACTIVE'),
+        ('bagus', 'Bagus Putra', 'bagus@mail.com', 'MALE', '082211211209', 'singonegaran-kdr', 'User Bagus', current_timestamp, 'ACTIVE');
 
 -- supplier address from Pesantren, Kediri
 insert into suppliers (id, name, email, gender, mobile_phone, id_address, created_by, created_date, status_record)
