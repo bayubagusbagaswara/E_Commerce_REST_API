@@ -6,8 +6,6 @@ create table product_detail (
     updated_date timestamp without time zone,
     updated_by character varying(255),
     description character varying(500) not null,
-    sku character varying(50) not null
+    sku character varying(50) not null,
+    constraint product_detail_unique_sku unique (sku)
 );
-
-alter table product_detail
-    add constraint product_detail_unique_sku unique (sku);
