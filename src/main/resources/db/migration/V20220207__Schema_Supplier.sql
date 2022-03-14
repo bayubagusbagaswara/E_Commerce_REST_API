@@ -9,12 +9,9 @@ create table suppliers (
     gender character varying(255),
     mobile_phone character varying(30),
     name character varying(100) not null,
-    id_address character varying(64)
+    id_address character varying(64),
+    constraint ck_gender_supplier check (gender in ('NONE', 'MALE', 'FEMALE')),
+    constraint suppliers_unique_email unique (email),
+    constraint suppliers_unique_mobile_phone unique (mobile_phone),
+    constraint fk_supplier_address foreign key (id_address) references address(id)
 );
-
-alter table suppliers
-    add constraint suppliers_unique_email unique (email);
-alter table suppliers
-    add constraint suppliers_unique_mobile_phone unique (mobile_phone);
-alter table suppliers
-    add constraint fk_supplier_address foreign key (id_address) references address(id);
