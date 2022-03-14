@@ -7,10 +7,7 @@ create table address (
     updated_by character varying(255),
     street character varying(100),
     postal_code character varying(255) not null,
-    id_kelurahan character varying(64)
+    id_kelurahan character varying(64),
+    constraint kelurahan_unique_postal_code unique (postal_code),
+    constraint fk_address_kelurahan foreign key (id_kelurahan) references kelurahan(id)
 );
-
-alter table address
-    add constraint kelurahan_unique_postal_code unique (postal_code);
-alter table address
-    add constraint fk_address_kelurahan foreign key (id_kelurahan) references kelurahan(id);
