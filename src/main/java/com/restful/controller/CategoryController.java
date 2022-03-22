@@ -21,6 +21,8 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    // produces = Content-Type (atau yang dikirim dari request user)
+    // consumes = Accept (yang dikirim dari server berupa response json)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<CategoryResponseDto> createCategory(@RequestBody CreateCategoryRequestDto createCategoryRequest) {
         CategoryResponseDto categoryResponse = categoryService.createCategory(createCategoryRequest);
