@@ -1,10 +1,7 @@
 package com.restful.controller;
 
 import com.restful.dto.WebResponseDto;
-import com.restful.dto.provinsi.CreateProvinsiRequestDto;
-import com.restful.dto.provinsi.ListProvinsiRequestDto;
-import com.restful.dto.provinsi.ListProvinsiResponseDto;
-import com.restful.dto.provinsi.ProvinsiResponseDto;
+import com.restful.dto.provinsi.*;
 import com.restful.exception.ProvinsiNotFoundException;
 import com.restful.service.ProvinsiService;
 import com.restful.util.AppConstants;
@@ -73,5 +70,24 @@ public class ProvinsiController {
     }
 
     // Update Provinsi
+    @PutMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<ProvinsiResponseDto> updateProvinsi(@PathVariable("idProvinsi") String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
+        final ProvinsiResponseDto provinsiResponse = provinsiService.updateProvinsi(id, updateProvinsiRequest);
+        return WebResponseDto.<ProvinsiResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(provinsiResponse)
+                .build();
+    }
+
     // Delete Provinsi
+    @DeleteMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<String> deleteProvinsi(@PathVariable("idProvinsi") String id) {
+        provinsiService.deleteProvinsi(id);
+        return WebResponseDto.<String>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(null)
+                .build();
+    }
 }
