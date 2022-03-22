@@ -44,6 +44,8 @@ public class ProvinsiController {
     }
 
     // Get All Provinsi
+    // pengennya Get All ini bisa Get All Provinsi by Name, artinya hanya mengirimkan parameter name
+    // lalu di cek jika ada parameter name (name tidak sama dengan null), maka masukkan nilai parameter name ke request
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ListProvinsiResponseDto> getAllProvinsi(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
@@ -56,6 +58,11 @@ public class ProvinsiController {
         listProvinsiRequest.setPageSize(pageSize);
         listProvinsiRequest.setSortBy(sortBy);
         listProvinsiRequest.setSortDir(sortDir);
+
+////        if (name = not null) {
+//        listProvinsiRequest.setParamerterName(name)
+//
+//    }
 
         final ListProvinsiResponseDto allProvinsiResponse = provinsiService.getAllProvinsi(listProvinsiRequest);
         return WebResponseDto.<ListProvinsiResponseDto>builder()
