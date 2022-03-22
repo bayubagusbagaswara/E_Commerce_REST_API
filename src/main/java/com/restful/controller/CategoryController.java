@@ -5,6 +5,7 @@ import com.restful.dto.category.CategoryResponseDto;
 import com.restful.dto.category.CreateCategoryRequestDto;
 import com.restful.service.CategoryService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<CategoryResponseDto> createCategory(@RequestBody CreateCategoryRequestDto createCategoryRequest) {
         CategoryResponseDto categoryResponse = categoryService.createCategory(createCategoryRequest);
         return WebResponseDto.<CategoryResponseDto>builder()
