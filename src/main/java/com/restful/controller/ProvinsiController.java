@@ -40,9 +40,7 @@ public class ProvinsiController {
                 .build();
     }
 
-    // Get All Provinsi
-    // pengennya Get All ini bisa Get All Provinsi by Name, artinya hanya mengirimkan parameter name
-    // lalu di cek jika ada parameter name (name tidak sama dengan null), maka masukkan nilai parameter name ke request
+    // kita coba testing dengan mengirimkan parameter sortBy yang berbeda-beda (sesuai dengan properti yang dimiliki entity Provinsi)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ListProvinsiResponseDto> getAllProvinsi(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
@@ -55,12 +53,6 @@ public class ProvinsiController {
         listProvinsiRequest.setPageSize(pageSize);
         listProvinsiRequest.setSortBy(sortBy);
         listProvinsiRequest.setSortDir(sortDir);
-
-////        if (name = not null) {
-//        listProvinsiRequest.setParamerterName(name)
-//
-//    }
-
         final ListProvinsiResponseDto allProvinsiResponse = provinsiService.getAllProvinsi(listProvinsiRequest);
         return WebResponseDto.<ListProvinsiResponseDto>builder()
                 .code(HttpStatus.OK.value())
@@ -69,7 +61,6 @@ public class ProvinsiController {
                 .build();
     }
 
-    // Update Provinsi
     @PutMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ProvinsiResponseDto> updateProvinsi(@PathVariable("idProvinsi") String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
         final ProvinsiResponseDto provinsiResponse = provinsiService.updateProvinsi(id, updateProvinsiRequest);
@@ -80,7 +71,6 @@ public class ProvinsiController {
                 .build();
     }
 
-    // Delete Provinsi
     @DeleteMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<String> deleteProvinsi(@PathVariable("idProvinsi") String id) {
         provinsiService.deleteProvinsi(id);
