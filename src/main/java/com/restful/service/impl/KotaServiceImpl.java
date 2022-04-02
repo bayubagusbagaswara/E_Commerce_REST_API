@@ -66,8 +66,10 @@ public class KotaServiceImpl implements KotaService {
     }
 
     @Override
-    public void deleteKota(String id) {
-        kotaRepository.deleteById(id);
+    public void deleteKota(String id) throws KotaNotFoundException {
+        final Kota kota = kotaRepository.findById(id)
+                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
+        kotaRepository.delete(kota);
     }
 
     @Override
