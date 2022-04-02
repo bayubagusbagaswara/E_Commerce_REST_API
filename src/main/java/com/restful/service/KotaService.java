@@ -16,7 +16,7 @@ public interface KotaService {
 
     KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
 
-    void deleteKota(String id);
+    void deleteKota(String id) throws KotaNotFoundException;
 
     KotaResponseDto getKotaByName(String name) throws KotaNotFoundException;
 
