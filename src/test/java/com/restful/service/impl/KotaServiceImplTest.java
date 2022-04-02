@@ -101,7 +101,7 @@ class KotaServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteKota() {
+    void deleteKota() throws KotaNotFoundException {
         // delete kota Denpasar
         String id = "5171";
         kotaService.deleteKota(id);
