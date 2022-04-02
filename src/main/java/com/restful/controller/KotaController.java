@@ -1,10 +1,7 @@
 package com.restful.controller;
 
 import com.restful.dto.WebResponseDto;
-import com.restful.dto.kota.CreateKotaRequestDto;
-import com.restful.dto.kota.KotaResponseDto;
-import com.restful.dto.kota.ListKotaRequestDto;
-import com.restful.dto.kota.ListKotaResponseDto;
+import com.restful.dto.kota.*;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.exception.ProvinsiNotFoundException;
 import com.restful.service.KotaService;
@@ -63,5 +60,25 @@ public class KotaController {
                 .data(allKotaResponse)
                 .build();
 
+    }
+
+    @PutMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<KotaResponseDto> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateKotaRequestDto updateKotaRequestDto) throws ProvinsiNotFoundException, KotaNotFoundException {
+        final KotaResponseDto kotaResponse = kotaService.updateKota(id, updateKotaRequestDto);
+        return WebResponseDto.<KotaResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kotaResponse)
+                .build();
+    }
+
+    @DeleteMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<String> deleteKota(@PathVariable("idKota") String id) throws KotaNotFoundException {
+        kotaService.deleteKota(id);
+        return WebResponseDto.<String>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(null)
+                .build();
     }
 }
