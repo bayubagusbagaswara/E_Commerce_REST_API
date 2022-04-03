@@ -101,7 +101,7 @@ class KelurahanServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteKelurahan() {
+    void deleteKelurahan() throws KelurahanNotFoundException {
         // id kelurahan Ngronggo
         String id = "3571021014";
         kelurahanService.deleteKelurahan(id);
