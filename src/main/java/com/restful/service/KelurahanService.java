@@ -16,7 +16,7 @@ public interface KelurahanService {
 
     KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException;
 
-    void deleteKelurahan(String id);
+    void deleteKelurahan(String id) throws KelurahanNotFoundException;
 
     KelurahanResponseDto getKelurahanByName(String name) throws KelurahanNotFoundException;
 
