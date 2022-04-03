@@ -48,7 +48,8 @@ public class KelurahanServiceImpl implements KelurahanService {
 
     @Override
     public KelurahanResponseDto getKelurahanById(String id) throws KelurahanNotFoundException {
-        Kelurahan kelurahan = getKelurahan(id);
+        Kelurahan kelurahan = kelurahanRepository.findById(id)
+                .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
         return wilayahMapper.mapToKelurahanResponse(kelurahan);
     }
 
@@ -56,7 +57,8 @@ public class KelurahanServiceImpl implements KelurahanService {
     public KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
         Kecamatan kecamatan = kecamatanRepository.findById(updateKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + updateKelurahanRequest.getKecamatanId() + "] not found"));
-        Kelurahan kelurahan = getKelurahan(id);
+        Kelurahan kelurahan = kelurahanRepository.findById(id)
+                .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
         kelurahan.setCode(updateKelurahanRequest.getCode());
         kelurahan.setName(updateKelurahanRequest.getName());
         kelurahan.setKecamatan(kecamatan);
@@ -90,8 +92,10 @@ public class KelurahanServiceImpl implements KelurahanService {
     }
 
     @Override
-    public void deleteKelurahan(String id) {
-        kelurahanRepository.deleteById(id);
+    public void deleteKelurahan(String id) throws KelurahanNotFoundException {
+        final Kelurahan kelurahan = kelurahanRepository.findById(id)
+                .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
+        kelurahanRepository.delete(kelurahan);
     }
 
     @Override
@@ -116,10 +120,6 @@ public class KelurahanServiceImpl implements KelurahanService {
     public List<KelurahanResponseDto> getKelurahanByKecamatanId(String kecamatanId) {
         List<Kelurahan> kelurahanList = kelurahanRepository.findAllByKecamatanId(kecamatanId);
         return wilayahMapper.mapToKelurahanResponseList(kelurahanList);
-    }
-
-    private Kelurahan getKelurahan(String id) throws KelurahanNotFoundException {
-        return kelurahanRepository.findById(id).orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
     }
 }
 
