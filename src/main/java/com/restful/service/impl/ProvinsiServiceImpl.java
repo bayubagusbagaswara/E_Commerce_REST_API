@@ -40,7 +40,8 @@ public class ProvinsiServiceImpl implements ProvinsiService {
 
     @Override
     public ProvinsiResponseDto getProvinsiById(String id) throws ProvinsiNotFoundException {
-        Provinsi provinsi = getProvinsi(id);
+        Provinsi provinsi = provinsiRepository.findById(id)
+                .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
         return wilayahMapper.mapToProvinsiResponse(provinsi);
     }
 
@@ -70,7 +71,8 @@ public class ProvinsiServiceImpl implements ProvinsiService {
 
     @Override
     public ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
-        Provinsi provinsi = getProvinsi(id);
+        Provinsi provinsi = provinsiRepository.findById(id)
+                .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
         provinsi.setCode(updateProvinsiRequest.getCode());
         provinsi.setName(updateProvinsiRequest.getName());
         provinsi.setUpdatedDate(LocalDateTime.now());
@@ -79,8 +81,10 @@ public class ProvinsiServiceImpl implements ProvinsiService {
     }
 
     @Override
-    public void deleteProvinsi(String provinsiId) {
-        provinsiRepository.deleteById(provinsiId);
+    public void deleteProvinsi(String id) throws ProvinsiNotFoundException {
+        final Provinsi provinsi = provinsiRepository.findById(id)
+                .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + id + "] not found"));
+        provinsiRepository.delete(provinsi);
     }
 
     @Override
@@ -101,7 +105,4 @@ public class ProvinsiServiceImpl implements ProvinsiService {
         return wilayahMapper.mapToProvinsiResponseList(provinsiList);
     }
 
-    private Provinsi getProvinsi(String id) throws ProvinsiNotFoundException {
-        return provinsiRepository.findById(id).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
-    }
 }
