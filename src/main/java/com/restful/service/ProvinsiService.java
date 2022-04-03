@@ -15,7 +15,7 @@ public interface ProvinsiService {
 
     ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException;
 
-    void deleteProvinsi(String id);
+    void deleteProvinsi(String id) throws ProvinsiNotFoundException;
 
     ProvinsiResponseDto getProvinsiByName(String name) throws ProvinsiNotFoundException;
 
