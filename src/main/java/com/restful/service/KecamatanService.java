@@ -16,7 +16,7 @@ public interface KecamatanService {
 
     KecamatanResponseDto updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
 
-    void deleteKecamatan(String id);
+    void deleteKecamatan(String id) throws KecamatanNotFoundException;
 
     KecamatanResponseDto getKecamatanByName(String name) throws KecamatanNotFoundException;
 
