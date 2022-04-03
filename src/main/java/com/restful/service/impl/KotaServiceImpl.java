@@ -48,7 +48,8 @@ public class KotaServiceImpl implements KotaService {
 
     @Override
     public KotaResponseDto getKotaById(String id) throws KotaNotFoundException {
-        Kota kota = getKota(id);
+        Kota kota = kotaRepository.findById(id)
+                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
         return wilayahMapper.mapToKotaResponse(kota);
     }
 
@@ -56,7 +57,8 @@ public class KotaServiceImpl implements KotaService {
     public KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
         Provinsi provinsi = provinsiRepository.findById(updateKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
-        Kota kota = getKota(id);
+        Kota kota = kotaRepository.findById(id)
+                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
         kota.setCode(updateKotaRequest.getCode());
         kota.setName(updateKotaRequest.getName());
         kota.setProvinsi(provinsi);
@@ -120,7 +122,4 @@ public class KotaServiceImpl implements KotaService {
         return wilayahMapper.mapToKotaResponseList(kotaList);
     }
 
-    private Kota getKota(String id) throws KotaNotFoundException {
-        return kotaRepository.findById(id).orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
-    }
 }
