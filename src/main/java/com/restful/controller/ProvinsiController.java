@@ -41,18 +41,25 @@ public class ProvinsiController {
     }
 
     // kita coba testing dengan mengirimkan parameter sortBy yang berbeda-beda (sesuai dengan properti yang dimiliki entity Provinsi)
+    // harusnya disini juga bisa menangani search by Name, tetapi deafultnya adalah search by Id
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ListProvinsiResponseDto> getAllProvinsi(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(value = "searchBy", defaultValue = AppConstants.DEFAULT_SEARCH_BY, required = false) String searchBy,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
 
         ListProvinsiRequestDto listProvinsiRequest = new ListProvinsiRequestDto();
         listProvinsiRequest.setPageNo(pageNo);
         listProvinsiRequest.setPageSize(pageSize);
+//        listProvinsiRequest.setSearchBy(searchBy);
+
         listProvinsiRequest.setSortBy(sortBy);
         listProvinsiRequest.setSortDir(sortDir);
+
+        // listProvinsiRequest jadi memiliki property searchBy
+
         final ListProvinsiResponseDto allProvinsiResponse = provinsiService.getAllProvinsi(listProvinsiRequest);
         return WebResponseDto.<ListProvinsiResponseDto>builder()
                 .code(HttpStatus.OK.value())
@@ -72,7 +79,7 @@ public class ProvinsiController {
     }
 
     @DeleteMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<String> deleteProvinsi(@PathVariable("idProvinsi") String id) {
+    public WebResponseDto<String> deleteProvinsi(@PathVariable("idProvinsi") String id) throws ProvinsiNotFoundException {
         provinsiService.deleteProvinsi(id);
         return WebResponseDto.<String>builder()
                 .code(HttpStatus.OK.value())
