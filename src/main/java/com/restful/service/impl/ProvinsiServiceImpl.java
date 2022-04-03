@@ -47,6 +47,8 @@ public class ProvinsiServiceImpl implements ProvinsiService {
 
     @Override
     public ListProvinsiResponseDto getAllProvinsi(ListProvinsiRequestDto listProvinsiRequest) {
+
+        // ada parameter searchBy
         Integer pageNo = listProvinsiRequest.getPageNo();
         Integer pageSize = listProvinsiRequest.getPageSize();
         String sortBy = listProvinsiRequest.getSortBy();
@@ -54,7 +56,19 @@ public class ProvinsiServiceImpl implements ProvinsiService {
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+
+        // intinya disini
+        // karena findAll maka kita akan mendapatkan semua data nya
+        // tapi kita ingin find ini bergantung terhadap nilai dari properti searchBy
+        // jadi pencarian data berdasarkan query where ...
+
+
+        // if (searchByName.isExist) {
+        // maka provinsiRepository.findAllByName
+        // }
         Page<Provinsi> provinsiPage = provinsiRepository.findAll(pageable);
+
+
         List<Provinsi> provinsiList = provinsiPage.getContent();
 
         List<ProvinsiResponseDto> provinsiResponseList = wilayahMapper.mapToProvinsiResponseList(provinsiList);
