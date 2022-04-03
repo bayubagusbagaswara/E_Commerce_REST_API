@@ -98,7 +98,7 @@ class KecamatanServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteKecamatan() {
+    void deleteKecamatan() throws KecamatanNotFoundException {
         // delete kecamatan Mojoroto
         String id = "357101";
         kecamatanService.deleteKecamatan(id);
