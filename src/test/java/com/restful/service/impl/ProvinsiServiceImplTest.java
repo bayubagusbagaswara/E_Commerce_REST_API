@@ -96,7 +96,7 @@ class ProvinsiServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteProvinsi() {
+    void deleteProvinsi() throws ProvinsiNotFoundException {
         // id provinsi Bali
         String id = "51";
         provinsiService.deleteProvinsi(id);
