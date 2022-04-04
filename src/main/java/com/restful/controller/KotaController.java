@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/kota")
 public class KotaController {
@@ -79,6 +81,36 @@ public class KotaController {
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(null)
+                .build();
+    }
+
+    @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<KotaResponseDto> getKotaByName(@RequestParam("name") String name) throws KotaNotFoundException {
+        final KotaResponseDto kotaResponse = kotaService.getKotaByName(name);
+        return WebResponseDto.<KotaResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kotaResponse)
+                .build();
+    }
+
+    @GetMapping(value = "/name/contains")
+    public WebResponseDto<List<KotaResponseDto>> getKotaByNameContaining(@RequestParam("name") String name) {
+        final List<KotaResponseDto> kotaResponseList = kotaService.getKotaByNameContains(name);
+        return WebResponseDto.<List<KotaResponseDto>>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kotaResponseList)
+                .build();
+    }
+
+    @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<KotaResponseDto> getKotaByCode(@RequestParam("code") String code) throws KotaNotFoundException {
+        final KotaResponseDto kotaResponse = kotaService.getKotaByCode(code);
+        return WebResponseDto.<KotaResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kotaResponse)
                 .build();
     }
 }
