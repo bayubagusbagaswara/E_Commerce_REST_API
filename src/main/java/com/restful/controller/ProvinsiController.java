@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/provinsi")
 public class ProvinsiController {
@@ -29,7 +31,6 @@ public class ProvinsiController {
                 .build();
     }
 
-    // Get Provinsi By ID, /{idProvinsi}
     @GetMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ProvinsiResponseDto> getProvinsiById(@PathVariable("idProvinsi") String id) throws ProvinsiNotFoundException {
         final ProvinsiResponseDto provinsiResponse = provinsiService.getProvinsiById(id);
@@ -40,8 +41,6 @@ public class ProvinsiController {
                 .build();
     }
 
-    // kita coba testing dengan mengirimkan parameter sortBy yang berbeda-beda (sesuai dengan properti yang dimiliki entity Provinsi)
-    // harusnya disini juga bisa menangani search by Name, tetapi deafultnya adalah search by Id
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ListProvinsiResponseDto> getAllProvinsi(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
@@ -53,12 +52,8 @@ public class ProvinsiController {
         ListProvinsiRequestDto listProvinsiRequest = new ListProvinsiRequestDto();
         listProvinsiRequest.setPageNo(pageNo);
         listProvinsiRequest.setPageSize(pageSize);
-//        listProvinsiRequest.setSearchBy(searchBy);
-
         listProvinsiRequest.setSortBy(sortBy);
         listProvinsiRequest.setSortDir(sortDir);
-
-        // listProvinsiRequest jadi memiliki property searchBy
 
         final ListProvinsiResponseDto allProvinsiResponse = provinsiService.getAllProvinsi(listProvinsiRequest);
         return WebResponseDto.<ListProvinsiResponseDto>builder()
@@ -85,6 +80,36 @@ public class ProvinsiController {
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(null)
+                .build();
+    }
+
+    @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<ProvinsiResponseDto> getProvinsiByName(@RequestParam("name") String name) throws ProvinsiNotFoundException {
+        final ProvinsiResponseDto provinsiResponse = provinsiService.getProvinsiByName(name);
+        return WebResponseDto.<ProvinsiResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(provinsiResponse)
+                .build();
+    }
+
+    @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<List<ProvinsiResponseDto>> getProvinsiByNameContaining(@RequestParam("name") String name) {
+        final List<ProvinsiResponseDto> provinsiResponseList = provinsiService.getProvinsiByNameContains(name);
+        return WebResponseDto.<List<ProvinsiResponseDto>>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(provinsiResponseList)
+                .build();
+    }
+
+    @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<ProvinsiResponseDto> getProvinsiByCode(@RequestParam("code") String code) throws ProvinsiNotFoundException {
+        final ProvinsiResponseDto provinsiResponse = provinsiService.getProvinsiByCode(code);
+        return WebResponseDto.<ProvinsiResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(provinsiResponse)
                 .build();
     }
 }
