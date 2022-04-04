@@ -73,7 +73,7 @@ public class CategoryController {
     }
 
     @DeleteMapping(value = "/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<String> deleteCategory(@PathVariable("idCategory") String id) {
+    public WebResponseDto<String> deleteCategory(@PathVariable("idCategory") String id) throws CategoryNotFoundException {
         categoryService.deleteCategory(id);
         return WebResponseDto.<String>builder()
                 .code(HttpStatus.OK.value())
