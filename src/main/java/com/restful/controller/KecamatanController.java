@@ -1,10 +1,7 @@
 package com.restful.controller;
 
 import com.restful.dto.WebResponseDto;
-import com.restful.dto.kecamatan.CreateKecamatanRequestDto;
-import com.restful.dto.kecamatan.KecamatanResponseDto;
-import com.restful.dto.kecamatan.ListKecamatanRequestDto;
-import com.restful.dto.kecamatan.ListKecamatanResponseDto;
+import com.restful.dto.kecamatan.*;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.service.KecamatanService;
@@ -12,6 +9,8 @@ import com.restful.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/kecamatan")
@@ -33,7 +32,6 @@ public class KecamatanController {
                 .build();
     }
 
-    // get kecamatan by id
     @GetMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KecamatanResponseDto> getKecamatanById(@PathVariable("idKecamatan") String id) throws KecamatanNotFoundException {
         final KecamatanResponseDto kecamatanResponse = kecamatanService.getKecamatanById(id);
@@ -44,7 +42,6 @@ public class KecamatanController {
                 .build();
     }
 
-    // get all kecamatan
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ListKecamatanResponseDto> getAllKecamatan(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
@@ -66,7 +63,53 @@ public class KecamatanController {
                 .build();
     }
 
-    // update kecamatan
-    // delete kecamatan
-    // find by code
+    @PutMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<KecamatanResponseDto> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException {
+        final KecamatanResponseDto kecamatanResponse = kecamatanService.updateKecamatan(id, updateKecamatanRequest);
+        return WebResponseDto.<KecamatanResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kecamatanResponse)
+                .build();
+    }
+
+    @DeleteMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<KecamatanResponseDto> deleteKecamatan(@PathVariable("idKecamatan") String id) throws KecamatanNotFoundException {
+        kecamatanService.deleteKecamatan(id);
+        return WebResponseDto.<KecamatanResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(null)
+                .build();
+    }
+
+    @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<KecamatanResponseDto> getKecamatanByName(@RequestParam("name") String name) throws KecamatanNotFoundException {
+        final KecamatanResponseDto kecamatanResponse = kecamatanService.getKecamatanByName(name);
+        return WebResponseDto.<KecamatanResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kecamatanResponse)
+                .build();
+    }
+
+    @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<List<KecamatanResponseDto>> getKecamatanByNameContains(@RequestParam("name") String name) {
+        final List<KecamatanResponseDto> kecamatanResponseList = kecamatanService.getKecamatanByNameContains(name);
+        return WebResponseDto.<List<KecamatanResponseDto>>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kecamatanResponseList)
+                .build();
+    }
+
+    @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDto<KecamatanResponseDto> getKecamatanByCode(@RequestParam("code") String code) throws KecamatanNotFoundException {
+        final KecamatanResponseDto kecamatanResponse = kecamatanService.getKecamatanByCode(code);
+        return WebResponseDto.<KecamatanResponseDto>builder()
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.getReasonPhrase())
+                .data(kecamatanResponse)
+                .build();
+    }
 }
