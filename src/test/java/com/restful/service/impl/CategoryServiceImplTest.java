@@ -87,7 +87,7 @@ class CategoryServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteCategory() {
+    void deleteCategory() throws CategoryNotFoundException {
         String id = "camera";
         categoryService.deleteCategory(id);
         assertThrows(CategoryNotFoundException.class, () -> {
