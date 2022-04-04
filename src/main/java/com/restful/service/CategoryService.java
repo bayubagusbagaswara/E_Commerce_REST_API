@@ -15,11 +15,13 @@ public interface CategoryService {
 
     CategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException;
 
-    void deleteCategory(String id);
+    void deleteCategory(String id) throws CategoryNotFoundException;
 
     CategoryResponseDto getCategoryByName(String name) throws CategoryNotFoundException;
 
     List<CategoryResponseDto> getCategoryByNameContains(String name);
 
     List<CategoryResponseDto> getCategoryStartingWithName(String name);
+
+    CategoryResponseDto getCategoryByProductId(String idProduct) throws CategoryNotFoundException;
 }
