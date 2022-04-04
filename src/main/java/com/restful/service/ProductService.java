@@ -2,7 +2,6 @@ package com.restful.service;
 
 import com.restful.dto.product.*;
 import com.restful.exception.CategoryNotFoundException;
-import com.restful.exception.ProductDetailNotFoundException;
 import com.restful.exception.ProductNotFoundException;
 
 import java.util.List;
