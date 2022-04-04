@@ -45,7 +45,7 @@ public class CategoryAndProductTest {
 
     @Test
     @Order(1)
-    void testRemoveCategory() {
+    void testRemoveCategory() throws CategoryNotFoundException {
         // [laptop]
         String categoryId = "laptop";
         categoryService.deleteCategory(categoryId);
