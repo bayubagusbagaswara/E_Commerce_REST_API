@@ -30,7 +30,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ProvinsiResponseDto createProvinsi(CreateProvinceRequestDTO createProvinsiRequest) {
+    public ProvinceDTO createProvinsi(CreateProvinceRequestDTO createProvinsiRequest) {
         Province province = new Province();
         province.setCode(createProvinsiRequest.getCode());
         province.setName(createProvinsiRequest.getName());
@@ -40,7 +40,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ProvinsiResponseDto getProvinsiById(String id) throws ProvinsiNotFoundException {
+    public ProvinceDTO getProvinsiById(String id) throws ProvinsiNotFoundException {
         Province province = provinsiRepository.findById(id)
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
         return wilayahMapper.mapToProvinsiResponse(province);
@@ -72,7 +72,7 @@ public class ProvinceServiceImpl implements ProvinceService {
 
         List<Province> provinceList = provinsiPage.getContent();
 
-        List<ProvinsiResponseDto> provinsiResponseList = wilayahMapper.mapToProvinsiResponseList(provinceList);
+        List<ProvinceDTO> provinsiResponseList = wilayahMapper.mapToProvinsiResponseList(provinceList);
 
         ListProvinceResponseDTO listProvinsiResponse = new ListProvinceResponseDTO();
         listProvinsiResponse.setProvinsiList(provinsiResponseList);
@@ -85,7 +85,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
+    public ProvinceDTO updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
         Province province = provinsiRepository.findById(id)
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
         province.setCode(updateProvinsiRequest.getCode());
@@ -103,19 +103,19 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ProvinsiResponseDto getProvinsiByName(String name) throws ProvinsiNotFoundException {
+    public ProvinceDTO getProvinsiByName(String name) throws ProvinsiNotFoundException {
         Province province = provinsiRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi name [" + name + "] not found"));
         return wilayahMapper.mapToProvinsiResponse(province);
     }
 
     @Override
-    public ProvinsiResponseDto getProvinsiByCode(String code) throws ProvinsiNotFoundException {
+    public ProvinceDTO getProvinsiByCode(String code) throws ProvinsiNotFoundException {
         Province province = provinsiRepository.findAllByCode(code).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi code [" + code + "] not found"));
         return wilayahMapper.mapToProvinsiResponse(province);
     }
 
     @Override
-    public List<ProvinsiResponseDto> getProvinsiByNameContains(String name) {
+    public List<ProvinceDTO> getProvinsiByNameContains(String name) {
         List<Province> provinceList = provinsiRepository.findAllByNameContainingIgnoreCase(name);
         return wilayahMapper.mapToProvinsiResponseList(provinceList);
     }

@@ -1,6 +1,6 @@
 package com.ecommerce.dto.region.district;
 
-import com.ecommerce.dto.region.province.ProvinsiResponseDto;
+import com.ecommerce.dto.region.province.ProvinceDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,5 +15,5 @@ public class KotaResponseDto {
     private String name;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private ProvinsiResponseDto provinsi;
+    private ProvinceDTO provinsi;
 }

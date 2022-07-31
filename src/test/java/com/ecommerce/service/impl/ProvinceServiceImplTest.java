@@ -37,7 +37,7 @@ class ProvinceServiceImplTest {
         requestDto.setCode("123");
         requestDto.setName("Provinsi Test");
 
-        ProvinsiResponseDto provinsi = provinsiService.createProvinsi(requestDto);
+        ProvinceDTO provinsi = provinsiService.createProvinsi(requestDto);
 
         assertNotNull(provinsi.getId());
         assertNotNull(provinsi.getCreatedDate());
@@ -52,7 +52,7 @@ class ProvinceServiceImplTest {
     void getProvinsiById() throws ProvinsiNotFoundException {
         // id provinsi Jawa Timur
         String id = "35";
-        ProvinsiResponseDto provinsi = provinsiService.getProvinsiById(id);
+        ProvinceDTO provinsi = provinsiService.getProvinsiById(id);
         assertEquals(id, provinsi.getId());
         log.info("Name: {}", provinsi.getName());
     }
@@ -88,7 +88,7 @@ class ProvinceServiceImplTest {
         requestDto.setCode("31");
         requestDto.setName("DKI Jakarta update");
 
-        ProvinsiResponseDto responseDto = provinsiService.updateProvinsi(id, requestDto);
+        ProvinceDTO responseDto = provinsiService.updateProvinsi(id, requestDto);
 
         assertEquals(id, responseDto.getId());
         assertNotNull(responseDto.getUpdatedDate());
@@ -102,7 +102,7 @@ class ProvinceServiceImplTest {
         String id = "51";
         provinsiService.deleteProvinsi(id);
         assertThrows(ProvinsiNotFoundException.class, () -> {
-            ProvinsiResponseDto provinsi = provinsiService.getProvinsiById(id);
+            ProvinceDTO provinsi = provinsiService.getProvinsiById(id);
         });
     }
 
@@ -111,7 +111,7 @@ class ProvinceServiceImplTest {
     void getProvinsiByName() throws ProvinsiNotFoundException {
         // name provinsi jawa timur
         String name = "jawa timur";
-        final ProvinsiResponseDto provinsi = provinsiService.getProvinsiByName(name);
+        final ProvinceDTO provinsi = provinsiService.getProvinsiByName(name);
         assertEquals(name, provinsi.getName().toLowerCase());
         log.info("Name: {}", provinsi.getName());
     }
@@ -121,7 +121,7 @@ class ProvinceServiceImplTest {
     void getProvinsiByCode() throws ProvinsiNotFoundException {
         // code provinsi jawa timur
         String code = "35";
-        final ProvinsiResponseDto provinsi = provinsiService.getProvinsiByCode(code);
+        final ProvinceDTO provinsi = provinsiService.getProvinsiByCode(code);
         assertEquals(code, provinsi.getCode());
         log.info("Code: {}", provinsi.getCode());
     }
@@ -131,9 +131,9 @@ class ProvinceServiceImplTest {
     void getProvinsiByNameContains() {
         // contains name ja [Jakarta, Jawa Barat, Jawa Timur, Jawa Tengah]
         String name = "ja";
-        final List<ProvinsiResponseDto> provinsiList = provinsiService.getProvinsiByNameContains(name);
+        final List<ProvinceDTO> provinsiList = provinsiService.getProvinsiByNameContains(name);
         assertEquals(4, provinsiList.size());
-        for (ProvinsiResponseDto provinsi : provinsiList) {
+        for (ProvinceDTO provinsi : provinsiList) {
             log.info("Name: {}", provinsi.getName());
             log.info("=========");
         }

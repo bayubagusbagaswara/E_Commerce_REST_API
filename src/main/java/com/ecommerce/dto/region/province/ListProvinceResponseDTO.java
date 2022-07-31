@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ListProvinceResponseDTO {
 
-    private List<ProvinsiResponseDto> provinsiList;
+    private List<ProvinceDTO> provinceList;
     private Integer pageNo;
     private Integer pageSize;
     private Long totalElements;

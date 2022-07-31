@@ -8,19 +8,19 @@ import java.util.List;
 
 public interface ProvinceService {
 
-    ProvinsiResponseDto createProvinsi(CreateProvinceRequestDTO createProvinsiRequest);
+    ProvinceDTO createProvinsi(CreateProvinceRequestDTO createProvinsiRequest);
 
-    ProvinsiResponseDto getProvinsiById(String id) throws ProvinsiNotFoundException;
+    ProvinceDTO getProvinsiById(String id) throws ProvinsiNotFoundException;
 
     ListProvinceResponseDTO getAllProvinsi(ListProvinceRequestDTO listProvinsiRequest);
 
-    ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException;
+    ProvinceDTO updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException;
 
     void deleteProvinsi(String id) throws ProvinsiNotFoundException;
 
-    ProvinsiResponseDto getProvinsiByName(String name) throws ProvinsiNotFoundException;
+    ProvinceDTO getProvinsiByName(String name) throws ProvinsiNotFoundException;
 
-    List<ProvinsiResponseDto> getProvinsiByNameContains(String name);
+    List<ProvinceDTO> getProvinsiByNameContains(String name);
 
-    ProvinsiResponseDto getProvinsiByCode(String code) throws ProvinsiNotFoundException;
+    ProvinceDTO getProvinsiByCode(String code) throws ProvinsiNotFoundException;
 }
