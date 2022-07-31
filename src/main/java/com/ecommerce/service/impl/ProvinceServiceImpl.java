@@ -6,7 +6,7 @@ import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.provinsi.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 import com.ecommerce.repository.ProvinsiRepository;
-import com.ecommerce.service.ProvinsiService;
+import com.ecommerce.service.ProvinceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,12 +19,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ProvinsiServiceImpl implements ProvinsiService {
+public class ProvinceServiceImpl implements ProvinceService {
 
     private final ProvinsiRepository provinsiRepository;
     private final WilayahMapper wilayahMapper;
 
-    public ProvinsiServiceImpl(ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
+    public ProvinceServiceImpl(ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
         this.provinsiRepository = provinsiRepository;
         this.wilayahMapper = wilayahMapper;
     }

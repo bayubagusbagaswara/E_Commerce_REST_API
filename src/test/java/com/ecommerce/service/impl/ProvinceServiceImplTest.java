@@ -28,7 +28,7 @@ class ProvinceServiceImplTest {
     private static final Logger log = LoggerFactory.getLogger(ProvinceServiceImplTest.class);
 
     @Autowired
-    ProvinsiServiceImpl provinsiService;
+    ProvinceServiceImpl provinsiService;
 
     @Test
     @Order(1)

@@ -4,7 +4,7 @@ import com.ecommerce.dto.WebResponseDto;
 import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.provinsi.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
-import com.ecommerce.service.ProvinsiService;
+import com.ecommerce.service.ProvinceService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,15 +16,15 @@ import java.util.List;
 @RequestMapping("/api/provinces")
 public class ProvinceController {
 
-    private final ProvinsiService provinsiService;
+    private final ProvinceService provinceService;
 
-    public ProvinceController(ProvinsiService provinsiService) {
-        this.provinsiService = provinsiService;
+    public ProvinceController(ProvinceService provinceService) {
+        this.provinceService = provinceService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ProvinsiResponseDto> createProvinsi(@RequestBody CreateProvinsiRequestDto createCategoryRequest) {
-        final ProvinsiResponseDto provinsiResponse = provinsiService.createProvinsi(createCategoryRequest);
+        final ProvinsiResponseDto provinsiResponse = provinceService.createProvinsi(createCategoryRequest);
         return WebResponseDto.<ProvinsiResponseDto>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
@@ -34,7 +34,7 @@ public class ProvinceController {
 
     @GetMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ProvinsiResponseDto> getProvinsiById(@PathVariable("idProvinsi") String id) throws ProvinsiNotFoundException {
-        final ProvinsiResponseDto provinsiResponse = provinsiService.getProvinsiById(id);
+        final ProvinsiResponseDto provinsiResponse = provinceService.getProvinsiById(id);
         return WebResponseDto.<ProvinsiResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -56,7 +56,7 @@ public class ProvinceController {
         listProvinsiRequest.setSortBy(sortBy);
         listProvinsiRequest.setSortDir(sortDir);
 
-        final ListProvinsiResponseDto allProvinsiResponse = provinsiService.getAllProvinsi(listProvinsiRequest);
+        final ListProvinsiResponseDto allProvinsiResponse = provinceService.getAllProvinsi(listProvinsiRequest);
         return WebResponseDto.<ListProvinsiResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -66,7 +66,7 @@ public class ProvinceController {
 
     @PutMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ProvinsiResponseDto> updateProvinsi(@PathVariable("idProvinsi") String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
-        final ProvinsiResponseDto provinsiResponse = provinsiService.updateProvinsi(id, updateProvinsiRequest);
+        final ProvinsiResponseDto provinsiResponse = provinceService.updateProvinsi(id, updateProvinsiRequest);
         return WebResponseDto.<ProvinsiResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -76,7 +76,7 @@ public class ProvinceController {
 
     @DeleteMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<String> deleteProvinsi(@PathVariable("idProvinsi") String id) throws ProvinsiNotFoundException {
-        provinsiService.deleteProvinsi(id);
+        provinceService.deleteProvinsi(id);
         return WebResponseDto.<String>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -86,7 +86,7 @@ public class ProvinceController {
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ProvinsiResponseDto> getProvinsiByName(@RequestParam("name") String name) throws ProvinsiNotFoundException {
-        final ProvinsiResponseDto provinsiResponse = provinsiService.getProvinsiByName(name);
+        final ProvinsiResponseDto provinsiResponse = provinceService.getProvinsiByName(name);
         return WebResponseDto.<ProvinsiResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -96,7 +96,7 @@ public class ProvinceController {
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<List<ProvinsiResponseDto>> getProvinsiByNameContaining(@RequestParam("name") String name) {
-        final List<ProvinsiResponseDto> provinsiResponseList = provinsiService.getProvinsiByNameContains(name);
+        final List<ProvinsiResponseDto> provinsiResponseList = provinceService.getProvinsiByNameContains(name);
         return WebResponseDto.<List<ProvinsiResponseDto>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -106,7 +106,7 @@ public class ProvinceController {
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<ProvinsiResponseDto> getProvinsiByCode(@RequestParam("code") String code) throws ProvinsiNotFoundException {
-        final ProvinsiResponseDto provinsiResponse = provinsiService.getProvinsiByCode(code);
+        final ProvinsiResponseDto provinsiResponse = provinceService.getProvinsiByCode(code);
         return WebResponseDto.<ProvinsiResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())

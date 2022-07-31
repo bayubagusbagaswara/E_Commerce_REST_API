@@ -6,7 +6,7 @@ import com.ecommerce.exception.ProvinsiNotFoundException;
 
 import java.util.List;
 
-public interface ProvinsiService {
+public interface ProvinceService {
 
     ProvinsiResponseDto createProvinsi(CreateProvinsiRequestDto createProvinsiRequest);
 
