@@ -1,1 +1,1 @@
-delete from provinsi;
+delete from province;

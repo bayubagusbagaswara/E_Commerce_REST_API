@@ -23,7 +23,7 @@ import javax.persistence.UniqueConstraint;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE provinsi SET status_record = 'INACTIVE' WHERE id = ?")
 @Where(clause = "status_record = 'ACTIVE'")
-public class Provinsi extends BaseEntity {
+public class Province extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;

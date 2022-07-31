@@ -26,6 +26,8 @@ public class Address extends BaseEntity {
     @Column(name = "street", length = 100)
     private String street;
 
+    // harusnya postal code kita taruh di kelurahan saja
+    // karena bisa saja user salah memasukkan postal code nya
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 

@@ -1,6 +1,6 @@
 package com.restful.repository;
 
-import com.restful.entity.wilayah.Provinsi;
+import com.restful.entity.wilayah.Province;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,16 +8,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProvinsiRepository extends JpaRepository<Provinsi, String> {
+public interface ProvinsiRepository extends JpaRepository<Province, String> {
 
     // get provinsi by code
-    Optional<Provinsi> findAllByCode(String code);
+    Optional<Province> findAllByCode(String code);
 
     // get provinsi by name ignore case
-    Optional<Provinsi> findAllByNameIgnoreCase(String name);
+    Optional<Province> findAllByNameIgnoreCase(String name);
 
     // get provinsi by name containing ignore case
-    List<Provinsi> findAllByNameContainingIgnoreCase(String name);
+    List<Province> findAllByNameContainingIgnoreCase(String name);
 
-    Page<Provinsi> findAllByNameContainsIgnoreCase(String name, Pageable pageable);
+    Page<Province> findAllByNameContainsIgnoreCase(String name, Pageable pageable);
 }

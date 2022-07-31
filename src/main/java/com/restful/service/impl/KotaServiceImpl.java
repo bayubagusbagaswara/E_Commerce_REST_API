@@ -1,10 +1,10 @@
 package com.restful.service.impl;
 
+import com.restful.entity.wilayah.Province;
 import com.restful.mapper.WilayahMapper;
 import com.restful.dto.kota.*;
 import com.restful.dto.region.kota.*;
 import com.restful.entity.wilayah.Kota;
-import com.restful.entity.wilayah.Provinsi;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.exception.ProvinsiNotFoundException;
 import com.restful.repository.KotaRepository;
@@ -36,12 +36,12 @@ public class KotaServiceImpl implements KotaService {
 
     @Override
     public KotaResponseDto createKota(CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException {
-        Provinsi provinsi = provinsiRepository.findById(createKotaRequest.getProvinsiId())
+        Province province = provinsiRepository.findById(createKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + createKotaRequest.getProvinsiId() + "] not found"));
         Kota kota = new Kota();
         kota.setCode(createKotaRequest.getCode());
         kota.setName(createKotaRequest.getName());
-        kota.setProvinsi(provinsi);
+        kota.setProvince(province);
         kota.setCreatedDate(LocalDateTime.now());
         kotaRepository.save(kota);
         return wilayahMapper.mapToKotaResponse(kota);
@@ -56,13 +56,13 @@ public class KotaServiceImpl implements KotaService {
 
     @Override
     public KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
-        Provinsi provinsi = provinsiRepository.findById(updateKotaRequest.getProvinsiId())
+        Province province = provinsiRepository.findById(updateKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
         Kota kota = kotaRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
         kota.setCode(updateKotaRequest.getCode());
         kota.setName(updateKotaRequest.getName());
-        kota.setProvinsi(provinsi);
+        kota.setProvince(province);
         kota.setUpdatedDate(LocalDateTime.now());
         kotaRepository.save(kota);
         return wilayahMapper.mapToKotaResponse(kota);

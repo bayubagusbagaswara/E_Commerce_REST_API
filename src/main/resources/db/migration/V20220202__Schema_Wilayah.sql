@@ -1,5 +1,5 @@
 -- PROVINSI
-create table provinsi (
+create table province (
     id character varying(64) not null primary key default uuid_generate_v4(),
     created_date timestamp not null default now(),
     created_by character varying(255) not null,
@@ -23,7 +23,7 @@ create table kota (
     name character varying(255) not null,
     id_provinsi character varying(64),
     constraint kota_unique_code unique (code),
-    constraint fk_kota_provinsi foreign key (id_provinsi) references provinsi(id) on update cascade on delete cascade
+    constraint fk_kota_provinsi foreign key (id_provinsi) references province(id) on update cascade on delete cascade
 );
 
 -- KECAMATAN

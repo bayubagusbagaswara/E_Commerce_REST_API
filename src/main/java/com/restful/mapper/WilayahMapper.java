@@ -7,7 +7,7 @@ import com.restful.dto.region.provinsi.ProvinsiResponseDto;
 import com.restful.entity.wilayah.Kecamatan;
 import com.restful.entity.wilayah.Kelurahan;
 import com.restful.entity.wilayah.Kota;
-import com.restful.entity.wilayah.Provinsi;
+import com.restful.entity.wilayah.Province;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 @Component
 public class WilayahMapper {
 
-    public ProvinsiResponseDto mapToProvinsiResponse(Provinsi provinsi) {
+    public ProvinsiResponseDto mapToProvinsiResponse(Province province) {
         ProvinsiResponseDto provinsiResponse = new ProvinsiResponseDto();
-        provinsiResponse.setId(provinsi.getId());
-        provinsiResponse.setCode(provinsi.getCode());
-        provinsiResponse.setName(provinsi.getName());
-        provinsiResponse.setCreatedDate(provinsi.getCreatedDate());
-        provinsiResponse.setUpdatedDate(provinsi.getUpdatedDate());
+        provinsiResponse.setId(province.getId());
+        provinsiResponse.setCode(province.getCode());
+        provinsiResponse.setName(province.getName());
+        provinsiResponse.setCreatedDate(province.getCreatedDate());
+        provinsiResponse.setUpdatedDate(province.getUpdatedDate());
         return provinsiResponse;
     }
 
@@ -33,7 +33,7 @@ public class WilayahMapper {
         kotaResponse.setName(kota.getName());
         kotaResponse.setCreatedDate(kota.getCreatedDate());
         kotaResponse.setUpdatedDate(kota.getUpdatedDate());
-        kotaResponse.setProvinsi(mapToProvinsiResponse(kota.getProvinsi()));
+        kotaResponse.setProvinsi(mapToProvinsiResponse(kota.getProvince()));
         return kotaResponse;
     }
 
@@ -59,8 +59,8 @@ public class WilayahMapper {
         return kelurahanResponse;
     }
 
-    public List<ProvinsiResponseDto> mapToProvinsiResponseList(List<Provinsi> provinsiList) {
-        return provinsiList.stream()
+    public List<ProvinsiResponseDto> mapToProvinsiResponseList(List<Province> provinceList) {
+        return provinceList.stream()
                 .map(this::mapToProvinsiResponse)
                 .collect(Collectors.toList())
                 ;

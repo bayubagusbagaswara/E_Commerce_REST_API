@@ -12,8 +12,8 @@ public class ProductDetailMapper {
         productDetailResponse.setId(productDetail.getId());
         productDetailResponse.setSku(productDetail.getSku());
         productDetailResponse.setDescription(productDetail.getDescription());
-        productDetailResponse.setCreatedAt(productDetail.getCreatedDate());
-        productDetailResponse.setUpdatedAt(productDetail.getUpdatedDate());
+//        productDetailResponse.setCreatedAt(productDetail.getCreatedAt());
+//        productDetailResponse.setUpdatedAt(productDetail.getUpdatedDate());
         return productDetailResponse;
     }
 }

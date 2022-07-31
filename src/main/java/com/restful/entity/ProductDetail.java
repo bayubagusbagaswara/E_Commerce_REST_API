@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.time.Instant;
 
 @Entity
 @Table(name = "product_detail", uniqueConstraints = {
@@ -30,4 +31,14 @@ public class ProductDetail extends BaseEntity {
 
     @Column(name = "description", nullable = false, length = 500)
     private String description;
+
+    @Override
+    public void setUpdatedAt(Instant updatedAt) {
+        super.setUpdatedAt(updatedAt);
+    }
+
+    @Override
+    public void setCreatedAt(Instant createdAt) {
+        super.setCreatedAt(createdAt);
+    }
 }

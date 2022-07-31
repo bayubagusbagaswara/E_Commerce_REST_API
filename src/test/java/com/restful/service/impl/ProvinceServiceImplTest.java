@@ -23,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.*;
         "classpath:/sql/delete-data-provinsi.sql",
         "classpath:/sql/sample-data-provinsi.sql"
 })
-class ProvinsiServiceImplTest {
+class ProvinceServiceImplTest {
 
-    private static final Logger log = LoggerFactory.getLogger(ProvinsiServiceImplTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ProvinceServiceImplTest.class);
 
     @Autowired
     ProvinsiServiceImpl provinsiService;

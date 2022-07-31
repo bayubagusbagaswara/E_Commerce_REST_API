@@ -30,5 +30,5 @@ public class Kota extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_provinsi", foreignKey = @ForeignKey(name = "fk_kota_provinsi"))
-    private Provinsi provinsi;
+    private Province province;
 }
