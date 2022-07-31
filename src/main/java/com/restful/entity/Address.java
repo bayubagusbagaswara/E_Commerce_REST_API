@@ -3,13 +3,22 @@ package com.restful.entity;
 import com.restful.entity.base.BaseEntity;
 import com.restful.entity.region.UrbanVillage;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "address", uniqueConstraints = {
@@ -23,15 +32,13 @@ import javax.persistence.*;
 @Where(clause = "status_record = 'ACTIVE'")
 public class Address extends BaseEntity {
 
-    @Column(name = "street", length = 100)
-    private String street;
+    @Column(name = "full_address", columnDefinition = "TEXT")
+    private String fullAddress;
 
-    // harusnya postal code kita taruh di kelurahan saja
-    // karena bisa saja user salah memasukkan postal code nya
-    @Column(name = "postal_code", nullable = false)
-    private String postalCode;
-
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @FieldNameConstants.Exclude
     @OneToOne
-    @JoinColumn(name = "id_kelurahan", foreignKey = @ForeignKey(name = "fk_address_kelurahan"))
+    @JoinColumn(name = "urban_village_id", foreignKey = @ForeignKey(name = "fk_address_urban_village_id"), referencedColumnName = "id")
     private UrbanVillage urbanVillage;
 }
