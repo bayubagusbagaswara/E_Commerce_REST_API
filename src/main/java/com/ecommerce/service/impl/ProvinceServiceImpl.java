@@ -6,7 +6,7 @@ import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.provinsi.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 import com.ecommerce.repository.ProvinsiRepository;
-import com.ecommerce.service.ProvinceService;
+import com.ecommerce.service.region.ProvinceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

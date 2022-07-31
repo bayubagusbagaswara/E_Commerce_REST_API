@@ -9,7 +9,7 @@ import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
 import com.ecommerce.repository.KecamatanRepository;
 import com.ecommerce.repository.KelurahanRepository;
-import com.ecommerce.service.KelurahanService;
+import com.ecommerce.service.region.KelurahanService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

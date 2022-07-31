@@ -9,7 +9,7 @@ import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 import com.ecommerce.repository.KotaRepository;
 import com.ecommerce.repository.ProvinsiRepository;
-import com.ecommerce.service.DistrictService;
+import com.ecommerce.service.region.DistrictService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

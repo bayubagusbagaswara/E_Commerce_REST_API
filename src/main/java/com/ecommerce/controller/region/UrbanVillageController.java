@@ -5,7 +5,7 @@ import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.kelurahan.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
-import com.ecommerce.service.KelurahanService;
+import com.ecommerce.service.region.KelurahanService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

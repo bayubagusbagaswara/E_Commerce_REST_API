@@ -9,7 +9,7 @@ import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.repository.KecamatanRepository;
 import com.ecommerce.repository.KotaRepository;
-import com.ecommerce.service.KecamatanService;
+import com.ecommerce.service.region.KecamatanService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

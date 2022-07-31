@@ -1,4 +1,4 @@
-package com.ecommerce.service;
+package com.ecommerce.service.region;
 
 import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.kelurahan.*;

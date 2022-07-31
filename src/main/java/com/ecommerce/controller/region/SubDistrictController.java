@@ -5,7 +5,7 @@ import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.kecamatan.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KotaNotFoundException;
-import com.ecommerce.service.KecamatanService;
+import com.ecommerce.service.region.KecamatanService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

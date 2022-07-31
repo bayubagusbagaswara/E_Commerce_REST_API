@@ -5,7 +5,7 @@ import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.kota.*;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.exception.ProvinsiNotFoundException;
-import com.ecommerce.service.DistrictService;
+import com.ecommerce.service.region.DistrictService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

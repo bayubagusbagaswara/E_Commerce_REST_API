@@ -4,7 +4,7 @@ import com.ecommerce.dto.WebResponseDto;
 import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.provinsi.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
-import com.ecommerce.service.ProvinceService;
+import com.ecommerce.service.region.ProvinceService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
