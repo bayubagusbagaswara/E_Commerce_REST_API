@@ -32,7 +32,7 @@ class DistrictServiceImplTest {
     private final static Logger log = LoggerFactory.getLogger(DistrictServiceImplTest.class);
 
     @Autowired
-    KotaServiceImpl kotaService;
+    DistrictServiceImpl kotaService;
 
     @Test
     @Order(1)

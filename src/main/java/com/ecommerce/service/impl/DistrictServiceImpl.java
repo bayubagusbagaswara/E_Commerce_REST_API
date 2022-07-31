@@ -9,7 +9,7 @@ import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 import com.ecommerce.repository.KotaRepository;
 import com.ecommerce.repository.ProvinsiRepository;
-import com.ecommerce.service.KotaService;
+import com.ecommerce.service.DistrictService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,13 +22,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class KotaServiceImpl implements KotaService {
+public class DistrictServiceImpl implements DistrictService {
 
     private final KotaRepository kotaRepository;
     private final ProvinsiRepository provinsiRepository;
     private final WilayahMapper wilayahMapper;
 
-    public KotaServiceImpl(KotaRepository kotaRepository, ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
+    public DistrictServiceImpl(KotaRepository kotaRepository, ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
         this.kotaRepository = kotaRepository;
         this.provinsiRepository = provinsiRepository;
         this.wilayahMapper = wilayahMapper;

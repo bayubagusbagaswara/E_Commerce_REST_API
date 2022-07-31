@@ -5,7 +5,7 @@ import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.kota.*;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.exception.ProvinsiNotFoundException;
-import com.ecommerce.service.KotaService;
+import com.ecommerce.service.DistrictService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,15 +17,15 @@ import java.util.List;
 @RequestMapping("/api/districts")
 public class DistrictController {
 
-    private final KotaService kotaService;
+    private final DistrictService districtService;
 
-    public DistrictController(KotaService kotaService) {
-        this.kotaService = kotaService;
+    public DistrictController(DistrictService districtService) {
+        this.districtService = districtService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KotaResponseDto> createKota(@RequestBody CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException {
-        final KotaResponseDto kotaResponse = kotaService.createKota(createKotaRequest);
+        final KotaResponseDto kotaResponse = districtService.createKota(createKotaRequest);
         return WebResponseDto.<KotaResponseDto>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
@@ -35,7 +35,7 @@ public class DistrictController {
 
     @GetMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KotaResponseDto> getKotaById(@PathVariable("idKota") String id) throws KotaNotFoundException {
-        final KotaResponseDto kotaResponse = kotaService.getKotaById(id);
+        final KotaResponseDto kotaResponse = districtService.getKotaById(id);
         return WebResponseDto.<KotaResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -56,7 +56,7 @@ public class DistrictController {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKotaResponseDto allKotaResponse = kotaService.getAllKota(requestDto);
+        final ListKotaResponseDto allKotaResponse = districtService.getAllKota(requestDto);
         return WebResponseDto.<ListKotaResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -67,7 +67,7 @@ public class DistrictController {
 
     @PutMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KotaResponseDto> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateKotaRequestDto updateKotaRequestDto) throws ProvinsiNotFoundException, KotaNotFoundException {
-        final KotaResponseDto kotaResponse = kotaService.updateKota(id, updateKotaRequestDto);
+        final KotaResponseDto kotaResponse = districtService.updateKota(id, updateKotaRequestDto);
         return WebResponseDto.<KotaResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -77,7 +77,7 @@ public class DistrictController {
 
     @DeleteMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<String> deleteKota(@PathVariable("idKota") String id) throws KotaNotFoundException {
-        kotaService.deleteKota(id);
+        districtService.deleteKota(id);
         return WebResponseDto.<String>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -87,7 +87,7 @@ public class DistrictController {
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KotaResponseDto> getKotaByName(@RequestParam("name") String name) throws KotaNotFoundException {
-        final KotaResponseDto kotaResponse = kotaService.getKotaByName(name);
+        final KotaResponseDto kotaResponse = districtService.getKotaByName(name);
         return WebResponseDto.<KotaResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -97,7 +97,7 @@ public class DistrictController {
 
     @GetMapping(value = "/name/contains")
     public WebResponseDto<List<KotaResponseDto>> getKotaByNameContaining(@RequestParam("name") String name) {
-        final List<KotaResponseDto> kotaResponseList = kotaService.getKotaByNameContains(name);
+        final List<KotaResponseDto> kotaResponseList = districtService.getKotaByNameContains(name);
         return WebResponseDto.<List<KotaResponseDto>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -107,7 +107,7 @@ public class DistrictController {
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KotaResponseDto> getKotaByCode(@RequestParam("code") String code) throws KotaNotFoundException {
-        final KotaResponseDto kotaResponse = kotaService.getKotaByCode(code);
+        final KotaResponseDto kotaResponse = districtService.getKotaByCode(code);
         return WebResponseDto.<KotaResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())

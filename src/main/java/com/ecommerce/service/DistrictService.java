@@ -7,7 +7,7 @@ import com.ecommerce.exception.ProvinsiNotFoundException;
 
 import java.util.List;
 
-public interface KotaService {
+public interface DistrictService {
 
     KotaResponseDto createKota(CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException;
 
