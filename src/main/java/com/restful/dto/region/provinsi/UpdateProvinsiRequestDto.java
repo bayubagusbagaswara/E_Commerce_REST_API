@@ -1,4 +1,4 @@
-package com.restful.dto.provinsi;
+package com.restful.dto.region.provinsi;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

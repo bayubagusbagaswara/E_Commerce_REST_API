@@ -1,4 +1,4 @@
-package com.restful.dto.kecamatan;
+package com.restful.dto.region.kelurahan;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ListKecamatanRequestDto {
+public class ListKelurahanRequestDto {
 
     @NotNull(message = "Page index can not null")
     @Min(value = 0, message = "Page index must not be less than zero")

@@ -1,6 +1,6 @@
-package com.restful.dto.kelurahan;
+package com.restful.dto.region.kelurahan;
 
-import com.restful.dto.kecamatan.KecamatanResponseDto;
+import com.restful.dto.region.kecamatan.KecamatanResponseDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

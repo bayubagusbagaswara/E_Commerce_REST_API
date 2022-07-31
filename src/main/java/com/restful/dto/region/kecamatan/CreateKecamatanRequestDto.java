@@ -1,4 +1,4 @@
-package com.restful.dto.kecamatan;
+package com.restful.dto.region.kecamatan;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UpdateKecamatanRequestDto {
+public class CreateKecamatanRequestDto {
 
     @NotBlank(message = "Kecamatan code must not be blank")
     private String code;

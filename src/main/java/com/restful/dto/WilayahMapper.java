@@ -1,9 +1,9 @@
 package com.restful.dto;
 
-import com.restful.dto.kecamatan.KecamatanResponseDto;
-import com.restful.dto.kelurahan.KelurahanResponseDto;
-import com.restful.dto.kota.KotaResponseDto;
-import com.restful.dto.provinsi.ProvinsiResponseDto;
+import com.restful.dto.region.kecamatan.KecamatanResponseDto;
+import com.restful.dto.region.kelurahan.KelurahanResponseDto;
+import com.restful.dto.region.kota.KotaResponseDto;
+import com.restful.dto.region.provinsi.ProvinsiResponseDto;
 import com.restful.entity.wilayah.Kecamatan;
 import com.restful.entity.wilayah.Kelurahan;
 import com.restful.entity.wilayah.Kota;

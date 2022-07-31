@@ -1,4 +1,4 @@
-package com.restful.dto.kota;
+package com.restful.dto.region.kota;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UpdateKotaRequestDto {
+public class CreateKotaRequestDto {
 
     @NotBlank(message = "Kota code must not be blank")
     private String code;
@@ -17,4 +17,3 @@ public class UpdateKotaRequestDto {
     @NotBlank(message = "Provinsi ID must not be blank")
     private String provinsiId;
 }
-

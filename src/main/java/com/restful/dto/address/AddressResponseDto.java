@@ -1,6 +1,6 @@
 package com.restful.dto.address;
 
-import com.restful.dto.kelurahan.KelurahanResponseDto;
+import com.restful.dto.region.kelurahan.KelurahanResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

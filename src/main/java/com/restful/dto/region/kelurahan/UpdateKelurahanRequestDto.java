@@ -1,4 +1,4 @@
-package com.restful.dto.kelurahan;
+package com.restful.dto.region.kelurahan;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

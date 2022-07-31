@@ -2,6 +2,7 @@ package com.restful.service.impl;
 
 import com.restful.dto.WilayahMapper;
 import com.restful.dto.kelurahan.*;
+import com.restful.dto.region.kelurahan.*;
 import com.restful.entity.wilayah.Kecamatan;
 import com.restful.entity.wilayah.Kelurahan;
 import com.restful.exception.KecamatanNotFoundException;

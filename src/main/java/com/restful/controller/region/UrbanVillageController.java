@@ -2,6 +2,7 @@ package com.restful.controller.region;
 
 import com.restful.dto.WebResponseDto;
 import com.restful.dto.kelurahan.*;
+import com.restful.dto.region.kelurahan.*;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KelurahanNotFoundException;
 import com.restful.service.KelurahanService;

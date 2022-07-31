@@ -2,6 +2,7 @@ package com.restful.controller.region;
 
 import com.restful.dto.WebResponseDto;
 import com.restful.dto.provinsi.*;
+import com.restful.dto.region.provinsi.*;
 import com.restful.exception.ProvinsiNotFoundException;
 import com.restful.service.ProvinsiService;
 import com.restful.util.AppConstants;

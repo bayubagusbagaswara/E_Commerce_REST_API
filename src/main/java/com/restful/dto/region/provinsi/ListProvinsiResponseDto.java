@@ -1,4 +1,4 @@
-package com.restful.dto.kota;
+package com.restful.dto.region.provinsi;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +7,9 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ListKotaResponseDto {
+public class ListProvinsiResponseDto {
 
-    private List<KotaResponseDto> kotaList;
+    private List<ProvinsiResponseDto> provinsiList;
     private Integer pageNo;
     private Integer pageSize;
     private Long totalElements;

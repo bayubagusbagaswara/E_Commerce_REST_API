@@ -2,6 +2,7 @@ package com.restful.controller.region;
 
 import com.restful.dto.WebResponseDto;
 import com.restful.dto.kecamatan.*;
+import com.restful.dto.region.kecamatan.*;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.service.KecamatanService;

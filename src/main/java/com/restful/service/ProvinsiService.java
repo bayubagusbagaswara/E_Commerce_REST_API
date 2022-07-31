@@ -1,6 +1,7 @@
 package com.restful.service;
 
 import com.restful.dto.provinsi.*;
+import com.restful.dto.region.provinsi.*;
 import com.restful.exception.ProvinsiNotFoundException;
 
 import java.util.List;
