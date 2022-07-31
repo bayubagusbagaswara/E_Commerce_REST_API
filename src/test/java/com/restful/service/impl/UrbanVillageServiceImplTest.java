@@ -30,9 +30,9 @@ import static org.junit.jupiter.api.Assertions.*;
         "classpath:/sql/sample-data-kecamatan.sql",
         "classpath:/sql/sample-data-kelurahan.sql"
 })
-class KelurahanServiceImplTest {
+class UrbanVillageServiceImplTest {
 
-    private final static Logger log = LoggerFactory.getLogger(KelurahanServiceImplTest.class);
+    private final static Logger log = LoggerFactory.getLogger(UrbanVillageServiceImplTest.class);
 
     @Autowired
     KelurahanServiceImpl kelurahanService;

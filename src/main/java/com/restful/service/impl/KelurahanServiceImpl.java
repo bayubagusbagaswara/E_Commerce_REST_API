@@ -1,10 +1,10 @@
 package com.restful.service.impl;
 
 import com.restful.entity.region.SubDistrict;
+import com.restful.entity.region.UrbanVillage;
 import com.restful.mapper.WilayahMapper;
 import com.restful.dto.kelurahan.*;
 import com.restful.dto.region.kelurahan.*;
-import com.restful.entity.region.Kelurahan;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KelurahanNotFoundException;
 import com.restful.repository.KecamatanRepository;
@@ -38,34 +38,34 @@ public class KelurahanServiceImpl implements KelurahanService {
     public KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException {
         SubDistrict subDistrict = kecamatanRepository.findById(createKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + createKelurahanRequest.getKecamatanId() + "] not found"));
-        Kelurahan kelurahan = new Kelurahan();
-        kelurahan.setCode(createKelurahanRequest.getCode());
-        kelurahan.setName(createKelurahanRequest.getName());
-        kelurahan.setCreatedDate(LocalDateTime.now());
-        kelurahan.setSubDistrict(subDistrict);
-        kelurahanRepository.save(kelurahan);
-        return wilayahMapper.mapToKelurahanResponse(kelurahan);
+        UrbanVillage urbanVillage = new UrbanVillage();
+        urbanVillage.setCode(createKelurahanRequest.getCode());
+        urbanVillage.setName(createKelurahanRequest.getName());
+        urbanVillage.setCreatedDate(LocalDateTime.now());
+        urbanVillage.setSubDistrict(subDistrict);
+        kelurahanRepository.save(urbanVillage);
+        return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
     public KelurahanResponseDto getKelurahanById(String id) throws KelurahanNotFoundException {
-        Kelurahan kelurahan = kelurahanRepository.findById(id)
+        UrbanVillage urbanVillage = kelurahanRepository.findById(id)
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
-        return wilayahMapper.mapToKelurahanResponse(kelurahan);
+        return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
     public KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
         SubDistrict subDistrict = kecamatanRepository.findById(updateKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + updateKelurahanRequest.getKecamatanId() + "] not found"));
-        Kelurahan kelurahan = kelurahanRepository.findById(id)
+        UrbanVillage urbanVillage = kelurahanRepository.findById(id)
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
-        kelurahan.setCode(updateKelurahanRequest.getCode());
-        kelurahan.setName(updateKelurahanRequest.getName());
-        kelurahan.setSubDistrict(subDistrict);
-        kelurahan.setUpdatedDate(LocalDateTime.now());
-        kelurahanRepository.save(kelurahan);
-        return wilayahMapper.mapToKelurahanResponse(kelurahan);
+        urbanVillage.setCode(updateKelurahanRequest.getCode());
+        urbanVillage.setName(updateKelurahanRequest.getName());
+        urbanVillage.setSubDistrict(subDistrict);
+        urbanVillage.setUpdatedDate(LocalDateTime.now());
+        kelurahanRepository.save(urbanVillage);
+        return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
@@ -78,9 +78,9 @@ public class KelurahanServiceImpl implements KelurahanService {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
 
-        Page<Kelurahan> kelurahanPage = kelurahanRepository.findAll(pageable);
-        List<Kelurahan> kelurahanList = kelurahanPage.getContent();
-        List<KelurahanResponseDto> kelurahanResponseList = wilayahMapper.mapToKelurahanResponseList(kelurahanList);
+        Page<UrbanVillage> kelurahanPage = kelurahanRepository.findAll(pageable);
+        List<UrbanVillage> urbanVillageList = kelurahanPage.getContent();
+        List<KelurahanResponseDto> kelurahanResponseList = wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
 
         ListKelurahanResponseDto listKelurahanResponse = new ListKelurahanResponseDto();
         listKelurahanResponse.setKelurahanList(kelurahanResponseList);
@@ -94,33 +94,33 @@ public class KelurahanServiceImpl implements KelurahanService {
 
     @Override
     public void deleteKelurahan(String id) throws KelurahanNotFoundException {
-        final Kelurahan kelurahan = kelurahanRepository.findById(id)
+        final UrbanVillage urbanVillage = kelurahanRepository.findById(id)
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
-        kelurahanRepository.delete(kelurahan);
+        kelurahanRepository.delete(urbanVillage);
     }
 
     @Override
     public KelurahanResponseDto getKelurahanByName(String name) throws KelurahanNotFoundException {
-        Kelurahan kelurahan = kelurahanRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KelurahanNotFoundException("Kelurahan name [" + name + "] not found"));
-        return wilayahMapper.mapToKelurahanResponse(kelurahan);
+        UrbanVillage urbanVillage = kelurahanRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KelurahanNotFoundException("Kelurahan name [" + name + "] not found"));
+        return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
     public KelurahanResponseDto getKelurahanByCode(String code) throws KelurahanNotFoundException {
-        Kelurahan kelurahan = kelurahanRepository.findAllByCode(code).orElseThrow(() -> new KelurahanNotFoundException("Kelurahan code [" + code + "] not found"));
-        return wilayahMapper.mapToKelurahanResponse(kelurahan);
+        UrbanVillage urbanVillage = kelurahanRepository.findAllByCode(code).orElseThrow(() -> new KelurahanNotFoundException("Kelurahan code [" + code + "] not found"));
+        return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
     public List<KelurahanResponseDto> getKelurahanByNameContains(String name) {
-        List<Kelurahan> kelurahanList = kelurahanRepository.findAllByNameContainingIgnoreCase(name);
-        return wilayahMapper.mapToKelurahanResponseList(kelurahanList);
+        List<UrbanVillage> urbanVillageList = kelurahanRepository.findAllByNameContainingIgnoreCase(name);
+        return wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
     }
 
     @Override
     public List<KelurahanResponseDto> getKelurahanByKecamatanId(String kecamatanId) {
-        List<Kelurahan> kelurahanList = kelurahanRepository.findAllByKecamatanId(kecamatanId);
-        return wilayahMapper.mapToKelurahanResponseList(kelurahanList);
+        List<UrbanVillage> urbanVillageList = kelurahanRepository.findAllByKecamatanId(kecamatanId);
+        return wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
     }
 }
 

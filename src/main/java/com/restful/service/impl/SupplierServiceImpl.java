@@ -1,11 +1,11 @@
 package com.restful.service.impl;
 
+import com.restful.entity.region.UrbanVillage;
 import com.restful.mapper.SupplierMapper;
 import com.restful.dto.supplier.*;
 import com.restful.entity.Address;
 import com.restful.entity.Product;
 import com.restful.entity.Supplier;
-import com.restful.entity.region.Kelurahan;
 import com.restful.exception.KelurahanNotFoundException;
 import com.restful.exception.ProductNotFoundException;
 import com.restful.exception.SupplierNotFoundException;
@@ -46,13 +46,13 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierResponseDto createSupplier(CreateSupplierRequestDto createSupplierRequest) throws KelurahanNotFoundException {
 
-        Kelurahan kelurahan = kelurahanRepository.findById(createSupplierRequest.getKelurahanId())
+        UrbanVillage urbanVillage = kelurahanRepository.findById(createSupplierRequest.getKelurahanId())
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + createSupplierRequest.getKelurahanId() + "] not found"));
 
         Address address = new Address();
         address.setStreet(createSupplierRequest.getStreet());
         address.setPostalCode(createSupplierRequest.getPostalCode());
-        address.setKelurahan(kelurahan);
+        address.setUrbanVillage(urbanVillage);
 
         Supplier supplier = new Supplier();
         supplier.setName(createSupplierRequest.getName());
@@ -101,13 +101,13 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResponseDto updateSupplier(String id, UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
 
         Supplier supplier = getSupplier(id);
-        Kelurahan kelurahan = kelurahanRepository.findById(updateSupplierRequest.getKelurahanId())
+        UrbanVillage urbanVillage = kelurahanRepository.findById(updateSupplierRequest.getKelurahanId())
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + updateSupplierRequest.getKelurahanId() + "] not found"));
 
         Address address = supplier.getAddress();
         address.setStreet(updateSupplierRequest.getStreet());
         address.setPostalCode(updateSupplierRequest.getPostalCode());
-        address.setKelurahan(kelurahan);
+        address.setUrbanVillage(urbanVillage);
 
         supplier.setName(updateSupplierRequest.getName());
         supplier.setEmail(updateSupplierRequest.getEmail());

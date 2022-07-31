@@ -1,7 +1,7 @@
 package com.restful.entity;
 
 import com.restful.entity.base.BaseEntity;
-import com.restful.entity.region.Kelurahan;
+import com.restful.entity.region.UrbanVillage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,5 +33,5 @@ public class Address extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "id_kelurahan", foreignKey = @ForeignKey(name = "fk_address_kelurahan"))
-    private Kelurahan kelurahan;
+    private UrbanVillage urbanVillage;
 }

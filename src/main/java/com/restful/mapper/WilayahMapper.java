@@ -5,7 +5,7 @@ import com.restful.dto.region.kelurahan.KelurahanResponseDto;
 import com.restful.dto.region.kota.KotaResponseDto;
 import com.restful.dto.region.provinsi.ProvinsiResponseDto;
 import com.restful.entity.region.SubDistrict;
-import com.restful.entity.region.Kelurahan;
+import com.restful.entity.region.UrbanVillage;
 import com.restful.entity.region.District;
 import com.restful.entity.region.Province;
 import org.springframework.stereotype.Component;
@@ -48,14 +48,14 @@ public class WilayahMapper {
         return kecamatanResponse;
     }
 
-    public KelurahanResponseDto mapToKelurahanResponse(Kelurahan kelurahan) {
+    public KelurahanResponseDto mapToKelurahanResponse(UrbanVillage urbanVillage) {
         KelurahanResponseDto kelurahanResponse = new KelurahanResponseDto();
-        kelurahanResponse.setId(kelurahan.getId());
-        kelurahanResponse.setCode(kelurahan.getCode());
-        kelurahanResponse.setName(kelurahan.getName());
-        kelurahanResponse.setCreatedDate(kelurahan.getCreatedDate());
-        kelurahanResponse.setUpdatedDate(kelurahan.getUpdatedDate());
-        kelurahanResponse.setKecamatan(mapToKecamatanResponse(kelurahan.getSubDistrict()));
+        kelurahanResponse.setId(urbanVillage.getId());
+        kelurahanResponse.setCode(urbanVillage.getCode());
+        kelurahanResponse.setName(urbanVillage.getName());
+        kelurahanResponse.setCreatedDate(urbanVillage.getCreatedDate());
+        kelurahanResponse.setUpdatedDate(urbanVillage.getUpdatedDate());
+        kelurahanResponse.setKecamatan(mapToKecamatanResponse(urbanVillage.getSubDistrict()));
         return kelurahanResponse;
     }
 
@@ -80,8 +80,8 @@ public class WilayahMapper {
                 ;
     }
 
-    public List<KelurahanResponseDto> mapToKelurahanResponseList(List<Kelurahan> kelurahanList) {
-        return kelurahanList.stream()
+    public List<KelurahanResponseDto> mapToKelurahanResponseList(List<UrbanVillage> urbanVillageList) {
+        return urbanVillageList.stream()
                 .map(this::mapToKelurahanResponse)
                 .collect(Collectors.toList())
                 ;

@@ -1,1 +1,1 @@
-delete from kelurahan;
+delete from urbanVillage;
