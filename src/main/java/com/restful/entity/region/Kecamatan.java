@@ -1,4 +1,4 @@
-package com.restful.entity.wilayah;
+package com.restful.entity.region;
 
 import com.restful.entity.base.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -11,16 +11,16 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "kelurahan", uniqueConstraints = {
-        @UniqueConstraint(name = "kelurahan_unique_code", columnNames = "code")
+@Table(name = "kecamatan", uniqueConstraints = {
+        @UniqueConstraint(name = "kecamatan_unique_code", columnNames = "code")
 })
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE kelurahan SET status_record = 'INACTIVE' WHERE id = ?")
+@SQLDelete(sql = "UPDATE kecamatan SET status_record = 'INACTIVE' WHERE id = ?")
 @Where(clause = "status_record = 'ACTIVE'")
-public class Kelurahan extends BaseEntity {
+public class Kecamatan extends BaseEntity {
 
     @Column(name = "code", nullable = false)
     private String code;
@@ -29,6 +29,6 @@ public class Kelurahan extends BaseEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_kecamatan", foreignKey = @ForeignKey(name = "fk_kelurahan_kecamatan"))
-    private Kecamatan kecamatan;
+    @JoinColumn(name = "id_kota", foreignKey = @ForeignKey(name = "fk_kecamatan_kota"))
+    private Kota kota;
 }

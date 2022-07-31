@@ -4,10 +4,10 @@ import com.restful.dto.region.kecamatan.KecamatanResponseDto;
 import com.restful.dto.region.kelurahan.KelurahanResponseDto;
 import com.restful.dto.region.kota.KotaResponseDto;
 import com.restful.dto.region.provinsi.ProvinsiResponseDto;
-import com.restful.entity.wilayah.Kecamatan;
-import com.restful.entity.wilayah.Kelurahan;
-import com.restful.entity.wilayah.Kota;
-import com.restful.entity.wilayah.Province;
+import com.restful.entity.region.Kecamatan;
+import com.restful.entity.region.Kelurahan;
+import com.restful.entity.region.Kota;
+import com.restful.entity.region.Province;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

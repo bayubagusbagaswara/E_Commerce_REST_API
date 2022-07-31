@@ -1,10 +1,10 @@
 package com.restful.service.impl;
 
-import com.restful.entity.wilayah.Province;
+import com.restful.entity.region.Province;
 import com.restful.mapper.WilayahMapper;
 import com.restful.dto.kota.*;
 import com.restful.dto.region.kota.*;
-import com.restful.entity.wilayah.Kota;
+import com.restful.entity.region.Kota;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.exception.ProvinsiNotFoundException;
 import com.restful.repository.KotaRepository;

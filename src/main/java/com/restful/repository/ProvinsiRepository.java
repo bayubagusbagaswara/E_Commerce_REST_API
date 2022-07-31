@@ -1,6 +1,6 @@
 package com.restful.repository;
 
-import com.restful.entity.wilayah.Province;
+import com.restful.entity.region.Province;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package com.restful.entity;
 
 import com.restful.entity.base.BaseEntity;
-import com.restful.entity.wilayah.Kelurahan;
+import com.restful.entity.region.Kelurahan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

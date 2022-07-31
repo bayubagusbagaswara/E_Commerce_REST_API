@@ -5,7 +5,7 @@ import com.restful.dto.supplier.*;
 import com.restful.entity.Address;
 import com.restful.entity.Product;
 import com.restful.entity.Supplier;
-import com.restful.entity.wilayah.Kelurahan;
+import com.restful.entity.region.Kelurahan;
 import com.restful.exception.KelurahanNotFoundException;
 import com.restful.exception.ProductNotFoundException;
 import com.restful.exception.SupplierNotFoundException;

@@ -1,6 +1,6 @@
 package com.restful.repository;
 
-import com.restful.entity.wilayah.Kota;
+import com.restful.entity.region.Kota;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

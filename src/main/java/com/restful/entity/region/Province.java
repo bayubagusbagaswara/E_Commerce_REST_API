@@ -1,4 +1,4 @@
-package com.restful.entity.wilayah;
+package com.restful.entity.region;
 
 import com.restful.entity.base.BaseEntity;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.restful.service.impl;
 
-import com.restful.entity.wilayah.Province;
+import com.restful.entity.region.Province;
 import com.restful.mapper.WilayahMapper;
 import com.restful.dto.provinsi.*;
 import com.restful.dto.region.provinsi.*;
