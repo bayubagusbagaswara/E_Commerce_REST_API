@@ -12,6 +12,11 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     // get product by name ignore case
     Optional<Product> findProductByNameIgnoreCase(String name);
 
+//    List<Product> findByNameContainingIgnoreCase(String name);
+//
+//    @Query("SELECT DISTINCT brand FROM Product")
+//    List<String> findAllBrandsDistincts();
+
     // get product by name containing ignore case
     List<Product> findAllByNameContainingIgnoreCase(String name);
 
