@@ -2,10 +2,8 @@ package com.ecommerce.entity;
 
 import com.ecommerce.entity.base.BaseEntity;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -16,8 +14,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "products")
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE products SET status_record = 'INACTIVE' WHERE id = ?")
@@ -35,21 +33,27 @@ public class Product extends BaseEntity {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @FieldNameConstants.Exclude
     @OneToOne
-    @JoinColumn(name = "id_product_detail", foreignKey = @ForeignKey(name = "fk_product_product_detail"))
+    @JoinColumn(name = "product_detail_id", foreignKey = @ForeignKey(name = "fk_product_product_detail_id"), referencedColumnName = "id")
     private ProductDetail productDetail;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @FieldNameConstants.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_category", foreignKey = @ForeignKey(name = "fk_product_category"))
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_product_category_id"), referencedColumnName = "id")
     private Category category;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "product_supplier",
-            joinColumns = @JoinColumn(name = "id_product"),
-            foreignKey = @ForeignKey(name = "fk_product"),
-            inverseJoinColumns = @JoinColumn(name = "id_supplier"),
-            inverseForeignKey = @ForeignKey(name = "fk_supplier")
+            name = "products_suppliers",
+            joinColumns = @JoinColumn(name = "product_id"),
+            foreignKey = @ForeignKey(name = "fk_products_suppliers_product_id"),
+            inverseJoinColumns = @JoinColumn(name = "supplier_id"),
+            inverseForeignKey = @ForeignKey(name = "fk_products_suppliers_supplier_id")
     )
     private Set<Supplier> suppliers = new HashSet<>();
 
