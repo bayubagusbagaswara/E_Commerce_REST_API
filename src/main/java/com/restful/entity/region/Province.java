@@ -1,33 +1,44 @@
 package com.restful.entity.region;
 
-import com.restful.entity.base.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.restful.entity.audit.DateAudit;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
-@Table(name = "provinsi", uniqueConstraints = {
-        @UniqueConstraint(name = "provinsi_unique_code", columnNames = "code")
+@Table(name = "provinces", uniqueConstraints = {
+        @UniqueConstraint(name = "province_unique_code", columnNames = "code")
 })
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE provinsi SET status_record = 'INACTIVE' WHERE id = ?")
-@Where(clause = "status_record = 'ACTIVE'")
-public class Province extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+public class Province extends DateAudit {
+
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @Column(name = "id", length = 64)
+    private String id;
+
+    @Column(name = "code", nullable = false)
+    private String code;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "code", nullable = false)
-    private String code;
+    @JsonIgnore
+    @Override
+    public Instant getCreatedAt() {
+        return super.getCreatedAt();
+    }
+
+    @JsonIgnore
+    @Override
+    public Instant getUpdatedAt() {
+        return super.getUpdatedAt();
+    }
 }
