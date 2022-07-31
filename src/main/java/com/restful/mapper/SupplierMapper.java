@@ -1,4 +1,4 @@
-package com.restful.dto;
+package com.restful.mapper;
 
 import com.restful.dto.product.ProductResponseDto;
 import com.restful.dto.supplier.SupplierResponseDto;

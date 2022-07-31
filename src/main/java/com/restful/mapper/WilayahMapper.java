@@ -1,4 +1,4 @@
-package com.restful.dto;
+package com.restful.mapper;
 
 import com.restful.dto.region.kecamatan.KecamatanResponseDto;
 import com.restful.dto.region.kelurahan.KelurahanResponseDto;

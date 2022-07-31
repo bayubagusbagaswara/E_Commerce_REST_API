@@ -1,6 +1,6 @@
 package com.restful.service.impl;
 
-import com.restful.dto.SupplierMapper;
+import com.restful.mapper.SupplierMapper;
 import com.restful.dto.supplier.*;
 import com.restful.entity.Address;
 import com.restful.entity.Product;

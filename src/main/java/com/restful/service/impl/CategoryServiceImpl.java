@@ -1,6 +1,6 @@
 package com.restful.service.impl;
 
-import com.restful.dto.CategoryMapper;
+import com.restful.mapper.CategoryMapper;
 import com.restful.dto.category.*;
 import com.restful.entity.Category;
 import com.restful.exception.CategoryNotFoundException;

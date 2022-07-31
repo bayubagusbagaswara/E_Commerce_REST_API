@@ -1,6 +1,6 @@
 package com.restful.service.impl;
 
-import com.restful.dto.ProductMapper;
+import com.restful.mapper.ProductMapper;
 import com.restful.dto.product.*;
 import com.restful.entity.Category;
 import com.restful.entity.Product;
