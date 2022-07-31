@@ -3,7 +3,7 @@ package com.ecommerce.service.impl;
 import com.ecommerce.entity.region.Province;
 import com.ecommerce.mapper.WilayahMapper;
 import com.ecommerce.dto.kota.*;
-import com.ecommerce.dto.region.kota.*;
+import com.ecommerce.dto.region.district.*;
 import com.ecommerce.entity.region.District;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.exception.ProvinsiNotFoundException;

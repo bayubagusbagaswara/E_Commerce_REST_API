@@ -1,4 +1,4 @@
-package com.ecommerce.dto.region.kota;
+package com.ecommerce.dto.region.district;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

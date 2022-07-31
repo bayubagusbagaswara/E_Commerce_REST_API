@@ -1,4 +1,4 @@
-package com.ecommerce.dto.region.kota;
+package com.ecommerce.dto.region.district;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

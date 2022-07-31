@@ -2,7 +2,7 @@ package com.ecommerce.controller.region;
 
 import com.ecommerce.dto.WebResponseDto;
 import com.ecommerce.dto.kota.*;
-import com.ecommerce.dto.region.kota.*;
+import com.ecommerce.dto.region.district.*;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 import com.ecommerce.service.region.DistrictService;
