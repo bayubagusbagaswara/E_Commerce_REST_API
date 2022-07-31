@@ -65,7 +65,7 @@ public class ProvinceController {
     }
 
     @PutMapping(value = "/{idProvinsi}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProvinceDTO> updateProvinsi(@PathVariable("idProvinsi") String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
+    public WebResponseDto<ProvinceDTO> updateProvinsi(@PathVariable("idProvinsi") String id, UpdateProvinceRequestDTO updateProvinsiRequest) throws ProvinsiNotFoundException {
         final ProvinceDTO provinsiResponse = provinceService.updateProvinsi(id, updateProvinsiRequest);
         return WebResponseDto.<ProvinceDTO>builder()
                 .code(HttpStatus.OK.value())

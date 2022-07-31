@@ -84,7 +84,7 @@ class ProvinceServiceImplTest {
         // id provinsi Jakarta
         String id = "31";
 
-        UpdateProvinsiRequestDto requestDto = new UpdateProvinsiRequestDto();
+        UpdateProvinceRequestDTO requestDto = new UpdateProvinceRequestDTO();
         requestDto.setCode("31");
         requestDto.setName("DKI Jakarta update");
 

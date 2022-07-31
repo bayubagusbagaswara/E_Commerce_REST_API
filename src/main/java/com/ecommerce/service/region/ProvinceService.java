@@ -14,7 +14,7 @@ public interface ProvinceService {
 
     ListProvinceResponseDTO getAllProvinsi(ListProvinceRequestDTO listProvinsiRequest);
 
-    ProvinceDTO updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException;
+    ProvinceDTO updateProvinsi(String id, UpdateProvinceRequestDTO updateProvinsiRequest) throws ProvinsiNotFoundException;
 
     void deleteProvinsi(String id) throws ProvinsiNotFoundException;
 

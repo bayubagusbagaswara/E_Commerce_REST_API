@@ -85,7 +85,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ProvinceDTO updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException {
+    public ProvinceDTO updateProvinsi(String id, UpdateProvinceRequestDTO updateProvinsiRequest) throws ProvinsiNotFoundException {
         Province province = provinsiRepository.findById(id)
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
         province.setCode(updateProvinsiRequest.getCode());
