@@ -1,5 +1,6 @@
 package com.restful.entity;
 
+import com.restful.entity.base.BaseEntity;
 import com.restful.entity.wilayah.Kelurahan;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

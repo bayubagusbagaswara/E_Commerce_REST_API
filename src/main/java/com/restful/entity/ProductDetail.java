@@ -1,5 +1,6 @@
 package com.restful.entity;
 
+import com.restful.entity.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

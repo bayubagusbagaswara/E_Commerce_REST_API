@@ -1,4 +1,4 @@
-package com.restful.entity;
+package com.restful.entity.base;
 
 import com.restful.entity.enumerator.StatusRecord;
 import lombok.Data;

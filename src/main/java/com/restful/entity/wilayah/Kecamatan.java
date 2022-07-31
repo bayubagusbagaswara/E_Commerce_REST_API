@@ -1,6 +1,6 @@
 package com.restful.entity.wilayah;
 
-import com.restful.entity.BaseEntity;
+import com.restful.entity.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

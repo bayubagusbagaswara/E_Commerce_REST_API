@@ -1,5 +1,6 @@
 package com.restful.entity;
 
+import com.restful.entity.base.BaseEntity;
 import com.restful.entity.enumerator.Gender;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
