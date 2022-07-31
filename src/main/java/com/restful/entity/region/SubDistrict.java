@@ -22,8 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "subdistricts", uniqueConstraints = {
-        @UniqueConstraint(name = "subdistrict_unique_code", columnNames = "code")
+@Table(name = "sub_districts", uniqueConstraints = {
+        @UniqueConstraint(name = "sub_district_unique_code", columnNames = "code")
 })
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -47,6 +47,6 @@ public class SubDistrict extends DateAudit {
     @EqualsAndHashCode.Exclude
     @FieldNameConstants.Exclude
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "district_id", foreignKey = @ForeignKey(name = "fk_subdistrict_district_id"), referencedColumnName = "id")
+    @JoinColumn(name = "district_id", foreignKey = @ForeignKey(name = "fk_sub_district_district_id"), referencedColumnName = "id")
     private District district;
 }
