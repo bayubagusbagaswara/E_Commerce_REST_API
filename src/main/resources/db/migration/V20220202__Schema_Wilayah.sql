@@ -27,7 +27,7 @@ create table district (
 );
 
 -- KECAMATAN
-create table kecamatan (
+create table subDistrict (
     id character varying(64) not null primary key default uuid_generate_v4(),
     created_date timestamp not null default now(),
     created_by character varying(255) not null,
@@ -53,5 +53,5 @@ create table kelurahan (
     name character varying(255) not null,
     id_kecamatan character varying(64),
     constraint kelurahan_unique_code unique (code),
-    constraint fk_kelurahan_kecamatan foreign key (id_kecamatan) references kecamatan(id) on update cascade on delete cascade
+    constraint fk_kelurahan_kecamatan foreign key (id_kecamatan) references subDistrict(id) on update cascade on delete cascade
 );

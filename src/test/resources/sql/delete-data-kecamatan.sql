@@ -1,1 +1,1 @@
-delete from kecamatan;
+delete from subDistrict;

@@ -4,7 +4,7 @@ import com.restful.dto.region.kecamatan.KecamatanResponseDto;
 import com.restful.dto.region.kelurahan.KelurahanResponseDto;
 import com.restful.dto.region.kota.KotaResponseDto;
 import com.restful.dto.region.provinsi.ProvinsiResponseDto;
-import com.restful.entity.region.Kecamatan;
+import com.restful.entity.region.SubDistrict;
 import com.restful.entity.region.Kelurahan;
 import com.restful.entity.region.District;
 import com.restful.entity.region.Province;
@@ -37,14 +37,14 @@ public class WilayahMapper {
         return kotaResponse;
     }
 
-    public KecamatanResponseDto mapToKecamatanResponse(Kecamatan kecamatan) {
+    public KecamatanResponseDto mapToKecamatanResponse(SubDistrict subDistrict) {
         KecamatanResponseDto kecamatanResponse = new KecamatanResponseDto();
-        kecamatanResponse.setId(kecamatan.getId());
-        kecamatanResponse.setCode(kecamatan.getCode());
-        kecamatanResponse.setName(kecamatan.getName());
-        kecamatanResponse.setCreatedDate(kecamatan.getCreatedDate());
-        kecamatanResponse.setUpdatedDate(kecamatan.getUpdatedDate());
-        kecamatanResponse.setKota(mapToKotaResponse(kecamatan.getDistrict()));
+        kecamatanResponse.setId(subDistrict.getId());
+        kecamatanResponse.setCode(subDistrict.getCode());
+        kecamatanResponse.setName(subDistrict.getName());
+        kecamatanResponse.setCreatedDate(subDistrict.getCreatedDate());
+        kecamatanResponse.setUpdatedDate(subDistrict.getUpdatedDate());
+        kecamatanResponse.setKota(mapToKotaResponse(subDistrict.getDistrict()));
         return kecamatanResponse;
     }
 
@@ -55,7 +55,7 @@ public class WilayahMapper {
         kelurahanResponse.setName(kelurahan.getName());
         kelurahanResponse.setCreatedDate(kelurahan.getCreatedDate());
         kelurahanResponse.setUpdatedDate(kelurahan.getUpdatedDate());
-        kelurahanResponse.setKecamatan(mapToKecamatanResponse(kelurahan.getKecamatan()));
+        kelurahanResponse.setKecamatan(mapToKecamatanResponse(kelurahan.getSubDistrict()));
         return kelurahanResponse;
     }
 
@@ -73,8 +73,8 @@ public class WilayahMapper {
                 ;
     }
 
-    public List<KecamatanResponseDto> mapToKecamatanResponseList(List<Kecamatan> kecamatanList) {
-        return kecamatanList.stream()
+    public List<KecamatanResponseDto> mapToKecamatanResponseList(List<SubDistrict> subDistrictList) {
+        return subDistrictList.stream()
                 .map(this::mapToKecamatanResponse)
                 .collect(Collectors.toList())
                 ;

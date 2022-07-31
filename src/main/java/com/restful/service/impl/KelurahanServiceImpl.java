@@ -1,9 +1,9 @@
 package com.restful.service.impl;
 
+import com.restful.entity.region.SubDistrict;
 import com.restful.mapper.WilayahMapper;
 import com.restful.dto.kelurahan.*;
 import com.restful.dto.region.kelurahan.*;
-import com.restful.entity.region.Kecamatan;
 import com.restful.entity.region.Kelurahan;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KelurahanNotFoundException;
@@ -36,13 +36,13 @@ public class KelurahanServiceImpl implements KelurahanService {
 
     @Override
     public KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException {
-        Kecamatan kecamatan = kecamatanRepository.findById(createKelurahanRequest.getKecamatanId())
+        SubDistrict subDistrict = kecamatanRepository.findById(createKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + createKelurahanRequest.getKecamatanId() + "] not found"));
         Kelurahan kelurahan = new Kelurahan();
         kelurahan.setCode(createKelurahanRequest.getCode());
         kelurahan.setName(createKelurahanRequest.getName());
         kelurahan.setCreatedDate(LocalDateTime.now());
-        kelurahan.setKecamatan(kecamatan);
+        kelurahan.setSubDistrict(subDistrict);
         kelurahanRepository.save(kelurahan);
         return wilayahMapper.mapToKelurahanResponse(kelurahan);
     }
@@ -56,13 +56,13 @@ public class KelurahanServiceImpl implements KelurahanService {
 
     @Override
     public KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
-        Kecamatan kecamatan = kecamatanRepository.findById(updateKelurahanRequest.getKecamatanId())
+        SubDistrict subDistrict = kecamatanRepository.findById(updateKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + updateKelurahanRequest.getKecamatanId() + "] not found"));
         Kelurahan kelurahan = kelurahanRepository.findById(id)
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
         kelurahan.setCode(updateKelurahanRequest.getCode());
         kelurahan.setName(updateKelurahanRequest.getName());
-        kelurahan.setKecamatan(kecamatan);
+        kelurahan.setSubDistrict(subDistrict);
         kelurahan.setUpdatedDate(LocalDateTime.now());
         kelurahanRepository.save(kelurahan);
         return wilayahMapper.mapToKelurahanResponse(kelurahan);
