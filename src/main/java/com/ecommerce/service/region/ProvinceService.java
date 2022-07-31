@@ -12,7 +12,7 @@ public interface ProvinceService {
 
     ProvinsiResponseDto getProvinsiById(String id) throws ProvinsiNotFoundException;
 
-    ListProvinsiResponseDto getAllProvinsi(ListProvinsiRequestDto listProvinsiRequest);
+    ListProvinsiResponseDto getAllProvinsi(ListProvinceRequestDTO listProvinsiRequest);
 
     ProvinsiResponseDto updateProvinsi(String id, UpdateProvinsiRequestDto updateProvinsiRequest) throws ProvinsiNotFoundException;
 

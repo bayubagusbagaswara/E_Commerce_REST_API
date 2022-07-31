@@ -67,7 +67,7 @@ class ProvinceServiceImplTest {
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListProvinsiRequestDto requestDto = new ListProvinsiRequestDto();
+        ListProvinceRequestDTO requestDto = new ListProvinceRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);

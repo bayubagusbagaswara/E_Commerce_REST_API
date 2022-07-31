@@ -47,7 +47,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ListProvinsiResponseDto getAllProvinsi(ListProvinsiRequestDto listProvinsiRequest) {
+    public ListProvinsiResponseDto getAllProvinsi(ListProvinceRequestDTO listProvinsiRequest) {
 
         // ada parameter searchBy
         Integer pageNo = listProvinsiRequest.getPageNo();

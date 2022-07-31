@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ListProvinsiRequestDto {
+public class ListProvinceRequestDTO {
 
     @NotNull(message = "Page index can not null")
     @Min(value = 0, message = "Page index must not be less than zero")

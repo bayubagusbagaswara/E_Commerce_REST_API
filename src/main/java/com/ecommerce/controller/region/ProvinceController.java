@@ -50,7 +50,7 @@ public class ProvinceController {
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
 
-        ListProvinsiRequestDto listProvinsiRequest = new ListProvinsiRequestDto();
+        ListProvinceRequestDTO listProvinsiRequest = new ListProvinceRequestDTO();
         listProvinsiRequest.setPageNo(pageNo);
         listProvinsiRequest.setPageSize(pageSize);
         listProvinsiRequest.setSortBy(sortBy);
