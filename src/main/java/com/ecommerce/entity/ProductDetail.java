@@ -1,10 +1,7 @@
 package com.ecommerce.entity;
 
 import com.ecommerce.entity.base.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -15,11 +12,11 @@ import javax.persistence.UniqueConstraint;
 import java.time.Instant;
 
 @Entity
-@Table(name = "product_detail", uniqueConstraints = {
+@Table(name = "product_details", uniqueConstraints = {
         @UniqueConstraint(name = "product_detail_unique_sku", columnNames = "sku")
 })
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE product_detail SET status_record = 'INACTIVE' WHERE id = ?")
