@@ -1,7 +1,7 @@
 package com.ecommerce.service.region;
 
 import com.ecommerce.dto.kelurahan.*;
-import com.ecommerce.dto.region.kelurahan.*;
+import com.ecommerce.dto.region.urbanVillage.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
 

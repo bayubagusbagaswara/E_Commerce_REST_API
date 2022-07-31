@@ -1,4 +1,4 @@
-package com.ecommerce.dto.region.kelurahan;
+package com.ecommerce.dto.region.urbanVillage;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

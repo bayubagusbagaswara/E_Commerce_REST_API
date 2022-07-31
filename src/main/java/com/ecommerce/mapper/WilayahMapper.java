@@ -1,7 +1,7 @@
 package com.ecommerce.mapper;
 
 import com.ecommerce.dto.region.subDistrict.KecamatanResponseDto;
-import com.ecommerce.dto.region.kelurahan.KelurahanResponseDto;
+import com.ecommerce.dto.region.urbanVillage.KelurahanResponseDto;
 import com.ecommerce.dto.region.district.KotaResponseDto;
 import com.ecommerce.dto.region.province.ProvinsiResponseDto;
 import com.ecommerce.entity.region.SubDistrict;

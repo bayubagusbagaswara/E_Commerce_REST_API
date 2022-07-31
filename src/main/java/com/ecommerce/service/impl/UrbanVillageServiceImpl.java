@@ -4,7 +4,7 @@ import com.ecommerce.entity.region.SubDistrict;
 import com.ecommerce.entity.region.UrbanVillage;
 import com.ecommerce.mapper.WilayahMapper;
 import com.ecommerce.dto.kelurahan.*;
-import com.ecommerce.dto.region.kelurahan.*;
+import com.ecommerce.dto.region.urbanVillage.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
 import com.ecommerce.repository.KecamatanRepository;

@@ -1,4 +1,4 @@
-package com.ecommerce.dto.region.kelurahan;
+package com.ecommerce.dto.region.urbanVillage;
 
 import com.ecommerce.dto.region.subDistrict.KecamatanResponseDto;
 import lombok.Data;
