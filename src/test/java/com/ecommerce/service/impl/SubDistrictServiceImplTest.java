@@ -33,7 +33,7 @@ class SubDistrictServiceImplTest {
     private final static Logger log = LoggerFactory.getLogger(SubDistrictServiceImplTest.class);
 
     @Autowired
-    KecamatanServiceImpl kecamatanService;
+    SubDistrictServiceImpl kecamatanService;
 
     @Test
     @Order(1)

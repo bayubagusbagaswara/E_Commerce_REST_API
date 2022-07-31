@@ -5,7 +5,7 @@ import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.kecamatan.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KotaNotFoundException;
-import com.ecommerce.service.region.KecamatanService;
+import com.ecommerce.service.region.SubDistrictService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,15 +17,15 @@ import java.util.List;
 @RequestMapping("/api/subdistricts")
 public class SubDistrictController {
 
-    private final KecamatanService kecamatanService;
+    private final SubDistrictService subDistrictService;
 
-    public SubDistrictController(KecamatanService kecamatanService) {
-        this.kecamatanService = kecamatanService;
+    public SubDistrictController(SubDistrictService subDistrictService) {
+        this.subDistrictService = subDistrictService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KecamatanResponseDto> createKecamatan(@RequestBody CreateKecamatanRequestDto createKecamatanRequest) throws KotaNotFoundException {
-        final KecamatanResponseDto kecamatanResponse = kecamatanService.createKecamatan(createKecamatanRequest);
+        final KecamatanResponseDto kecamatanResponse = subDistrictService.createKecamatan(createKecamatanRequest);
         return WebResponseDto.<KecamatanResponseDto>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
@@ -35,7 +35,7 @@ public class SubDistrictController {
 
     @GetMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KecamatanResponseDto> getKecamatanById(@PathVariable("idKecamatan") String id) throws KecamatanNotFoundException {
-        final KecamatanResponseDto kecamatanResponse = kecamatanService.getKecamatanById(id);
+        final KecamatanResponseDto kecamatanResponse = subDistrictService.getKecamatanById(id);
         return WebResponseDto.<KecamatanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -56,7 +56,7 @@ public class SubDistrictController {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKecamatanResponseDto kecamatanResponses = kecamatanService.getAllKecamatan(requestDto);
+        final ListKecamatanResponseDto kecamatanResponses = subDistrictService.getAllKecamatan(requestDto);
         return WebResponseDto.<ListKecamatanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -66,7 +66,7 @@ public class SubDistrictController {
 
     @PutMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KecamatanResponseDto> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException {
-        final KecamatanResponseDto kecamatanResponse = kecamatanService.updateKecamatan(id, updateKecamatanRequest);
+        final KecamatanResponseDto kecamatanResponse = subDistrictService.updateKecamatan(id, updateKecamatanRequest);
         return WebResponseDto.<KecamatanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -76,7 +76,7 @@ public class SubDistrictController {
 
     @DeleteMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KecamatanResponseDto> deleteKecamatan(@PathVariable("idKecamatan") String id) throws KecamatanNotFoundException {
-        kecamatanService.deleteKecamatan(id);
+        subDistrictService.deleteKecamatan(id);
         return WebResponseDto.<KecamatanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -86,7 +86,7 @@ public class SubDistrictController {
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KecamatanResponseDto> getKecamatanByName(@RequestParam("name") String name) throws KecamatanNotFoundException {
-        final KecamatanResponseDto kecamatanResponse = kecamatanService.getKecamatanByName(name);
+        final KecamatanResponseDto kecamatanResponse = subDistrictService.getKecamatanByName(name);
         return WebResponseDto.<KecamatanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -96,7 +96,7 @@ public class SubDistrictController {
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<List<KecamatanResponseDto>> getKecamatanByNameContains(@RequestParam("name") String name) {
-        final List<KecamatanResponseDto> kecamatanResponseList = kecamatanService.getKecamatanByNameContains(name);
+        final List<KecamatanResponseDto> kecamatanResponseList = subDistrictService.getKecamatanByNameContains(name);
         return WebResponseDto.<List<KecamatanResponseDto>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -106,7 +106,7 @@ public class SubDistrictController {
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KecamatanResponseDto> getKecamatanByCode(@RequestParam("code") String code) throws KecamatanNotFoundException {
-        final KecamatanResponseDto kecamatanResponse = kecamatanService.getKecamatanByCode(code);
+        final KecamatanResponseDto kecamatanResponse = subDistrictService.getKecamatanByCode(code);
         return WebResponseDto.<KecamatanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())

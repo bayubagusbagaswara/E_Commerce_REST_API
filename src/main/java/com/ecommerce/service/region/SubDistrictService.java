@@ -7,7 +7,7 @@ import com.ecommerce.exception.KotaNotFoundException;
 
 import java.util.List;
 
-public interface KecamatanService {
+public interface SubDistrictService {
 
     KecamatanResponseDto createKecamatan(CreateKecamatanRequestDto createKecamatanRequest) throws KotaNotFoundException;
 

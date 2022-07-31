@@ -9,7 +9,7 @@ import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.repository.KecamatanRepository;
 import com.ecommerce.repository.KotaRepository;
-import com.ecommerce.service.region.KecamatanService;
+import com.ecommerce.service.region.SubDistrictService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,13 +22,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class KecamatanServiceImpl implements KecamatanService {
+public class SubDistrictServiceImpl implements SubDistrictService {
 
     private final KecamatanRepository kecamatanRepository;
     private final KotaRepository kotaRepository;
     private final WilayahMapper wilayahMapper;
 
-    public KecamatanServiceImpl(KecamatanRepository kecamatanRepository, KotaRepository kotaRepository, WilayahMapper wilayahMapper) {
+    public SubDistrictServiceImpl(KecamatanRepository kecamatanRepository, KotaRepository kotaRepository, WilayahMapper wilayahMapper) {
         this.kecamatanRepository = kecamatanRepository;
         this.kotaRepository = kotaRepository;
         this.wilayahMapper = wilayahMapper;
