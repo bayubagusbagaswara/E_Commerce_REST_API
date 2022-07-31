@@ -73,7 +73,7 @@ class ProvinceServiceImplTest {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        ListProvinsiResponseDto responseDto = provinsiService.getAllProvinsi(requestDto);
+        ListProvinceResponseDTO responseDto = provinsiService.getAllProvinsi(requestDto);
         assertEquals(totalSampleData, responseDto.getTotalElements());
         assertEquals(pageSize, responseDto.getProvinsiList().size());
     }

@@ -43,7 +43,7 @@ public class ProvinceController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ListProvinsiResponseDto> getAllProvinsi(
+    public WebResponseDto<ListProvinceResponseDTO> getAllProvinsi(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "searchBy", defaultValue = AppConstants.DEFAULT_SEARCH_BY, required = false) String searchBy,
@@ -56,8 +56,8 @@ public class ProvinceController {
         listProvinsiRequest.setSortBy(sortBy);
         listProvinsiRequest.setSortDir(sortDir);
 
-        final ListProvinsiResponseDto allProvinsiResponse = provinceService.getAllProvinsi(listProvinsiRequest);
-        return WebResponseDto.<ListProvinsiResponseDto>builder()
+        final ListProvinceResponseDTO allProvinsiResponse = provinceService.getAllProvinsi(listProvinsiRequest);
+        return WebResponseDto.<ListProvinceResponseDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(allProvinsiResponse)

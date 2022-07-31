@@ -1,13 +1,15 @@
 package com.ecommerce.dto.region.province;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class ListProvinsiResponseDto {
+public class ListProvinceResponseDTO {
 
     private List<ProvinsiResponseDto> provinsiList;
     private Integer pageNo;

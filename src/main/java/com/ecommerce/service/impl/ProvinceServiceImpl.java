@@ -47,7 +47,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ListProvinsiResponseDto getAllProvinsi(ListProvinceRequestDTO listProvinsiRequest) {
+    public ListProvinceResponseDTO getAllProvinsi(ListProvinceRequestDTO listProvinsiRequest) {
 
         // ada parameter searchBy
         Integer pageNo = listProvinsiRequest.getPageNo();
@@ -74,7 +74,7 @@ public class ProvinceServiceImpl implements ProvinceService {
 
         List<ProvinsiResponseDto> provinsiResponseList = wilayahMapper.mapToProvinsiResponseList(provinceList);
 
-        ListProvinsiResponseDto listProvinsiResponse = new ListProvinsiResponseDto();
+        ListProvinceResponseDTO listProvinsiResponse = new ListProvinceResponseDTO();
         listProvinsiResponse.setProvinsiList(provinsiResponseList);
         listProvinsiResponse.setPageNo(provinsiPage.getNumber());
         listProvinsiResponse.setPageSize(provinsiPage.getSize());
