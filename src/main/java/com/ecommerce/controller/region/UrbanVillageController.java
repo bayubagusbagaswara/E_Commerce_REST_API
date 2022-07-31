@@ -5,7 +5,7 @@ import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.kelurahan.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
-import com.ecommerce.service.region.KelurahanService;
+import com.ecommerce.service.region.UrbanVillageService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,15 +17,15 @@ import java.util.List;
 @RequestMapping("/api/urbanvillages")
 public class UrbanVillageController {
 
-    private final KelurahanService kelurahanService;
+    private final UrbanVillageService urbanVillageService;
 
-    public UrbanVillageController(KelurahanService kelurahanService) {
-        this.kelurahanService = kelurahanService;
+    public UrbanVillageController(UrbanVillageService urbanVillageService) {
+        this.urbanVillageService = urbanVillageService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KelurahanResponseDto> createKelurahan(@RequestBody CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = kelurahanService.createKelurahan(createKelurahanRequest);
+        final KelurahanResponseDto kelurahanResponse = urbanVillageService.createKelurahan(createKelurahanRequest);
         return WebResponseDto.<KelurahanResponseDto>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
@@ -35,7 +35,7 @@ public class UrbanVillageController {
 
     @GetMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KelurahanResponseDto> getKelurahanById(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = kelurahanService.getKelurahanById(id);
+        final KelurahanResponseDto kelurahanResponse = urbanVillageService.getKelurahanById(id);
         return WebResponseDto.<KelurahanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -56,7 +56,7 @@ public class UrbanVillageController {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKelurahanResponseDto kelurahanResponseList = kelurahanService.getAllKelurahan(requestDto);
+        final ListKelurahanResponseDto kelurahanResponseList = urbanVillageService.getAllKelurahan(requestDto);
         return WebResponseDto.<ListKelurahanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -66,7 +66,7 @@ public class UrbanVillageController {
 
     @PutMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KelurahanResponseDto> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = kelurahanService.updateKelurahan(id, updateKelurahanRequest);
+        final KelurahanResponseDto kelurahanResponse = urbanVillageService.updateKelurahan(id, updateKelurahanRequest);
         return WebResponseDto.<KelurahanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -76,7 +76,7 @@ public class UrbanVillageController {
 
     @DeleteMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KelurahanResponseDto> deleteKelurahan(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
-        kelurahanService.deleteKelurahan(id);
+        urbanVillageService.deleteKelurahan(id);
         return WebResponseDto.<KelurahanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -86,7 +86,7 @@ public class UrbanVillageController {
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KelurahanResponseDto> getKelurahanByName(@RequestParam("name") String name) throws KelurahanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = kelurahanService.getKelurahanByName(name);
+        final KelurahanResponseDto kelurahanResponse = urbanVillageService.getKelurahanByName(name);
         return WebResponseDto.<KelurahanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -96,7 +96,7 @@ public class UrbanVillageController {
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<List<KelurahanResponseDto>> getKelurahanByNameContains(@RequestParam("name") String name) {
-        final List<KelurahanResponseDto> kelurahanResponseList = kelurahanService.getKelurahanByNameContains(name);
+        final List<KelurahanResponseDto> kelurahanResponseList = urbanVillageService.getKelurahanByNameContains(name);
         return WebResponseDto.<List<KelurahanResponseDto>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
@@ -106,7 +106,7 @@ public class UrbanVillageController {
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
     public WebResponseDto<KelurahanResponseDto> getKelurahanByCode(@RequestParam("code") String code) throws KelurahanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = kelurahanService.getKelurahanByCode(code);
+        final KelurahanResponseDto kelurahanResponse = urbanVillageService.getKelurahanByCode(code);
         return WebResponseDto.<KelurahanResponseDto>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())

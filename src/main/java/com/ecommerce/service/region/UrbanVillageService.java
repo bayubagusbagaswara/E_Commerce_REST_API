@@ -7,7 +7,7 @@ import com.ecommerce.exception.KelurahanNotFoundException;
 
 import java.util.List;
 
-public interface KelurahanService {
+public interface UrbanVillageService {
 
     KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException;
 

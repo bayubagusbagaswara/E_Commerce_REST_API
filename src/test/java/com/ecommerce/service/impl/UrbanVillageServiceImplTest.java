@@ -35,7 +35,7 @@ class UrbanVillageServiceImplTest {
     private final static Logger log = LoggerFactory.getLogger(UrbanVillageServiceImplTest.class);
 
     @Autowired
-    KelurahanServiceImpl kelurahanService;
+    UrbanVillageServiceImpl kelurahanService;
 
     @Test
     @Order(1)
