@@ -1,7 +1,6 @@
 package com.restful.entity.enumerator;
 
 public enum Gender {
-    NONE("NONE"),
     MALE("MALE"),
     FEMALE("FEMALE");
 
