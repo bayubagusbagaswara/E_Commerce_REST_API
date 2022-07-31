@@ -12,7 +12,7 @@ create table province (
 );
 
 -- KOTA
-create table kota (
+create table district (
     id character varying(64) not null primary key default uuid_generate_v4(),
     created_date timestamp not null default now(),
     created_by character varying(255) not null,
@@ -38,7 +38,7 @@ create table kecamatan (
     name character varying(255) not null,
     id_kota character varying(64),
     constraint kecamatan_unique_code unique (code),
-    constraint fk_kecamatan_kota foreign key (id_kota) references kota(id) on update cascade on delete cascade
+    constraint fk_kecamatan_kota foreign key (id_kota) references district(id) on update cascade on delete cascade
 );
 
 -- KELURAHAN

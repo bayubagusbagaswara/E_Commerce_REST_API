@@ -6,7 +6,7 @@ import com.restful.dto.region.kota.KotaResponseDto;
 import com.restful.dto.region.provinsi.ProvinsiResponseDto;
 import com.restful.entity.region.Kecamatan;
 import com.restful.entity.region.Kelurahan;
-import com.restful.entity.region.Kota;
+import com.restful.entity.region.District;
 import com.restful.entity.region.Province;
 import org.springframework.stereotype.Component;
 
@@ -26,14 +26,14 @@ public class WilayahMapper {
         return provinsiResponse;
     }
 
-    public KotaResponseDto mapToKotaResponse(Kota kota) {
+    public KotaResponseDto mapToKotaResponse(District district) {
         KotaResponseDto kotaResponse = new KotaResponseDto();
-        kotaResponse.setId(kota.getId());
-        kotaResponse.setCode(kota.getCode());
-        kotaResponse.setName(kota.getName());
-        kotaResponse.setCreatedDate(kota.getCreatedDate());
-        kotaResponse.setUpdatedDate(kota.getUpdatedDate());
-        kotaResponse.setProvinsi(mapToProvinsiResponse(kota.getProvince()));
+        kotaResponse.setId(district.getId());
+        kotaResponse.setCode(district.getCode());
+        kotaResponse.setName(district.getName());
+        kotaResponse.setCreatedDate(district.getCreatedDate());
+        kotaResponse.setUpdatedDate(district.getUpdatedDate());
+        kotaResponse.setProvinsi(mapToProvinsiResponse(district.getProvince()));
         return kotaResponse;
     }
 
@@ -44,7 +44,7 @@ public class WilayahMapper {
         kecamatanResponse.setName(kecamatan.getName());
         kecamatanResponse.setCreatedDate(kecamatan.getCreatedDate());
         kecamatanResponse.setUpdatedDate(kecamatan.getUpdatedDate());
-        kecamatanResponse.setKota(mapToKotaResponse(kecamatan.getKota()));
+        kecamatanResponse.setKota(mapToKotaResponse(kecamatan.getDistrict()));
         return kecamatanResponse;
     }
 
@@ -66,8 +66,8 @@ public class WilayahMapper {
                 ;
     }
 
-    public List<KotaResponseDto> mapToKotaResponseList(List<Kota> kotaList) {
-        return kotaList.stream()
+    public List<KotaResponseDto> mapToKotaResponseList(List<District> districtList) {
+        return districtList.stream()
                 .map(this::mapToKotaResponse)
                 .collect(Collectors.toList())
                 ;

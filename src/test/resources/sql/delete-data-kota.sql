@@ -1,1 +1,1 @@
-delete from kota;
+delete from district;

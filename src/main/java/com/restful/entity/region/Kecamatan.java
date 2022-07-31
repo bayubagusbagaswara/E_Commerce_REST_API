@@ -30,5 +30,5 @@ public class Kecamatan extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_kota", foreignKey = @ForeignKey(name = "fk_kecamatan_kota"))
-    private Kota kota;
+    private District district;
 }

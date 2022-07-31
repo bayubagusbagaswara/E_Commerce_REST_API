@@ -27,9 +27,9 @@ import static org.junit.jupiter.api.Assertions.*;
         "classpath:/sql/sample-data-provinsi.sql",
         "classpath:/sql/sample-data-kota.sql"
 })
-class KotaServiceImplTest {
+class DistrictServiceImplTest {
 
-    private final static Logger log = LoggerFactory.getLogger(KotaServiceImplTest.class);
+    private final static Logger log = LoggerFactory.getLogger(DistrictServiceImplTest.class);
 
     @Autowired
     KotaServiceImpl kotaService;

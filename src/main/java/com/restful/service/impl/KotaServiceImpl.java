@@ -4,7 +4,7 @@ import com.restful.entity.region.Province;
 import com.restful.mapper.WilayahMapper;
 import com.restful.dto.kota.*;
 import com.restful.dto.region.kota.*;
-import com.restful.entity.region.Kota;
+import com.restful.entity.region.District;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.exception.ProvinsiNotFoundException;
 import com.restful.repository.KotaRepository;
@@ -38,41 +38,41 @@ public class KotaServiceImpl implements KotaService {
     public KotaResponseDto createKota(CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException {
         Province province = provinsiRepository.findById(createKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + createKotaRequest.getProvinsiId() + "] not found"));
-        Kota kota = new Kota();
-        kota.setCode(createKotaRequest.getCode());
-        kota.setName(createKotaRequest.getName());
-        kota.setProvince(province);
-        kota.setCreatedDate(LocalDateTime.now());
-        kotaRepository.save(kota);
-        return wilayahMapper.mapToKotaResponse(kota);
+        District district = new District();
+        district.setCode(createKotaRequest.getCode());
+        district.setName(createKotaRequest.getName());
+        district.setProvince(province);
+        district.setCreatedDate(LocalDateTime.now());
+        kotaRepository.save(district);
+        return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public KotaResponseDto getKotaById(String id) throws KotaNotFoundException {
-        Kota kota = kotaRepository.findById(id)
+        District district = kotaRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
-        return wilayahMapper.mapToKotaResponse(kota);
+        return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
         Province province = provinsiRepository.findById(updateKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
-        Kota kota = kotaRepository.findById(id)
+        District district = kotaRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
-        kota.setCode(updateKotaRequest.getCode());
-        kota.setName(updateKotaRequest.getName());
-        kota.setProvince(province);
-        kota.setUpdatedDate(LocalDateTime.now());
-        kotaRepository.save(kota);
-        return wilayahMapper.mapToKotaResponse(kota);
+        district.setCode(updateKotaRequest.getCode());
+        district.setName(updateKotaRequest.getName());
+        district.setProvince(province);
+        district.setUpdatedDate(LocalDateTime.now());
+        kotaRepository.save(district);
+        return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public void deleteKota(String id) throws KotaNotFoundException {
-        final Kota kota = kotaRepository.findById(id)
+        final District district = kotaRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
-        kotaRepository.delete(kota);
+        kotaRepository.delete(district);
     }
 
     @Override
@@ -84,10 +84,10 @@ public class KotaServiceImpl implements KotaService {
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
-        Page<Kota> kotaPage = kotaRepository.findAll(pageable);
-        List<Kota> kotaList = kotaPage.getContent();
+        Page<District> kotaPage = kotaRepository.findAll(pageable);
+        List<District> districtList = kotaPage.getContent();
 
-        List<KotaResponseDto> kotaResponseList = wilayahMapper.mapToKotaResponseList(kotaList);
+        List<KotaResponseDto> kotaResponseList = wilayahMapper.mapToKotaResponseList(districtList);
 
         ListKotaResponseDto listKotaResponse = new ListKotaResponseDto();
         listKotaResponse.setKotaList(kotaResponseList);
@@ -101,26 +101,26 @@ public class KotaServiceImpl implements KotaService {
 
     @Override
     public KotaResponseDto getKotaByName(String name) throws KotaNotFoundException {
-        Kota kota = kotaRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name [" + name + "] not found"));
-        return wilayahMapper.mapToKotaResponse(kota);
+        District district = kotaRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name [" + name + "] not found"));
+        return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public KotaResponseDto getKotaByCode(String code) throws KotaNotFoundException {
-        Kota kota = kotaRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code [" + code + "] not found"));
-        return wilayahMapper.mapToKotaResponse(kota);
+        District district = kotaRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code [" + code + "] not found"));
+        return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public List<KotaResponseDto> getKotaByNameContains(String name) {
-        List<Kota> kotaList = kotaRepository.findAllByNameContainingIgnoreCase(name);
-        return wilayahMapper.mapToKotaResponseList(kotaList);
+        List<District> districtList = kotaRepository.findAllByNameContainingIgnoreCase(name);
+        return wilayahMapper.mapToKotaResponseList(districtList);
     }
 
     @Override
     public List<KotaResponseDto> getKotaByProvinsiId(String provinsiId) {
-        List<Kota> kotaList = kotaRepository.findAllByProvinsiId(provinsiId);
-        return wilayahMapper.mapToKotaResponseList(kotaList);
+        List<District> districtList = kotaRepository.findAllByProvinsiId(provinsiId);
+        return wilayahMapper.mapToKotaResponseList(districtList);
     }
 
 }

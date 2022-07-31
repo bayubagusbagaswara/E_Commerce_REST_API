@@ -1,10 +1,10 @@
 package com.restful.service.impl;
 
+import com.restful.entity.region.District;
 import com.restful.mapper.WilayahMapper;
 import com.restful.dto.kecamatan.*;
 import com.restful.dto.region.kecamatan.*;
 import com.restful.entity.region.Kecamatan;
-import com.restful.entity.region.Kota;
 import com.restful.exception.KecamatanNotFoundException;
 import com.restful.exception.KotaNotFoundException;
 import com.restful.repository.KecamatanRepository;
@@ -36,12 +36,12 @@ public class KecamatanServiceImpl implements KecamatanService {
 
     @Override
     public KecamatanResponseDto createKecamatan(CreateKecamatanRequestDto createKecamatanRequest) throws KotaNotFoundException {
-        Kota kota = kotaRepository.findById(createKecamatanRequest.getKotaId())
+        District district = kotaRepository.findById(createKecamatanRequest.getKotaId())
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + createKecamatanRequest.getKotaId() + "] not found"));
         Kecamatan kecamatan = new Kecamatan();
         kecamatan.setCode(createKecamatanRequest.getCode());
         kecamatan.setName(createKecamatanRequest.getName());
-        kecamatan.setKota(kota);
+        kecamatan.setDistrict(district);
         kecamatan.setCreatedDate(LocalDateTime.now());
         kecamatanRepository.save(kecamatan);
         return wilayahMapper.mapToKecamatanResponse(kecamatan);
@@ -56,13 +56,13 @@ public class KecamatanServiceImpl implements KecamatanService {
 
     @Override
     public KecamatanResponseDto updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KotaNotFoundException, KecamatanNotFoundException {
-        Kota kota = kotaRepository.findById(updateKecamatanRequest.getKotaId())
+        District district = kotaRepository.findById(updateKecamatanRequest.getKotaId())
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + updateKecamatanRequest.getKotaId() + "] not found"));
         Kecamatan kecamatan = kecamatanRepository.findById(id)
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + id + "] not found"));
         kecamatan.setCode(updateKecamatanRequest.getCode());
         kecamatan.setName(updateKecamatanRequest.getName());
-        kecamatan.setKota(kota);
+        kecamatan.setDistrict(district);
         kecamatan.setUpdatedDate(LocalDateTime.now());
         kecamatanRepository.save(kecamatan);
         return wilayahMapper.mapToKecamatanResponse(kecamatan);
