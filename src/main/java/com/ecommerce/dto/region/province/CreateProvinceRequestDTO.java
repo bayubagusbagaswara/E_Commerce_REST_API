@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CreateProvinsiRequestDto {
+public class CreateProvinceRequestDTO {
 
-    @NotBlank(message = "Provinsi code must not be blank")
+    @NotBlank(message = "Province code must not be blank")
     private String code;
 
-    @NotBlank(message = "Provinsi name must not be blank")
+    @NotBlank(message = "Province name must not be blank")
     private String name;
 }

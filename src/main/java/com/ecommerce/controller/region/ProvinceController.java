@@ -23,7 +23,7 @@ public class ProvinceController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProvinsiResponseDto> createProvinsi(@RequestBody CreateProvinsiRequestDto createCategoryRequest) {
+    public WebResponseDto<ProvinsiResponseDto> createProvinsi(@RequestBody CreateProvinceRequestDTO createCategoryRequest) {
         final ProvinsiResponseDto provinsiResponse = provinceService.createProvinsi(createCategoryRequest);
         return WebResponseDto.<ProvinsiResponseDto>builder()
                 .code(HttpStatus.CREATED.value())

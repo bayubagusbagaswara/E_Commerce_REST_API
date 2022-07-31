@@ -30,7 +30,7 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
 
     @Override
-    public ProvinsiResponseDto createProvinsi(CreateProvinsiRequestDto createProvinsiRequest) {
+    public ProvinsiResponseDto createProvinsi(CreateProvinceRequestDTO createProvinsiRequest) {
         Province province = new Province();
         province.setCode(createProvinsiRequest.getCode());
         province.setName(createProvinsiRequest.getName());

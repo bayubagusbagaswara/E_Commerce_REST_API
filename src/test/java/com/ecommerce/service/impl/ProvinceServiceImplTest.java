@@ -33,7 +33,7 @@ class ProvinceServiceImplTest {
     @Test
     @Order(1)
     void createProvinsi() {
-        CreateProvinsiRequestDto requestDto = new CreateProvinsiRequestDto();
+        CreateProvinceRequestDTO requestDto = new CreateProvinceRequestDTO();
         requestDto.setCode("123");
         requestDto.setName("Provinsi Test");
 

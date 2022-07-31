@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProvinceService {
 
-    ProvinsiResponseDto createProvinsi(CreateProvinsiRequestDto createProvinsiRequest);
+    ProvinsiResponseDto createProvinsi(CreateProvinceRequestDTO createProvinsiRequest);
 
     ProvinsiResponseDto getProvinsiById(String id) throws ProvinsiNotFoundException;
 
