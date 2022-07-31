@@ -3,7 +3,7 @@ package com.ecommerce.service.impl;
 import com.ecommerce.entity.region.Province;
 import com.ecommerce.mapper.WilayahMapper;
 import com.ecommerce.dto.provinsi.*;
-import com.ecommerce.dto.region.provinsi.*;
+import com.ecommerce.dto.region.province.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 import com.ecommerce.repository.ProvinsiRepository;
 import com.ecommerce.service.region.ProvinceService;

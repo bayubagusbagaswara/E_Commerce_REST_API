@@ -1,7 +1,7 @@
 package com.ecommerce.service.region;
 
 import com.ecommerce.dto.provinsi.*;
-import com.ecommerce.dto.region.provinsi.*;
+import com.ecommerce.dto.region.province.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 
 import java.util.List;

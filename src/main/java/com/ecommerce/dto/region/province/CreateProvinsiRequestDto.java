@@ -1,4 +1,4 @@
-package com.ecommerce.dto.region.provinsi;
+package com.ecommerce.dto.region.province;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UpdateProvinsiRequestDto {
+public class CreateProvinsiRequestDto {
 
     @NotBlank(message = "Provinsi code must not be blank")
     private String code;

@@ -1,6 +1,6 @@
 package com.ecommerce.dto.region.kota;
 
-import com.ecommerce.dto.region.provinsi.ProvinsiResponseDto;
+import com.ecommerce.dto.region.province.ProvinsiResponseDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

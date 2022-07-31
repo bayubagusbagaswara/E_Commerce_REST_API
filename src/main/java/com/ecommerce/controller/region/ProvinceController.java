@@ -2,7 +2,7 @@ package com.ecommerce.controller.region;
 
 import com.ecommerce.dto.WebResponseDto;
 import com.ecommerce.dto.provinsi.*;
-import com.ecommerce.dto.region.provinsi.*;
+import com.ecommerce.dto.region.province.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
 import com.ecommerce.service.region.ProvinceService;
 import com.ecommerce.util.AppConstants;
