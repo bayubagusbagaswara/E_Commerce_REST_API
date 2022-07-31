@@ -1,4 +1,4 @@
-package com.restful.controller;
+package com.restful.controller.region;
 
 import com.restful.dto.WebResponseDto;
 import com.restful.dto.provinsi.*;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/provinsi")
-public class ProvinsiController {
+@RequestMapping("/api/provinces")
+public class ProvinceController {
 
     private final ProvinsiService provinsiService;
 
-    public ProvinsiController(ProvinsiService provinsiService) {
+    public ProvinceController(ProvinsiService provinsiService) {
         this.provinsiService = provinsiService;
     }
 

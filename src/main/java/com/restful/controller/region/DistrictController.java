@@ -1,4 +1,4 @@
-package com.restful.controller;
+package com.restful.controller.region;
 
 import com.restful.dto.WebResponseDto;
 import com.restful.dto.kota.*;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/kota")
-public class KotaController {
+@RequestMapping("/api/districts")
+public class DistrictController {
 
     private final KotaService kotaService;
 
-    public KotaController(KotaService kotaService) {
+    public DistrictController(KotaService kotaService) {
         this.kotaService = kotaService;
     }
 

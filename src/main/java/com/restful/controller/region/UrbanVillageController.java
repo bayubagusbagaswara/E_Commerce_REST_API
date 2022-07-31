@@ -1,4 +1,4 @@
-package com.restful.controller;
+package com.restful.controller.region;
 
 import com.restful.dto.WebResponseDto;
 import com.restful.dto.kelurahan.*;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/kelurahan")
-public class KelurahanController {
+@RequestMapping("/api/urbanvillages")
+public class UrbanVillageController {
 
     private final KelurahanService kelurahanService;
 
-    public KelurahanController(KelurahanService kelurahanService) {
+    public UrbanVillageController(KelurahanService kelurahanService) {
         this.kelurahanService = kelurahanService;
     }
 
