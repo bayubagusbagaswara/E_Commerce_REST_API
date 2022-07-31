@@ -2,7 +2,7 @@ package com.ecommerce.controller.region;
 
 import com.ecommerce.dto.WebResponseDto;
 import com.ecommerce.dto.kecamatan.*;
-import com.ecommerce.dto.region.kecamatan.*;
+import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.service.region.SubDistrictService;

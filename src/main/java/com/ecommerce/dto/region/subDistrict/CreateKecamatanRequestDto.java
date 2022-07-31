@@ -1,4 +1,4 @@
-package com.ecommerce.dto.region.kecamatan;
+package com.ecommerce.dto.region.subDistrict;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.ecommerce.dto.region.kelurahan;
 
-import com.ecommerce.dto.region.kecamatan.KecamatanResponseDto;
+import com.ecommerce.dto.region.subDistrict.KecamatanResponseDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

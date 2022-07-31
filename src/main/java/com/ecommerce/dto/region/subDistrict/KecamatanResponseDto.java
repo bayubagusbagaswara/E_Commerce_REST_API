@@ -1,4 +1,4 @@
-package com.ecommerce.dto.region.kecamatan;
+package com.ecommerce.dto.region.subDistrict;
 
 import com.ecommerce.dto.region.district.KotaResponseDto;
 import lombok.Data;

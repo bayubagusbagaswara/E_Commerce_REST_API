@@ -4,7 +4,7 @@ import com.ecommerce.entity.region.District;
 import com.ecommerce.entity.region.SubDistrict;
 import com.ecommerce.mapper.WilayahMapper;
 import com.ecommerce.dto.kecamatan.*;
-import com.ecommerce.dto.region.kecamatan.*;
+import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.repository.KecamatanRepository;
