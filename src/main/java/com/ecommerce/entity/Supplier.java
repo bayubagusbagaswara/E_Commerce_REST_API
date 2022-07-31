@@ -3,10 +3,8 @@ package com.ecommerce.entity;
 import com.ecommerce.entity.base.BaseEntity;
 import com.ecommerce.entity.enumerator.Gender;
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -16,11 +14,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "suppliers", uniqueConstraints = {
-        @UniqueConstraint(name = "suppliers_unique_email", columnNames = "email"),
-        @UniqueConstraint(name = "suppliers_unique_mobile_phone", columnNames = "mobile_phone")
+        @UniqueConstraint(name = "supplier_unique_email", columnNames = "email"),
+        @UniqueConstraint(name = "supplier_unique_mobile_phone", columnNames = "mobile_phone")
 })
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE suppliers SET status_record = 'INACTIVE' WHERE id = ?")
@@ -38,12 +36,19 @@ public class Supplier extends BaseEntity {
     private String mobilePhone;
 
     @Enumerated(EnumType.STRING)
-    private Gender gender = Gender.NONE;
+    @Column(name = "gender")
+    private Gender gender;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @FieldNameConstants.Exclude
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_address", foreignKey = @ForeignKey(name = "fk_supplier_address"))
+    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "fk_supplier_address_id"))
     private Address address;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @FieldNameConstants.Exclude
     @ManyToMany(mappedBy = "suppliers", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
 
