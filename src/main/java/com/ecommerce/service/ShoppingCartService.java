@@ -1,8 +1,12 @@
 package com.ecommerce.service;
 
+import com.ecommerce.entity.CartItem;
+import com.ecommerce.entity.ShoppingCart;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 @Slf4j
