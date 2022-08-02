@@ -1,44 +1,21 @@
-# RESTful API Categories, Products and Suppliers for Online Stores
+# REST API e-Commerce
 
-# Controller Layer
+# Features
 
-- [ ] Product Controller
-- [ ] Category Controller
-- [ ] Supplier Controller
-- [ ] Provinsi Controller
-- [ ] Kota Controller
-- [ ] Kecamatan Controller
-- [ ] Kelurahan Controller
-- [ ] Error Controller
+- Categories
+- Products
+- Suppliers
+- Shopping Cart
+- Cart Item
+- Coupon
+- Wish List
 
-# Helper
+# Technologies
 
-- [ ] Validation Helper
-- [ ] AppConstant
-
-# Testing
-
-- [ ] Unit Testing - Repository Layer
-- [ ] Unit Testing - Service Layer
-- [ ] Unit Testing - Controller Layer
-- [ ] Integration Testing
-
-## Testing Service Layer
-
-- [x] Provinsi Service Test
-- [x] Kota Service Test
-- [x] Kecamatan Service Test
-- [x] Kelurahan Service Tets
-- [ ] Category Service Test (jika category dihapus, maka akan menghapus product), dan di Category dapat mengambil data product
-
-
-# Service Layer
-
-## Product
-
-- [ ] Create Product
-- [ ] Get Product By ID
-- [ ] Get All Product
-- [ ] Update Product
-- [ ] Get Product By Name
-- [ ] Get Product By Name Containing
+- Java JDK 17
+- Maven version 3.8.5 
+- Spring Boot version 2.7.1
+- Spring JPA
+- Spring Security
+- Json Web Token (JWT)
+- PostgreSQL
