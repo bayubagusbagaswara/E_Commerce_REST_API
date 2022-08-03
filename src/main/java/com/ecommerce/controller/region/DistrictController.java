@@ -24,9 +24,9 @@ public class DistrictController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KotaResponseDto> createKota(@RequestBody CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
-        final KotaResponseDto kotaResponse = districtService.createKota(createKotaRequest);
-        return WebResponseDto.<KotaResponseDto>builder()
+    public WebResponseDto<DistrictDTO> createKota(@RequestBody CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
+        final DistrictDTO kotaResponse = districtService.createKota(createKotaRequest);
+        return WebResponseDto.<DistrictDTO>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
                 .data(kotaResponse)
@@ -34,9 +34,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KotaResponseDto> getKotaById(@PathVariable("idKota") String id) throws KotaNotFoundException {
-        final KotaResponseDto kotaResponse = districtService.getKotaById(id);
-        return WebResponseDto.<KotaResponseDto>builder()
+    public WebResponseDto<DistrictDTO> getKotaById(@PathVariable("idKota") String id) throws KotaNotFoundException {
+        final DistrictDTO kotaResponse = districtService.getKotaById(id);
+        return WebResponseDto.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)
@@ -66,9 +66,9 @@ public class DistrictController {
     }
 
     @PutMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KotaResponseDto> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateKotaRequestDto updateKotaRequestDto) throws ProvinsiNotFoundException, KotaNotFoundException {
-        final KotaResponseDto kotaResponse = districtService.updateKota(id, updateKotaRequestDto);
-        return WebResponseDto.<KotaResponseDto>builder()
+    public WebResponseDto<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateKotaRequestDto updateKotaRequestDto) throws ProvinsiNotFoundException, KotaNotFoundException {
+        final DistrictDTO kotaResponse = districtService.updateKota(id, updateKotaRequestDto);
+        return WebResponseDto.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)
@@ -86,9 +86,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KotaResponseDto> getKotaByName(@RequestParam("name") String name) throws KotaNotFoundException {
-        final KotaResponseDto kotaResponse = districtService.getKotaByName(name);
-        return WebResponseDto.<KotaResponseDto>builder()
+    public WebResponseDto<DistrictDTO> getKotaByName(@RequestParam("name") String name) throws KotaNotFoundException {
+        final DistrictDTO kotaResponse = districtService.getKotaByName(name);
+        return WebResponseDto.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)
@@ -96,9 +96,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/name/contains")
-    public WebResponseDto<List<KotaResponseDto>> getKotaByNameContaining(@RequestParam("name") String name) {
-        final List<KotaResponseDto> kotaResponseList = districtService.getKotaByNameContains(name);
-        return WebResponseDto.<List<KotaResponseDto>>builder()
+    public WebResponseDto<List<DistrictDTO>> getKotaByNameContaining(@RequestParam("name") String name) {
+        final List<DistrictDTO> kotaResponseList = districtService.getKotaByNameContains(name);
+        return WebResponseDto.<List<DistrictDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponseList)
@@ -106,9 +106,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KotaResponseDto> getKotaByCode(@RequestParam("code") String code) throws KotaNotFoundException {
-        final KotaResponseDto kotaResponse = districtService.getKotaByCode(code);
-        return WebResponseDto.<KotaResponseDto>builder()
+    public WebResponseDto<DistrictDTO> getKotaByCode(@RequestParam("code") String code) throws KotaNotFoundException {
+        final DistrictDTO kotaResponse = districtService.getKotaByCode(code);
+        return WebResponseDto.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)

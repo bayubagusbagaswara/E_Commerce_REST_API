@@ -43,7 +43,7 @@ class DistrictServiceImplTest {
         // provinsi Jawa Timur
         requestDto.setProvinsiId("35");
 
-        final KotaResponseDto kota = kotaService.createKota(requestDto);
+        final DistrictDTO kota = kotaService.createKota(requestDto);
         assertNotNull(kota.getId());
         assertNotNull(kota.getCreatedDate());
         assertEquals(requestDto.getName(), kota.getName());
@@ -57,7 +57,7 @@ class DistrictServiceImplTest {
     void getKotaById() throws KotaNotFoundException {
         // id kota Kediri, Jawa Timur
         String id = "3571";
-        final KotaResponseDto kota = kotaService.getKotaById(id);
+        final DistrictDTO kota = kotaService.getKotaById(id);
         assertEquals(id, kota.getId());
         log.info("ID: {}", kota.getId());
     }
@@ -93,7 +93,7 @@ class DistrictServiceImplTest {
         requestDto.setName("KOTA DENPASAR Update");
         requestDto.setProvinsiId("35");
 
-        final KotaResponseDto responseDto = kotaService.updateKota(id, requestDto);
+        final DistrictDTO responseDto = kotaService.updateKota(id, requestDto);
         assertEquals(id, responseDto.getId());
         assertNotNull(responseDto.getUpdatedDate());
         assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
@@ -109,7 +109,7 @@ class DistrictServiceImplTest {
         assertThrows(KotaNotFoundException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                final KotaResponseDto kota = kotaService.getKotaById(id);
+                final DistrictDTO kota = kotaService.getKotaById(id);
             }
         });
     }
@@ -118,7 +118,7 @@ class DistrictServiceImplTest {
     @Order(6)
     void getKotaByName() throws KotaNotFoundException {
         String name = "kota kediri";
-        final KotaResponseDto kota = kotaService.getKotaByName(name);
+        final DistrictDTO kota = kotaService.getKotaByName(name);
         assertEquals(name, kota.getName().toLowerCase());
         log.info("Name: {}", kota.getName());
     }
@@ -128,7 +128,7 @@ class DistrictServiceImplTest {
     void getKotaByCode() throws KotaNotFoundException {
         // code kota kediri
         String code = "3571";
-        final KotaResponseDto kota = kotaService.getKotaByCode(code);
+        final DistrictDTO kota = kotaService.getKotaByCode(code);
         assertEquals(code, kota.getCode());
         log.info("Code: {}", kota.getCode());
     }
@@ -138,9 +138,9 @@ class DistrictServiceImplTest {
     void getKotaByNameContains() {
         // contains name kediri [KAB KEDIRI, KOTA KEDIRI]
         String name = "kediri";
-        final List<KotaResponseDto> kotaList = kotaService.getKotaByNameContains(name);
+        final List<DistrictDTO> kotaList = kotaService.getKotaByNameContains(name);
         assertEquals(2, kotaList.size());
-        for (KotaResponseDto kota : kotaList) {
+        for (DistrictDTO kota : kotaList) {
             log.info("Name: {}", kota.getName());
             log.info("=======");
         }
@@ -151,9 +151,9 @@ class DistrictServiceImplTest {
     void getKotaByProvinsiId() {
         // provinsi jawa timur [Kota Surabaya, Kota Kediri, Kab Kediri]
         String provinsiId = "35";
-        final List<KotaResponseDto> kotaList = kotaService.getKotaByProvinsiId(provinsiId);
+        final List<DistrictDTO> kotaList = kotaService.getKotaByProvinsiId(provinsiId);
         assertEquals(3, kotaList.size());
-        for (KotaResponseDto kota : kotaList) {
+        for (DistrictDTO kota : kotaList) {
             log.info("Name: {}", kota.getName());
             log.info("=======");
         }

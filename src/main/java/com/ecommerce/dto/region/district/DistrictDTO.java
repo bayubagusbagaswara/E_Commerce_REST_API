@@ -8,12 +8,10 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class KotaResponseDto {
+public class DistrictDTO {
 
     private String id;
     private String code;
     private String name;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
-    private ProvinceDTO provinsi;
+    private ProvinceDTO provinceDTO;
 }

@@ -9,21 +9,21 @@ import java.util.List;
 
 public interface DistrictService {
 
-    KotaResponseDto createKota(CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException;
+    DistrictDTO createKota(CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException;
 
-    KotaResponseDto getKotaById(String id) throws KotaNotFoundException;
+    DistrictDTO getKotaById(String id) throws KotaNotFoundException;
 
     ListKotaResponseDto getAllKota(ListKotaRequestDto listKotaRequest);
 
-    KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
+    DistrictDTO updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
 
     void deleteKota(String id) throws KotaNotFoundException;
 
-    KotaResponseDto getKotaByName(String name) throws KotaNotFoundException;
+    DistrictDTO getKotaByName(String name) throws KotaNotFoundException;
 
-    List<KotaResponseDto> getKotaByNameContains(String name);
+    List<DistrictDTO> getKotaByNameContains(String name);
 
-    KotaResponseDto getKotaByCode(String code) throws KotaNotFoundException;
+    DistrictDTO getKotaByCode(String code) throws KotaNotFoundException;
 
-    List<KotaResponseDto> getKotaByProvinsiId(String provinsiId);
+    List<DistrictDTO> getKotaByProvinsiId(String provinsiId);
 }
