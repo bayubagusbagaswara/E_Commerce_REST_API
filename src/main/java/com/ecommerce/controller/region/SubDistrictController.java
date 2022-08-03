@@ -44,7 +44,7 @@ public class SubDistrictController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ListKecamatanResponseDto> getAllKecamatan(
+    public WebResponseDto<ListSubDistrictResponseDTO> getAllKecamatan(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -56,8 +56,8 @@ public class SubDistrictController {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKecamatanResponseDto kecamatanResponses = subDistrictService.getAllKecamatan(requestDto);
-        return WebResponseDto.<ListKecamatanResponseDto>builder()
+        final ListSubDistrictResponseDTO kecamatanResponses = subDistrictService.getAllKecamatan(requestDto);
+        return WebResponseDto.<ListSubDistrictResponseDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kecamatanResponses)

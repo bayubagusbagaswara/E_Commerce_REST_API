@@ -74,7 +74,7 @@ class SubDistrictServiceImplTest {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKecamatanResponseDto responseDto = kecamatanService.getAllKecamatan(requestDto);
+        final ListSubDistrictResponseDTO responseDto = kecamatanService.getAllKecamatan(requestDto);
         assertEquals(totalSampleKecamatan, responseDto.getTotalElements());
         assertEquals(pageSize, responseDto.getKecamatanList().size());
     }

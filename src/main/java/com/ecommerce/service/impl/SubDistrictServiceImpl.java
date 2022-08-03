@@ -76,7 +76,7 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public ListKecamatanResponseDto getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest) {
+    public ListSubDistrictResponseDTO getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest) {
         Integer pageNo = listKecamatanRequest.getPageNo();
         Integer pageSize = listKecamatanRequest.getPageSize();
         String sortBy = listKecamatanRequest.getSortBy();
@@ -89,7 +89,7 @@ public class SubDistrictServiceImpl implements SubDistrictService {
 
         List<SubDistrictDTO> kecamatanResponseList = wilayahMapper.mapToKecamatanResponseList(subDistrictList);
 
-        ListKecamatanResponseDto listKecamatanResponse = new ListKecamatanResponseDto();
+        ListSubDistrictResponseDTO listKecamatanResponse = new ListSubDistrictResponseDTO();
         listKecamatanResponse.setKecamatanList(kecamatanResponseList);
         listKecamatanResponse.setPageNo(kecamatanPage.getNumber());
         listKecamatanResponse.setPageSize(kecamatanPage.getSize());

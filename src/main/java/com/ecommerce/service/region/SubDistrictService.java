@@ -13,7 +13,7 @@ public interface SubDistrictService {
 
     SubDistrictDTO getKecamatanById(String id) throws KecamatanNotFoundException;
 
-    ListKecamatanResponseDto getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest);
+    ListSubDistrictResponseDTO getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest);
 
     SubDistrictDTO updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
 
