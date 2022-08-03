@@ -15,7 +15,7 @@ public interface SubDistrictService {
 
     ListSubDistrictResponseDTO getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest);
 
-    SubDistrictDTO updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
+    SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
 
     void deleteKecamatan(String id) throws KecamatanNotFoundException;
 

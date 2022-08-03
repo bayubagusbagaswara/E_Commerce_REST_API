@@ -65,7 +65,7 @@ public class SubDistrictController {
     }
 
     @PutMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<SubDistrictDTO> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException {
+    public WebResponseDto<SubDistrictDTO> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException {
         final SubDistrictDTO kecamatanResponse = subDistrictService.updateKecamatan(id, updateKecamatanRequest);
         return WebResponseDto.<SubDistrictDTO>builder()
                 .code(HttpStatus.OK.value())

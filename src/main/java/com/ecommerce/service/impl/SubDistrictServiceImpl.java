@@ -55,7 +55,7 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public SubDistrictDTO updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KotaNotFoundException, KecamatanNotFoundException {
+    public SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KotaNotFoundException, KecamatanNotFoundException {
         District district = districtRepository.findById(updateKecamatanRequest.getKotaId())
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + updateKecamatanRequest.getKotaId() + "] not found"));
         SubDistrict subDistrict = subDistrictRepository.findById(id)

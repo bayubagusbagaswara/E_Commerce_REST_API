@@ -84,7 +84,7 @@ class SubDistrictServiceImplTest {
     void updateKecamatan() throws KecamatanNotFoundException, KotaNotFoundException {
         // update kecamatan Mojoroto id 357101
         String id = "357101";
-        UpdateKecamatanRequestDto requestDto = new UpdateKecamatanRequestDto();
+        UpdateSubDistrictRequestDTO requestDto = new UpdateSubDistrictRequestDTO();
         requestDto.setCode("357101");
         requestDto.setName("Mojoroto Update");
         // pindah ke kota Surabaya id 3578
