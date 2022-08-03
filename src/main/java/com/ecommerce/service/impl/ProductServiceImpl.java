@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ListProductResponseDto getAllProducts(ListProductRequestDto listProductRequest) {
+    public ListProductResponseDto getAllProducts(ListProductRequestDTO listProductRequest) {
         Integer pageNo = listProductRequest.getPageNo();
         Integer pageSize = listProductRequest.getPageSize();
         String sortBy = listProductRequest.getSortBy();

@@ -12,7 +12,7 @@ public interface ProductService {
 
     ProductResponseDto getProductById(String id) throws ProductNotFoundException;
 
-    ListProductResponseDto getAllProducts(ListProductRequestDto listProductRequest);
+    ListProductResponseDto getAllProducts(ListProductRequestDTO listProductRequest);
 
     ProductResponseDto updateProduct(String id, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException;
 

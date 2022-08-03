@@ -78,7 +78,7 @@ class ProductServiceImplTest {
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListProductRequestDto requestDto = new ListProductRequestDto();
+        ListProductRequestDTO requestDto = new ListProductRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);
