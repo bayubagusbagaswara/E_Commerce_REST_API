@@ -27,4 +27,6 @@ public interface ProductService {
     List<ProductResponseDto> getProductByCategoryId(String categoryId);
 
     List<ProductResponseDto> getProductBySuppliersId(String supplierId);
+
+    // save product to database
 }
