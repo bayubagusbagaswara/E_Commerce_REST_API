@@ -13,7 +13,7 @@ public interface UrbanVillageService {
 
     UrbanVillageDTO getKelurahanById(String id) throws KelurahanNotFoundException;
 
-    ListKelurahanResponseDto getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest);
+    ListUrbanVillageResponseDTO getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest);
 
     UrbanVillageDTO updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException;
 

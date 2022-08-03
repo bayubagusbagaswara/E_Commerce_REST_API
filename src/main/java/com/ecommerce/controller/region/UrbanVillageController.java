@@ -44,7 +44,7 @@ public class UrbanVillageController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ListKelurahanResponseDto> getAllKelurahan(
+    public WebResponseDto<ListUrbanVillageResponseDTO> getAllKelurahan(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -56,8 +56,8 @@ public class UrbanVillageController {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKelurahanResponseDto kelurahanResponseList = urbanVillageService.getAllKelurahan(requestDto);
-        return WebResponseDto.<ListKelurahanResponseDto>builder()
+        final ListUrbanVillageResponseDTO kelurahanResponseList = urbanVillageService.getAllKelurahan(requestDto);
+        return WebResponseDto.<ListUrbanVillageResponseDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kelurahanResponseList)

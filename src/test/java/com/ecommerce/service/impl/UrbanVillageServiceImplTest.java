@@ -76,7 +76,7 @@ class UrbanVillageServiceImplTest {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKelurahanResponseDto responseDto = kelurahanService.getAllKelurahan(requestDto);
+        final ListUrbanVillageResponseDTO responseDto = kelurahanService.getAllKelurahan(requestDto);
         assertEquals(totalSampleKelurahan, responseDto.getTotalElements());
         assertEquals(pageSize, responseDto.getKelurahanList().size());
     }

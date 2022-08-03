@@ -69,7 +69,7 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
     }
 
     @Override
-    public ListKelurahanResponseDto getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest) {
+    public ListUrbanVillageResponseDTO getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest) {
         Integer pageNo = listKelurahanRequest.getPageNo();
         Integer pageSize = listKelurahanRequest.getPageSize();
         String sortBy = listKelurahanRequest.getSortBy();
@@ -82,7 +82,7 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
         List<UrbanVillage> urbanVillageList = kelurahanPage.getContent();
         List<UrbanVillageDTO> kelurahanResponseList = wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
 
-        ListKelurahanResponseDto listKelurahanResponse = new ListKelurahanResponseDto();
+        ListUrbanVillageResponseDTO listKelurahanResponse = new ListUrbanVillageResponseDTO();
         listKelurahanResponse.setKelurahanList(kelurahanResponseList);
         listKelurahanResponse.setPageNo(kelurahanPage.getNumber());
         listKelurahanResponse.setPageSize(kelurahanPage.getSize());
