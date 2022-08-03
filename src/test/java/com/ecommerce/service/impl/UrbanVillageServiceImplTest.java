@@ -86,7 +86,7 @@ class UrbanVillageServiceImplTest {
     void updateKelurahan() throws KelurahanNotFoundException, KecamatanNotFoundException {
         // id kelurahan balowerti
         String id = "3571021002";
-        UpdateKelurahanRequestDto requestDto = new UpdateKelurahanRequestDto();
+        UpdateUrbanVillageRequestDTO requestDto = new UpdateUrbanVillageRequestDTO();
         requestDto.setCode("3571021002");
         requestDto.setName("Balowerti Update");
         // pindah ke kecamatan Pesantren

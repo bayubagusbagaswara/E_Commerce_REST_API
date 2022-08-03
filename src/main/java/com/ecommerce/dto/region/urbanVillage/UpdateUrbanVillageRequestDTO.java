@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UpdateKelurahanRequestDto {
+public class UpdateUrbanVillageRequestDTO {
 
     @NotBlank(message = "Code must not be blank")
     private String code;
@@ -14,6 +14,6 @@ public class UpdateKelurahanRequestDto {
     @NotBlank(message = "Name must not be blank")
     private String name;
 
-    @NotBlank(message = "Kecamatan ID must not be blank")
-    private String kecamatanId;
+    @NotBlank(message = "Urban Village ID must not be blank")
+    private String urbanVillageId;
 }

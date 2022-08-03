@@ -15,7 +15,7 @@ public interface UrbanVillageService {
 
     ListUrbanVillageResponseDTO getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest);
 
-    UrbanVillageDTO updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException;
+    UrbanVillageDTO updateKelurahan(String id, UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException;
 
     void deleteKelurahan(String id) throws KelurahanNotFoundException;
 

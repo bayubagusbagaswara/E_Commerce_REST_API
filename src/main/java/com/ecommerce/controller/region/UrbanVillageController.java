@@ -65,7 +65,7 @@ public class UrbanVillageController {
     }
 
     @PutMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<UrbanVillageDTO> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException {
+    public WebResponseDto<UrbanVillageDTO> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException {
         final UrbanVillageDTO kelurahanResponse = urbanVillageService.updateKelurahan(id, updateKelurahanRequest);
         return WebResponseDto.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())

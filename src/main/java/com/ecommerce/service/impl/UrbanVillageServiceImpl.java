@@ -55,7 +55,7 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
     }
 
     @Override
-    public UrbanVillageDTO updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
+    public UrbanVillageDTO updateKelurahan(String id, UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
         SubDistrict subDistrict = subDistrictRepository.findById(updateKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + updateKelurahanRequest.getKecamatanId() + "] not found"));
         UrbanVillage urbanVillage = urbanVillageRepository.findById(id)
