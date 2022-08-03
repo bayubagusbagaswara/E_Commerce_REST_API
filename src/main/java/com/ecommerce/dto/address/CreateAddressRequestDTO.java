@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateAddressRequestDto {
+public class CreateAddressRequestDTO {
 
     @NotBlank(message = "Street must not be blank")
     private String street;
 
-    @NotBlank(message = "Kelurahan ID must not be blank")
-    private String kelurahanId;
+    @NotBlank(message = "UrbanVillage ID must not be blank")
+    private String urbanVillageId;
 }
