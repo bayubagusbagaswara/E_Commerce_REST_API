@@ -10,7 +10,7 @@ import com.ecommerce.exception.KelurahanNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import com.ecommerce.repository.AddressRepository;
-import com.ecommerce.repository.KelurahanRepository;
+import com.ecommerce.repository.UrbanVillageRepository;
 import com.ecommerce.repository.ProductRepository;
 import com.ecommerce.repository.SupplierRepository;
 import com.ecommerce.service.SupplierService;
@@ -31,14 +31,14 @@ public class SupplierServiceImpl implements SupplierService {
 
     private final SupplierRepository supplierRepository;
     private final ProductRepository productRepository;
-    private final KelurahanRepository kelurahanRepository;
+    private final UrbanVillageRepository urbanVillageRepository;
     private final AddressRepository addressRepository;
     private final SupplierMapper supplierMapper;
 
-    public SupplierServiceImpl(SupplierRepository supplierRepository, ProductRepository productRepository, KelurahanRepository kelurahanRepository, AddressRepository addressRepository, SupplierMapper supplierMapper) {
+    public SupplierServiceImpl(SupplierRepository supplierRepository, ProductRepository productRepository, UrbanVillageRepository urbanVillageRepository, AddressRepository addressRepository, SupplierMapper supplierMapper) {
         this.supplierRepository = supplierRepository;
         this.productRepository = productRepository;
-        this.kelurahanRepository = kelurahanRepository;
+        this.urbanVillageRepository = urbanVillageRepository;
         this.addressRepository = addressRepository;
         this.supplierMapper = supplierMapper;
     }
@@ -46,7 +46,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierResponseDto createSupplier(CreateSupplierRequestDto createSupplierRequest) throws KelurahanNotFoundException {
 
-        UrbanVillage urbanVillage = kelurahanRepository.findById(createSupplierRequest.getKelurahanId())
+        UrbanVillage urbanVillage = urbanVillageRepository.findById(createSupplierRequest.getKelurahanId())
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + createSupplierRequest.getKelurahanId() + "] not found"));
 
         Address address = new Address();
@@ -101,7 +101,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResponseDto updateSupplier(String id, UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
 
         Supplier supplier = getSupplier(id);
-        UrbanVillage urbanVillage = kelurahanRepository.findById(updateSupplierRequest.getKelurahanId())
+        UrbanVillage urbanVillage = urbanVillageRepository.findById(updateSupplierRequest.getKelurahanId())
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + updateSupplierRequest.getKelurahanId() + "] not found"));
 
         Address address = supplier.getAddress();
