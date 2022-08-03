@@ -22,7 +22,7 @@ public class CategoryController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryDTO> createCategory(@RequestBody CreateCategoryRequestDto createCategoryRequest) {
+    public WebResponseDto<CategoryDTO> createCategory(@RequestBody CreateCategoryRequestDTO createCategoryRequest) {
         CategoryDTO categoryResponse = categoryService.createCategory(createCategoryRequest);
         return WebResponseDto.<CategoryDTO>builder()
                 .code(HttpStatus.CREATED.value())

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CategoryService {
 
-    CategoryDTO createCategory(CreateCategoryRequestDto createCategoryRequest);
+    CategoryDTO createCategory(CreateCategoryRequestDTO createCategoryRequest);
 
     CategoryDTO getCategoryById(String id) throws CategoryNotFoundException;
 

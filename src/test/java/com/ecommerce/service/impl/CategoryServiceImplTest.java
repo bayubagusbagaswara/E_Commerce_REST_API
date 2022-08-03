@@ -32,7 +32,7 @@ class CategoryServiceImplTest {
     @Test
     @Order(1)
     void createCategory() {
-        CreateCategoryRequestDto requestDto = new CreateCategoryRequestDto();
+        CreateCategoryRequestDTO requestDto = new CreateCategoryRequestDTO();
         requestDto.setName("Category test");
         requestDto.setDescription("Category description");
 

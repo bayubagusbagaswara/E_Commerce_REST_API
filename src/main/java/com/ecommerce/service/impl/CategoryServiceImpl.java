@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO createCategory(CreateCategoryRequestDto createCategoryRequest) {
+    public CategoryDTO createCategory(CreateCategoryRequestDTO createCategoryRequest) {
         Category category = new Category();
         category.setName(createCategoryRequest.getName());
         category.setDescription(createCategoryRequest.getDescription());
