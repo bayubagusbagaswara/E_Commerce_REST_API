@@ -2,6 +2,7 @@ package com.ecommerce.entity;
 
 import com.ecommerce.entity.base.BaseEntity;
 import com.ecommerce.entity.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
 
@@ -45,5 +46,27 @@ public class RefreshToken extends BaseEntity {
     @Override
     public void setUpdatedAt(Instant updatedAt) {
         super.setUpdatedAt(updatedAt);
+    }
+
+    @Override
+    public Instant getCreatedAt() {
+        return super.getCreatedAt();
+    }
+
+    @JsonIgnore
+    @Override
+    public Instant getUpdatedAt() {
+        return super.getUpdatedAt();
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return super.getCreatedBy();
+    }
+
+    @JsonIgnore
+    @Override
+    public String getUpdatedBy() {
+        return super.getUpdatedBy();
     }
 }
