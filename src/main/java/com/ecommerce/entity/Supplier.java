@@ -44,7 +44,7 @@ public class Supplier extends BaseEntity {
     @FieldNameConstants.Exclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "fk_supplier_address_id"))
-    private Address address;
+    private SupplierAddress supplierAddress;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

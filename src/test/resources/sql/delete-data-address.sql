@@ -1,1 +1,1 @@
-delete from address;
+delete from supplierAddress;

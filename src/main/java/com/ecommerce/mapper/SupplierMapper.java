@@ -40,7 +40,7 @@ public class SupplierMapper {
         supplierResponse.setEmail(supplier.getEmail());
         supplierResponse.setMobilePhone(supplier.getMobilePhone());
         supplierResponse.setGender(supplier.getGender());
-        supplierResponse.setAddress(supplier.getAddress());
+        supplierResponse.setSupplierAddress(supplier.getSupplierAddress());
         supplierResponse.setProducts(supplier.getProducts()
                 .stream()
                 .map(this::productResponse)

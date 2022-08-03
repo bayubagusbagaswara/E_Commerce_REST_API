@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface SupplierService {
 
-    SupplierResponseDto createSupplier(CreateSupplierRequestDto createSupplierRequest) throws KelurahanNotFoundException;
+    SupplierResponseDto createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException;
 
     SupplierResponseDto getSupplierById(String id) throws SupplierNotFoundException;
 

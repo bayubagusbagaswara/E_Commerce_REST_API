@@ -1,9 +1,9 @@
 package com.ecommerce.service.impl;
 
+import com.ecommerce.entity.SupplierAddress;
 import com.ecommerce.entity.region.UrbanVillage;
 import com.ecommerce.mapper.SupplierMapper;
 import com.ecommerce.dto.supplier.*;
-import com.ecommerce.entity.Address;
 import com.ecommerce.entity.Product;
 import com.ecommerce.entity.Supplier;
 import com.ecommerce.exception.KelurahanNotFoundException;
@@ -44,25 +44,25 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public SupplierResponseDto createSupplier(CreateSupplierRequestDto createSupplierRequest) throws KelurahanNotFoundException {
+    public SupplierResponseDto createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException {
 
         UrbanVillage urbanVillage = urbanVillageRepository.findById(createSupplierRequest.getKelurahanId())
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + createSupplierRequest.getKelurahanId() + "] not found"));
 
-        Address address = new Address();
-        address.setStreet(createSupplierRequest.getStreet());
-        address.setPostalCode(createSupplierRequest.getPostalCode());
-        address.setUrbanVillage(urbanVillage);
+        SupplierAddress supplierAddress = new SupplierAddress();
+        supplierAddress.setStreet(createSupplierRequest.getStreet());
+        supplierAddress.setPostalCode(createSupplierRequest.getPostalCode());
+        supplierAddress.setUrbanVillage(urbanVillage);
 
         Supplier supplier = new Supplier();
         supplier.setName(createSupplierRequest.getName());
         supplier.setEmail(createSupplierRequest.getEmail());
         supplier.setGender(createSupplierRequest.getGender());
         supplier.setMobilePhone(createSupplierRequest.getMobilePhone());
-        supplier.setAddress(address);
+        supplier.setSupplierAddress(supplierAddress);
         supplier.setCreatedDate(LocalDateTime.now());
 
-        addressRepository.save(address);
+        addressRepository.save(supplierAddress);
         supplierRepository.save(supplier);
         return supplierMapper.mapToSupplierResponse(supplier);
     }
@@ -104,19 +104,19 @@ public class SupplierServiceImpl implements SupplierService {
         UrbanVillage urbanVillage = urbanVillageRepository.findById(updateSupplierRequest.getKelurahanId())
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + updateSupplierRequest.getKelurahanId() + "] not found"));
 
-        Address address = supplier.getAddress();
-        address.setStreet(updateSupplierRequest.getStreet());
-        address.setPostalCode(updateSupplierRequest.getPostalCode());
-        address.setUrbanVillage(urbanVillage);
+        SupplierAddress supplierAddress = supplier.getSupplierAddress();
+        supplierAddress.setStreet(updateSupplierRequest.getStreet());
+        supplierAddress.setPostalCode(updateSupplierRequest.getPostalCode());
+        supplierAddress.setUrbanVillage(urbanVillage);
 
         supplier.setName(updateSupplierRequest.getName());
         supplier.setEmail(updateSupplierRequest.getEmail());
         supplier.setGender(updateSupplierRequest.getGender());
         supplier.setMobilePhone(updateSupplierRequest.getMobilePhone());
-        supplier.setAddress(address);
+        supplier.setSupplierAddress(supplierAddress);
         supplier.setUpdatedDate(LocalDateTime.now());
 
-        addressRepository.save(address);
+        addressRepository.save(supplierAddress);
         supplierRepository.save(supplier);
         return supplierMapper.mapToSupplierResponse(supplier);
     }

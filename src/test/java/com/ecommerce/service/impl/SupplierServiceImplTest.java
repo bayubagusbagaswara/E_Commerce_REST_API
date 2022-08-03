@@ -42,7 +42,7 @@ class SupplierServiceImplTest {
     @Test
     @Order(1)
     void createSupplier() throws KelurahanNotFoundException {
-        CreateSupplierRequestDto requestDto = new CreateSupplierRequestDto();
+        CreateSupplierRequestDTO requestDto = new CreateSupplierRequestDTO();
         requestDto.setName("Supplier");
         requestDto.setEmail("supplier@mail.com");
         requestDto.setGender(Gender.MALE);

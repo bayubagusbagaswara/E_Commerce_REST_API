@@ -13,5 +13,5 @@ create table suppliers (
     constraint ck_gender_supplier check (gender in ('NONE', 'MALE', 'FEMALE')),
     constraint suppliers_unique_email unique (email),
     constraint suppliers_unique_mobile_phone unique (mobile_phone),
-    constraint fk_supplier_address foreign key (id_address) references address(id)
+    constraint fk_supplier_address foreign key (id_address) references supplierAddress(id)
 );

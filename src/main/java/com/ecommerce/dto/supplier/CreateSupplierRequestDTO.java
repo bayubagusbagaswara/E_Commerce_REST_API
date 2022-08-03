@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CreateSupplierRequestDto {
+public class CreateSupplierRequestDTO {
 
     @NotBlank(message = "Name must not be blank")
     private String name;
@@ -27,9 +27,7 @@ public class CreateSupplierRequestDto {
     @NotBlank(message = "Street must not be blank")
     private String street;
 
-    @NotBlank(message = "Postal code must not be blank")
-    private String postalCode;
 
-    @NotBlank(message = "Kelurahan ID must not be blank")
+    @NotBlank(message = "uR ID must not be blank")
     private String kelurahanId;
 }

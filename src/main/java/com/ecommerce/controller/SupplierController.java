@@ -24,7 +24,7 @@ public class SupplierController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<SupplierResponseDto> createSupplier(@RequestBody CreateSupplierRequestDto createSupplierRequest) throws KelurahanNotFoundException {
+    public WebResponseDto<SupplierResponseDto> createSupplier(@RequestBody CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException {
         final SupplierResponseDto supplierResponse = supplierService.createSupplier(createSupplierRequest);
         return WebResponseDto.<SupplierResponseDto>builder()
                 .code(HttpStatus.CREATED.value())

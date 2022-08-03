@@ -1,7 +1,7 @@
 package com.ecommerce.dto.supplier;
 
 import com.ecommerce.dto.product.ProductResponseDto;
-import com.ecommerce.entity.Address;
+import com.ecommerce.entity.SupplierAddress;
 import com.ecommerce.entity.enumerator.Gender;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +28,7 @@ public class SupplierResponseDto {
 
     private LocalDateTime updatedDate;
 
-    private Address address;
+    private SupplierAddress supplierAddress;
 
     private Set<ProductResponseDto> products = new HashSet<>();
 }

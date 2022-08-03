@@ -27,7 +27,7 @@ public class ProductMapper {
         supplierResponse.setEmail(supplier.getEmail());
         supplierResponse.setGender(supplier.getGender());
         supplierResponse.setMobilePhone(supplier.getMobilePhone());
-        supplierResponse.setAddress(supplier.getAddress());
+        supplierResponse.setSupplierAddress(supplier.getSupplierAddress());
         supplierResponse.setCreatedDate(supplier.getCreatedDate());
         supplierResponse.setUpdatedDate(supplier.getUpdatedDate());
         return supplierResponse;
