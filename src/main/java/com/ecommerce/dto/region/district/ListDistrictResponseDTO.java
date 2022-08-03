@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ListKotaResponseDto {
+public class ListDistrictResponseDTO {
 
     private List<DistrictDTO> kotaList;
     private Integer pageNo;

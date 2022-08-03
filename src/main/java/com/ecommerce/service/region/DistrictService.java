@@ -13,7 +13,7 @@ public interface DistrictService {
 
     DistrictDTO getKotaById(String id) throws KotaNotFoundException;
 
-    ListKotaResponseDto getAllKota(ListDistrictRequestDTO listKotaRequest);
+    ListDistrictResponseDTO getAllKota(ListDistrictRequestDTO listKotaRequest);
 
     DistrictDTO updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
 

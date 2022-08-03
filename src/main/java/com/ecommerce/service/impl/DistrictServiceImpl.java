@@ -76,7 +76,7 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public ListKotaResponseDto getAllKota(ListDistrictRequestDTO listKotaRequest) {
+    public ListDistrictResponseDTO getAllKota(ListDistrictRequestDTO listKotaRequest) {
         Integer pageNo = listKotaRequest.getPageNo();
         Integer pageSize = listKotaRequest.getPageSize();
         String sortBy = listKotaRequest.getSortBy();
@@ -89,7 +89,7 @@ public class DistrictServiceImpl implements DistrictService {
 
         List<DistrictDTO> kotaResponseList = wilayahMapper.mapToKotaResponseList(districtList);
 
-        ListKotaResponseDto listKotaResponse = new ListKotaResponseDto();
+        ListDistrictResponseDTO listKotaResponse = new ListDistrictResponseDTO();
         listKotaResponse.setKotaList(kotaResponseList);
         listKotaResponse.setPageNo(kotaPage.getNumber());
         listKotaResponse.setPageSize(kotaPage.getSize());

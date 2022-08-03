@@ -78,7 +78,7 @@ class DistrictServiceImplTest {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListKotaResponseDto responseDto = kotaService.getAllKota(requestDto);
+        final ListDistrictResponseDTO responseDto = kotaService.getAllKota(requestDto);
         assertEquals(totalSampleKota, responseDto.getTotalElements());
         assertEquals(pageSize, responseDto.getKotaList().size());
     }
