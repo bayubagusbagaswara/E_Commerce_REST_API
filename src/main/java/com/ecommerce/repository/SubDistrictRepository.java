@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UrbanVillageRepository extends JpaRepository<SubDistrict, String> {
+public interface SubDistrictRepository extends JpaRepository<SubDistrict, String> {
 
     Optional<SubDistrict> findAllByCode(String code);
     Optional<SubDistrict> findAllByNameIgnoreCase(String name);
     List<SubDistrict> findAllByNameContainingIgnoreCase(String name);
-    List<SubDistrict> findAllByKotaId(String districtId);
+    List<SubDistrict> findAllByDistrictId(String districtId);
 }
