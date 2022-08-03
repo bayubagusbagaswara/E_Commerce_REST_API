@@ -50,7 +50,7 @@ public class UrbanVillageController {
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
 
-        ListKelurahanRequestDto requestDto = new ListKelurahanRequestDto();
+        ListUrbanVillageRequestDTO requestDto = new ListUrbanVillageRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);

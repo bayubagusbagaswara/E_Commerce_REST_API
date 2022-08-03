@@ -70,7 +70,7 @@ class UrbanVillageServiceImplTest {
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListKelurahanRequestDto requestDto = new ListKelurahanRequestDto();
+        ListUrbanVillageRequestDTO requestDto = new ListUrbanVillageRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);

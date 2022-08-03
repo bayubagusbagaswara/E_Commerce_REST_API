@@ -69,7 +69,7 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
     }
 
     @Override
-    public ListKelurahanResponseDto getAllKelurahan(ListKelurahanRequestDto listKelurahanRequest) {
+    public ListKelurahanResponseDto getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest) {
         Integer pageNo = listKelurahanRequest.getPageNo();
         Integer pageSize = listKelurahanRequest.getPageSize();
         String sortBy = listKelurahanRequest.getSortBy();
