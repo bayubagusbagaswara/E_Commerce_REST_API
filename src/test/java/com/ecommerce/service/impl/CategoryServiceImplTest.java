@@ -66,7 +66,7 @@ class CategoryServiceImplTest {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sordDir);
 
-        final ListCategoryResponseDto responseDto = categoryService.getAllCategories(requestDto);
+        final ListCategoryResponseDTO responseDto = categoryService.getAllCategories(requestDto);
         assertEquals(totalSampleData, responseDto.getTotalElements());
         assertEquals(pageSize, responseDto.getCategoryResponseList().size());
     }

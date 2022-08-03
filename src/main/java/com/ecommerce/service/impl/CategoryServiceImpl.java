@@ -46,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ListCategoryResponseDto getAllCategories(ListCategoryRequestDTO listCategoryRequest) {
+    public ListCategoryResponseDTO getAllCategories(ListCategoryRequestDTO listCategoryRequest) {
         Integer pageNo = listCategoryRequest.getPageNo();
         Integer pageSize = listCategoryRequest.getPageSize();
         String sortBy = listCategoryRequest.getSortBy();
@@ -59,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         List<CategoryDTO> categoryResponseList = categoryMapper.mapToCategoryResponseList(categoryList);
 
-        ListCategoryResponseDto listCategoryResponse = new ListCategoryResponseDto();
+        ListCategoryResponseDTO listCategoryResponse = new ListCategoryResponseDTO();
         listCategoryResponse.setCategoryResponseList(categoryResponseList);
         listCategoryResponse.setPageNo(categories.getNumber());
         listCategoryResponse.setPageSize(categories.getSize());

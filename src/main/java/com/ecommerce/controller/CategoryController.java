@@ -42,7 +42,7 @@ public class CategoryController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ListCategoryResponseDto> getAllCategories(
+    public WebResponseDto<ListCategoryResponseDTO> getAllCategories(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -54,8 +54,8 @@ public class CategoryController {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListCategoryResponseDto allCategories = categoryService.getAllCategories(requestDto);
-        return WebResponseDto.<ListCategoryResponseDto>builder()
+        final ListCategoryResponseDTO allCategories = categoryService.getAllCategories(requestDto);
+        return WebResponseDto.<ListCategoryResponseDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(allCategories)
