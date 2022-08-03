@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateProductDetailRequestDto {
+public class CreateProductDetailRequestDTO {
 
     @NotBlank(message = "SKU must not be blank")
     @Size(max = 50, message = "SKU maximum length is 50 characters")
