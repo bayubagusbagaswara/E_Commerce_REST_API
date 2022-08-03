@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bayu</groupId>
-	<artifactId>categories-products-suppliers-rest-api</artifactId>
+	<artifactId>ecommerce-rest-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>categories-products-suppliers-rest-api</name>
-	<description>REST API Categories, Products and Suppliers for Online Stores</description>
+	<name>ecommerce-rest-api</name>
+	<description>ECommerce REST API</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
