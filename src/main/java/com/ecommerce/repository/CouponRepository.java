@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CouponRepository extends JpaRepository<Coupon, Long> {
+public interface CouponRepository extends JpaRepository<Coupon, String> {
 
-    @Query("SELECT DISTINCT c FROM Coupon c where c.discount=(SELECT MAX(discount) From Coupon)")
+    @Query("SELECT DISTINCT c FROM Coupon c where c.discount=(SELECT MAX(discount) FROM Coupon)")
     Coupon findMax();
 }
