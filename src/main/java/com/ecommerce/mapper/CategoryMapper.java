@@ -18,34 +18,30 @@ public class CategoryMapper {
         this.productDetailMapper = productDetailMapper;
     }
 
-    public ProductDTO productResponseDto(Product product) {
-        ProductDTO productResponse = new ProductDTO();
-        productResponse.setId(product.getId());
-        productResponse.setName(product.getName());
-        productResponse.setPrice(product.getPrice());
-        productResponse.setQuantity(product.getQuantity());
-        productResponse.setProductDetail(productDetailMapper.mapToProductDetailResponse(product.getProductDetail()));
-        productResponse.setCreatedDate(product.getCreatedDate());
-        productResponse.setUpdatedDate(product.getUpdatedDate());
-        return productResponse;
+    public ProductDTO fromEntity(Product product) {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setQuantity(product.getQuantity());
+        productDTO.setProductDetail(productDetailMapper.mapToProductDetailResponse(product.getProductDetail()));
+        return productDTO;
     }
 
-    public CategoryDTO mapToCategoryResponse(Category category) {
-        CategoryDTO categoryResponse = new CategoryDTO();
-        categoryResponse.setId(category.getId());
-        categoryResponse.setName(category.getName());
-        categoryResponse.setDescription(category.getDescription());
-        categoryResponse.setCreatedDate(category.getCreatedDate());
-        categoryResponse.setUpdatedDate(category.getUpdatedDate());
-        categoryResponse.setProductList(category.getProducts().stream()
-                .map(this::productResponseDto)
+    public CategoryDTO fromEntity(Category category) {
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setId(category.getId());
+        categoryDTO.setName(category.getName());
+        categoryDTO.setDescription(category.getDescription());
+        categoryDTO.setProductList(category.getProducts().stream()
+                .map(this::fromEntity)
                 .collect(Collectors.toList()));
-        return categoryResponse;
+        return categoryDTO;
     }
 
-    public List<CategoryDTO> mapToCategoryResponseList(List<Category> categoryList) {
+    public List<CategoryDTO> fromEntities(List<Category> categoryList) {
         return categoryList.stream()
-                .map(this::mapToCategoryResponse)
+                .map(this::fromEntity)
                 .collect(Collectors.toList());
     }
 }
