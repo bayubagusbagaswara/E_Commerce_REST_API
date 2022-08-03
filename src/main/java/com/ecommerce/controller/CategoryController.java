@@ -22,9 +22,9 @@ public class CategoryController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryResponseDto> createCategory(@RequestBody CreateCategoryRequestDto createCategoryRequest) {
-        CategoryResponseDto categoryResponse = categoryService.createCategory(createCategoryRequest);
-        return WebResponseDto.<CategoryResponseDto>builder()
+    public WebResponseDto<CategoryDTO> createCategory(@RequestBody CreateCategoryRequestDto createCategoryRequest) {
+        CategoryDTO categoryResponse = categoryService.createCategory(createCategoryRequest);
+        return WebResponseDto.<CategoryDTO>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
                 .data(categoryResponse)
@@ -32,9 +32,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryResponseDto> getCategoryById(@PathVariable("idCategory") String id) throws CategoryNotFoundException {
-        final CategoryResponseDto categoryResponse = categoryService.getCategoryById(id);
-        return WebResponseDto.<CategoryResponseDto>builder()
+    public WebResponseDto<CategoryDTO> getCategoryById(@PathVariable("idCategory") String id) throws CategoryNotFoundException {
+        final CategoryDTO categoryResponse = categoryService.getCategoryById(id);
+        return WebResponseDto.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)
@@ -63,9 +63,9 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryResponseDto> updateCategory(@PathVariable("idCategory") String id, @RequestBody UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException {
-        final CategoryResponseDto categoryResponse = categoryService.updateCategory(id, updateCategoryRequest);
-        return WebResponseDto.<CategoryResponseDto>builder()
+    public WebResponseDto<CategoryDTO> updateCategory(@PathVariable("idCategory") String id, @RequestBody UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException {
+        final CategoryDTO categoryResponse = categoryService.updateCategory(id, updateCategoryRequest);
+        return WebResponseDto.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)
@@ -83,9 +83,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryResponseDto> getCategoryByName(@RequestParam("name") String name) throws CategoryNotFoundException {
-        final CategoryResponseDto categoryResponse = categoryService.getCategoryByName(name);
-        return WebResponseDto.<CategoryResponseDto>builder()
+    public WebResponseDto<CategoryDTO> getCategoryByName(@RequestParam("name") String name) throws CategoryNotFoundException {
+        final CategoryDTO categoryResponse = categoryService.getCategoryByName(name);
+        return WebResponseDto.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)
@@ -93,9 +93,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<CategoryResponseDto>> getCategoryByNameContains(@RequestParam("name") String name) {
-        final List<CategoryResponseDto> categoryResponseList = categoryService.getCategoryByNameContains(name);
-        return WebResponseDto.<List<CategoryResponseDto>>builder()
+    public WebResponseDto<List<CategoryDTO>> getCategoryByNameContains(@RequestParam("name") String name) {
+        final List<CategoryDTO> categoryResponseList = categoryService.getCategoryByNameContains(name);
+        return WebResponseDto.<List<CategoryDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponseList)
@@ -103,9 +103,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/name/starting", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<CategoryResponseDto>> getCategoryByNameStartsWith(@RequestParam("name") String name) {
-        final List<CategoryResponseDto> categoryResponseList = categoryService.getCategoryStartingWithName(name);
-        return WebResponseDto.<List<CategoryResponseDto>>builder()
+    public WebResponseDto<List<CategoryDTO>> getCategoryByNameStartsWith(@RequestParam("name") String name) {
+        final List<CategoryDTO> categoryResponseList = categoryService.getCategoryStartingWithName(name);
+        return WebResponseDto.<List<CategoryDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponseList)
@@ -113,9 +113,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryResponseDto> getCategoryByProductId(@PathVariable("idProduct") String id) throws CategoryNotFoundException {
-        final CategoryResponseDto categoryResponse = categoryService.getCategoryByProductId(id);
-        return WebResponseDto.<CategoryResponseDto>builder()
+    public WebResponseDto<CategoryDTO> getCategoryByProductId(@PathVariable("idProduct") String id) throws CategoryNotFoundException {
+        final CategoryDTO categoryResponse = categoryService.getCategoryByProductId(id);
+        return WebResponseDto.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)

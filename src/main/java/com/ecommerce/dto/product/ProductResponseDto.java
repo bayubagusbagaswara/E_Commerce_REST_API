@@ -1,7 +1,7 @@
 package com.ecommerce.dto.product;
 
 
-import com.ecommerce.dto.category.CategoryResponseDto;
+import com.ecommerce.dto.category.CategoryDTO;
 import com.ecommerce.dto.productdetail.ProductDetailResponseDto;
 import com.ecommerce.dto.supplier.SupplierResponseDto;
 import lombok.Data;
@@ -23,6 +23,6 @@ public class ProductResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private ProductDetailResponseDto productDetail;
-    private CategoryResponseDto category;
+    private CategoryDTO category;
     private Set<SupplierResponseDto> suppliers = new HashSet<>();
 }

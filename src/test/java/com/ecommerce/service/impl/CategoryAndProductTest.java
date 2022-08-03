@@ -1,6 +1,6 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.dto.category.CategoryResponseDto;
+import com.ecommerce.dto.category.CategoryDTO;
 import com.ecommerce.dto.category.UpdateCategoryRequestDto;
 import com.ecommerce.dto.product.ProductResponseDto;
 import com.ecommerce.exception.CategoryNotFoundException;
@@ -50,7 +50,7 @@ public class CategoryAndProductTest {
         String categoryId = "laptop";
         categoryService.deleteCategory(categoryId);
         assertThrows(CategoryNotFoundException.class, () -> {
-            final CategoryResponseDto category = categoryService.getCategoryById(categoryId);
+            final CategoryDTO category = categoryService.getCategoryById(categoryId);
         });
 
         // check di product, pastikan data productnya juga hilang
@@ -76,7 +76,7 @@ public class CategoryAndProductTest {
         updateCategoryRequest.setName("Laptop Update");
         updateCategoryRequest.setDescription("Laptop update description");
 
-        final CategoryResponseDto categoryResponse = categoryService.updateCategory(categoryId, updateCategoryRequest);
+        final CategoryDTO categoryResponse = categoryService.updateCategory(categoryId, updateCategoryRequest);
         assertEquals(categoryId, categoryResponse.getId());
 
         // cek di product
@@ -103,7 +103,7 @@ public class CategoryAndProductTest {
 
         // kita cek category nya
         String categoryId = "laptop";
-        final CategoryResponseDto category = categoryService.getCategoryById(categoryId);
+        final CategoryDTO category = categoryService.getCategoryById(categoryId);
         assertNotNull(category);
         assertEquals(categoryId, category.getId());
     }

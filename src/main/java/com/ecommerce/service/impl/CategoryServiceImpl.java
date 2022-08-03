@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDto createCategory(CreateCategoryRequestDto createCategoryRequest) {
+    public CategoryDTO createCategory(CreateCategoryRequestDto createCategoryRequest) {
         Category category = new Category();
         category.setName(createCategoryRequest.getName());
         category.setDescription(createCategoryRequest.getDescription());
@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDto getCategoryById(String id) throws CategoryNotFoundException {
+    public CategoryDTO getCategoryById(String id) throws CategoryNotFoundException {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + id + "] not found"));
         return categoryMapper.mapToCategoryResponse(category);
@@ -57,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
         Page<Category> categories = categoryRepository.findAll(pageable);
         List<Category> categoryList = categories.getContent();
 
-        List<CategoryResponseDto> categoryResponseList = categoryMapper.mapToCategoryResponseList(categoryList);
+        List<CategoryDTO> categoryResponseList = categoryMapper.mapToCategoryResponseList(categoryList);
 
         ListCategoryResponseDto listCategoryResponse = new ListCategoryResponseDto();
         listCategoryResponse.setCategoryResponseList(categoryResponseList);
@@ -70,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException {
+    public CategoryDTO updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + id + "] not found"));
         category.setName(updateCategoryRequest.getName());
@@ -81,13 +81,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDto getCategoryByName(String name) throws CategoryNotFoundException {
+    public CategoryDTO getCategoryByName(String name) throws CategoryNotFoundException {
         Category category = categoryRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new CategoryNotFoundException("Category name [" + name + "] not found"));
         return categoryMapper.mapToCategoryResponse(category);
     }
 
     @Override
-    public List<CategoryResponseDto> getCategoryByNameContains(String name) {
+    public List<CategoryDTO> getCategoryByNameContains(String name) {
         List<Category> categoryList = categoryRepository.findAllByNameContainingIgnoreCase(name);
         return categoryMapper.mapToCategoryResponseList(categoryList);
     }
@@ -100,13 +100,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponseDto> getCategoryStartingWithName(String name) {
+    public List<CategoryDTO> getCategoryStartingWithName(String name) {
         List<Category> categoryList = categoryRepository.findAllByNameIgnoreCaseStartsWith(name);
         return categoryMapper.mapToCategoryResponseList(categoryList);
     }
 
     @Override
-    public CategoryResponseDto getCategoryByProductId(String idProduct) throws CategoryNotFoundException {
+    public CategoryDTO getCategoryByProductId(String idProduct) throws CategoryNotFoundException {
         final Category category = categoryRepository.findAllByProductsId(idProduct)
                 .orElseThrow(() -> new CategoryNotFoundException("Category with Product ID [" + idProduct + "] not found"));
         return categoryMapper.mapToCategoryResponse(category);

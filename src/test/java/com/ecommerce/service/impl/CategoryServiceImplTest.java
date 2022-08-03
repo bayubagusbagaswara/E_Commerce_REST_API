@@ -36,7 +36,7 @@ class CategoryServiceImplTest {
         requestDto.setName("Category test");
         requestDto.setDescription("Category description");
 
-        final CategoryResponseDto responseDto = categoryService.createCategory(requestDto);
+        final CategoryDTO responseDto = categoryService.createCategory(requestDto);
         assertNotNull(responseDto.getId());
         assertNotNull(responseDto.getCreatedDate());
         assertEquals(requestDto.getName(), responseDto.getName());
@@ -47,7 +47,7 @@ class CategoryServiceImplTest {
     @Order(2)
     void getCategoryById() throws CategoryNotFoundException {
         String id = "laptop";
-        final CategoryResponseDto responseDto = categoryService.getCategoryById(id);
+        final CategoryDTO responseDto = categoryService.getCategoryById(id);
         assertEquals(id, responseDto.getId());
     }
 
@@ -79,7 +79,7 @@ class CategoryServiceImplTest {
         requestDto.setName("Tablet Update");
         requestDto.setDescription("Tablet description update");
 
-        final CategoryResponseDto responseDto = categoryService.updateCategory(id, requestDto);
+        final CategoryDTO responseDto = categoryService.updateCategory(id, requestDto);
         assertEquals(id, responseDto.getId());
         assertNotNull(responseDto.getUpdatedDate());
         assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
@@ -91,7 +91,7 @@ class CategoryServiceImplTest {
         String id = "camera";
         categoryService.deleteCategory(id);
         assertThrows(CategoryNotFoundException.class, () -> {
-            final CategoryResponseDto category = categoryService.getCategoryById(id);
+            final CategoryDTO category = categoryService.getCategoryById(id);
         });
     }
 
@@ -100,7 +100,7 @@ class CategoryServiceImplTest {
     @Order(6)
     void getCategoryByName() throws CategoryNotFoundException {
         String name = "laptop";
-        final CategoryResponseDto responseDto = categoryService.getCategoryByName(name);
+        final CategoryDTO responseDto = categoryService.getCategoryByName(name);
         assertEquals(name, responseDto.getName().toLowerCase());
         log.info("Name: {}", responseDto.getName());
     }
@@ -111,7 +111,7 @@ class CategoryServiceImplTest {
         // [Monitor, Television, Hand Phone]
         String name = "on";
         int totalData = 3;
-        final List<CategoryResponseDto> responseDtoList = categoryService.getCategoryByNameContains(name);
+        final List<CategoryDTO> responseDtoList = categoryService.getCategoryByNameContains(name);
         assertEquals(totalData, responseDtoList.size());
     }
 
@@ -122,7 +122,7 @@ class CategoryServiceImplTest {
         // [Mouser, Monitor]
         String name = "mo";
         int totalData = 2;
-        final List<CategoryResponseDto> responseDtoList = categoryService.getCategoryStartingWithName(name);
+        final List<CategoryDTO> responseDtoList = categoryService.getCategoryStartingWithName(name);
         assertEquals(totalData, responseDtoList.size());
     }
 }

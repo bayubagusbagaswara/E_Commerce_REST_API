@@ -7,21 +7,21 @@ import java.util.List;
 
 public interface CategoryService {
 
-    CategoryResponseDto createCategory(CreateCategoryRequestDto createCategoryRequest);
+    CategoryDTO createCategory(CreateCategoryRequestDto createCategoryRequest);
 
-    CategoryResponseDto getCategoryById(String id) throws CategoryNotFoundException;
+    CategoryDTO getCategoryById(String id) throws CategoryNotFoundException;
 
     ListCategoryResponseDto getAllCategories(ListCategoryRequestDto listCategoryRequest);
 
-    CategoryResponseDto updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException;
+    CategoryDTO updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException;
 
     void deleteCategory(String id) throws CategoryNotFoundException;
 
-    CategoryResponseDto getCategoryByName(String name) throws CategoryNotFoundException;
+    CategoryDTO getCategoryByName(String name) throws CategoryNotFoundException;
 
-    List<CategoryResponseDto> getCategoryByNameContains(String name);
+    List<CategoryDTO> getCategoryByNameContains(String name);
 
-    List<CategoryResponseDto> getCategoryStartingWithName(String name);
+    List<CategoryDTO> getCategoryStartingWithName(String name);
 
-    CategoryResponseDto getCategoryByProductId(String idProduct) throws CategoryNotFoundException;
+    CategoryDTO getCategoryByProductId(String idProduct) throws CategoryNotFoundException;
 }

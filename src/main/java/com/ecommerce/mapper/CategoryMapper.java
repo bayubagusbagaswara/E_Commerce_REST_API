@@ -1,6 +1,6 @@
 package com.ecommerce.mapper;
 
-import com.ecommerce.dto.category.CategoryResponseDto;
+import com.ecommerce.dto.category.CategoryDTO;
 import com.ecommerce.dto.product.ProductResponseDto;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Product;
@@ -30,8 +30,8 @@ public class CategoryMapper {
         return productResponse;
     }
 
-    public CategoryResponseDto mapToCategoryResponse(Category category) {
-        CategoryResponseDto categoryResponse = new CategoryResponseDto();
+    public CategoryDTO mapToCategoryResponse(Category category) {
+        CategoryDTO categoryResponse = new CategoryDTO();
         categoryResponse.setId(category.getId());
         categoryResponse.setName(category.getName());
         categoryResponse.setDescription(category.getDescription());
@@ -43,7 +43,7 @@ public class CategoryMapper {
         return categoryResponse;
     }
 
-    public List<CategoryResponseDto> mapToCategoryResponseList(List<Category> categoryList) {
+    public List<CategoryDTO> mapToCategoryResponseList(List<Category> categoryList) {
         return categoryList.stream()
                 .map(this::mapToCategoryResponse)
                 .collect(Collectors.toList());
