@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UpdateKotaRequestDto {
+public class UpdateDistrictRequestDTO {
 
     @NotBlank(message = "Kota code must not be blank")
     private String code;

@@ -55,7 +55,7 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public DistrictDTO updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
+    public DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
         Province province = provinceRepository.findById(updateKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
         District district = districtRepository.findById(id)

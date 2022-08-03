@@ -88,7 +88,7 @@ class DistrictServiceImplTest {
     void updateKota() throws ProvinsiNotFoundException, KotaNotFoundException {
         // update kota Denpasar pindah ke provinsi jawa timur
         String id = "5171";
-        UpdateKotaRequestDto requestDto = new UpdateKotaRequestDto();
+        UpdateDistrictRequestDTO requestDto = new UpdateDistrictRequestDTO();
         requestDto.setCode("35123");
         requestDto.setName("KOTA DENPASAR Update");
         requestDto.setProvinsiId("35");

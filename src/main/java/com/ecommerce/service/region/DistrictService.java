@@ -15,7 +15,7 @@ public interface DistrictService {
 
     ListDistrictResponseDTO getAllKota(ListDistrictRequestDTO listKotaRequest);
 
-    DistrictDTO updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
+    DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
 
     void deleteKota(String id) throws KotaNotFoundException;
 

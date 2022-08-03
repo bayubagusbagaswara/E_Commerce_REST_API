@@ -66,8 +66,8 @@ public class DistrictController {
     }
 
     @PutMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateKotaRequestDto updateKotaRequestDto) throws ProvinsiNotFoundException, KotaNotFoundException {
-        final DistrictDTO kotaResponse = districtService.updateKota(id, updateKotaRequestDto);
+    public WebResponseDto<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateDistrictRequestDTO updateDistrictRequestDTO) throws ProvinsiNotFoundException, KotaNotFoundException {
+        final DistrictDTO kotaResponse = districtService.updateKota(id, updateDistrictRequestDTO);
         return WebResponseDto.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
