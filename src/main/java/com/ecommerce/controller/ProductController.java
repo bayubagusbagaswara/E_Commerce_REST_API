@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProductResponseDto> createProduct(@RequestBody CreateProductRequestDto createProductRequest) throws CategoryNotFoundException {
+    public WebResponseDto<ProductResponseDto> createProduct(@RequestBody CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException {
         final ProductResponseDto productResponse = productService.createProduct(createProductRequest);
         return WebResponseDto.<ProductResponseDto>builder()
                 .code(HttpStatus.CREATED.value())

@@ -43,7 +43,7 @@ class ProductServiceImplTest {
     @Test
     @Order(1)
     void createProduct() throws CategoryNotFoundException {
-        CreateProductRequestDto requestDto = new CreateProductRequestDto();
+        CreateProductRequestDTO requestDto = new CreateProductRequestDTO();
         requestDto.setName("Asus test");
         requestDto.setPrice(new BigDecimal(5_000_000));
         requestDto.setQuantity(12);

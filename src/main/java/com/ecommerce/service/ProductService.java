@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException;
+    ProductResponseDto createProduct(CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException;
 
     ProductResponseDto getProductById(String id) throws ProductNotFoundException;
 

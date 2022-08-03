@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto createProduct(CreateProductRequestDto createProductRequest) throws CategoryNotFoundException {
+    public ProductResponseDto createProduct(CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException {
 
         Category category = categoryRepository.findById(createProductRequest.getCategoryId())
                 .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + createProductRequest.getCategoryId() + "] not found"));

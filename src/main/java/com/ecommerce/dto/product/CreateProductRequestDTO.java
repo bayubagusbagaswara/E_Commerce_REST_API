@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-public class CreateProductRequestDto {
+public class CreateProductRequestDTO {
 
     @NotBlank(message = "Product name must not be blank")
     private String name;
