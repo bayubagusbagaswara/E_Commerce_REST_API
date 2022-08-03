@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateDistrictRequestDTO {
 
-    @NotBlank(message = "Kota code must not be blank")
+    @NotBlank(message = "District code must not be blank")
     private String code;
 
-    @NotBlank(message = "Kota name must not be blank")
+    @NotBlank(message = "District name must not be blank")
     private String name;
 
-    @NotBlank(message = "Provinsi ID must not be blank")
-    private String provinsiId;
+    @NotBlank(message = "Province ID must not be blank")
+    private String provinceId;
 }
 
