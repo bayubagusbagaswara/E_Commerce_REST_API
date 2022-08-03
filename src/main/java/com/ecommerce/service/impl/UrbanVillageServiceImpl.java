@@ -7,7 +7,7 @@ import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
-import com.ecommerce.repository.KecamatanRepository;
+import com.ecommerce.repository.UrbanVillageRepository;
 import com.ecommerce.repository.KelurahanRepository;
 import com.ecommerce.service.region.UrbanVillageService;
 import org.springframework.data.domain.Page;
@@ -25,18 +25,18 @@ import java.util.List;
 public class UrbanVillageServiceImpl implements UrbanVillageService {
 
     private final KelurahanRepository kelurahanRepository;
-    private final KecamatanRepository kecamatanRepository;
+    private final UrbanVillageRepository urbanVillageRepository;
     private final WilayahMapper wilayahMapper;
 
-    public UrbanVillageServiceImpl(KelurahanRepository kelurahanRepository, KecamatanRepository kecamatanRepository, WilayahMapper wilayahMapper) {
+    public UrbanVillageServiceImpl(KelurahanRepository kelurahanRepository, UrbanVillageRepository urbanVillageRepository, WilayahMapper wilayahMapper) {
         this.kelurahanRepository = kelurahanRepository;
-        this.kecamatanRepository = kecamatanRepository;
+        this.urbanVillageRepository = urbanVillageRepository;
         this.wilayahMapper = wilayahMapper;
     }
 
     @Override
     public KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException {
-        SubDistrict subDistrict = kecamatanRepository.findById(createKelurahanRequest.getKecamatanId())
+        SubDistrict subDistrict = urbanVillageRepository.findById(createKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + createKelurahanRequest.getKecamatanId() + "] not found"));
         UrbanVillage urbanVillage = new UrbanVillage();
         urbanVillage.setCode(createKelurahanRequest.getCode());
@@ -56,7 +56,7 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
 
     @Override
     public KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
-        SubDistrict subDistrict = kecamatanRepository.findById(updateKelurahanRequest.getKecamatanId())
+        SubDistrict subDistrict = urbanVillageRepository.findById(updateKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + updateKelurahanRequest.getKecamatanId() + "] not found"));
         UrbanVillage urbanVillage = kelurahanRepository.findById(id)
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
