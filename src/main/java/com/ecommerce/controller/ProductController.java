@@ -64,7 +64,7 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProductDTO> updateProduct(@PathVariable("idProduct") String id, @RequestBody UpdateProductRequestDto updateProductRequest) throws CategoryNotFoundException, ProductNotFoundException {
+    public WebResponseDto<ProductDTO> updateProduct(@PathVariable("idProduct") String id, @RequestBody UpdateProductRequestDTO updateProductRequest) throws CategoryNotFoundException, ProductNotFoundException {
         final ProductDTO productResponse = productService.updateProduct(id, updateProductRequest);
         return WebResponseDto.<ProductDTO>builder()
                 .code(HttpStatus.OK.value())

@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateProductRequestDto {
+public class UpdateProductRequestDTO {
 
     @NotBlank(message = "Product name must not be blank")
     private String name;

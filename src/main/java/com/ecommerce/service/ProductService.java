@@ -14,7 +14,7 @@ public interface ProductService {
 
     ListProductResponseDTO getAllProducts(ListProductRequestDTO listProductRequest);
 
-    ProductDTO updateProduct(String id, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException;
+    ProductDTO updateProduct(String id, UpdateProductRequestDTO updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException;
 
     void deleteProduct(String id) throws ProductNotFoundException;
 

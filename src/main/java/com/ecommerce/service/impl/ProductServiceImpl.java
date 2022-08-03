@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO updateProduct(String id, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException {
+    public ProductDTO updateProduct(String id, UpdateProductRequestDTO updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException {
         final Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product ID [" + id + "] not found"));
 

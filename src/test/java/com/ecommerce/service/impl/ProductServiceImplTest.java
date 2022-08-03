@@ -93,7 +93,7 @@ class ProductServiceImplTest {
     @Order(4)
     void updateProduct() throws CategoryNotFoundException, ProductNotFoundException {
         String id = "legion";
-        UpdateProductRequestDto requestDto = new UpdateProductRequestDto();
+        UpdateProductRequestDTO requestDto = new UpdateProductRequestDTO();
         requestDto.setName("Lenovo update");
         requestDto.setPrice(new BigDecimal(7_700_000));
         requestDto.setQuantity(90);
