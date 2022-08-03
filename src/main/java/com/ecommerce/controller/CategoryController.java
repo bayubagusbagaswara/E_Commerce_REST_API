@@ -48,7 +48,7 @@ public class CategoryController {
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
 
-        ListCategoryRequestDto requestDto = new ListCategoryRequestDto();
+        ListCategoryRequestDTO requestDto = new ListCategoryRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);

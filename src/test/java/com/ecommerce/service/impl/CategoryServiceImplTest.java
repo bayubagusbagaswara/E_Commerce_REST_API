@@ -60,7 +60,7 @@ class CategoryServiceImplTest {
         String sortBy = "name";
         String sordDir = "asc";
 
-        ListCategoryRequestDto requestDto = new ListCategoryRequestDto();
+        ListCategoryRequestDTO requestDto = new ListCategoryRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);

@@ -46,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ListCategoryResponseDto getAllCategories(ListCategoryRequestDto listCategoryRequest) {
+    public ListCategoryResponseDto getAllCategories(ListCategoryRequestDTO listCategoryRequest) {
         Integer pageNo = listCategoryRequest.getPageNo();
         Integer pageSize = listCategoryRequest.getPageSize();
         String sortBy = listCategoryRequest.getSortBy();
