@@ -1,7 +1,7 @@
 package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.category.CategoryDTO;
-import com.ecommerce.dto.category.UpdateCategoryRequestDto;
+import com.ecommerce.dto.category.UpdateCategoryRequestDTO;
 import com.ecommerce.dto.product.ProductResponseDto;
 import com.ecommerce.exception.CategoryNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
@@ -72,7 +72,7 @@ public class CategoryAndProductTest {
     @Order(2)
     void testUpdateCategory() throws CategoryNotFoundException, ProductNotFoundException {
         String categoryId = "laptop";
-        UpdateCategoryRequestDto updateCategoryRequest = new UpdateCategoryRequestDto();
+        UpdateCategoryRequestDTO updateCategoryRequest = new UpdateCategoryRequestDTO();
         updateCategoryRequest.setName("Laptop Update");
         updateCategoryRequest.setDescription("Laptop update description");
 

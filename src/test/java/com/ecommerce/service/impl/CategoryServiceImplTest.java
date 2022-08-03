@@ -75,7 +75,7 @@ class CategoryServiceImplTest {
     @Order(4)
     void updateCategory() throws CategoryNotFoundException {
         String id = "tablet";
-        UpdateCategoryRequestDto requestDto = new UpdateCategoryRequestDto();
+        UpdateCategoryRequestDTO requestDto = new UpdateCategoryRequestDTO();
         requestDto.setName("Tablet Update");
         requestDto.setDescription("Tablet description update");
 

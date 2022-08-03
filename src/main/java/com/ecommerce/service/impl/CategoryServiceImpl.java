@@ -70,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException {
+    public CategoryDTO updateCategory(String id, UpdateCategoryRequestDTO updateCategoryRequest) throws CategoryNotFoundException {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + id + "] not found"));
         category.setName(updateCategoryRequest.getName());

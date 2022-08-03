@@ -63,7 +63,7 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryDTO> updateCategory(@PathVariable("idCategory") String id, @RequestBody UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException {
+    public WebResponseDto<CategoryDTO> updateCategory(@PathVariable("idCategory") String id, @RequestBody UpdateCategoryRequestDTO updateCategoryRequest) throws CategoryNotFoundException {
         final CategoryDTO categoryResponse = categoryService.updateCategory(id, updateCategoryRequest);
         return WebResponseDto.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())

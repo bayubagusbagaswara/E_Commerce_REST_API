@@ -13,7 +13,7 @@ public interface CategoryService {
 
     ListCategoryResponseDTO getAllCategories(ListCategoryRequestDTO listCategoryRequest);
 
-    CategoryDTO updateCategory(String id, UpdateCategoryRequestDto updateCategoryRequest) throws CategoryNotFoundException;
+    CategoryDTO updateCategory(String id, UpdateCategoryRequestDTO updateCategoryRequest) throws CategoryNotFoundException;
 
     void deleteCategory(String id) throws CategoryNotFoundException;
 

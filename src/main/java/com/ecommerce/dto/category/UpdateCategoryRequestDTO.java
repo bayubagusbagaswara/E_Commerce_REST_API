@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UpdateCategoryRequestDto {
+public class UpdateCategoryRequestDTO {
 
     @NotBlank(message = "Name must not be blank")
     @Size(max = 50, message = "Name length maximum is 50 characters")
