@@ -1,6 +1,6 @@
 package com.ecommerce.controller.region;
 
-import com.ecommerce.dto.WebResponseDto;
+import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.exception.KotaNotFoundException;
@@ -24,9 +24,9 @@ public class DistrictController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<DistrictDTO> createKota(@RequestBody CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
+    public WebResponseDTO<DistrictDTO> createKota(@RequestBody CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
         final DistrictDTO kotaResponse = districtService.createKota(createKotaRequest);
-        return WebResponseDto.<DistrictDTO>builder()
+        return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
                 .data(kotaResponse)
@@ -34,9 +34,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<DistrictDTO> getKotaById(@PathVariable("idKota") String id) throws KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> getKotaById(@PathVariable("idKota") String id) throws KotaNotFoundException {
         final DistrictDTO kotaResponse = districtService.getKotaById(id);
-        return WebResponseDto.<DistrictDTO>builder()
+        return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)
@@ -44,7 +44,7 @@ public class DistrictController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ListDistrictResponseDTO> getAllKota(
+    public WebResponseDTO<ListDistrictResponseDTO> getAllKota(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -57,7 +57,7 @@ public class DistrictController {
         requestDto.setSortDir(sortDir);
 
         final ListDistrictResponseDTO allKotaResponse = districtService.getAllKota(requestDto);
-        return WebResponseDto.<ListDistrictResponseDTO>builder()
+        return WebResponseDTO.<ListDistrictResponseDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(allKotaResponse)
@@ -66,9 +66,9 @@ public class DistrictController {
     }
 
     @PutMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateDistrictRequestDTO updateDistrictRequestDTO) throws ProvinsiNotFoundException, KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateDistrictRequestDTO updateDistrictRequestDTO) throws ProvinsiNotFoundException, KotaNotFoundException {
         final DistrictDTO kotaResponse = districtService.updateKota(id, updateDistrictRequestDTO);
-        return WebResponseDto.<DistrictDTO>builder()
+        return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)
@@ -76,9 +76,9 @@ public class DistrictController {
     }
 
     @DeleteMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<String> deleteKota(@PathVariable("idKota") String id) throws KotaNotFoundException {
+    public WebResponseDTO<String> deleteKota(@PathVariable("idKota") String id) throws KotaNotFoundException {
         districtService.deleteKota(id);
-        return WebResponseDto.<String>builder()
+        return WebResponseDTO.<String>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(null)
@@ -86,9 +86,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<DistrictDTO> getKotaByName(@RequestParam("name") String name) throws KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> getKotaByName(@RequestParam("name") String name) throws KotaNotFoundException {
         final DistrictDTO kotaResponse = districtService.getKotaByName(name);
-        return WebResponseDto.<DistrictDTO>builder()
+        return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)
@@ -96,9 +96,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/name/contains")
-    public WebResponseDto<List<DistrictDTO>> getKotaByNameContaining(@RequestParam("name") String name) {
+    public WebResponseDTO<List<DistrictDTO>> getKotaByNameContaining(@RequestParam("name") String name) {
         final List<DistrictDTO> kotaResponseList = districtService.getKotaByNameContains(name);
-        return WebResponseDto.<List<DistrictDTO>>builder()
+        return WebResponseDTO.<List<DistrictDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponseList)
@@ -106,9 +106,9 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<DistrictDTO> getKotaByCode(@RequestParam("code") String code) throws KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> getKotaByCode(@RequestParam("code") String code) throws KotaNotFoundException {
         final DistrictDTO kotaResponse = districtService.getKotaByCode(code);
-        return WebResponseDto.<DistrictDTO>builder()
+        return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kotaResponse)

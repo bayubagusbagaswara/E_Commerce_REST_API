@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class WebResponseDto<T> {
+public class WebResponseDTO<T> {
 
     private Integer code;
     private String status;

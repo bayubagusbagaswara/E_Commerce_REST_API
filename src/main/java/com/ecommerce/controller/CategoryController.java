@@ -1,6 +1,6 @@
 package com.ecommerce.controller;
 
-import com.ecommerce.dto.WebResponseDto;
+import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.category.*;
 import com.ecommerce.exception.CategoryNotFoundException;
 import com.ecommerce.service.CategoryService;
@@ -22,9 +22,9 @@ public class CategoryController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryDTO> createCategory(@RequestBody CreateCategoryRequestDTO createCategoryRequest) {
+    public WebResponseDTO<CategoryDTO> createCategory(@RequestBody CreateCategoryRequestDTO createCategoryRequest) {
         CategoryDTO categoryResponse = categoryService.createCategory(createCategoryRequest);
-        return WebResponseDto.<CategoryDTO>builder()
+        return WebResponseDTO.<CategoryDTO>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
                 .data(categoryResponse)
@@ -32,9 +32,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryDTO> getCategoryById(@PathVariable("idCategory") String id) throws CategoryNotFoundException {
+    public WebResponseDTO<CategoryDTO> getCategoryById(@PathVariable("idCategory") String id) throws CategoryNotFoundException {
         final CategoryDTO categoryResponse = categoryService.getCategoryById(id);
-        return WebResponseDto.<CategoryDTO>builder()
+        return WebResponseDTO.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)
@@ -42,7 +42,7 @@ public class CategoryController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ListCategoryResponseDTO> getAllCategories(
+    public WebResponseDTO<ListCategoryResponseDTO> getAllCategories(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -55,7 +55,7 @@ public class CategoryController {
         requestDto.setSortDir(sortDir);
 
         final ListCategoryResponseDTO allCategories = categoryService.getAllCategories(requestDto);
-        return WebResponseDto.<ListCategoryResponseDTO>builder()
+        return WebResponseDTO.<ListCategoryResponseDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(allCategories)
@@ -63,9 +63,9 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryDTO> updateCategory(@PathVariable("idCategory") String id, @RequestBody UpdateCategoryRequestDTO updateCategoryRequest) throws CategoryNotFoundException {
+    public WebResponseDTO<CategoryDTO> updateCategory(@PathVariable("idCategory") String id, @RequestBody UpdateCategoryRequestDTO updateCategoryRequest) throws CategoryNotFoundException {
         final CategoryDTO categoryResponse = categoryService.updateCategory(id, updateCategoryRequest);
-        return WebResponseDto.<CategoryDTO>builder()
+        return WebResponseDTO.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)
@@ -73,9 +73,9 @@ public class CategoryController {
     }
 
     @DeleteMapping(value = "/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<String> deleteCategory(@PathVariable("idCategory") String id) throws CategoryNotFoundException {
+    public WebResponseDTO<String> deleteCategory(@PathVariable("idCategory") String id) throws CategoryNotFoundException {
         categoryService.deleteCategory(id);
-        return WebResponseDto.<String>builder()
+        return WebResponseDTO.<String>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(null)
@@ -83,9 +83,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryDTO> getCategoryByName(@RequestParam("name") String name) throws CategoryNotFoundException {
+    public WebResponseDTO<CategoryDTO> getCategoryByName(@RequestParam("name") String name) throws CategoryNotFoundException {
         final CategoryDTO categoryResponse = categoryService.getCategoryByName(name);
-        return WebResponseDto.<CategoryDTO>builder()
+        return WebResponseDTO.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)
@@ -93,9 +93,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<CategoryDTO>> getCategoryByNameContains(@RequestParam("name") String name) {
+    public WebResponseDTO<List<CategoryDTO>> getCategoryByNameContains(@RequestParam("name") String name) {
         final List<CategoryDTO> categoryResponseList = categoryService.getCategoryByNameContains(name);
-        return WebResponseDto.<List<CategoryDTO>>builder()
+        return WebResponseDTO.<List<CategoryDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponseList)
@@ -103,9 +103,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/name/starting", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<CategoryDTO>> getCategoryByNameStartsWith(@RequestParam("name") String name) {
+    public WebResponseDTO<List<CategoryDTO>> getCategoryByNameStartsWith(@RequestParam("name") String name) {
         final List<CategoryDTO> categoryResponseList = categoryService.getCategoryStartingWithName(name);
-        return WebResponseDto.<List<CategoryDTO>>builder()
+        return WebResponseDTO.<List<CategoryDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponseList)
@@ -113,9 +113,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<CategoryDTO> getCategoryByProductId(@PathVariable("idProduct") String id) throws CategoryNotFoundException {
+    public WebResponseDTO<CategoryDTO> getCategoryByProductId(@PathVariable("idProduct") String id) throws CategoryNotFoundException {
         final CategoryDTO categoryResponse = categoryService.getCategoryByProductId(id);
-        return WebResponseDto.<CategoryDTO>builder()
+        return WebResponseDTO.<CategoryDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(categoryResponse)

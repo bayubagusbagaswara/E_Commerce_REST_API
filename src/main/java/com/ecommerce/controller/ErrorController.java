@@ -1,6 +1,6 @@
 package com.ecommerce.controller;
 
-import com.ecommerce.dto.WebResponseDto;
+import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.exception.*;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class ErrorController {
             SupplierNotFoundException.class,
             ProductDetailNotFoundException.class
     })
-    public WebResponseDto<String> dataNotFoundHandler(
+    public WebResponseDTO<String> dataNotFoundHandler(
             CategoryNotFoundException categoryNotFoundException,
             ProductNotFoundException productNotFoundException,
             SupplierNotFoundException supplierNotFoundException,
@@ -30,7 +30,7 @@ public class ErrorController {
             KecamatanNotFoundException kecamatanNotFoundException,
             KelurahanNotFoundException kelurahanNotFoundException
     ) {
-        return WebResponseDto.<String>builder()
+        return WebResponseDTO.<String>builder()
                 .code(HttpStatus.NOT_FOUND.value())
                 .status(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .data("Data not found")
@@ -38,8 +38,8 @@ public class ErrorController {
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
-    public WebResponseDto<String> validatorHandler(ConstraintViolationException constraintViolationException) {
-        return WebResponseDto.<String>builder()
+    public WebResponseDTO<String> validatorHandler(ConstraintViolationException constraintViolationException) {
+        return WebResponseDTO.<String>builder()
                 .code(HttpStatus.BAD_REQUEST.value())
                 .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .data(constraintViolationException.getMessage())
