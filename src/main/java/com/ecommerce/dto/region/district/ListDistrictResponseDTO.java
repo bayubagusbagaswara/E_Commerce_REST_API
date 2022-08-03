@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ListDistrictResponseDTO {
 
-    private List<DistrictDTO> kotaList;
+    private List<DistrictDTO> districtDTOList;
     private Integer pageNo;
     private Integer pageSize;
     private Long totalElements;
