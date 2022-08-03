@@ -1,6 +1,6 @@
 package com.ecommerce.dto.region.urbanVillage;
 
-import com.ecommerce.dto.region.subDistrict.KecamatanResponseDto;
+import com.ecommerce.dto.region.subDistrict.SubDistrictDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,5 +15,5 @@ public class KelurahanResponseDto {
     private String name;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private KecamatanResponseDto kecamatan;
+    private SubDistrictDTO kecamatan;
 }

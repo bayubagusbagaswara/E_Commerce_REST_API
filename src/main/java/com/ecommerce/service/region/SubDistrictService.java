@@ -9,21 +9,21 @@ import java.util.List;
 
 public interface SubDistrictService {
 
-    KecamatanResponseDto createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws KotaNotFoundException;
+    SubDistrictDTO createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws KotaNotFoundException;
 
-    KecamatanResponseDto getKecamatanById(String id) throws KecamatanNotFoundException;
+    SubDistrictDTO getKecamatanById(String id) throws KecamatanNotFoundException;
 
     ListKecamatanResponseDto getAllKecamatan(ListKecamatanRequestDto listKecamatanRequest);
 
-    KecamatanResponseDto updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
+    SubDistrictDTO updateKecamatan(String id, UpdateKecamatanRequestDto updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
 
     void deleteKecamatan(String id) throws KecamatanNotFoundException;
 
-    KecamatanResponseDto getKecamatanByName(String name) throws KecamatanNotFoundException;
+    SubDistrictDTO getKecamatanByName(String name) throws KecamatanNotFoundException;
 
-    List<KecamatanResponseDto> getKecamatanByNameContains(String name);
+    List<SubDistrictDTO> getKecamatanByNameContains(String name);
 
-    KecamatanResponseDto getKecamatanByCode(String code) throws KecamatanNotFoundException;
+    SubDistrictDTO getKecamatanByCode(String code) throws KecamatanNotFoundException;
 
-    List<KecamatanResponseDto> getKecamatanByKotaId(String kotaId);
+    List<SubDistrictDTO> getKecamatanByKotaId(String kotaId);
 }

@@ -44,7 +44,7 @@ class SubDistrictServiceImplTest {
         // kota Kediri id 3571
         requestDto.setKotaId("3571");
 
-        final KecamatanResponseDto responseDto = kecamatanService.createKecamatan(requestDto);
+        final SubDistrictDTO responseDto = kecamatanService.createKecamatan(requestDto);
         assertNotNull(responseDto.getId());
         assertNotNull(responseDto.getCreatedDate());
         assertEquals(requestDto.getName(), responseDto.getName());
@@ -55,7 +55,7 @@ class SubDistrictServiceImplTest {
     void getKecamatanById() throws KecamatanNotFoundException {
         // id kecamatan Pesantren, Kota Kediri
         String id = "357103";
-        final KecamatanResponseDto responseDto = kecamatanService.getKecamatanById(id);
+        final SubDistrictDTO responseDto = kecamatanService.getKecamatanById(id);
         assertEquals(id, responseDto.getId());
     }
 
@@ -90,7 +90,7 @@ class SubDistrictServiceImplTest {
         // pindah ke kota Surabaya id 3578
         requestDto.setKotaId("3578");
 
-        final KecamatanResponseDto responseDto = kecamatanService.updateKecamatan(id, requestDto);
+        final SubDistrictDTO responseDto = kecamatanService.updateKecamatan(id, requestDto);
         assertEquals(id, responseDto.getId());
         assertNotNull(responseDto.getUpdatedDate());
         assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
@@ -104,7 +104,7 @@ class SubDistrictServiceImplTest {
         String id = "357101";
         kecamatanService.deleteKecamatan(id);
         assertThrows(KecamatanNotFoundException.class, () -> {
-            final KecamatanResponseDto kecamatan = kecamatanService.getKecamatanById(id);
+            final SubDistrictDTO kecamatan = kecamatanService.getKecamatanById(id);
         });
     }
 
@@ -112,7 +112,7 @@ class SubDistrictServiceImplTest {
     @Order(6)
     void getKecamatanByName() throws KecamatanNotFoundException {
         String name = "pesantren";
-        final KecamatanResponseDto kecamatan = kecamatanService.getKecamatanByName(name);
+        final SubDistrictDTO kecamatan = kecamatanService.getKecamatanByName(name);
         assertEquals(name, kecamatan.getName().toLowerCase());
         log.info("Name: {}", kecamatan.getName());
     }
@@ -122,7 +122,7 @@ class SubDistrictServiceImplTest {
     void getKecamatanByCode() throws KecamatanNotFoundException {
         // code kecamatan Pesantren 357103
         String code = "357103";
-        final KecamatanResponseDto kecamatan = kecamatanService.getKecamatanByCode(code);
+        final SubDistrictDTO kecamatan = kecamatanService.getKecamatanByCode(code);
         assertEquals(code, kecamatan.getCode());
         log.info("Code: {}", kecamatan.getCode());
     }
@@ -132,9 +132,9 @@ class SubDistrictServiceImplTest {
     void getKecamatanByNameContains() {
         // name 'ke' [Kemayoran, Kebayoran Lama, Kebayoran Baru, Simokerto, Kenjeran, Sambikerep]
         String name = "ke";
-        final List<KecamatanResponseDto> kecamatanList = kecamatanService.getKecamatanByNameContains(name);
+        final List<SubDistrictDTO> kecamatanList = kecamatanService.getKecamatanByNameContains(name);
         assertEquals(6, kecamatanList.size());
-        for (KecamatanResponseDto kecamatan : kecamatanList) {
+        for (SubDistrictDTO kecamatan : kecamatanList) {
             log.info("Name: {}", kecamatan.getName());
             log.info("==========");
         }
@@ -145,9 +145,9 @@ class SubDistrictServiceImplTest {
     void getKecamatanByKotaId() {
         // id kota Kediri [Kota, Pesantren, Mojoroto]
         String kotaId = "3571";
-        final List<KecamatanResponseDto> kecamatanList = kecamatanService.getKecamatanByKotaId(kotaId);
+        final List<SubDistrictDTO> kecamatanList = kecamatanService.getKecamatanByKotaId(kotaId);
         assertEquals(3, kecamatanList.size());
-        for (KecamatanResponseDto kecamatan : kecamatanList) {
+        for (SubDistrictDTO kecamatan : kecamatanList) {
             log.info("Name: {}", kecamatan.getName());
             log.info("==========");
         }
