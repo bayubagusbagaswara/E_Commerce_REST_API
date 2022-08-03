@@ -76,7 +76,7 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public ListKotaResponseDto getAllKota(ListKotaRequestDto listKotaRequest) {
+    public ListKotaResponseDto getAllKota(ListDistrictRequestDTO listKotaRequest) {
         Integer pageNo = listKotaRequest.getPageNo();
         Integer pageSize = listKotaRequest.getPageSize();
         String sortBy = listKotaRequest.getSortBy();

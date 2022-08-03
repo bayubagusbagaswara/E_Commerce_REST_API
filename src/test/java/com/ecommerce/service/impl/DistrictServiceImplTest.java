@@ -72,7 +72,7 @@ class DistrictServiceImplTest {
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListKotaRequestDto requestDto = new ListKotaRequestDto();
+        ListDistrictRequestDTO requestDto = new ListDistrictRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);
