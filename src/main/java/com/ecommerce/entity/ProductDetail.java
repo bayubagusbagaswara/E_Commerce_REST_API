@@ -1,6 +1,7 @@
 package com.ecommerce.entity;
 
 import com.ecommerce.entity.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -37,5 +38,27 @@ public class ProductDetail extends BaseEntity {
     @Override
     public void setCreatedAt(Instant createdAt) {
         super.setCreatedAt(createdAt);
+    }
+
+    @Override
+    public Instant getCreatedAt() {
+        return super.getCreatedAt();
+    }
+
+    @Override
+    public Instant getUpdatedAt() {
+        return super.getUpdatedAt();
+    }
+
+    @JsonIgnore
+    @Override
+    public String getCreatedBy() {
+        return super.getCreatedBy();
+    }
+
+    @JsonIgnore
+    @Override
+    public String getUpdatedBy() {
+        return super.getUpdatedBy();
     }
 }
