@@ -50,7 +50,7 @@ public class SubDistrictController {
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
 
-        ListKecamatanRequestDto requestDto = new ListKecamatanRequestDto();
+        ListSubDistrictRequestDTO requestDto = new ListSubDistrictRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);

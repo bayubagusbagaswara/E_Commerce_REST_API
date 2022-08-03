@@ -76,7 +76,7 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public ListKecamatanResponseDto getAllKecamatan(ListKecamatanRequestDto listKecamatanRequest) {
+    public ListKecamatanResponseDto getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest) {
         Integer pageNo = listKecamatanRequest.getPageNo();
         Integer pageSize = listKecamatanRequest.getPageSize();
         String sortBy = listKecamatanRequest.getSortBy();

@@ -68,7 +68,7 @@ class SubDistrictServiceImplTest {
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListKecamatanRequestDto requestDto = new ListKecamatanRequestDto();
+        ListSubDistrictRequestDTO requestDto = new ListSubDistrictRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);
