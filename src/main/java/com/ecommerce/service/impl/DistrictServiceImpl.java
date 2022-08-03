@@ -7,7 +7,7 @@ import com.ecommerce.dto.region.district.*;
 import com.ecommerce.entity.region.District;
 import com.ecommerce.exception.KotaNotFoundException;
 import com.ecommerce.exception.ProvinsiNotFoundException;
-import com.ecommerce.repository.KotaRepository;
+import com.ecommerce.repository.DistrictRepository;
 import com.ecommerce.repository.ProvinsiRepository;
 import com.ecommerce.service.region.DistrictService;
 import org.springframework.data.domain.Page;
@@ -24,12 +24,12 @@ import java.util.List;
 @Transactional
 public class DistrictServiceImpl implements DistrictService {
 
-    private final KotaRepository kotaRepository;
+    private final DistrictRepository districtRepository;
     private final ProvinsiRepository provinsiRepository;
     private final WilayahMapper wilayahMapper;
 
-    public DistrictServiceImpl(KotaRepository kotaRepository, ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
-        this.kotaRepository = kotaRepository;
+    public DistrictServiceImpl(DistrictRepository districtRepository, ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
+        this.districtRepository = districtRepository;
         this.provinsiRepository = provinsiRepository;
         this.wilayahMapper = wilayahMapper;
     }
@@ -43,13 +43,13 @@ public class DistrictServiceImpl implements DistrictService {
         district.setName(createKotaRequest.getName());
         district.setProvince(province);
         district.setCreatedDate(LocalDateTime.now());
-        kotaRepository.save(district);
+        districtRepository.save(district);
         return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public KotaResponseDto getKotaById(String id) throws KotaNotFoundException {
-        District district = kotaRepository.findById(id)
+        District district = districtRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
         return wilayahMapper.mapToKotaResponse(district);
     }
@@ -58,21 +58,21 @@ public class DistrictServiceImpl implements DistrictService {
     public KotaResponseDto updateKota(String id, UpdateKotaRequestDto updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
         Province province = provinsiRepository.findById(updateKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
-        District district = kotaRepository.findById(id)
+        District district = districtRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
         district.setCode(updateKotaRequest.getCode());
         district.setName(updateKotaRequest.getName());
         district.setProvince(province);
         district.setUpdatedDate(LocalDateTime.now());
-        kotaRepository.save(district);
+        districtRepository.save(district);
         return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public void deleteKota(String id) throws KotaNotFoundException {
-        final District district = kotaRepository.findById(id)
+        final District district = districtRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
-        kotaRepository.delete(district);
+        districtRepository.delete(district);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class DistrictServiceImpl implements DistrictService {
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
-        Page<District> kotaPage = kotaRepository.findAll(pageable);
+        Page<District> kotaPage = districtRepository.findAll(pageable);
         List<District> districtList = kotaPage.getContent();
 
         List<KotaResponseDto> kotaResponseList = wilayahMapper.mapToKotaResponseList(districtList);
@@ -101,25 +101,25 @@ public class DistrictServiceImpl implements DistrictService {
 
     @Override
     public KotaResponseDto getKotaByName(String name) throws KotaNotFoundException {
-        District district = kotaRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name [" + name + "] not found"));
+        District district = districtRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name [" + name + "] not found"));
         return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public KotaResponseDto getKotaByCode(String code) throws KotaNotFoundException {
-        District district = kotaRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code [" + code + "] not found"));
+        District district = districtRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code [" + code + "] not found"));
         return wilayahMapper.mapToKotaResponse(district);
     }
 
     @Override
     public List<KotaResponseDto> getKotaByNameContains(String name) {
-        List<District> districtList = kotaRepository.findAllByNameContainingIgnoreCase(name);
+        List<District> districtList = districtRepository.findAllByNameContainingIgnoreCase(name);
         return wilayahMapper.mapToKotaResponseList(districtList);
     }
 
     @Override
     public List<KotaResponseDto> getKotaByProvinsiId(String provinsiId) {
-        List<District> districtList = kotaRepository.findAllByProvinsiId(provinsiId);
+        List<District> districtList = districtRepository.findAllByProvinsiId(provinsiId);
         return wilayahMapper.mapToKotaResponseList(districtList);
     }
 
