@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UrbanVillageService {
 
-    KelurahanResponseDto createKelurahan(CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException;
+    KelurahanResponseDto createKelurahan(CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException;
 
     KelurahanResponseDto getKelurahanById(String id) throws KelurahanNotFoundException;
 

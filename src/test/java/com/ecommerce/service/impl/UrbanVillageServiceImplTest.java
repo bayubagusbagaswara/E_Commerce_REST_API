@@ -40,7 +40,7 @@ class UrbanVillageServiceImplTest {
     @Test
     @Order(1)
     void createKelurahan() throws KecamatanNotFoundException {
-        CreateKelurahanRequestDto requestDto = new CreateKelurahanRequestDto();
+        CreateUrbanVillageRequestDTO requestDto = new CreateUrbanVillageRequestDTO();
         requestDto.setCode("3571038899");
         requestDto.setName("Kelurahan di Pesantren");
         // id kecamatan Pesantren

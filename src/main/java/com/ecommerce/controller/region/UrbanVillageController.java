@@ -24,7 +24,7 @@ public class UrbanVillageController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KelurahanResponseDto> createKelurahan(@RequestBody CreateKelurahanRequestDto createKelurahanRequest) throws KecamatanNotFoundException {
+    public WebResponseDto<KelurahanResponseDto> createKelurahan(@RequestBody CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException {
         final KelurahanResponseDto kelurahanResponse = urbanVillageService.createKelurahan(createKelurahanRequest);
         return WebResponseDto.<KelurahanResponseDto>builder()
                 .code(HttpStatus.CREATED.value())
