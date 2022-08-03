@@ -38,7 +38,7 @@ class SubDistrictServiceImplTest {
     @Test
     @Order(1)
     void createKecamatan() throws KotaNotFoundException {
-        CreateKecamatanRequestDto requestDto = new CreateKecamatanRequestDto();
+        CreateSubDistrictRequestDTO requestDto = new CreateSubDistrictRequestDTO();
         requestDto.setCode("3571890");
         requestDto.setName("Kecamatan Kediri");
         // kota Kediri id 3571

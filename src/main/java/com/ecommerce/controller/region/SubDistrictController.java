@@ -24,7 +24,7 @@ public class SubDistrictController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KecamatanResponseDto> createKecamatan(@RequestBody CreateKecamatanRequestDto createKecamatanRequest) throws KotaNotFoundException {
+    public WebResponseDto<KecamatanResponseDto> createKecamatan(@RequestBody CreateSubDistrictRequestDTO createKecamatanRequest) throws KotaNotFoundException {
         final KecamatanResponseDto kecamatanResponse = subDistrictService.createKecamatan(createKecamatanRequest);
         return WebResponseDto.<KecamatanResponseDto>builder()
                 .code(HttpStatus.CREATED.value())

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface SubDistrictService {
 
-    KecamatanResponseDto createKecamatan(CreateKecamatanRequestDto createKecamatanRequest) throws KotaNotFoundException;
+    KecamatanResponseDto createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws KotaNotFoundException;
 
     KecamatanResponseDto getKecamatanById(String id) throws KecamatanNotFoundException;
 
