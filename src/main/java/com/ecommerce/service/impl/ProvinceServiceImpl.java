@@ -5,7 +5,7 @@ import com.ecommerce.mapper.WilayahMapper;
 import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.province.*;
 import com.ecommerce.exception.ProvinsiNotFoundException;
-import com.ecommerce.repository.ProvinsiRepository;
+import com.ecommerce.repository.ProvinceRepository;
 import com.ecommerce.service.region.ProvinceService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,11 +21,11 @@ import java.util.List;
 @Transactional
 public class ProvinceServiceImpl implements ProvinceService {
 
-    private final ProvinsiRepository provinsiRepository;
+    private final ProvinceRepository provinceRepository;
     private final WilayahMapper wilayahMapper;
 
-    public ProvinceServiceImpl(ProvinsiRepository provinsiRepository, WilayahMapper wilayahMapper) {
-        this.provinsiRepository = provinsiRepository;
+    public ProvinceServiceImpl(ProvinceRepository provinceRepository, WilayahMapper wilayahMapper) {
+        this.provinceRepository = provinceRepository;
         this.wilayahMapper = wilayahMapper;
     }
 
@@ -35,13 +35,13 @@ public class ProvinceServiceImpl implements ProvinceService {
         province.setCode(createProvinsiRequest.getCode());
         province.setName(createProvinsiRequest.getName());
         province.setCreatedDate(LocalDateTime.now());
-        provinsiRepository.save(province);
+        provinceRepository.save(province);
         return wilayahMapper.mapToProvinsiResponse(province);
     }
 
     @Override
     public ProvinceDTO getProvinsiById(String id) throws ProvinsiNotFoundException {
-        Province province = provinsiRepository.findById(id)
+        Province province = provinceRepository.findById(id)
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
         return wilayahMapper.mapToProvinsiResponse(province);
     }
@@ -67,7 +67,7 @@ public class ProvinceServiceImpl implements ProvinceService {
         // if (searchByName.isExist) {
         // maka provinsiRepository.findAllByName
         // }
-        Page<Province> provinsiPage = provinsiRepository.findAll(pageable);
+        Page<Province> provinsiPage = provinceRepository.findAll(pageable);
 
 
         List<Province> provinceList = provinsiPage.getContent();
@@ -86,37 +86,37 @@ public class ProvinceServiceImpl implements ProvinceService {
 
     @Override
     public ProvinceDTO updateProvinsi(String id, UpdateProvinceRequestDTO updateProvinsiRequest) throws ProvinsiNotFoundException {
-        Province province = provinsiRepository.findById(id)
+        Province province = provinceRepository.findById(id)
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID ["+ id +"] not found"));
         province.setCode(updateProvinsiRequest.getCode());
         province.setName(updateProvinsiRequest.getName());
         province.setUpdatedDate(LocalDateTime.now());
-        provinsiRepository.save(province);
+        provinceRepository.save(province);
         return wilayahMapper.mapToProvinsiResponse(province);
     }
 
     @Override
     public void deleteProvinsi(String id) throws ProvinsiNotFoundException {
-        final Province province = provinsiRepository.findById(id)
+        final Province province = provinceRepository.findById(id)
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + id + "] not found"));
-        provinsiRepository.delete(province);
+        provinceRepository.delete(province);
     }
 
     @Override
     public ProvinceDTO getProvinsiByName(String name) throws ProvinsiNotFoundException {
-        Province province = provinsiRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi name [" + name + "] not found"));
+        Province province = provinceRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi name [" + name + "] not found"));
         return wilayahMapper.mapToProvinsiResponse(province);
     }
 
     @Override
     public ProvinceDTO getProvinsiByCode(String code) throws ProvinsiNotFoundException {
-        Province province = provinsiRepository.findAllByCode(code).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi code [" + code + "] not found"));
+        Province province = provinceRepository.findAllByCode(code).orElseThrow(() -> new ProvinsiNotFoundException("Provinsi code [" + code + "] not found"));
         return wilayahMapper.mapToProvinsiResponse(province);
     }
 
     @Override
     public List<ProvinceDTO> getProvinsiByNameContains(String name) {
-        List<Province> provinceList = provinsiRepository.findAllByNameContainingIgnoreCase(name);
+        List<Province> provinceList = provinceRepository.findAllByNameContainingIgnoreCase(name);
         return wilayahMapper.mapToProvinsiResponseList(provinceList);
     }
 
