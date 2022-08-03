@@ -1,7 +1,7 @@
 package com.ecommerce.mapper;
 
 import com.ecommerce.dto.region.subDistrict.SubDistrictDTO;
-import com.ecommerce.dto.region.urbanVillage.KelurahanResponseDto;
+import com.ecommerce.dto.region.urbanVillage.UrbanVillageDTO;
 import com.ecommerce.dto.region.district.DistrictDTO;
 import com.ecommerce.dto.region.province.ProvinceDTO;
 import com.ecommerce.entity.region.SubDistrict;
@@ -48,8 +48,8 @@ public class WilayahMapper {
         return kecamatanResponse;
     }
 
-    public KelurahanResponseDto mapToKelurahanResponse(UrbanVillage urbanVillage) {
-        KelurahanResponseDto kelurahanResponse = new KelurahanResponseDto();
+    public UrbanVillageDTO mapToKelurahanResponse(UrbanVillage urbanVillage) {
+        UrbanVillageDTO kelurahanResponse = new UrbanVillageDTO();
         kelurahanResponse.setId(urbanVillage.getId());
         kelurahanResponse.setCode(urbanVillage.getCode());
         kelurahanResponse.setName(urbanVillage.getName());
@@ -80,7 +80,7 @@ public class WilayahMapper {
                 ;
     }
 
-    public List<KelurahanResponseDto> mapToKelurahanResponseList(List<UrbanVillage> urbanVillageList) {
+    public List<UrbanVillageDTO> mapToKelurahanResponseList(List<UrbanVillage> urbanVillageList) {
         return urbanVillageList.stream()
                 .map(this::mapToKelurahanResponse)
                 .collect(Collectors.toList())

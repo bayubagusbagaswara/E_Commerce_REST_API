@@ -9,21 +9,21 @@ import java.util.List;
 
 public interface UrbanVillageService {
 
-    KelurahanResponseDto createKelurahan(CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException;
+    UrbanVillageDTO createKelurahan(CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException;
 
-    KelurahanResponseDto getKelurahanById(String id) throws KelurahanNotFoundException;
+    UrbanVillageDTO getKelurahanById(String id) throws KelurahanNotFoundException;
 
     ListKelurahanResponseDto getAllKelurahan(ListKelurahanRequestDto listKelurahanRequest);
 
-    KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException;
+    UrbanVillageDTO updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException;
 
     void deleteKelurahan(String id) throws KelurahanNotFoundException;
 
-    KelurahanResponseDto getKelurahanByName(String name) throws KelurahanNotFoundException;
+    UrbanVillageDTO getKelurahanByName(String name) throws KelurahanNotFoundException;
 
-    List<KelurahanResponseDto> getKelurahanByNameContains(String name);
+    List<UrbanVillageDTO> getKelurahanByNameContains(String name);
 
-    KelurahanResponseDto getKelurahanByCode(String code) throws KelurahanNotFoundException;
+    UrbanVillageDTO getKelurahanByCode(String code) throws KelurahanNotFoundException;
 
-    List<KelurahanResponseDto> getKelurahanByKecamatanId(String kecamatanId);
+    List<UrbanVillageDTO> getKelurahanByKecamatanId(String kecamatanId);
 }

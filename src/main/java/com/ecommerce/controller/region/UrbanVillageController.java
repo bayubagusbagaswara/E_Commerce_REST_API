@@ -24,9 +24,9 @@ public class UrbanVillageController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KelurahanResponseDto> createKelurahan(@RequestBody CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = urbanVillageService.createKelurahan(createKelurahanRequest);
-        return WebResponseDto.<KelurahanResponseDto>builder()
+    public WebResponseDto<UrbanVillageDTO> createKelurahan(@RequestBody CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException {
+        final UrbanVillageDTO kelurahanResponse = urbanVillageService.createKelurahan(createKelurahanRequest);
+        return WebResponseDto.<UrbanVillageDTO>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
                 .data(kelurahanResponse)
@@ -34,9 +34,9 @@ public class UrbanVillageController {
     }
 
     @GetMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KelurahanResponseDto> getKelurahanById(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = urbanVillageService.getKelurahanById(id);
-        return WebResponseDto.<KelurahanResponseDto>builder()
+    public WebResponseDto<UrbanVillageDTO> getKelurahanById(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
+        final UrbanVillageDTO kelurahanResponse = urbanVillageService.getKelurahanById(id);
+        return WebResponseDto.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kelurahanResponse)
@@ -65,9 +65,9 @@ public class UrbanVillageController {
     }
 
     @PutMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KelurahanResponseDto> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = urbanVillageService.updateKelurahan(id, updateKelurahanRequest);
-        return WebResponseDto.<KelurahanResponseDto>builder()
+    public WebResponseDto<UrbanVillageDTO> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateKelurahanRequestDto updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException {
+        final UrbanVillageDTO kelurahanResponse = urbanVillageService.updateKelurahan(id, updateKelurahanRequest);
+        return WebResponseDto.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kelurahanResponse)
@@ -75,9 +75,9 @@ public class UrbanVillageController {
     }
 
     @DeleteMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KelurahanResponseDto> deleteKelurahan(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
+    public WebResponseDto<UrbanVillageDTO> deleteKelurahan(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
         urbanVillageService.deleteKelurahan(id);
-        return WebResponseDto.<KelurahanResponseDto>builder()
+        return WebResponseDto.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(null)
@@ -85,9 +85,9 @@ public class UrbanVillageController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KelurahanResponseDto> getKelurahanByName(@RequestParam("name") String name) throws KelurahanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = urbanVillageService.getKelurahanByName(name);
-        return WebResponseDto.<KelurahanResponseDto>builder()
+    public WebResponseDto<UrbanVillageDTO> getKelurahanByName(@RequestParam("name") String name) throws KelurahanNotFoundException {
+        final UrbanVillageDTO kelurahanResponse = urbanVillageService.getKelurahanByName(name);
+        return WebResponseDto.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kelurahanResponse)
@@ -95,9 +95,9 @@ public class UrbanVillageController {
     }
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<KelurahanResponseDto>> getKelurahanByNameContains(@RequestParam("name") String name) {
-        final List<KelurahanResponseDto> kelurahanResponseList = urbanVillageService.getKelurahanByNameContains(name);
-        return WebResponseDto.<List<KelurahanResponseDto>>builder()
+    public WebResponseDto<List<UrbanVillageDTO>> getKelurahanByNameContains(@RequestParam("name") String name) {
+        final List<UrbanVillageDTO> kelurahanResponseList = urbanVillageService.getKelurahanByNameContains(name);
+        return WebResponseDto.<List<UrbanVillageDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kelurahanResponseList)
@@ -105,9 +105,9 @@ public class UrbanVillageController {
     }
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KelurahanResponseDto> getKelurahanByCode(@RequestParam("code") String code) throws KelurahanNotFoundException {
-        final KelurahanResponseDto kelurahanResponse = urbanVillageService.getKelurahanByCode(code);
-        return WebResponseDto.<KelurahanResponseDto>builder()
+    public WebResponseDto<UrbanVillageDTO> getKelurahanByCode(@RequestParam("code") String code) throws KelurahanNotFoundException {
+        final UrbanVillageDTO kelurahanResponse = urbanVillageService.getKelurahanByCode(code);
+        return WebResponseDto.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(kelurahanResponse)

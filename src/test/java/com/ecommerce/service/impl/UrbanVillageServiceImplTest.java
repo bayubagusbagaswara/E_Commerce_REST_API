@@ -46,7 +46,7 @@ class UrbanVillageServiceImplTest {
         // id kecamatan Pesantren
         requestDto.setKecamatanId("357103");
 
-        final KelurahanResponseDto responseDto = kelurahanService.createKelurahan(requestDto);
+        final UrbanVillageDTO responseDto = kelurahanService.createKelurahan(requestDto);
         assertNotNull(responseDto.getId());
         assertNotNull(responseDto.getCreatedDate());
         assertEquals(requestDto.getName(), responseDto.getName());
@@ -57,7 +57,7 @@ class UrbanVillageServiceImplTest {
     void getKelurahanById() throws KelurahanNotFoundException {
         // id kelurahan Singonegaran, Kecamatan Pesantren
         String id = "3571031005";
-        final KelurahanResponseDto responseDto = kelurahanService.getKelurahanById(id);
+        final UrbanVillageDTO responseDto = kelurahanService.getKelurahanById(id);
         assertEquals(id, responseDto.getId());
     }
 
@@ -92,7 +92,7 @@ class UrbanVillageServiceImplTest {
         // pindah ke kecamatan Pesantren
         requestDto.setKecamatanId("357103");
 
-        final KelurahanResponseDto responseDto = kelurahanService.updateKelurahan(id, requestDto);
+        final UrbanVillageDTO responseDto = kelurahanService.updateKelurahan(id, requestDto);
 
         assertEquals(id, responseDto.getId());
         assertNotNull(responseDto.getUpdatedDate());
@@ -107,7 +107,7 @@ class UrbanVillageServiceImplTest {
         String id = "3571021014";
         kelurahanService.deleteKelurahan(id);
         assertThrows(KelurahanNotFoundException.class, () -> {
-            final KelurahanResponseDto kelurahan = kelurahanService.getKelurahanById(id);
+            final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanById(id);
         });
     }
 
@@ -116,7 +116,7 @@ class UrbanVillageServiceImplTest {
     void getKelurahanByName() throws KelurahanNotFoundException {
         // kelurahan singonegaran
         String name = "singonegaran";
-        final KelurahanResponseDto kelurahan = kelurahanService.getKelurahanByName(name);
+        final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanByName(name);
         assertEquals(name, kelurahan.getName().toLowerCase());
         log.info("Name: {}", kelurahan.getName());
     }
@@ -126,7 +126,7 @@ class UrbanVillageServiceImplTest {
     void getKelurahanByCode() throws KelurahanNotFoundException {
         // code singonegaran
         String code = "3571031005";
-        final KelurahanResponseDto kelurahan = kelurahanService.getKelurahanByCode(code);
+        final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanByCode(code);
         assertEquals(code, kelurahan.getCode());
         log.info("Code: {}", kelurahan.getCode());
     }
@@ -136,9 +136,9 @@ class UrbanVillageServiceImplTest {
     void getKelurahanByNameContains() {
         // name "ma" [Manggarai, Kemayoran, Manyar Sabrangan]
         String name = "ma";
-        final List<KelurahanResponseDto> kelurahanList = kelurahanService.getKelurahanByNameContains(name);
+        final List<UrbanVillageDTO> kelurahanList = kelurahanService.getKelurahanByNameContains(name);
         assertEquals(3, kelurahanList.size());
-        for (KelurahanResponseDto kelurahan : kelurahanList) {
+        for (UrbanVillageDTO kelurahan : kelurahanList) {
             log.info("Name: {}", kelurahan.getName());
             log.info("========");
         }
@@ -149,9 +149,9 @@ class UrbanVillageServiceImplTest {
     void getKelurahanByKecamatanId() {
         // id kecamatan Pesantren
         String kecamatanId = "357103";
-        final List<KelurahanResponseDto> kelurahanList = kelurahanService.getKelurahanByKecamatanId(kecamatanId);
+        final List<UrbanVillageDTO> kelurahanList = kelurahanService.getKelurahanByKecamatanId(kecamatanId);
         assertEquals(2, kelurahanList.size());
-        for (KelurahanResponseDto kelurahan : kelurahanList) {
+        for (UrbanVillageDTO kelurahan : kelurahanList) {
             log.info("Name: {}", kelurahan.getName());
             log.info("==========");
         }

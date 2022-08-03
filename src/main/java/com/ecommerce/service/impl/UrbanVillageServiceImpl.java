@@ -35,7 +35,7 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
     }
 
     @Override
-    public KelurahanResponseDto createKelurahan(CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException {
+    public UrbanVillageDTO createKelurahan(CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException {
         SubDistrict subDistrict = subDistrictRepository.findById(createKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + createKelurahanRequest.getKecamatanId() + "] not found"));
         UrbanVillage urbanVillage = new UrbanVillage();
@@ -48,14 +48,14 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
     }
 
     @Override
-    public KelurahanResponseDto getKelurahanById(String id) throws KelurahanNotFoundException {
+    public UrbanVillageDTO getKelurahanById(String id) throws KelurahanNotFoundException {
         UrbanVillage urbanVillage = urbanVillageRepository.findById(id)
                 .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + id + "] not found"));
         return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
-    public KelurahanResponseDto updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
+    public UrbanVillageDTO updateKelurahan(String id, UpdateKelurahanRequestDto updateKelurahanRequest) throws KecamatanNotFoundException, KelurahanNotFoundException {
         SubDistrict subDistrict = subDistrictRepository.findById(updateKelurahanRequest.getKecamatanId())
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + updateKelurahanRequest.getKecamatanId() + "] not found"));
         UrbanVillage urbanVillage = urbanVillageRepository.findById(id)
@@ -80,7 +80,7 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
 
         Page<UrbanVillage> kelurahanPage = urbanVillageRepository.findAll(pageable);
         List<UrbanVillage> urbanVillageList = kelurahanPage.getContent();
-        List<KelurahanResponseDto> kelurahanResponseList = wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
+        List<UrbanVillageDTO> kelurahanResponseList = wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
 
         ListKelurahanResponseDto listKelurahanResponse = new ListKelurahanResponseDto();
         listKelurahanResponse.setKelurahanList(kelurahanResponseList);
@@ -100,25 +100,25 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
     }
 
     @Override
-    public KelurahanResponseDto getKelurahanByName(String name) throws KelurahanNotFoundException {
+    public UrbanVillageDTO getKelurahanByName(String name) throws KelurahanNotFoundException {
         UrbanVillage urbanVillage = urbanVillageRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KelurahanNotFoundException("Kelurahan name [" + name + "] not found"));
         return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
-    public KelurahanResponseDto getKelurahanByCode(String code) throws KelurahanNotFoundException {
+    public UrbanVillageDTO getKelurahanByCode(String code) throws KelurahanNotFoundException {
         UrbanVillage urbanVillage = urbanVillageRepository.findAllByCode(code).orElseThrow(() -> new KelurahanNotFoundException("Kelurahan code [" + code + "] not found"));
         return wilayahMapper.mapToKelurahanResponse(urbanVillage);
     }
 
     @Override
-    public List<KelurahanResponseDto> getKelurahanByNameContains(String name) {
+    public List<UrbanVillageDTO> getKelurahanByNameContains(String name) {
         List<UrbanVillage> urbanVillageList = urbanVillageRepository.findAllByNameContainingIgnoreCase(name);
         return wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
     }
 
     @Override
-    public List<KelurahanResponseDto> getKelurahanByKecamatanId(String kecamatanId) {
+    public List<UrbanVillageDTO> getKelurahanByKecamatanId(String kecamatanId) {
         List<UrbanVillage> urbanVillageList = urbanVillageRepository.findAllByKecamatanId(kecamatanId);
         return wilayahMapper.mapToKelurahanResponseList(urbanVillageList);
     }
