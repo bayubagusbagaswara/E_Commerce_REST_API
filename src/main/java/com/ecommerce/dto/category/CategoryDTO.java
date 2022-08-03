@@ -1,6 +1,6 @@
 package com.ecommerce.dto.category;
 
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,5 +17,5 @@ public class CategoryDTO {
     private String description;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private List<ProductResponseDto> productList = new ArrayList<>();
+    private List<ProductDTO> productList = new ArrayList<>();
 }

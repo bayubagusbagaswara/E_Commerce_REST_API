@@ -1,6 +1,6 @@
 package com.ecommerce.mapper;
 
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.SupplierResponseDto;
 import com.ecommerce.entity.Product;
 import com.ecommerce.entity.Supplier;
@@ -20,8 +20,8 @@ public class SupplierMapper {
         this.productDetailMapper = productDetailMapper;
     }
 
-    public ProductResponseDto productResponse(Product product) {
-        ProductResponseDto productResponse = new ProductResponseDto();
+    public ProductDTO productResponse(Product product) {
+        ProductDTO productResponse = new ProductDTO();
         productResponse.setId(product.getId());
         productResponse.setName(product.getName());
         productResponse.setPrice(product.getPrice());

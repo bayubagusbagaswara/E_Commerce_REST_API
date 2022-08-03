@@ -52,7 +52,7 @@ class ProductServiceImplTest {
         // misal kita create product dengan category Laptop
         requestDto.setCategoryId("laptop");
 
-        final ProductResponseDto responseDto = productService.createProduct(requestDto);
+        final ProductDTO responseDto = productService.createProduct(requestDto);
         assertNotNull(responseDto.getId());
         assertNotNull(responseDto.getUpdatedDate());
         assertEquals("Asus test", responseDto.getName());
@@ -64,7 +64,7 @@ class ProductServiceImplTest {
     @Order(2)
     void getProductById() throws ProductNotFoundException {
         String id = "macbook";
-        final ProductResponseDto responseDto = productService.getProductById(id);
+        final ProductDTO responseDto = productService.getProductById(id);
         assertEquals("macbook", responseDto.getId());
         log.info("ID: {}", responseDto.getId());
     }
@@ -84,7 +84,7 @@ class ProductServiceImplTest {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListProductResponseDto products = productService.getAllProducts(requestDto);
+        final ListProductResponseDTO products = productService.getAllProducts(requestDto);
         assertEquals(11, products.getTotalElements());
         assertEquals(5, products.getProductList().size());
     }
@@ -102,7 +102,7 @@ class ProductServiceImplTest {
         // kita ganti category menjadi phone
         requestDto.setCategoryId("phone");
 
-        final ProductResponseDto responseDto = productService.updateProduct(id, requestDto);
+        final ProductDTO responseDto = productService.updateProduct(id, requestDto);
         assertEquals(id, responseDto.getId());
         assertNotNull(responseDto.getUpdatedDate());
         assertNotNull(responseDto.getProductDetail().getUpdatedAt());
@@ -114,7 +114,7 @@ class ProductServiceImplTest {
         String id = "";
         productService.deleteProduct(id);
         assertThrows(ProductNotFoundException.class, () -> {
-            final ProductResponseDto product = productService.getProductById(id);
+            final ProductDTO product = productService.getProductById(id);
         });
     }
 
@@ -122,7 +122,7 @@ class ProductServiceImplTest {
     @Order(6)
     void getProductByName() throws ProductNotFoundException {
         String name = "";
-        final ProductResponseDto product = productService.getProductByName(name);
+        final ProductDTO product = productService.getProductByName(name);
         assertEquals(name, product.getName());
     }
 
@@ -130,7 +130,7 @@ class ProductServiceImplTest {
     @Order(7)
     void getProductByContainingName() {
         String name = "";
-        final List<ProductResponseDto> products = productService.getProductByContainingName(name);
+        final List<ProductDTO> products = productService.getProductByContainingName(name);
         assertEquals(0, products.size());
     }
 
@@ -138,7 +138,7 @@ class ProductServiceImplTest {
     @Order(8)
     void getProductBySku() throws ProductNotFoundException {
         String sku = "";
-        final ProductResponseDto product = productService.getProductBySku(sku);
+        final ProductDTO product = productService.getProductBySku(sku);
         assertEquals(sku, product.getProductDetail().getSku());
     }
 
@@ -146,7 +146,7 @@ class ProductServiceImplTest {
     @Order(9)
     void getProductByCategoryId() {
         String categoryId = "";
-        final List<ProductResponseDto> products = productService.getProductByCategoryId(categoryId);
+        final List<ProductDTO> products = productService.getProductByCategoryId(categoryId);
         assertEquals(0, products.size());
     }
 
@@ -154,7 +154,7 @@ class ProductServiceImplTest {
     @Order(10)
     void getProductBySuppliersId() {
         String supplierId = "";
-        final List<ProductResponseDto> products = productService.getProductBySuppliersId(supplierId);
+        final List<ProductDTO> products = productService.getProductBySuppliersId(supplierId);
         assertEquals(0, products.size());
     }
 }

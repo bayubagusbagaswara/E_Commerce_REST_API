@@ -23,9 +23,9 @@ public class ProductController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProductResponseDto> createProduct(@RequestBody CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException {
-        final ProductResponseDto productResponse = productService.createProduct(createProductRequest);
-        return WebResponseDto.<ProductResponseDto>builder()
+    public WebResponseDto<ProductDTO> createProduct(@RequestBody CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException {
+        final ProductDTO productResponse = productService.createProduct(createProductRequest);
+        return WebResponseDto.<ProductDTO>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
                 .data(productResponse)
@@ -33,9 +33,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProductResponseDto> getProductById(@PathVariable("idProduct") String id) throws ProductNotFoundException {
-        final ProductResponseDto productResponse = productService.getProductById(id);
-        return WebResponseDto.<ProductResponseDto>builder()
+    public WebResponseDto<ProductDTO> getProductById(@PathVariable("idProduct") String id) throws ProductNotFoundException {
+        final ProductDTO productResponse = productService.getProductById(id);
+        return WebResponseDto.<ProductDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponse)
@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ListProductResponseDto> getAllProducts(
+    public WebResponseDto<ListProductResponseDTO> getAllProducts(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
@@ -55,8 +55,8 @@ public class ProductController {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListProductResponseDto productResponseList = productService.getAllProducts(requestDto);
-        return WebResponseDto.<ListProductResponseDto>builder()
+        final ListProductResponseDTO productResponseList = productService.getAllProducts(requestDto);
+        return WebResponseDto.<ListProductResponseDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponseList)
@@ -64,9 +64,9 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProductResponseDto> updateProduct(@PathVariable("idProduct") String id, @RequestBody UpdateProductRequestDto updateProductRequest) throws CategoryNotFoundException, ProductNotFoundException {
-        final ProductResponseDto productResponse = productService.updateProduct(id, updateProductRequest);
-        return WebResponseDto.<ProductResponseDto>builder()
+    public WebResponseDto<ProductDTO> updateProduct(@PathVariable("idProduct") String id, @RequestBody UpdateProductRequestDto updateProductRequest) throws CategoryNotFoundException, ProductNotFoundException {
+        final ProductDTO productResponse = productService.updateProduct(id, updateProductRequest);
+        return WebResponseDto.<ProductDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponse)
@@ -84,9 +84,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProductResponseDto> getProductByName(@RequestParam("name") String name) throws ProductNotFoundException {
-        final ProductResponseDto productResponse = productService.getProductByName(name);
-        return WebResponseDto.<ProductResponseDto>builder()
+    public WebResponseDto<ProductDTO> getProductByName(@RequestParam("name") String name) throws ProductNotFoundException {
+        final ProductDTO productResponse = productService.getProductByName(name);
+        return WebResponseDto.<ProductDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponse)
@@ -94,9 +94,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<ProductResponseDto>> getProductByNameContains(@RequestParam("name") String name) {
-        final List<ProductResponseDto> productResponseList = productService.getProductByContainingName(name);
-        return WebResponseDto.<List<ProductResponseDto>>builder()
+    public WebResponseDto<List<ProductDTO>> getProductByNameContains(@RequestParam("name") String name) {
+        final List<ProductDTO> productResponseList = productService.getProductByContainingName(name);
+        return WebResponseDto.<List<ProductDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponseList)
@@ -104,9 +104,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "/sku", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<ProductResponseDto> getProductBySku(@RequestParam("sku") String sku) throws ProductNotFoundException {
-        final ProductResponseDto productResponse = productService.getProductBySku(sku);
-        return WebResponseDto.<ProductResponseDto>builder()
+    public WebResponseDto<ProductDTO> getProductBySku(@RequestParam("sku") String sku) throws ProductNotFoundException {
+        final ProductDTO productResponse = productService.getProductBySku(sku);
+        return WebResponseDto.<ProductDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponse)
@@ -114,9 +114,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "/category/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<ProductResponseDto>> getProductByCategoryId(@PathVariable("idCategory") String idCategory) {
-        final List<ProductResponseDto> productResponseList = productService.getProductByCategoryId(idCategory);
-        return WebResponseDto.<List<ProductResponseDto>>builder()
+    public WebResponseDto<List<ProductDTO>> getProductByCategoryId(@PathVariable("idCategory") String idCategory) {
+        final List<ProductDTO> productResponseList = productService.getProductByCategoryId(idCategory);
+        return WebResponseDto.<List<ProductDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponseList)
@@ -124,9 +124,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "/supplier/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<List<ProductResponseDto>> getProductsBySupplierId(@PathVariable("idSupplier") String idSupplier) {
-        final List<ProductResponseDto> productResponseList = productService.getProductBySuppliersId(idSupplier);
-        return WebResponseDto.<List<ProductResponseDto>>builder()
+    public WebResponseDto<List<ProductDTO>> getProductsBySupplierId(@PathVariable("idSupplier") String idSupplier) {
+        final List<ProductDTO> productResponseList = productService.getProductBySuppliersId(idSupplier);
+        return WebResponseDto.<List<ProductDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(productResponseList)

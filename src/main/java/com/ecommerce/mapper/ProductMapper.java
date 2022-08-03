@@ -1,6 +1,6 @@
 package com.ecommerce.mapper;
 
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.SupplierResponseDto;
 import com.ecommerce.entity.Product;
 import com.ecommerce.entity.Supplier;
@@ -33,8 +33,8 @@ public class ProductMapper {
         return supplierResponse;
     }
 
-    public ProductResponseDto mapToProductResponse(Product product) {
-        ProductResponseDto productResponse = new ProductResponseDto();
+    public ProductDTO mapToProductResponse(Product product) {
+        ProductDTO productResponse = new ProductDTO();
         productResponse.setId(product.getId());
         productResponse.setName(product.getName());
         productResponse.setPrice(product.getPrice());
@@ -49,7 +49,7 @@ public class ProductMapper {
         return productResponse;
     }
 
-    public List<ProductResponseDto> mapToProductResponseList(List<Product> productList) {
+    public List<ProductDTO> mapToProductResponseList(List<Product> productList) {
         return productList.stream()
                 .map(this::mapToProductResponse)
                 .collect(Collectors.toList())

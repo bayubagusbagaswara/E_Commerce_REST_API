@@ -1,7 +1,7 @@
 package com.ecommerce.mapper;
 
 import com.ecommerce.dto.category.CategoryDTO;
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Product;
 import org.springframework.stereotype.Component;
@@ -18,8 +18,8 @@ public class CategoryMapper {
         this.productDetailMapper = productDetailMapper;
     }
 
-    public ProductResponseDto productResponseDto(Product product) {
-        ProductResponseDto productResponse = new ProductResponseDto();
+    public ProductDTO productResponseDto(Product product) {
+        ProductDTO productResponse = new ProductDTO();
         productResponse.setId(product.getId());
         productResponse.setName(product.getName());
         productResponse.setPrice(product.getPrice());

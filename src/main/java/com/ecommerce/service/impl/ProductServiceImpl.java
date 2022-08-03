@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto createProduct(CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException {
+    public ProductDTO createProduct(CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException {
 
         Category category = categoryRepository.findById(createProductRequest.getCategoryId())
                 .orElseThrow(() -> new CategoryNotFoundException("Category ID [" + createProductRequest.getCategoryId() + "] not found"));
@@ -63,13 +63,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto getProductById(String id) throws ProductNotFoundException {
+    public ProductDTO getProductById(String id) throws ProductNotFoundException {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product ID: [" + id + "] not found"));
         return productMapper.mapToProductResponse(product);
     }
 
     @Override
-    public ListProductResponseDto getAllProducts(ListProductRequestDTO listProductRequest) {
+    public ListProductResponseDTO getAllProducts(ListProductRequestDTO listProductRequest) {
         Integer pageNo = listProductRequest.getPageNo();
         Integer pageSize = listProductRequest.getPageSize();
         String sortBy = listProductRequest.getSortBy();
@@ -81,9 +81,9 @@ public class ProductServiceImpl implements ProductService {
         Page<Product> productPage = productRepository.findAll(pageable);
         List<Product> productList = productPage.getContent();
 
-        List<ProductResponseDto> productResponseList = productMapper.mapToProductResponseList(productList);
+        List<ProductDTO> productResponseList = productMapper.mapToProductResponseList(productList);
 
-        ListProductResponseDto listProductResponse = new ListProductResponseDto();
+        ListProductResponseDTO listProductResponse = new ListProductResponseDTO();
         listProductResponse.setProductList(productResponseList);
         listProductResponse.setPageNo(productPage.getNumber());
         listProductResponse.setPageSize(productPage.getSize());
@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto updateProduct(String id, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException {
+    public ProductDTO updateProduct(String id, UpdateProductRequestDto updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException {
         final Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product ID [" + id + "] not found"));
 
@@ -129,33 +129,33 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto getProductByName(String name) throws ProductNotFoundException {
+    public ProductDTO getProductByName(String name) throws ProductNotFoundException {
         Product product = productRepository.findProductByNameIgnoreCase(name)
                 .orElseThrow(() -> new ProductNotFoundException("Product name [" + name + "] not found"));
         return productMapper.mapToProductResponse(product);
     }
 
     @Override
-    public List<ProductResponseDto> getProductByContainingName(String name) {
+    public List<ProductDTO> getProductByContainingName(String name) {
         List<Product> productList = productRepository.findAllByNameContainingIgnoreCase(name);
         return productMapper.mapToProductResponseList(productList);
     }
 
     @Override
-    public ProductResponseDto getProductBySku(String sku) throws ProductNotFoundException {
+    public ProductDTO getProductBySku(String sku) throws ProductNotFoundException {
         Product product = productRepository.findAllByProductDetailSku(sku)
                 .orElseThrow(() -> new ProductNotFoundException("Product SKU [" + sku + "] not found"));
         return productMapper.mapToProductResponse(product);
     }
 
     @Override
-    public List<ProductResponseDto> getProductByCategoryId(String categoryId) {
+    public List<ProductDTO> getProductByCategoryId(String categoryId) {
         List<Product> productList = productRepository.findAllByCategoryId(categoryId);
         return productMapper.mapToProductResponseList(productList);
     }
 
     @Override
-    public List<ProductResponseDto> getProductBySuppliersId(String supplierId) {
+    public List<ProductDTO> getProductBySuppliersId(String supplierId) {
         List<Product> productList = productRepository.findAllBySuppliersId(supplierId);
         return productMapper.mapToProductResponseList(productList);
     }

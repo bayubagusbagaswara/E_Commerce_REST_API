@@ -1,6 +1,6 @@
 package com.ecommerce.dto.supplier;
 
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.entity.SupplierAddress;
 import com.ecommerce.entity.enumerator.Gender;
 import lombok.Data;
@@ -30,5 +30,5 @@ public class SupplierResponseDto {
 
     private SupplierAddress supplierAddress;
 
-    private Set<ProductResponseDto> products = new HashSet<>();
+    private Set<ProductDTO> products = new HashSet<>();
 }

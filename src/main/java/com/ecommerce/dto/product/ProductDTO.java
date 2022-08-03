@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-public class ProductResponseDto {
+public class ProductDTO {
 
     private String id;
     private String name;

@@ -1,6 +1,6 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.*;
 import com.ecommerce.entity.enumerator.Gender;
 import com.ecommerce.exception.KelurahanNotFoundException;
@@ -157,7 +157,7 @@ class SupplierServiceImplTest {
         String productId = "";
         String supplierId = "";
         final SupplierResponseDto supplier = supplierService.addProductToSupplier(supplierId, productId);
-        for (ProductResponseDto product : supplier.getProducts()) {
+        for (ProductDTO product : supplier.getProducts()) {
             if (product.getId().equals(productId)) {
             }
         }

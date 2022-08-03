@@ -1,6 +1,6 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.SupplierResponseDto;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
@@ -62,7 +62,7 @@ public class ProductAndSupplierTest {
         String productId = "macbook";
         productService.deleteProduct(productId);
         assertThrows(ProductNotFoundException.class, () -> {
-            final ProductResponseDto product = productService.getProductById(productId);
+            final ProductDTO product = productService.getProductById(productId);
         });
 
         // cek apakah supplier masih punya relasi dengan product yang sudah terhapus
@@ -73,7 +73,7 @@ public class ProductAndSupplierTest {
         String supplierIdBayu = "bayu";
         final SupplierResponseDto supplier = supplierService.getSupplierById(supplierIdBayu);
         assertEquals(2, supplier.getProducts().size());
-        for (ProductResponseDto product : supplier.getProducts()) {
+        for (ProductDTO product : supplier.getProducts()) {
             log.info("Product: {}", product.getId());
             log.info("======");
         }
@@ -82,7 +82,7 @@ public class ProductAndSupplierTest {
         String supplierIdTesla = "tesla";
         final SupplierResponseDto supplier1 = supplierService.getSupplierById(supplierIdTesla);
         assertEquals(1, supplier1.getProducts().size());
-        for (ProductResponseDto product : supplier1.getProducts()) {
+        for (ProductDTO product : supplier1.getProducts()) {
             assertEquals("legion", product.getId());
         }
 
@@ -105,17 +105,17 @@ public class ProductAndSupplierTest {
 
         // product macbook [bayu, albert, tesla]
         String productIdMacbook = "macbook";
-        final ProductResponseDto product = productService.getProductById(productIdMacbook);
+        final ProductDTO product = productService.getProductById(productIdMacbook);
         assertEquals(2, product.getSuppliers().size());
 
         // product canon [bagus, newton, albert]
         String productIdCanon = "canon";
-        final ProductResponseDto product1 = productService.getProductById(productIdCanon);
+        final ProductDTO product1 = productService.getProductById(productIdCanon);
         assertEquals(2, product1.getSuppliers().size());
 
         // product iphone [albert, newton]
         String productIdIphone = "iphone";
-        final ProductResponseDto product2 = productService.getProductById(productIdIphone);
+        final ProductDTO product2 = productService.getProductById(productIdIphone);
         assertEquals(1, product2.getSuppliers().size());
         for (SupplierResponseDto supplier : product2.getSuppliers()) {
             assertEquals("newton", supplier.getId());

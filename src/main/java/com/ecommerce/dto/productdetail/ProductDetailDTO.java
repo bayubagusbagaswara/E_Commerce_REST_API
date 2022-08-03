@@ -1,6 +1,6 @@
 package com.ecommerce.dto.productdetail;
 
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +14,5 @@ public class ProductDetailDTO {
 
     private String sku;
     private String description;
-    private ProductResponseDto productDTO;
+    private ProductDTO productDTO;
 }

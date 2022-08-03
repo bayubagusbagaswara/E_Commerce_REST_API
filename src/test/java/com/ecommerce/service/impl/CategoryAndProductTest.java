@@ -2,7 +2,7 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.category.CategoryDTO;
 import com.ecommerce.dto.category.UpdateCategoryRequestDTO;
-import com.ecommerce.dto.product.ProductResponseDto;
+import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.exception.CategoryNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
@@ -57,12 +57,12 @@ public class CategoryAndProductTest {
         // [legion, macbook]
         String productId1 = "macbook";
         assertThrows(ProductNotFoundException.class, () -> {
-            final ProductResponseDto product = productService.getProductById(productId1);
+            final ProductDTO product = productService.getProductById(productId1);
         });
 
         String productId2 = "legion";
         assertThrows(ProductNotFoundException.class, () -> {
-            final ProductResponseDto product = productService.getProductById(productId2);
+            final ProductDTO product = productService.getProductById(productId2);
         });
 
         // kalau kita update cascade set null, maka data product nya tetap ada, handa data category nya kita set null
@@ -82,7 +82,7 @@ public class CategoryAndProductTest {
         // cek di product
         // caranya ambil data product, lalu bandingkan equals data categorynya
         String productId = "macbook";
-        final ProductResponseDto product = productService.getProductById(productId);
+        final ProductDTO product = productService.getProductById(productId);
         assertEquals("Laptop Update", product.getCategory().getName());
         assertEquals("Laptop update description", product.getCategory().getDescription());
 
@@ -98,7 +98,7 @@ public class CategoryAndProductTest {
         String productId = "legion";
         productService.deleteProduct(productId);
         assertThrows(ProductNotFoundException.class, () -> {
-            final ProductResponseDto product = productService.getProductById(productId);
+            final ProductDTO product = productService.getProductById(productId);
         });
 
         // kita cek category nya
