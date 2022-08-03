@@ -18,9 +18,5 @@ public class AddressResponseDto {
 
     private String street;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
     private KelurahanResponseDto kelurahanResponseDto;
 }

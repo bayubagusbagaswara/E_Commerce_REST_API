@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DistrictService {
 
-    KotaResponseDto createKota(CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException;
+    KotaResponseDto createKota(CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException;
 
     KotaResponseDto getKotaById(String id) throws KotaNotFoundException;
 

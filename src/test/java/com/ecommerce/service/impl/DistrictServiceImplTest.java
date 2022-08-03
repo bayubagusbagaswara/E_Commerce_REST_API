@@ -37,7 +37,7 @@ class DistrictServiceImplTest {
     @Test
     @Order(1)
     void createKota() throws ProvinsiNotFoundException {
-        CreateKotaRequestDto requestDto = new CreateKotaRequestDto();
+        CreateDistrictRequestDTO requestDto = new CreateDistrictRequestDTO();
         requestDto.setCode("35123");
         requestDto.setName("Kota Test");
         // provinsi Jawa Timur

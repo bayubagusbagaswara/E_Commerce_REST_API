@@ -24,7 +24,7 @@ public class DistrictController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDto<KotaResponseDto> createKota(@RequestBody CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException {
+    public WebResponseDto<KotaResponseDto> createKota(@RequestBody CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
         final KotaResponseDto kotaResponse = districtService.createKota(createKotaRequest);
         return WebResponseDto.<KotaResponseDto>builder()
                 .code(HttpStatus.CREATED.value())

@@ -35,7 +35,7 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public KotaResponseDto createKota(CreateKotaRequestDto createKotaRequest) throws ProvinsiNotFoundException {
+    public KotaResponseDto createKota(CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
         Province province = provinceRepository.findById(createKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + createKotaRequest.getProvinsiId() + "] not found"));
         District district = new District();
