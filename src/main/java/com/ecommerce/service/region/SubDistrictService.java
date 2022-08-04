@@ -3,19 +3,19 @@ package com.ecommerce.service.region;
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
-import com.ecommerce.exception.KotaNotFoundException;
+import com.ecommerce.exception.DistrictNotFoundException;
 
 import java.util.List;
 
 public interface SubDistrictService {
 
-    SubDistrictDTO createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws KotaNotFoundException;
+    SubDistrictDTO createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws DistrictNotFoundException;
 
     SubDistrictDTO getKecamatanById(String id) throws KecamatanNotFoundException;
 
     ListSubDistrictResponseDTO getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest);
 
-    SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException;
+    SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KecamatanNotFoundException, DistrictNotFoundException;
 
     void deleteKecamatan(String id) throws KecamatanNotFoundException;
 

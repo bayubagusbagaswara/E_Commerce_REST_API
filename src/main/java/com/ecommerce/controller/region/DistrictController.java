@@ -2,7 +2,7 @@ package com.ecommerce.controller.region;
 
 import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.region.district.*;
-import com.ecommerce.exception.KotaNotFoundException;
+import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.exception.ProvinceNotFoundException;
 import com.ecommerce.service.region.DistrictService;
 import com.ecommerce.util.AppConstants;
@@ -33,7 +33,7 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<DistrictDTO> getKotaById(@PathVariable("idKota") String id) throws KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> getKotaById(@PathVariable("idKota") String id) throws DistrictNotFoundException {
         final DistrictDTO kotaResponse = districtService.getKotaById(id);
         return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -65,7 +65,7 @@ public class DistrictController {
     }
 
     @PutMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateDistrictRequestDTO updateDistrictRequestDTO) throws ProvinceNotFoundException, KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateDistrictRequestDTO updateDistrictRequestDTO) throws ProvinceNotFoundException, DistrictNotFoundException {
         final DistrictDTO kotaResponse = districtService.updateKota(id, updateDistrictRequestDTO);
         return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -75,7 +75,7 @@ public class DistrictController {
     }
 
     @DeleteMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<String> deleteKota(@PathVariable("idKota") String id) throws KotaNotFoundException {
+    public WebResponseDTO<String> deleteKota(@PathVariable("idKota") String id) throws DistrictNotFoundException {
         districtService.deleteKota(id);
         return WebResponseDTO.<String>builder()
                 .code(HttpStatus.OK.value())
@@ -85,7 +85,7 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<DistrictDTO> getKotaByName(@RequestParam("name") String name) throws KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> getKotaByName(@RequestParam("name") String name) throws DistrictNotFoundException {
         final DistrictDTO kotaResponse = districtService.getKotaByName(name);
         return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -105,7 +105,7 @@ public class DistrictController {
     }
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<DistrictDTO> getKotaByCode(@RequestParam("code") String code) throws KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> getKotaByCode(@RequestParam("code") String code) throws DistrictNotFoundException {
         final DistrictDTO kotaResponse = districtService.getKotaByCode(code);
         return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())

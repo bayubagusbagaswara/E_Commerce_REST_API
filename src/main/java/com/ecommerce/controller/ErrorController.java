@@ -13,7 +13,7 @@ public class ErrorController {
     @ExceptionHandler(value = {
             CategoryNotFoundException.class,
             ProvinceNotFoundException.class,
-            KotaNotFoundException.class,
+            DistrictNotFoundException.class,
             KecamatanNotFoundException.class,
             KelurahanNotFoundException.class,
             ProductNotFoundException.class,
@@ -26,7 +26,7 @@ public class ErrorController {
             SupplierNotFoundException supplierNotFoundException,
             ProductDetailNotFoundException productDetailNotFoundException,
             ProvinceNotFoundException provinceNotFoundException,
-            KotaNotFoundException kotaNotFoundException,
+            DistrictNotFoundException districtNotFoundException,
             KecamatanNotFoundException kecamatanNotFoundException,
             KelurahanNotFoundException kelurahanNotFoundException
     ) {

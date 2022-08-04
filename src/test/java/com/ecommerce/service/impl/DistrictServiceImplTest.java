@@ -2,7 +2,7 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
-import com.ecommerce.exception.KotaNotFoundException;
+import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.exception.ProvinceNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -54,7 +54,7 @@ class DistrictServiceImplTest {
 
     @Test
     @Order(2)
-    void getKotaById() throws KotaNotFoundException {
+    void getKotaById() throws DistrictNotFoundException {
         // id kota Kediri, Jawa Timur
         String id = "3571";
         final DistrictDTO kota = kotaService.getKotaById(id);
@@ -85,7 +85,7 @@ class DistrictServiceImplTest {
 
     @Test
     @Order(4)
-    void updateKota() throws ProvinceNotFoundException, KotaNotFoundException {
+    void updateKota() throws ProvinceNotFoundException, DistrictNotFoundException {
         // update kota Denpasar pindah ke provinsi jawa timur
         String id = "5171";
         UpdateDistrictRequestDTO requestDto = new UpdateDistrictRequestDTO();
@@ -102,11 +102,11 @@ class DistrictServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteKota() throws KotaNotFoundException {
+    void deleteKota() throws DistrictNotFoundException {
         // delete kota Denpasar
         String id = "5171";
         kotaService.deleteKota(id);
-        assertThrows(KotaNotFoundException.class, new Executable() {
+        assertThrows(DistrictNotFoundException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
                 final DistrictDTO kota = kotaService.getKotaById(id);
@@ -116,7 +116,7 @@ class DistrictServiceImplTest {
 
     @Test
     @Order(6)
-    void getKotaByName() throws KotaNotFoundException {
+    void getKotaByName() throws DistrictNotFoundException {
         String name = "kota kediri";
         final DistrictDTO kota = kotaService.getKotaByName(name);
         assertEquals(name, kota.getName().toLowerCase());
@@ -125,7 +125,7 @@ class DistrictServiceImplTest {
 
     @Test
     @Order(7)
-    void getKotaByCode() throws KotaNotFoundException {
+    void getKotaByCode() throws DistrictNotFoundException {
         // code kota kediri
         String code = "3571";
         final DistrictDTO kota = kotaService.getKotaByCode(code);

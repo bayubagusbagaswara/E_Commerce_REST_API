@@ -4,7 +4,7 @@ import com.ecommerce.entity.region.Province;
 import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.entity.region.District;
-import com.ecommerce.exception.KotaNotFoundException;
+import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.exception.ProvinceNotFoundException;
 import com.ecommerce.repository.DistrictRepository;
 import com.ecommerce.repository.ProvinceRepository;
@@ -47,18 +47,18 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public DistrictDTO getKotaById(String id) throws KotaNotFoundException {
+    public DistrictDTO getKotaById(String id) throws DistrictNotFoundException {
         District district = districtRepository.findById(id)
-                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
+                .orElseThrow(() -> new DistrictNotFoundException("Kota ID [" + id + "] not found"));
         return regionMapper.mapToKotaResponse(district);
     }
 
     @Override
-    public DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws KotaNotFoundException, ProvinceNotFoundException {
+    public DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws DistrictNotFoundException, ProvinceNotFoundException {
         Province province = provinceRepository.findById(updateKotaRequest.getProvinsiId())
                 .orElseThrow(() -> new ProvinceNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
         District district = districtRepository.findById(id)
-                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
+                .orElseThrow(() -> new DistrictNotFoundException("Kota ID [" + id + "] not found"));
         district.setCode(updateKotaRequest.getCode());
         district.setName(updateKotaRequest.getName());
         district.setProvince(province);
@@ -68,9 +68,9 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public void deleteKota(String id) throws KotaNotFoundException {
+    public void deleteKota(String id) throws DistrictNotFoundException {
         final District district = districtRepository.findById(id)
-                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
+                .orElseThrow(() -> new DistrictNotFoundException("Kota ID [" + id + "] not found"));
         districtRepository.delete(district);
     }
 
@@ -99,14 +99,14 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public DistrictDTO getKotaByName(String name) throws KotaNotFoundException {
-        District district = districtRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name [" + name + "] not found"));
+    public DistrictDTO getKotaByName(String name) throws DistrictNotFoundException {
+        District district = districtRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new DistrictNotFoundException("Kota name [" + name + "] not found"));
         return regionMapper.mapToKotaResponse(district);
     }
 
     @Override
-    public DistrictDTO getKotaByCode(String code) throws KotaNotFoundException {
-        District district = districtRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code [" + code + "] not found"));
+    public DistrictDTO getKotaByCode(String code) throws DistrictNotFoundException {
+        District district = districtRepository.findAllByCode(code).orElseThrow(() -> new DistrictNotFoundException("Kota code [" + code + "] not found"));
         return regionMapper.mapToKotaResponse(district);
     }
 

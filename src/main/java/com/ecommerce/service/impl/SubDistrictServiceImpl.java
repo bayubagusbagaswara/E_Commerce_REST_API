@@ -5,7 +5,7 @@ import com.ecommerce.entity.region.SubDistrict;
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
-import com.ecommerce.exception.KotaNotFoundException;
+import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.repository.SubDistrictRepository;
 import com.ecommerce.repository.DistrictRepository;
 import com.ecommerce.service.region.SubDistrictService;
@@ -34,9 +34,9 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public SubDistrictDTO createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws KotaNotFoundException {
+    public SubDistrictDTO createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws DistrictNotFoundException {
         District district = districtRepository.findById(createKecamatanRequest.getKotaId())
-                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + createKecamatanRequest.getKotaId() + "] not found"));
+                .orElseThrow(() -> new DistrictNotFoundException("Kota ID [" + createKecamatanRequest.getKotaId() + "] not found"));
         SubDistrict subDistrict = new SubDistrict();
         subDistrict.setCode(createKecamatanRequest.getCode());
         subDistrict.setName(createKecamatanRequest.getName());
@@ -54,9 +54,9 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KotaNotFoundException, KecamatanNotFoundException {
+    public SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws DistrictNotFoundException, KecamatanNotFoundException {
         District district = districtRepository.findById(updateKecamatanRequest.getKotaId())
-                .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + updateKecamatanRequest.getKotaId() + "] not found"));
+                .orElseThrow(() -> new DistrictNotFoundException("Kota ID [" + updateKecamatanRequest.getKotaId() + "] not found"));
         SubDistrict subDistrict = subDistrictRepository.findById(id)
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + id + "] not found"));
         subDistrict.setCode(updateKecamatanRequest.getCode());

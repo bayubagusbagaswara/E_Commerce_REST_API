@@ -3,7 +3,7 @@ package com.ecommerce.service.impl;
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
-import com.ecommerce.exception.KotaNotFoundException;
+import com.ecommerce.exception.DistrictNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ class SubDistrictServiceImplTest {
 
     @Test
     @Order(1)
-    void createKecamatan() throws KotaNotFoundException {
+    void createKecamatan() throws DistrictNotFoundException {
         CreateSubDistrictRequestDTO requestDto = new CreateSubDistrictRequestDTO();
         requestDto.setCode("3571890");
         requestDto.setName("Kecamatan Kediri");
@@ -81,7 +81,7 @@ class SubDistrictServiceImplTest {
 
     @Test
     @Order(4)
-    void updateKecamatan() throws KecamatanNotFoundException, KotaNotFoundException {
+    void updateKecamatan() throws KecamatanNotFoundException, DistrictNotFoundException {
         // update kecamatan Mojoroto id 357101
         String id = "357101";
         UpdateSubDistrictRequestDTO requestDto = new UpdateSubDistrictRequestDTO();

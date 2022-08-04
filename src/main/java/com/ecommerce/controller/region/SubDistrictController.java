@@ -4,7 +4,7 @@ import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
-import com.ecommerce.exception.KotaNotFoundException;
+import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.service.region.SubDistrictService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class SubDistrictController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SubDistrictDTO> createKecamatan(@RequestBody CreateSubDistrictRequestDTO createKecamatanRequest) throws KotaNotFoundException {
+    public WebResponseDTO<SubDistrictDTO> createKecamatan(@RequestBody CreateSubDistrictRequestDTO createKecamatanRequest) throws DistrictNotFoundException {
         final SubDistrictDTO kecamatanResponse = subDistrictService.createKecamatan(createKecamatanRequest);
         return WebResponseDTO.<SubDistrictDTO>builder()
                 .code(HttpStatus.CREATED.value())
@@ -65,7 +65,7 @@ public class SubDistrictController {
     }
 
     @PutMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SubDistrictDTO> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KecamatanNotFoundException, KotaNotFoundException {
+    public WebResponseDTO<SubDistrictDTO> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KecamatanNotFoundException, DistrictNotFoundException {
         final SubDistrictDTO kecamatanResponse = subDistrictService.updateKecamatan(id, updateKecamatanRequest);
         return WebResponseDTO.<SubDistrictDTO>builder()
                 .code(HttpStatus.OK.value())
