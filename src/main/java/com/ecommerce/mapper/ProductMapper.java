@@ -13,11 +13,10 @@ import java.util.stream.Collectors;
 public class ProductMapper {
 
     private final CategoryMapper categoryMapper;
-    private final ProductDetailMapper productDetailMapper;
 
-    public ProductMapper(CategoryMapper categoryMapper, ProductDetailMapper productDetailMapper) {
+
+    public ProductMapper(CategoryMapper categoryMapper) {
         this.categoryMapper = categoryMapper;
-        this.productDetailMapper = productDetailMapper;
     }
 
     public SupplierResponseDto supplierResponse(Supplier supplier) {

@@ -27,7 +27,6 @@ public class CreateSupplierRequestDTO {
     @NotBlank(message = "Street must not be blank")
     private String street;
 
-
-    @NotBlank(message = "uR ID must not be blank")
-    private String kelurahanId;
+    @NotBlank(message = "Urban Village ID must not be blank")
+    private String urbanVillageId;
 }
