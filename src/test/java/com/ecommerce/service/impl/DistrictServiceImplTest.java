@@ -3,7 +3,7 @@ package com.ecommerce.service.impl;
 import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.exception.KotaNotFoundException;
-import com.ecommerce.exception.ProvinsiNotFoundException;
+import com.ecommerce.exception.ProvinceNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class DistrictServiceImplTest {
 
     @Test
     @Order(1)
-    void createKota() throws ProvinsiNotFoundException {
+    void createKota() throws ProvinceNotFoundException {
         CreateDistrictRequestDTO requestDto = new CreateDistrictRequestDTO();
         requestDto.setCode("35123");
         requestDto.setName("Kota Test");
@@ -85,7 +85,7 @@ class DistrictServiceImplTest {
 
     @Test
     @Order(4)
-    void updateKota() throws ProvinsiNotFoundException, KotaNotFoundException {
+    void updateKota() throws ProvinceNotFoundException, KotaNotFoundException {
         // update kota Denpasar pindah ke provinsi jawa timur
         String id = "5171";
         UpdateDistrictRequestDTO requestDto = new UpdateDistrictRequestDTO();

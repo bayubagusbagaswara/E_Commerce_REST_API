@@ -2,7 +2,7 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.province.*;
-import com.ecommerce.exception.ProvinsiNotFoundException;
+import com.ecommerce.exception.ProvinceNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -49,7 +49,7 @@ class ProvinceServiceImplTest {
 
     @Test
     @Order(2)
-    void getProvinsiById() throws ProvinsiNotFoundException {
+    void getProvinsiById() throws ProvinceNotFoundException {
         // id provinsi Jawa Timur
         String id = "35";
         ProvinceDTO provinsi = provinsiService.getProvinsiById(id);
@@ -80,7 +80,7 @@ class ProvinceServiceImplTest {
 
     @Test
     @Order(4)
-    void updateProvinsi() throws ProvinsiNotFoundException {
+    void updateProvinsi() throws ProvinceNotFoundException {
         // id provinsi Jakarta
         String id = "31";
 
@@ -97,18 +97,18 @@ class ProvinceServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteProvinsi() throws ProvinsiNotFoundException {
+    void deleteProvinsi() throws ProvinceNotFoundException {
         // id provinsi Bali
         String id = "51";
         provinsiService.deleteProvinsi(id);
-        assertThrows(ProvinsiNotFoundException.class, () -> {
+        assertThrows(ProvinceNotFoundException.class, () -> {
             ProvinceDTO provinsi = provinsiService.getProvinsiById(id);
         });
     }
 
     @Test
     @Order(6)
-    void getProvinsiByName() throws ProvinsiNotFoundException {
+    void getProvinsiByName() throws ProvinceNotFoundException {
         // name provinsi jawa timur
         String name = "jawa timur";
         final ProvinceDTO provinsi = provinsiService.getProvinsiByName(name);
@@ -118,7 +118,7 @@ class ProvinceServiceImplTest {
 
     @Test
     @Order(7)
-    void getProvinsiByCode() throws ProvinsiNotFoundException {
+    void getProvinsiByCode() throws ProvinceNotFoundException {
         // code provinsi jawa timur
         String code = "35";
         final ProvinceDTO provinsi = provinsiService.getProvinsiByCode(code);

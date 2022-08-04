@@ -5,7 +5,7 @@ import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.entity.region.District;
 import com.ecommerce.exception.KotaNotFoundException;
-import com.ecommerce.exception.ProvinsiNotFoundException;
+import com.ecommerce.exception.ProvinceNotFoundException;
 import com.ecommerce.repository.DistrictRepository;
 import com.ecommerce.repository.ProvinceRepository;
 import com.ecommerce.service.region.DistrictService;
@@ -34,9 +34,9 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public DistrictDTO createKota(CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
+    public DistrictDTO createKota(CreateDistrictRequestDTO createKotaRequest) throws ProvinceNotFoundException {
         Province province = provinceRepository.findById(createKotaRequest.getProvinsiId())
-                .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + createKotaRequest.getProvinsiId() + "] not found"));
+                .orElseThrow(() -> new ProvinceNotFoundException("Provinsi ID [" + createKotaRequest.getProvinsiId() + "] not found"));
         District district = new District();
         district.setCode(createKotaRequest.getCode());
         district.setName(createKotaRequest.getName());
@@ -54,9 +54,9 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException {
+    public DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws KotaNotFoundException, ProvinceNotFoundException {
         Province province = provinceRepository.findById(updateKotaRequest.getProvinsiId())
-                .orElseThrow(() -> new ProvinsiNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
+                .orElseThrow(() -> new ProvinceNotFoundException("Provinsi ID [" + updateKotaRequest.getProvinsiId() + "] not found"));
         District district = districtRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
         district.setCode(updateKotaRequest.getCode());

@@ -1,21 +1,20 @@
 package com.ecommerce.service.region;
 
-import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.exception.KotaNotFoundException;
-import com.ecommerce.exception.ProvinsiNotFoundException;
+import com.ecommerce.exception.ProvinceNotFoundException;
 
 import java.util.List;
 
 public interface DistrictService {
 
-    DistrictDTO createKota(CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException;
+    DistrictDTO createDistrict(CreateDistrictRequestDTO createKotaRequest) throws ProvinceNotFoundException;
 
     DistrictDTO getKotaById(String id) throws KotaNotFoundException;
 
     ListDistrictResponseDTO getAllKota(ListDistrictRequestDTO listKotaRequest);
 
-    DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws KotaNotFoundException, ProvinsiNotFoundException;
+    DistrictDTO updateKota(String id, UpdateDistrictRequestDTO updateKotaRequest) throws KotaNotFoundException, ProvinceNotFoundException;
 
     void deleteKota(String id) throws KotaNotFoundException;
 

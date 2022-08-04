@@ -1,10 +1,9 @@
 package com.ecommerce.controller.region;
 
 import com.ecommerce.dto.WebResponseDTO;
-import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.exception.KotaNotFoundException;
-import com.ecommerce.exception.ProvinsiNotFoundException;
+import com.ecommerce.exception.ProvinceNotFoundException;
 import com.ecommerce.service.region.DistrictService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class DistrictController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<DistrictDTO> createKota(@RequestBody CreateDistrictRequestDTO createKotaRequest) throws ProvinsiNotFoundException {
+    public WebResponseDTO<DistrictDTO> createKota(@RequestBody CreateDistrictRequestDTO createKotaRequest) throws ProvinceNotFoundException {
         final DistrictDTO kotaResponse = districtService.createKota(createKotaRequest);
         return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.CREATED.value())
@@ -66,7 +65,7 @@ public class DistrictController {
     }
 
     @PutMapping(value = "/{idKota}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateDistrictRequestDTO updateDistrictRequestDTO) throws ProvinsiNotFoundException, KotaNotFoundException {
+    public WebResponseDTO<DistrictDTO> updateKota(@PathVariable("idKota") String id, @RequestBody UpdateDistrictRequestDTO updateDistrictRequestDTO) throws ProvinceNotFoundException, KotaNotFoundException {
         final DistrictDTO kotaResponse = districtService.updateKota(id, updateDistrictRequestDTO);
         return WebResponseDTO.<DistrictDTO>builder()
                 .code(HttpStatus.OK.value())
