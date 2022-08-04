@@ -2,13 +2,14 @@ package com.ecommerce.service.impl.region;
 
 import com.ecommerce.entity.region.SubDistrict;
 import com.ecommerce.entity.region.UrbanVillage;
-import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
 import com.ecommerce.exception.SubDistrictNotFoundException;
 import com.ecommerce.exception.UrbanVillageNotFoundException;
+import com.ecommerce.mapper.region.UrbanVillageMapper;
 import com.ecommerce.repository.region.SubDistrictRepository;
 import com.ecommerce.repository.region.UrbanVillageRepository;
 import com.ecommerce.service.region.UrbanVillageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -25,101 +26,95 @@ public class UrbanVillageServiceImpl implements UrbanVillageService {
 
     private final UrbanVillageRepository urbanVillageRepository;
     private final SubDistrictRepository subDistrictRepository;
-    private final RegionMapper regionMapper;
+    private final UrbanVillageMapper urbanVillageMapper;
 
-    public UrbanVillageServiceImpl(UrbanVillageRepository urbanVillageRepository, SubDistrictRepository subDistrictRepository, RegionMapper regionMapper) {
+    @Autowired
+    public UrbanVillageServiceImpl(UrbanVillageRepository urbanVillageRepository, SubDistrictRepository subDistrictRepository, UrbanVillageMapper urbanVillageMapper) {
         this.urbanVillageRepository = urbanVillageRepository;
         this.subDistrictRepository = subDistrictRepository;
-        this.regionMapper = regionMapper;
+        this.urbanVillageMapper = urbanVillageMapper;
     }
 
+
     @Override
-    public UrbanVillageDTO createKelurahan(CreateUrbanVillageRequestDTO createKelurahanRequest) throws SubDistrictNotFoundException {
-        SubDistrict subDistrict = subDistrictRepository.findById(createKelurahanRequest.getKecamatanId())
-                .orElseThrow(() -> new SubDistrictNotFoundException("Kecamatan ID [" + createKelurahanRequest.getKecamatanId() + "] not found"));
+    public UrbanVillageDTO createUrbanVillage(CreateUrbanVillageRequestDTO createUrbanVillageRequestDTO) {
+        SubDistrict subDistrict = subDistrictRepository.findById(createUrbanVillageRequestDTO.getSubDistrictId())
+                .orElseThrow(() -> new SubDistrictNotFoundException("id", createUrbanVillageRequestDTO.getSubDistrictId()));
         UrbanVillage urbanVillage = new UrbanVillage();
-        urbanVillage.setCode(createKelurahanRequest.getCode());
-        urbanVillage.setName(createKelurahanRequest.getName());
-        urbanVillage.setCreatedDate(LocalDateTime.now());
+        urbanVillage.setCode(createUrbanVillageRequestDTO.getCode());
+        urbanVillage.setName(createUrbanVillageRequestDTO.getName());
+        urbanVillage.setCreatedAt(Instant.now());
         urbanVillage.setSubDistrict(subDistrict);
         urbanVillageRepository.save(urbanVillage);
-        return regionMapper.mapToKelurahanResponse(urbanVillage);
+        return urbanVillageMapper.fromUrbanVillage(urbanVillage);
     }
 
     @Override
-    public UrbanVillageDTO getKelurahanById(String id) throws UrbanVillageNotFoundException {
-        UrbanVillage urbanVillage = urbanVillageRepository.findById(id)
-                .orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan ID [" + id + "] not found"));
-        return regionMapper.mapToKelurahanResponse(urbanVillage);
+    public UrbanVillageDTO getUrbanVillageById(String urbanVillageId) {
+        UrbanVillage urbanVillage = urbanVillageRepository.findById(urbanVillageId).orElseThrow(() -> new UrbanVillageNotFoundException("id", urbanVillageId));
+        return urbanVillageMapper.fromUrbanVillage(urbanVillage);
     }
 
     @Override
-    public UrbanVillageDTO updateKelurahan(String id, UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws SubDistrictNotFoundException, UrbanVillageNotFoundException {
-        SubDistrict subDistrict = subDistrictRepository.findById(updateKelurahanRequest.getKecamatanId())
-                .orElseThrow(() -> new SubDistrictNotFoundException("Kecamatan ID [" + updateKelurahanRequest.getKecamatanId() + "] not found"));
-        UrbanVillage urbanVillage = urbanVillageRepository.findById(id)
-                .orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan ID [" + id + "] not found"));
-        urbanVillage.setCode(updateKelurahanRequest.getCode());
-        urbanVillage.setName(updateKelurahanRequest.getName());
-        urbanVillage.setSubDistrict(subDistrict);
-        urbanVillage.setUpdatedDate(LocalDateTime.now());
-        urbanVillageRepository.save(urbanVillage);
-        return regionMapper.mapToKelurahanResponse(urbanVillage);
-    }
-
-    @Override
-    public ListUrbanVillageResponseDTO getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest) {
-        Integer pageNo = listKelurahanRequest.getPageNo();
-        Integer pageSize = listKelurahanRequest.getPageSize();
-        String sortBy = listKelurahanRequest.getSortBy();
-        String sortDir = listKelurahanRequest.getSortDir();
+    public ListUrbanVillageResponseDTO getAllUrbanVillages(ListUrbanVillageRequestDTO listUrbanVillageRequestDTO) {
+        Integer pageNo = listUrbanVillageRequestDTO.getPageNo();
+        Integer pageSize = listUrbanVillageRequestDTO.getPageSize();
+        String sortBy = listUrbanVillageRequestDTO.getSortBy();
+        String sortDir = listUrbanVillageRequestDTO.getSortDir();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        Page<UrbanVillage> urbanVillagePage = urbanVillageRepository.findAll(pageable);
+        List<UrbanVillage> urbanVillageList = urbanVillagePage.getContent();
 
-        Page<UrbanVillage> kelurahanPage = urbanVillageRepository.findAll(pageable);
-        List<UrbanVillage> urbanVillageList = kelurahanPage.getContent();
-        List<UrbanVillageDTO> kelurahanResponseList = regionMapper.mapToKelurahanResponseList(urbanVillageList);
+        List<UrbanVillageDTO> urbanVillageDTOS = urbanVillageMapper.fromUrbanVillageList(urbanVillageList);
 
-        ListUrbanVillageResponseDTO listKelurahanResponse = new ListUrbanVillageResponseDTO();
-        listKelurahanResponse.setKelurahanList(kelurahanResponseList);
-        listKelurahanResponse.setPageNo(kelurahanPage.getNumber());
-        listKelurahanResponse.setPageSize(kelurahanPage.getSize());
-        listKelurahanResponse.setTotalElements(kelurahanPage.getTotalElements());
-        listKelurahanResponse.setTotalPages(kelurahanPage.getTotalPages());
-        listKelurahanResponse.setLast(kelurahanPage.isLast());
-        return listKelurahanResponse;
+        return new ListUrbanVillageResponseDTO(
+                urbanVillageDTOS, urbanVillagePage.getNumber(), urbanVillagePage.getSize(),
+                urbanVillagePage.getTotalElements(), urbanVillagePage.getTotalPages(), urbanVillagePage.isLast()
+        );
     }
 
     @Override
-    public void deleteKelurahan(String id) throws UrbanVillageNotFoundException {
-        final UrbanVillage urbanVillage = urbanVillageRepository.findById(id)
-                .orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan ID [" + id + "] not found"));
+    public UrbanVillageDTO updateUrbanVillage(String urbanVillageId, UpdateUrbanVillageRequestDTO updateUrbanVillageRequestDTO) {
+        SubDistrict subDistrict = subDistrictRepository.findById(updateUrbanVillageRequestDTO.getSubDistrictId()).orElseThrow(() -> new SubDistrictNotFoundException("id", updateUrbanVillageRequestDTO.getSubDistrictId()));
+        UrbanVillage urbanVillage = urbanVillageRepository.findById(urbanVillageId).orElseThrow(() -> new UrbanVillageNotFoundException("id", urbanVillageId));
+        urbanVillage.setCode(updateUrbanVillageRequestDTO.getCode());
+        urbanVillage.setName(updateUrbanVillageRequestDTO.getName());
+        urbanVillage.setSubDistrict(subDistrict);
+        urbanVillage.setUpdatedAt(Instant.now());
+        urbanVillageRepository.save(urbanVillage);
+        return urbanVillageMapper.fromUrbanVillage(urbanVillage);
+    }
+
+    @Override
+    public void deleteUrbanVillage(String urbanVillageId) {
+        final UrbanVillage urbanVillage = urbanVillageRepository.findById(urbanVillageId).orElseThrow(() -> new UrbanVillageNotFoundException("id", urbanVillageId));
         urbanVillageRepository.delete(urbanVillage);
     }
 
     @Override
-    public UrbanVillageDTO getKelurahanByName(String name) throws UrbanVillageNotFoundException {
-        UrbanVillage urbanVillage = urbanVillageRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan name [" + name + "] not found"));
-        return regionMapper.mapToKelurahanResponse(urbanVillage);
+    public UrbanVillageDTO getUrbanVillageByName(String name) {
+        UrbanVillage urbanVillage = urbanVillageRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new UrbanVillageNotFoundException("name", name));
+        return urbanVillageMapper.fromUrbanVillage(urbanVillage);
     }
 
     @Override
-    public UrbanVillageDTO getKelurahanByCode(String code) throws UrbanVillageNotFoundException {
-        UrbanVillage urbanVillage = urbanVillageRepository.findAllByCode(code).orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan code [" + code + "] not found"));
-        return regionMapper.mapToKelurahanResponse(urbanVillage);
-    }
-
-    @Override
-    public List<UrbanVillageDTO> getKelurahanByNameContains(String name) {
+    public List<UrbanVillageDTO> getUrbanVillageByNameContains(String name) {
         List<UrbanVillage> urbanVillageList = urbanVillageRepository.findAllByNameContainingIgnoreCase(name);
-        return regionMapper.mapToKelurahanResponseList(urbanVillageList);
+        return urbanVillageMapper.fromUrbanVillageList(urbanVillageList);
     }
 
     @Override
-    public List<UrbanVillageDTO> getKelurahanByKecamatanId(String kecamatanId) {
-        List<UrbanVillage> urbanVillageList = urbanVillageRepository.findAllByKecamatanId(kecamatanId);
-        return regionMapper.mapToKelurahanResponseList(urbanVillageList);
+    public UrbanVillageDTO getUrbanVillageByCode(String code) {
+        UrbanVillage urbanVillage = urbanVillageRepository.findAllByCode(code).orElseThrow(() -> new UrbanVillageNotFoundException("code", code));
+        return urbanVillageMapper.fromUrbanVillage(urbanVillage);
+    }
+
+    @Override
+    public List<UrbanVillageDTO> getAllUrbanVillagesBySubDistrictId(String subDistrictId) {
+        List<UrbanVillage> urbanVillageList = urbanVillageRepository.findAllBySubDistrictId(subDistrictId);
+        return urbanVillageMapper.fromUrbanVillageList(urbanVillageList);
     }
 }
 
