@@ -4,6 +4,9 @@ import com.ecommerce.dto.region.subDistrict.SubDistrictDTO;
 import com.ecommerce.entity.region.SubDistrict;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class SubDistrictMapper {
 
@@ -16,4 +19,11 @@ public class SubDistrictMapper {
         dto.setDistrict(subDistrict.getDistrict());
         return dto;
     }
+
+    public List<SubDistrictDTO> fromSubDistrictList(List<SubDistrict> subDistrictList) {
+        return subDistrictList.stream()
+                .map(this::fromSubDistrict)
+                .collect(Collectors.toList());
+    }
+
 }
