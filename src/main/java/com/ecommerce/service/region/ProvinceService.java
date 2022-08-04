@@ -1,7 +1,6 @@
 package com.ecommerce.service.region;
 
 import com.ecommerce.dto.region.province.*;
-import com.ecommerce.exception.ProvinceNotFoundException;
 
 import java.util.List;
 
@@ -9,17 +8,17 @@ public interface ProvinceService {
 
     ProvinceDTO createProvince(CreateProvinceRequestDTO createProvinceRequestDTO);
 
-    ProvinceDTO getProvinceById(String provinceId) throws ProvinceNotFoundException;
+    ProvinceDTO getProvinceById(String provinceId);
 
     ListProvinceResponseDTO getAllProvinces(ListProvinceRequestDTO listProvinceRequestDTO);
 
-    ProvinceDTO updateProvince(String provinceId, UpdateProvinceRequestDTO updateProvinceRequestDTO) throws ProvinceNotFoundException;
+    ProvinceDTO updateProvince(String provinceId, UpdateProvinceRequestDTO updateProvinceRequestDTO);
 
-    void deleteProvince(String provinceId) throws ProvinceNotFoundException;
+    void deleteProvince(String provinceId);
 
-    ProvinceDTO getProvinceByName(String name) throws ProvinceNotFoundException;
+    ProvinceDTO getProvinceByName(String name);
 
     List<ProvinceDTO> getProvinceByNameContains(String name);
 
-    ProvinceDTO getProvinceByCode(String code) throws ProvinceNotFoundException;
+    ProvinceDTO getProvinceByCode(String code);
 }
