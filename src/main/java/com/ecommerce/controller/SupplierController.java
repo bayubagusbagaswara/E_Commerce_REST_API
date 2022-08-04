@@ -2,7 +2,7 @@ package com.ecommerce.controller;
 
 import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.supplier.*;
-import com.ecommerce.exception.KelurahanNotFoundException;
+import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import com.ecommerce.service.SupplierService;
@@ -24,7 +24,7 @@ public class SupplierController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> createSupplier(@RequestBody CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException {
+    public WebResponseDTO<SupplierDTO> createSupplier(@RequestBody CreateSupplierRequestDTO createSupplierRequest) throws UrbanVillageNotFoundException {
         final SupplierDTO supplierResponse = supplierService.createSupplier(createSupplierRequest);
         return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.CREATED.value())
@@ -65,7 +65,7 @@ public class SupplierController {
     }
 
     @PutMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> updateSupplier(@PathVariable("idSupplier") String id, @RequestBody UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
+    public WebResponseDTO<SupplierDTO> updateSupplier(@PathVariable("idSupplier") String id, @RequestBody UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, UrbanVillageNotFoundException {
         final SupplierDTO supplierResponse = supplierService.updateSupplier(id, updateSupplierRequest);
         return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.OK.value())

@@ -6,7 +6,7 @@ import com.ecommerce.mapper.SupplierMapper;
 import com.ecommerce.dto.supplier.*;
 import com.ecommerce.entity.Product;
 import com.ecommerce.entity.Supplier;
-import com.ecommerce.exception.KelurahanNotFoundException;
+import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import com.ecommerce.repository.AddressRepository;
@@ -44,10 +44,10 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException {
+    public SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws UrbanVillageNotFoundException {
 
         UrbanVillage urbanVillage = urbanVillageRepository.findById(createSupplierRequest.getKelurahanId())
-                .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + createSupplierRequest.getKelurahanId() + "] not found"));
+                .orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan ID [" + createSupplierRequest.getKelurahanId() + "] not found"));
 
         SupplierAddress supplierAddress = new SupplierAddress();
         supplierAddress.setStreet(createSupplierRequest.getStreet());
@@ -98,11 +98,11 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
+    public SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, UrbanVillageNotFoundException {
 
         Supplier supplier = getSupplier(id);
         UrbanVillage urbanVillage = urbanVillageRepository.findById(updateSupplierRequest.getKelurahanId())
-                .orElseThrow(() -> new KelurahanNotFoundException("Kelurahan ID [" + updateSupplierRequest.getKelurahanId() + "] not found"));
+                .orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan ID [" + updateSupplierRequest.getKelurahanId() + "] not found"));
 
         SupplierAddress supplierAddress = supplier.getSupplierAddress();
         supplierAddress.setStreet(updateSupplierRequest.getStreet());

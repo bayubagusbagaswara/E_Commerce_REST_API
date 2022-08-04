@@ -15,7 +15,7 @@ public class ErrorController {
             ProvinceNotFoundException.class,
             DistrictNotFoundException.class,
             SubDistrictNotFoundException.class,
-            KelurahanNotFoundException.class,
+            UrbanVillageNotFoundException.class,
             ProductNotFoundException.class,
             SupplierNotFoundException.class,
             ProductDetailNotFoundException.class
@@ -28,7 +28,7 @@ public class ErrorController {
             ProvinceNotFoundException provinceNotFoundException,
             DistrictNotFoundException districtNotFoundException,
             SubDistrictNotFoundException subDistrictNotFoundException,
-            KelurahanNotFoundException kelurahanNotFoundException
+            UrbanVillageNotFoundException urbanVillageNotFoundException
     ) {
         return WebResponseDTO.<String>builder()
                 .code(HttpStatus.NOT_FOUND.value())

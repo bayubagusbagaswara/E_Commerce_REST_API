@@ -1,7 +1,7 @@
 package com.ecommerce.service;
 
 import com.ecommerce.dto.supplier.*;
-import com.ecommerce.exception.KelurahanNotFoundException;
+import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 
@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface SupplierService {
 
-    SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException;
+    SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws UrbanVillageNotFoundException;
 
     SupplierDTO getSupplierById(String id) throws SupplierNotFoundException;
 
     ListSupplierResponseDTO getAllSuppliers(ListSupplierRequestDTO listSupplierRequest);
 
-    SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException;
+    SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, UrbanVillageNotFoundException;
 
     void deleteSupplier(String id) throws SupplierNotFoundException;
 

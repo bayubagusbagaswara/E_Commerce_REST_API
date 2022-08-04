@@ -4,7 +4,7 @@ import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
 import com.ecommerce.exception.SubDistrictNotFoundException;
-import com.ecommerce.exception.KelurahanNotFoundException;
+import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.service.region.UrbanVillageService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class UrbanVillageController {
     }
 
     @GetMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<UrbanVillageDTO> getKelurahanById(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
+    public WebResponseDTO<UrbanVillageDTO> getKelurahanById(@PathVariable("idKelurahan") String id) throws UrbanVillageNotFoundException {
         final UrbanVillageDTO kelurahanResponse = urbanVillageService.getKelurahanById(id);
         return WebResponseDTO.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -65,7 +65,7 @@ public class UrbanVillageController {
     }
 
     @PutMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<UrbanVillageDTO> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws KelurahanNotFoundException, SubDistrictNotFoundException {
+    public WebResponseDTO<UrbanVillageDTO> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws UrbanVillageNotFoundException, SubDistrictNotFoundException {
         final UrbanVillageDTO kelurahanResponse = urbanVillageService.updateKelurahan(id, updateKelurahanRequest);
         return WebResponseDTO.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -75,7 +75,7 @@ public class UrbanVillageController {
     }
 
     @DeleteMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<UrbanVillageDTO> deleteKelurahan(@PathVariable("idKelurahan") String id) throws KelurahanNotFoundException {
+    public WebResponseDTO<UrbanVillageDTO> deleteKelurahan(@PathVariable("idKelurahan") String id) throws UrbanVillageNotFoundException {
         urbanVillageService.deleteKelurahan(id);
         return WebResponseDTO.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -85,7 +85,7 @@ public class UrbanVillageController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<UrbanVillageDTO> getKelurahanByName(@RequestParam("name") String name) throws KelurahanNotFoundException {
+    public WebResponseDTO<UrbanVillageDTO> getKelurahanByName(@RequestParam("name") String name) throws UrbanVillageNotFoundException {
         final UrbanVillageDTO kelurahanResponse = urbanVillageService.getKelurahanByName(name);
         return WebResponseDTO.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -105,7 +105,7 @@ public class UrbanVillageController {
     }
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<UrbanVillageDTO> getKelurahanByCode(@RequestParam("code") String code) throws KelurahanNotFoundException {
+    public WebResponseDTO<UrbanVillageDTO> getKelurahanByCode(@RequestParam("code") String code) throws UrbanVillageNotFoundException {
         final UrbanVillageDTO kelurahanResponse = urbanVillageService.getKelurahanByCode(code);
         return WebResponseDTO.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())

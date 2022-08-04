@@ -3,7 +3,7 @@ package com.ecommerce.service.impl;
 import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
 import com.ecommerce.exception.SubDistrictNotFoundException;
-import com.ecommerce.exception.KelurahanNotFoundException;
+import com.ecommerce.exception.UrbanVillageNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ class UrbanVillageServiceImplTest {
 
     @Test
     @Order(2)
-    void getKelurahanById() throws KelurahanNotFoundException {
+    void getKelurahanById() throws UrbanVillageNotFoundException {
         // id kelurahan Singonegaran, Kecamatan Pesantren
         String id = "3571031005";
         final UrbanVillageDTO responseDto = kelurahanService.getKelurahanById(id);
@@ -83,7 +83,7 @@ class UrbanVillageServiceImplTest {
 
     @Test
     @Order(4)
-    void updateKelurahan() throws KelurahanNotFoundException, SubDistrictNotFoundException {
+    void updateKelurahan() throws UrbanVillageNotFoundException, SubDistrictNotFoundException {
         // id kelurahan balowerti
         String id = "3571021002";
         UpdateUrbanVillageRequestDTO requestDto = new UpdateUrbanVillageRequestDTO();
@@ -102,18 +102,18 @@ class UrbanVillageServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteKelurahan() throws KelurahanNotFoundException {
+    void deleteKelurahan() throws UrbanVillageNotFoundException {
         // id kelurahan Ngronggo
         String id = "3571021014";
         kelurahanService.deleteKelurahan(id);
-        assertThrows(KelurahanNotFoundException.class, () -> {
+        assertThrows(UrbanVillageNotFoundException.class, () -> {
             final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanById(id);
         });
     }
 
     @Test
     @Order(6)
-    void getKelurahanByName() throws KelurahanNotFoundException {
+    void getKelurahanByName() throws UrbanVillageNotFoundException {
         // kelurahan singonegaran
         String name = "singonegaran";
         final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanByName(name);
@@ -123,7 +123,7 @@ class UrbanVillageServiceImplTest {
 
     @Test
     @Order(7)
-    void getKelurahanByCode() throws KelurahanNotFoundException {
+    void getKelurahanByCode() throws UrbanVillageNotFoundException {
         // code singonegaran
         String code = "3571031005";
         final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanByCode(code);

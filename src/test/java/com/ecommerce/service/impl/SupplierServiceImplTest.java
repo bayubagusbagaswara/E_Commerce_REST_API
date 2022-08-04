@@ -3,7 +3,7 @@ package com.ecommerce.service.impl;
 import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.*;
 import com.ecommerce.entity.enumerator.Gender;
-import com.ecommerce.exception.KelurahanNotFoundException;
+import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
@@ -41,7 +41,7 @@ class SupplierServiceImplTest {
 
     @Test
     @Order(1)
-    void createSupplier() throws KelurahanNotFoundException {
+    void createSupplier() throws UrbanVillageNotFoundException {
         CreateSupplierRequestDTO requestDto = new CreateSupplierRequestDTO();
         requestDto.setName("Supplier");
         requestDto.setEmail("supplier@mail.com");
@@ -88,7 +88,7 @@ class SupplierServiceImplTest {
 
     @Test
     @Order(4)
-    void updateSupplier() throws SupplierNotFoundException, KelurahanNotFoundException {
+    void updateSupplier() throws SupplierNotFoundException, UrbanVillageNotFoundException {
         String id = "";
         UpdateSupplierRequestDTO requestDto = new UpdateSupplierRequestDTO();
         requestDto.setName("Update");
