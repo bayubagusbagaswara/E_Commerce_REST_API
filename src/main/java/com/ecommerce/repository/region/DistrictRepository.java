@@ -1,4 +1,4 @@
-package com.ecommerce.repository;
+package com.ecommerce.repository.region;
 
 import com.ecommerce.entity.region.District;
 import org.springframework.data.jpa.repository.JpaRepository;

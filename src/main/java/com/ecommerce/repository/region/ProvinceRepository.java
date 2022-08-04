@@ -1,4 +1,4 @@
-package com.ecommerce.repository;
+package com.ecommerce.repository.region;
 
 import com.ecommerce.entity.region.Province;
 import org.springframework.data.domain.Page;

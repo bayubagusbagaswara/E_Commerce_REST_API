@@ -10,7 +10,7 @@ import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import com.ecommerce.repository.AddressRepository;
-import com.ecommerce.repository.UrbanVillageRepository;
+import com.ecommerce.repository.region.UrbanVillageRepository;
 import com.ecommerce.repository.ProductRepository;
 import com.ecommerce.repository.SupplierRepository;
 import com.ecommerce.service.SupplierService;

@@ -4,7 +4,7 @@ import com.ecommerce.entity.region.Province;
 import com.ecommerce.dto.region.province.*;
 import com.ecommerce.exception.ProvinceNotFoundException;
 import com.ecommerce.mapper.region.ProvinceMapper;
-import com.ecommerce.repository.ProvinceRepository;
+import com.ecommerce.repository.region.ProvinceRepository;
 import com.ecommerce.service.region.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
