@@ -74,7 +74,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public ListSupplierResponseDto getAllSuppliers(ListSupplierRequestDto listSupplierRequest) {
+    public ListSupplierResponseDto getAllSuppliers(ListSupplierRequestDTO listSupplierRequest) {
         Integer pageNo = listSupplierRequest.getPageNo();
         Integer pageSize = listSupplierRequest.getPageSize();
         String sortBy = listSupplierRequest.getSortBy();

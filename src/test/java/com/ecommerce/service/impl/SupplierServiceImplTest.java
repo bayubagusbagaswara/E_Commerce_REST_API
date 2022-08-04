@@ -75,7 +75,7 @@ class SupplierServiceImplTest {
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListSupplierRequestDto requestDto = new ListSupplierRequestDto();
+        ListSupplierRequestDTO requestDto = new ListSupplierRequestDTO();
         requestDto.setPageNo(pageNo);
         requestDto.setPageSize(pageSize);
         requestDto.setSortBy(sortBy);

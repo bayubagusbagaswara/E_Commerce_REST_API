@@ -13,7 +13,7 @@ public interface SupplierService {
 
     SupplierDTO getSupplierById(String id) throws SupplierNotFoundException;
 
-    ListSupplierResponseDto getAllSuppliers(ListSupplierRequestDto listSupplierRequest);
+    ListSupplierResponseDto getAllSuppliers(ListSupplierRequestDTO listSupplierRequest);
 
     SupplierDTO updateSupplier(String id, UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException;
 
