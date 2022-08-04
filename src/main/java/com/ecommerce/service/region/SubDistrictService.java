@@ -1,29 +1,26 @@
 package com.ecommerce.service.region;
 
-import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
-import com.ecommerce.exception.SubDistrictNotFoundException;
-import com.ecommerce.exception.DistrictNotFoundException;
 
 import java.util.List;
 
 public interface SubDistrictService {
 
-    SubDistrictDTO createKecamatan(CreateSubDistrictRequestDTO createKecamatanRequest) throws DistrictNotFoundException;
+    SubDistrictDTO createSubDistrict(CreateSubDistrictRequestDTO createSubDistrictRequestDTO);
 
-    SubDistrictDTO getKecamatanById(String id) throws SubDistrictNotFoundException;
+    SubDistrictDTO getSubDistrictById(String subDistrictId);
 
-    ListSubDistrictResponseDTO getAllKecamatan(ListSubDistrictRequestDTO listKecamatanRequest);
+    ListSubDistrictResponseDTO getAllSubDistricts(ListSubDistrictRequestDTO listSubDistrictRequestDTO);
 
-    SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws SubDistrictNotFoundException, DistrictNotFoundException;
+    SubDistrictDTO updateSubDistrict(String subDistrictId, UpdateSubDistrictRequestDTO updateSubDistrictRequestDTO);
 
-    void deleteKecamatan(String id) throws SubDistrictNotFoundException;
+    void deleteSubDistrict(String subDistrictId);
 
-    SubDistrictDTO getKecamatanByName(String name) throws SubDistrictNotFoundException;
+    SubDistrictDTO getSubDistrictByName(String name);
 
-    List<SubDistrictDTO> getKecamatanByNameContains(String name);
+    List<SubDistrictDTO> getSubDistrictByNameContains(String name);
 
-    SubDistrictDTO getKecamatanByCode(String code) throws SubDistrictNotFoundException;
+    SubDistrictDTO getSubDistrictByCode(String code);
 
-    List<SubDistrictDTO> getKecamatanByKotaId(String kotaId);
+    List<SubDistrictDTO> getAllSubDistrictsByDistrictId(String subDistrictId);
 }
