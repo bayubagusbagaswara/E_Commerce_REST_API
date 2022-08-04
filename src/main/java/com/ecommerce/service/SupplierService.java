@@ -15,7 +15,7 @@ public interface SupplierService {
 
     ListSupplierResponseDTO getAllSuppliers(ListSupplierRequestDTO listSupplierRequest);
 
-    SupplierDTO updateSupplier(String id, UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException;
+    SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException;
 
     void deleteSupplier(String id) throws SupplierNotFoundException;
 

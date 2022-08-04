@@ -65,7 +65,7 @@ public class SupplierController {
     }
 
     @PutMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> updateSupplier(@PathVariable("idSupplier") String id, @RequestBody UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
+    public WebResponseDTO<SupplierDTO> updateSupplier(@PathVariable("idSupplier") String id, @RequestBody UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
         final SupplierDTO supplierResponse = supplierService.updateSupplier(id, updateSupplierRequest);
         return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.OK.value())

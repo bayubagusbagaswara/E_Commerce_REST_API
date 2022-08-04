@@ -90,7 +90,7 @@ class SupplierServiceImplTest {
     @Order(4)
     void updateSupplier() throws SupplierNotFoundException, KelurahanNotFoundException {
         String id = "";
-        UpdateSupplierRequestDto requestDto = new UpdateSupplierRequestDto();
+        UpdateSupplierRequestDTO requestDto = new UpdateSupplierRequestDTO();
         requestDto.setName("Update");
         requestDto.setEmail("");
         requestDto.setGender(Gender.MALE);

@@ -98,7 +98,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public SupplierDTO updateSupplier(String id, UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
+    public SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
 
         Supplier supplier = getSupplier(id);
         UrbanVillage urbanVillage = urbanVillageRepository.findById(updateSupplierRequest.getKelurahanId())
