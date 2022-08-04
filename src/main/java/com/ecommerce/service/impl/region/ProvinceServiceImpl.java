@@ -1,4 +1,4 @@
-package com.ecommerce.service.impl;
+package com.ecommerce.service.impl.region;
 
 import com.ecommerce.entity.region.Province;
 import com.ecommerce.dto.region.province.*;
