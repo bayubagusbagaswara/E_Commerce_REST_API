@@ -1,8 +1,6 @@
 package com.ecommerce.mapper;
 
-import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.SupplierDTO;
-import com.ecommerce.entity.Product;
 import com.ecommerce.entity.Supplier;
 import org.springframework.stereotype.Component;
 
@@ -12,28 +10,7 @@ import java.util.stream.Collectors;
 @Component
 public class SupplierMapper {
 
-    private final CategoryMapper categoryMapper;
-    private final ProductDetailMapper productDetailMapper;
-
-    public SupplierMapper(CategoryMapper categoryMapper, ProductDetailMapper productDetailMapper) {
-        this.categoryMapper = categoryMapper;
-        this.productDetailMapper = productDetailMapper;
-    }
-
-    public ProductDTO productResponse(Product product) {
-        ProductDTO productResponse = new ProductDTO();
-        productResponse.setId(product.getId());
-        productResponse.setName(product.getName());
-        productResponse.setPrice(product.getPrice());
-        productResponse.setQuantity(product.getQuantity());
-        productResponse.setProductDetail(productDetailMapper.mapToProductDetailResponse(product.getProductDetail()));
-        productResponse.setCategory(categoryMapper.mapToCategoryResponse(product.getCategory()));
-        productResponse.setCreatedDate(product.getCreatedDate());
-        productResponse.setUpdatedDate(product.getUpdatedDate());
-        return productResponse;
-    }
-
-    public SupplierDTO mapToSupplierResponse(Supplier supplier) {
+    public SupplierDTO fromSupplier(Supplier supplier) {
         SupplierDTO supplierResponse = new SupplierDTO();
         supplierResponse.setId(supplier.getId());
         supplierResponse.setName(supplier.getName());
@@ -41,18 +18,14 @@ public class SupplierMapper {
         supplierResponse.setMobilePhone(supplier.getMobilePhone());
         supplierResponse.setGender(supplier.getGender());
         supplierResponse.setSupplierAddress(supplier.getSupplierAddress());
-        supplierResponse.setProducts(supplier.getProducts()
-                .stream()
-                .map(this::productResponse)
-                .collect(Collectors.toSet()));
-        supplierResponse.setCreatedDate(supplier.getCreatedDate());
-        supplierResponse.setUpdatedDate(supplier.getUpdatedDate());
+        supplierResponse.setProducts(supplier.getProducts());
+        supplierResponse.setCreatedAt(supplier.getCreatedAt());
         return supplierResponse;
     }
 
-    public List<SupplierDTO> mapToSupplierResponseList(List<Supplier> supplierList) {
+    public List<SupplierDTO> fromSupplierList(List<Supplier> supplierList) {
         return supplierList.stream()
-                .map(this::mapToSupplierResponse)
+                .map(this::fromSupplier)
                 .collect(Collectors.toList())
                 ;
     }
