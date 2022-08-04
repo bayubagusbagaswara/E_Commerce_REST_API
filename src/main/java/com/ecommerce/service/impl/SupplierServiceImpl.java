@@ -74,7 +74,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public ListSupplierResponseDto getAllSuppliers(ListSupplierRequestDTO listSupplierRequest) {
+    public ListSupplierResponseDTO getAllSuppliers(ListSupplierRequestDTO listSupplierRequest) {
         Integer pageNo = listSupplierRequest.getPageNo();
         Integer pageSize = listSupplierRequest.getPageSize();
         String sortBy = listSupplierRequest.getSortBy();
@@ -87,7 +87,7 @@ public class SupplierServiceImpl implements SupplierService {
 
         List<SupplierDTO> supplierResponseList = supplierMapper.mapToSupplierResponseList(supplierList);
 
-        ListSupplierResponseDto listSupplierResponse = new ListSupplierResponseDto();
+        ListSupplierResponseDTO listSupplierResponse = new ListSupplierResponseDTO();
         listSupplierResponse.setSupplierList(supplierResponseList);
         listSupplierResponse.setPageNo(supplierPage.getNumber());
         listSupplierResponse.setPageSize(supplierPage.getSize());

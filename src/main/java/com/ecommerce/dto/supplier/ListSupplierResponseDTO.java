@@ -11,9 +11,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListSupplierResponseDto {
+public class ListSupplierResponseDTO {
 
-    private List<SupplierDTO> supplierList;
+    private List<SupplierDTO> supplierDTOList;
     private Integer pageNo;
     private Integer pageSize;
     private Long totalElements;

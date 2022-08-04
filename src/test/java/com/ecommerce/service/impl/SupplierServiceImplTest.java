@@ -81,7 +81,7 @@ class SupplierServiceImplTest {
         requestDto.setSortBy(sortBy);
         requestDto.setSortDir(sortDir);
 
-        final ListSupplierResponseDto responseDto = supplierService.getAllSuppliers(requestDto);
+        final ListSupplierResponseDTO responseDto = supplierService.getAllSuppliers(requestDto);
         assertEquals(totalSampleData, responseDto.getTotalElements().intValue());
         assertEquals(pageSize, responseDto.getSupplierList().size());
     }
