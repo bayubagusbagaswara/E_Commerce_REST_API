@@ -30,5 +30,5 @@ public class SupplierDTO {
 
     private SupplierAddress supplierAddress;
 
-    private Set<Product> productSet = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 }
