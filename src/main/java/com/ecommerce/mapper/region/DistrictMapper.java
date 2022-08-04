@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DistrictMapper {
 
-    public DistrictDTO fromEntity(District district) {
+    public DistrictDTO fromDistrict(District district) {
         DistrictDTO districtDTO = new DistrictDTO();
         districtDTO.setId(district.getId());
         districtDTO.setCode(district.getCode());
