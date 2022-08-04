@@ -12,18 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class CategoryMapper {
 
-
-    public ProductDTO fromEntity(Product product) {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setId(product.getId());
-        productDTO.setName(product.getName());
-        productDTO.setPrice(product.getPrice());
-        productDTO.setQuantity(product.getQuantity());
-        productDTO.setProductDetail(product.getProductDetail());
-        return productDTO;
-    }
-
-    public CategoryDTO fromEntity(Category category) {
+    public CategoryDTO fromCategory(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());
         categoryDTO.setName(category.getName());
@@ -33,9 +22,9 @@ public class CategoryMapper {
         return categoryDTO;
     }
 
-    public List<CategoryDTO> fromEntities(List<Category> categoryList) {
+    public List<CategoryDTO> fromCategoryList(List<Category> categoryList) {
         return categoryList.stream()
-                .map(this::fromEntity)
+                .map(this::fromCategory)
                 .collect(Collectors.toList());
     }
 }

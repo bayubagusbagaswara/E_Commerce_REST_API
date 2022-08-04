@@ -2,7 +2,6 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.entity.region.SubDistrict;
 import com.ecommerce.entity.region.UrbanVillage;
-import com.ecommerce.mapper.RegionMapper;
 import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
