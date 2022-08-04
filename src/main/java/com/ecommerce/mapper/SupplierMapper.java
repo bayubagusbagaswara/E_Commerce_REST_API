@@ -26,7 +26,6 @@ public class SupplierMapper {
     public List<SupplierDTO> fromSupplierList(List<Supplier> supplierList) {
         return supplierList.stream()
                 .map(this::fromSupplier)
-                .collect(Collectors.toList())
-                ;
+                .collect(Collectors.toList());
     }
 }
