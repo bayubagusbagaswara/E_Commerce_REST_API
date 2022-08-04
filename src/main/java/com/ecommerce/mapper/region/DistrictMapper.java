@@ -4,6 +4,9 @@ import com.ecommerce.dto.region.district.DistrictDTO;
 import com.ecommerce.entity.region.District;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class DistrictMapper {
 
@@ -15,5 +18,11 @@ public class DistrictMapper {
         districtDTO.setCreatedAt(district.getCreatedAt());
         districtDTO.setProvince(district.getProvince());
         return districtDTO;
+    }
+
+    public List<DistrictDTO> fromDistrictList(List<District> districtList) {
+        return districtList.stream()
+                .map(this::fromDistrict)
+                .collect(Collectors.toList());
     }
 }
