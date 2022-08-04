@@ -1,11 +1,12 @@
 package com.ecommerce.service.impl;
 
 import com.ecommerce.entity.region.Province;
-import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.province.*;
 import com.ecommerce.exception.ProvinceNotFoundException;
+import com.ecommerce.mapper.region.ProvinceMapper;
 import com.ecommerce.repository.ProvinceRepository;
 import com.ecommerce.service.region.ProvinceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.Instant;;
 import java.util.List;
 
 @Service
@@ -21,102 +22,83 @@ import java.util.List;
 public class ProvinceServiceImpl implements ProvinceService {
 
     private final ProvinceRepository provinceRepository;
-    private final RegionMapper regionMapper;
+    private final ProvinceMapper provinceMapper;
 
-    public ProvinceServiceImpl(ProvinceRepository provinceRepository, RegionMapper regionMapper) {
+    @Autowired
+    public ProvinceServiceImpl(ProvinceRepository provinceRepository, ProvinceMapper provinceMapper) {
         this.provinceRepository = provinceRepository;
-        this.regionMapper = regionMapper;
+        this.provinceMapper = provinceMapper;
     }
 
     @Override
-    public ProvinceDTO createProvinsi(CreateProvinceRequestDTO createProvinsiRequest) {
+    public ProvinceDTO createProvince(CreateProvinceRequestDTO dto) {
         Province province = new Province();
-        province.setCode(createProvinsiRequest.getCode());
-        province.setName(createProvinsiRequest.getName());
-        province.setCreatedDate(LocalDateTime.now());
+        province.setCode(dto.getCode());
+        province.setName(dto.getName());
+        province.setCreatedAt(Instant.now());
         provinceRepository.save(province);
-        return regionMapper.mapToProvinsiResponse(province);
+        return provinceMapper.fromProvince(province);
     }
 
     @Override
-    public ProvinceDTO getProvinsiById(String id) throws ProvinceNotFoundException {
-        Province province = provinceRepository.findById(id)
-                .orElseThrow(() -> new ProvinceNotFoundException("Provinsi ID ["+ id +"] not found"));
-        return regionMapper.mapToProvinsiResponse(province);
+    public ProvinceDTO getProvinceById(String provinceId) {
+        Province province = provinceRepository.findById(provinceId).orElseThrow(() -> new ProvinceNotFoundException("id", provinceId));
+        return provinceMapper.fromProvince(province);
     }
 
     @Override
-    public ListProvinceResponseDTO getAllProvinsi(ListProvinceRequestDTO listProvinsiRequest) {
-
-        // ada parameter searchBy
-        Integer pageNo = listProvinsiRequest.getPageNo();
-        Integer pageSize = listProvinsiRequest.getPageSize();
-        String sortBy = listProvinsiRequest.getSortBy();
-        String sortDir = listProvinsiRequest.getSortDir();
+    public ListProvinceResponseDTO getAllProvinces(ListProvinceRequestDTO requestDTO) {
+        Integer pageNo = requestDTO.getPageNo();
+        Integer pageSize = requestDTO.getPageSize();
+        String sortBy = requestDTO.getSortBy();
+        String sortDir = requestDTO.getSortDir();
 
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
 
-        // intinya disini
-        // karena findAll maka kita akan mendapatkan semua data nya
-        // tapi kita ingin find ini bergantung terhadap nilai dari properti searchBy
-        // jadi pencarian data berdasarkan query where ...
+        Page<Province> provincePage = provinceRepository.findAll(pageable);
+        List<Province> provinceList = provincePage.getContent();
 
+        List<ProvinceDTO> provinceDTOList = provinceMapper.fromProvinceList(provinceList);
 
-        // if (searchByName.isExist) {
-        // maka provinsiRepository.findAllByName
-        // }
-        Page<Province> provinsiPage = provinceRepository.findAll(pageable);
-
-
-        List<Province> provinceList = provinsiPage.getContent();
-
-        List<ProvinceDTO> provinsiResponseList = regionMapper.mapToProvinsiResponseList(provinceList);
-
-        ListProvinceResponseDTO listProvinsiResponse = new ListProvinceResponseDTO();
-        listProvinsiResponse.setProvinsiList(provinsiResponseList);
-        listProvinsiResponse.setPageNo(provinsiPage.getNumber());
-        listProvinsiResponse.setPageSize(provinsiPage.getSize());
-        listProvinsiResponse.setTotalElements(provinsiPage.getTotalElements());
-        listProvinsiResponse.setTotalPages(provinsiPage.getTotalPages());
-        listProvinsiResponse.setLast(provinsiPage.isLast());
-        return listProvinsiResponse;
+        return new ListProvinceResponseDTO(
+                provinceDTOList, provincePage.getNumber(), provincePage.getSize(),
+                provincePage.getTotalElements(), provincePage.getTotalPages(), provincePage.isLast()
+        );
     }
 
     @Override
-    public ProvinceDTO updateProvinsi(String id, UpdateProvinceRequestDTO updateProvinsiRequest) throws ProvinceNotFoundException {
-        Province province = provinceRepository.findById(id)
-                .orElseThrow(() -> new ProvinceNotFoundException("Provinsi ID ["+ id +"] not found"));
-        province.setCode(updateProvinsiRequest.getCode());
-        province.setName(updateProvinsiRequest.getName());
-        province.setUpdatedDate(LocalDateTime.now());
+    public ProvinceDTO updateProvince(String provinceId, UpdateProvinceRequestDTO provinceDTO) {
+        Province province = provinceRepository.findById(provinceId).orElseThrow(() -> new ProvinceNotFoundException("id", provinceId));
+        province.setCode(provinceDTO.getCode());
+        province.setName(provinceDTO.getName());
+        province.setUpdatedAt(Instant.now());
         provinceRepository.save(province);
-        return regionMapper.mapToProvinsiResponse(province);
+        return provinceMapper.fromProvince(province);
     }
 
     @Override
-    public void deleteProvinsi(String id) throws ProvinceNotFoundException {
-        final Province province = provinceRepository.findById(id)
-                .orElseThrow(() -> new ProvinceNotFoundException("Provinsi ID [" + id + "] not found"));
+    public void deleteProvince(String provinceId) {
+        final Province province = provinceRepository.findById(provinceId).orElseThrow(() -> new ProvinceNotFoundException("id", provinceId));
         provinceRepository.delete(province);
     }
 
     @Override
-    public ProvinceDTO getProvinsiByName(String name) throws ProvinceNotFoundException {
-        Province province = provinceRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new ProvinceNotFoundException("Provinsi name [" + name + "] not found"));
-        return regionMapper.mapToProvinsiResponse(province);
+    public ProvinceDTO getProvinceByName(String name) {
+        Province province = provinceRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new ProvinceNotFoundException("name", name));
+        return provinceMapper.fromProvince(province);
     }
 
     @Override
-    public ProvinceDTO getProvinsiByCode(String code) throws ProvinceNotFoundException {
-        Province province = provinceRepository.findAllByCode(code).orElseThrow(() -> new ProvinceNotFoundException("Provinsi code [" + code + "] not found"));
-        return regionMapper.mapToProvinsiResponse(province);
+    public ProvinceDTO getProvinceByCode(String code) {
+        Province province = provinceRepository.findAllByCode(code).orElseThrow(() -> new ProvinceNotFoundException("code", code));
+        return provinceMapper.fromProvince(province);
     }
 
     @Override
-    public List<ProvinceDTO> getProvinsiByNameContains(String name) {
+    public List<ProvinceDTO> getProvinceByNameContains(String name) {
         List<Province> provinceList = provinceRepository.findAllByNameContainingIgnoreCase(name);
-        return regionMapper.mapToProvinsiResponseList(provinceList);
+        return provinceMapper.fromProvinceList(provinceList);
     }
 
 }
