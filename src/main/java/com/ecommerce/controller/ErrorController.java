@@ -14,7 +14,7 @@ public class ErrorController {
             CategoryNotFoundException.class,
             ProvinceNotFoundException.class,
             DistrictNotFoundException.class,
-            KecamatanNotFoundException.class,
+            SubDistrictNotFoundException.class,
             KelurahanNotFoundException.class,
             ProductNotFoundException.class,
             SupplierNotFoundException.class,
@@ -27,7 +27,7 @@ public class ErrorController {
             ProductDetailNotFoundException productDetailNotFoundException,
             ProvinceNotFoundException provinceNotFoundException,
             DistrictNotFoundException districtNotFoundException,
-            KecamatanNotFoundException kecamatanNotFoundException,
+            SubDistrictNotFoundException subDistrictNotFoundException,
             KelurahanNotFoundException kelurahanNotFoundException
     ) {
         return WebResponseDTO.<String>builder()

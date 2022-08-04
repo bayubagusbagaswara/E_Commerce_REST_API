@@ -3,7 +3,7 @@ package com.ecommerce.controller.region;
 import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
-import com.ecommerce.exception.KecamatanNotFoundException;
+import com.ecommerce.exception.SubDistrictNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
 import com.ecommerce.service.region.UrbanVillageService;
 import com.ecommerce.util.AppConstants;
@@ -24,7 +24,7 @@ public class UrbanVillageController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<UrbanVillageDTO> createKelurahan(@RequestBody CreateUrbanVillageRequestDTO createKelurahanRequest) throws KecamatanNotFoundException {
+    public WebResponseDTO<UrbanVillageDTO> createKelurahan(@RequestBody CreateUrbanVillageRequestDTO createKelurahanRequest) throws SubDistrictNotFoundException {
         final UrbanVillageDTO kelurahanResponse = urbanVillageService.createKelurahan(createKelurahanRequest);
         return WebResponseDTO.<UrbanVillageDTO>builder()
                 .code(HttpStatus.CREATED.value())
@@ -65,7 +65,7 @@ public class UrbanVillageController {
     }
 
     @PutMapping(value = "/{idKelurahan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<UrbanVillageDTO> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws KelurahanNotFoundException, KecamatanNotFoundException {
+    public WebResponseDTO<UrbanVillageDTO> updateKelurahan(@PathVariable("idKelurahan") String id, @RequestBody UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws KelurahanNotFoundException, SubDistrictNotFoundException {
         final UrbanVillageDTO kelurahanResponse = urbanVillageService.updateKelurahan(id, updateKelurahanRequest);
         return WebResponseDTO.<UrbanVillageDTO>builder()
                 .code(HttpStatus.OK.value())

@@ -2,7 +2,7 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
-import com.ecommerce.exception.KecamatanNotFoundException;
+import com.ecommerce.exception.SubDistrictNotFoundException;
 import com.ecommerce.exception.KelurahanNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -39,7 +39,7 @@ class UrbanVillageServiceImplTest {
 
     @Test
     @Order(1)
-    void createKelurahan() throws KecamatanNotFoundException {
+    void createKelurahan() throws SubDistrictNotFoundException {
         CreateUrbanVillageRequestDTO requestDto = new CreateUrbanVillageRequestDTO();
         requestDto.setCode("3571038899");
         requestDto.setName("Kelurahan di Pesantren");
@@ -83,7 +83,7 @@ class UrbanVillageServiceImplTest {
 
     @Test
     @Order(4)
-    void updateKelurahan() throws KelurahanNotFoundException, KecamatanNotFoundException {
+    void updateKelurahan() throws KelurahanNotFoundException, SubDistrictNotFoundException {
         // id kelurahan balowerti
         String id = "3571021002";
         UpdateUrbanVillageRequestDTO requestDto = new UpdateUrbanVillageRequestDTO();

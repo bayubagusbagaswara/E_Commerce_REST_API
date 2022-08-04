@@ -2,7 +2,7 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
-import com.ecommerce.exception.KecamatanNotFoundException;
+import com.ecommerce.exception.SubDistrictNotFoundException;
 import com.ecommerce.exception.DistrictNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -52,7 +52,7 @@ class SubDistrictServiceImplTest {
 
     @Test
     @Order(2)
-    void getKecamatanById() throws KecamatanNotFoundException {
+    void getKecamatanById() throws SubDistrictNotFoundException {
         // id kecamatan Pesantren, Kota Kediri
         String id = "357103";
         final SubDistrictDTO responseDto = kecamatanService.getKecamatanById(id);
@@ -81,7 +81,7 @@ class SubDistrictServiceImplTest {
 
     @Test
     @Order(4)
-    void updateKecamatan() throws KecamatanNotFoundException, DistrictNotFoundException {
+    void updateKecamatan() throws SubDistrictNotFoundException, DistrictNotFoundException {
         // update kecamatan Mojoroto id 357101
         String id = "357101";
         UpdateSubDistrictRequestDTO requestDto = new UpdateSubDistrictRequestDTO();
@@ -99,18 +99,18 @@ class SubDistrictServiceImplTest {
 
     @Test
     @Order(5)
-    void deleteKecamatan() throws KecamatanNotFoundException {
+    void deleteKecamatan() throws SubDistrictNotFoundException {
         // delete kecamatan Mojoroto
         String id = "357101";
         kecamatanService.deleteKecamatan(id);
-        assertThrows(KecamatanNotFoundException.class, () -> {
+        assertThrows(SubDistrictNotFoundException.class, () -> {
             final SubDistrictDTO kecamatan = kecamatanService.getKecamatanById(id);
         });
     }
 
     @Test
     @Order(6)
-    void getKecamatanByName() throws KecamatanNotFoundException {
+    void getKecamatanByName() throws SubDistrictNotFoundException {
         String name = "pesantren";
         final SubDistrictDTO kecamatan = kecamatanService.getKecamatanByName(name);
         assertEquals(name, kecamatan.getName().toLowerCase());
@@ -119,7 +119,7 @@ class SubDistrictServiceImplTest {
 
     @Test
     @Order(7)
-    void getKecamatanByCode() throws KecamatanNotFoundException {
+    void getKecamatanByCode() throws SubDistrictNotFoundException {
         // code kecamatan Pesantren 357103
         String code = "357103";
         final SubDistrictDTO kecamatan = kecamatanService.getKecamatanByCode(code);

@@ -3,7 +3,7 @@ package com.ecommerce.controller.region;
 import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
-import com.ecommerce.exception.KecamatanNotFoundException;
+import com.ecommerce.exception.SubDistrictNotFoundException;
 import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.service.region.SubDistrictService;
 import com.ecommerce.util.AppConstants;
@@ -34,7 +34,7 @@ public class SubDistrictController {
     }
 
     @GetMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SubDistrictDTO> getKecamatanById(@PathVariable("idKecamatan") String id) throws KecamatanNotFoundException {
+    public WebResponseDTO<SubDistrictDTO> getKecamatanById(@PathVariable("idKecamatan") String id) throws SubDistrictNotFoundException {
         final SubDistrictDTO kecamatanResponse = subDistrictService.getKecamatanById(id);
         return WebResponseDTO.<SubDistrictDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -65,7 +65,7 @@ public class SubDistrictController {
     }
 
     @PutMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SubDistrictDTO> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateSubDistrictRequestDTO updateKecamatanRequest) throws KecamatanNotFoundException, DistrictNotFoundException {
+    public WebResponseDTO<SubDistrictDTO> updateKecamatan(@PathVariable("idKecamatan") String id, @RequestBody UpdateSubDistrictRequestDTO updateKecamatanRequest) throws SubDistrictNotFoundException, DistrictNotFoundException {
         final SubDistrictDTO kecamatanResponse = subDistrictService.updateKecamatan(id, updateKecamatanRequest);
         return WebResponseDTO.<SubDistrictDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -75,7 +75,7 @@ public class SubDistrictController {
     }
 
     @DeleteMapping(value = "/{idKecamatan}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SubDistrictDTO> deleteKecamatan(@PathVariable("idKecamatan") String id) throws KecamatanNotFoundException {
+    public WebResponseDTO<SubDistrictDTO> deleteKecamatan(@PathVariable("idKecamatan") String id) throws SubDistrictNotFoundException {
         subDistrictService.deleteKecamatan(id);
         return WebResponseDTO.<SubDistrictDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -85,7 +85,7 @@ public class SubDistrictController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SubDistrictDTO> getKecamatanByName(@RequestParam("name") String name) throws KecamatanNotFoundException {
+    public WebResponseDTO<SubDistrictDTO> getKecamatanByName(@RequestParam("name") String name) throws SubDistrictNotFoundException {
         final SubDistrictDTO kecamatanResponse = subDistrictService.getKecamatanByName(name);
         return WebResponseDTO.<SubDistrictDTO>builder()
                 .code(HttpStatus.OK.value())
@@ -105,7 +105,7 @@ public class SubDistrictController {
     }
 
     @GetMapping(value = "/code", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SubDistrictDTO> getKecamatanByCode(@RequestParam("code") String code) throws KecamatanNotFoundException {
+    public WebResponseDTO<SubDistrictDTO> getKecamatanByCode(@RequestParam("code") String code) throws SubDistrictNotFoundException {
         final SubDistrictDTO kecamatanResponse = subDistrictService.getKecamatanByCode(code);
         return WebResponseDTO.<SubDistrictDTO>builder()
                 .code(HttpStatus.OK.value())

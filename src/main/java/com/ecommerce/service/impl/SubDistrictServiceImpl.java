@@ -4,7 +4,7 @@ import com.ecommerce.entity.region.District;
 import com.ecommerce.entity.region.SubDistrict;
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
-import com.ecommerce.exception.KecamatanNotFoundException;
+import com.ecommerce.exception.SubDistrictNotFoundException;
 import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.repository.SubDistrictRepository;
 import com.ecommerce.repository.DistrictRepository;
@@ -47,18 +47,18 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public SubDistrictDTO getKecamatanById(String id) throws KecamatanNotFoundException {
+    public SubDistrictDTO getKecamatanById(String id) throws SubDistrictNotFoundException {
         SubDistrict subDistrict = subDistrictRepository.findById(id)
-                .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + id + "] not found"));
+                .orElseThrow(() -> new SubDistrictNotFoundException("Kecamatan ID [" + id + "] not found"));
         return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
     @Override
-    public SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws DistrictNotFoundException, KecamatanNotFoundException {
+    public SubDistrictDTO updateKecamatan(String id, UpdateSubDistrictRequestDTO updateKecamatanRequest) throws DistrictNotFoundException, SubDistrictNotFoundException {
         District district = districtRepository.findById(updateKecamatanRequest.getKotaId())
                 .orElseThrow(() -> new DistrictNotFoundException("Kota ID [" + updateKecamatanRequest.getKotaId() + "] not found"));
         SubDistrict subDistrict = subDistrictRepository.findById(id)
-                .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + id + "] not found"));
+                .orElseThrow(() -> new SubDistrictNotFoundException("Kecamatan ID [" + id + "] not found"));
         subDistrict.setCode(updateKecamatanRequest.getCode());
         subDistrict.setName(updateKecamatanRequest.getName());
         subDistrict.setDistrict(district);
@@ -68,9 +68,9 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public void deleteKecamatan(String id) throws KecamatanNotFoundException {
+    public void deleteKecamatan(String id) throws SubDistrictNotFoundException {
         final SubDistrict subDistrict = subDistrictRepository.findById(id)
-                .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + id + "] not found"));
+                .orElseThrow(() -> new SubDistrictNotFoundException("Kecamatan ID [" + id + "] not found"));
         subDistrictRepository.delete(subDistrict);
     }
 
@@ -99,14 +99,14 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     }
 
     @Override
-    public SubDistrictDTO getKecamatanByName(String name) throws KecamatanNotFoundException {
-        SubDistrict subDistrict = subDistrictRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KecamatanNotFoundException("Kecamatan name [" + name + "] not found"));
+    public SubDistrictDTO getKecamatanByName(String name) throws SubDistrictNotFoundException {
+        SubDistrict subDistrict = subDistrictRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new SubDistrictNotFoundException("Kecamatan name [" + name + "] not found"));
         return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
     @Override
-    public SubDistrictDTO getKecamatanByCode(String code) throws KecamatanNotFoundException {
-        SubDistrict subDistrict = subDistrictRepository.findAllByCode(code).orElseThrow(() -> new KecamatanNotFoundException("Kecamatan code [" + code + "] not found"));
+    public SubDistrictDTO getKecamatanByCode(String code) throws SubDistrictNotFoundException {
+        SubDistrict subDistrict = subDistrictRepository.findAllByCode(code).orElseThrow(() -> new SubDistrictNotFoundException("Kecamatan code [" + code + "] not found"));
         return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
