@@ -1,7 +1,7 @@
 package com.ecommerce.service.impl;
 
 import com.ecommerce.entity.region.Province;
-import com.ecommerce.mapper.WilayahMapper;
+import com.ecommerce.mapper.RegionMapper;
 import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.entity.region.District;
@@ -26,12 +26,12 @@ public class DistrictServiceImpl implements DistrictService {
 
     private final DistrictRepository districtRepository;
     private final ProvinceRepository provinceRepository;
-    private final WilayahMapper wilayahMapper;
+    private final RegionMapper regionMapper;
 
-    public DistrictServiceImpl(DistrictRepository districtRepository, ProvinceRepository provinceRepository, WilayahMapper wilayahMapper) {
+    public DistrictServiceImpl(DistrictRepository districtRepository, ProvinceRepository provinceRepository, RegionMapper regionMapper) {
         this.districtRepository = districtRepository;
         this.provinceRepository = provinceRepository;
-        this.wilayahMapper = wilayahMapper;
+        this.regionMapper = regionMapper;
     }
 
     @Override
@@ -44,14 +44,14 @@ public class DistrictServiceImpl implements DistrictService {
         district.setProvince(province);
         district.setCreatedDate(LocalDateTime.now());
         districtRepository.save(district);
-        return wilayahMapper.mapToKotaResponse(district);
+        return regionMapper.mapToKotaResponse(district);
     }
 
     @Override
     public DistrictDTO getKotaById(String id) throws KotaNotFoundException {
         District district = districtRepository.findById(id)
                 .orElseThrow(() -> new KotaNotFoundException("Kota ID [" + id + "] not found"));
-        return wilayahMapper.mapToKotaResponse(district);
+        return regionMapper.mapToKotaResponse(district);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class DistrictServiceImpl implements DistrictService {
         district.setProvince(province);
         district.setUpdatedDate(LocalDateTime.now());
         districtRepository.save(district);
-        return wilayahMapper.mapToKotaResponse(district);
+        return regionMapper.mapToKotaResponse(district);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class DistrictServiceImpl implements DistrictService {
         Page<District> kotaPage = districtRepository.findAll(pageable);
         List<District> districtList = kotaPage.getContent();
 
-        List<DistrictDTO> kotaResponseList = wilayahMapper.mapToKotaResponseList(districtList);
+        List<DistrictDTO> kotaResponseList = regionMapper.mapToKotaResponseList(districtList);
 
         ListDistrictResponseDTO listKotaResponse = new ListDistrictResponseDTO();
         listKotaResponse.setKotaList(kotaResponseList);
@@ -102,25 +102,25 @@ public class DistrictServiceImpl implements DistrictService {
     @Override
     public DistrictDTO getKotaByName(String name) throws KotaNotFoundException {
         District district = districtRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KotaNotFoundException("Kota name [" + name + "] not found"));
-        return wilayahMapper.mapToKotaResponse(district);
+        return regionMapper.mapToKotaResponse(district);
     }
 
     @Override
     public DistrictDTO getKotaByCode(String code) throws KotaNotFoundException {
         District district = districtRepository.findAllByCode(code).orElseThrow(() -> new KotaNotFoundException("Kota code [" + code + "] not found"));
-        return wilayahMapper.mapToKotaResponse(district);
+        return regionMapper.mapToKotaResponse(district);
     }
 
     @Override
     public List<DistrictDTO> getKotaByNameContains(String name) {
         List<District> districtList = districtRepository.findAllByNameContainingIgnoreCase(name);
-        return wilayahMapper.mapToKotaResponseList(districtList);
+        return regionMapper.mapToKotaResponseList(districtList);
     }
 
     @Override
     public List<DistrictDTO> getKotaByProvinsiId(String provinsiId) {
         List<District> districtList = districtRepository.findAllByProvinsiId(provinsiId);
-        return wilayahMapper.mapToKotaResponseList(districtList);
+        return regionMapper.mapToKotaResponseList(districtList);
     }
 
 }

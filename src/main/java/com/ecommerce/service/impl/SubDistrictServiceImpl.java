@@ -2,7 +2,7 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.entity.region.District;
 import com.ecommerce.entity.region.SubDistrict;
-import com.ecommerce.mapper.WilayahMapper;
+import com.ecommerce.mapper.RegionMapper;
 import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.KecamatanNotFoundException;
@@ -26,12 +26,12 @@ public class SubDistrictServiceImpl implements SubDistrictService {
 
     private final SubDistrictRepository subDistrictRepository;
     private final DistrictRepository districtRepository;
-    private final WilayahMapper wilayahMapper;
+    private final RegionMapper regionMapper;
 
-    public SubDistrictServiceImpl(SubDistrictRepository subDistrictRepository, DistrictRepository districtRepository, WilayahMapper wilayahMapper) {
+    public SubDistrictServiceImpl(SubDistrictRepository subDistrictRepository, DistrictRepository districtRepository, RegionMapper regionMapper) {
         this.subDistrictRepository = subDistrictRepository;
         this.districtRepository = districtRepository;
-        this.wilayahMapper = wilayahMapper;
+        this.regionMapper = regionMapper;
     }
 
     @Override
@@ -44,14 +44,14 @@ public class SubDistrictServiceImpl implements SubDistrictService {
         subDistrict.setDistrict(district);
         subDistrict.setCreatedDate(LocalDateTime.now());
         subDistrictRepository.save(subDistrict);
-        return wilayahMapper.mapToKecamatanResponse(subDistrict);
+        return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
     @Override
     public SubDistrictDTO getKecamatanById(String id) throws KecamatanNotFoundException {
         SubDistrict subDistrict = subDistrictRepository.findById(id)
                 .orElseThrow(() -> new KecamatanNotFoundException("Kecamatan ID [" + id + "] not found"));
-        return wilayahMapper.mapToKecamatanResponse(subDistrict);
+        return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class SubDistrictServiceImpl implements SubDistrictService {
         subDistrict.setDistrict(district);
         subDistrict.setUpdatedDate(LocalDateTime.now());
         subDistrictRepository.save(subDistrict);
-        return wilayahMapper.mapToKecamatanResponse(subDistrict);
+        return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
     @Override
@@ -87,7 +87,7 @@ public class SubDistrictServiceImpl implements SubDistrictService {
         Page<SubDistrict> kecamatanPage = subDistrictRepository.findAll(pageable);
         List<SubDistrict> subDistrictList = kecamatanPage.getContent();
 
-        List<SubDistrictDTO> kecamatanResponseList = wilayahMapper.mapToKecamatanResponseList(subDistrictList);
+        List<SubDistrictDTO> kecamatanResponseList = regionMapper.mapToKecamatanResponseList(subDistrictList);
 
         ListSubDistrictResponseDTO listKecamatanResponse = new ListSubDistrictResponseDTO();
         listKecamatanResponse.setKecamatanList(kecamatanResponseList);
@@ -102,24 +102,24 @@ public class SubDistrictServiceImpl implements SubDistrictService {
     @Override
     public SubDistrictDTO getKecamatanByName(String name) throws KecamatanNotFoundException {
         SubDistrict subDistrict = subDistrictRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new KecamatanNotFoundException("Kecamatan name [" + name + "] not found"));
-        return wilayahMapper.mapToKecamatanResponse(subDistrict);
+        return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
     @Override
     public SubDistrictDTO getKecamatanByCode(String code) throws KecamatanNotFoundException {
         SubDistrict subDistrict = subDistrictRepository.findAllByCode(code).orElseThrow(() -> new KecamatanNotFoundException("Kecamatan code [" + code + "] not found"));
-        return wilayahMapper.mapToKecamatanResponse(subDistrict);
+        return regionMapper.mapToKecamatanResponse(subDistrict);
     }
 
     @Override
     public List<SubDistrictDTO> getKecamatanByNameContains(String name) {
         List<SubDistrict> subDistrictList = subDistrictRepository.findAllByNameContainingIgnoreCase(name);
-        return wilayahMapper.mapToKecamatanResponseList(subDistrictList);
+        return regionMapper.mapToKecamatanResponseList(subDistrictList);
     }
 
     @Override
     public List<SubDistrictDTO> getKecamatanByKotaId(String kotaId) {
         List<SubDistrict> subDistrictList = subDistrictRepository.findAllByKotaId(kotaId);
-        return wilayahMapper.mapToKecamatanResponseList(subDistrictList);
+        return regionMapper.mapToKecamatanResponseList(subDistrictList);
     }
 }

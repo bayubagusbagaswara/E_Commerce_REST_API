@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class WilayahMapper {
+public class RegionMapper {
 
     public ProvinceDTO mapToProvinsiResponse(Province province) {
         ProvinceDTO provinsiResponse = new ProvinceDTO();
