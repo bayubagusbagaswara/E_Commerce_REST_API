@@ -1,15 +1,47 @@
 package com.ecommerce.exception;
 
+import com.ecommerce.dto.ApiResponse;
+import lombok.Data;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class SupplierNotFoundException extends Exception {
+import javax.persistence.Transient;
 
-    public SupplierNotFoundException() {
+@Setter
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class SupplierNotFoundException extends RuntimeException {
+
+    @Transient
+    private transient ApiResponse apiResponse;
+
+    private final String resourceName = "Supplier";
+    private String fieldName;
+    private Object fieldValue;
+
+    public SupplierNotFoundException(String fieldName, Object fieldValue) {
+        this.fieldName = fieldName;
+        this.fieldValue = fieldValue;
     }
 
-    public SupplierNotFoundException(String message) {
-        super(message);
+    public String getResourceName() {
+        return resourceName;
+    }
+
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public Object getFieldValue() {
+        return fieldValue;
+    }
+
+    public ApiResponse getApiResponse() {
+        return apiResponse;
+    }
+
+    private void setApiResponse() {
+        String message = String.format("%s not found with %s: '%s'", resourceName, fieldName, fieldValue);
+        apiResponse = new ApiResponse(Boolean.FALSE, message);
     }
 }
