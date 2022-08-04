@@ -1,7 +1,7 @@
 package com.ecommerce.mapper;
 
 import com.ecommerce.dto.product.ProductDTO;
-import com.ecommerce.dto.supplier.SupplierResponseDto;
+import com.ecommerce.dto.supplier.SupplierDTO;
 import com.ecommerce.entity.Product;
 import com.ecommerce.entity.Supplier;
 import org.springframework.stereotype.Component;
@@ -33,8 +33,8 @@ public class SupplierMapper {
         return productResponse;
     }
 
-    public SupplierResponseDto mapToSupplierResponse(Supplier supplier) {
-        SupplierResponseDto supplierResponse = new SupplierResponseDto();
+    public SupplierDTO mapToSupplierResponse(Supplier supplier) {
+        SupplierDTO supplierResponse = new SupplierDTO();
         supplierResponse.setId(supplier.getId());
         supplierResponse.setName(supplier.getName());
         supplierResponse.setEmail(supplier.getEmail());
@@ -50,7 +50,7 @@ public class SupplierMapper {
         return supplierResponse;
     }
 
-    public List<SupplierResponseDto> mapToSupplierResponseList(List<Supplier> supplierList) {
+    public List<SupplierDTO> mapToSupplierResponseList(List<Supplier> supplierList) {
         return supplierList.stream()
                 .map(this::mapToSupplierResponse)
                 .collect(Collectors.toList())

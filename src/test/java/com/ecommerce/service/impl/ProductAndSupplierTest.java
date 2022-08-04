@@ -1,7 +1,7 @@
 package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.product.ProductDTO;
-import com.ecommerce.dto.supplier.SupplierResponseDto;
+import com.ecommerce.dto.supplier.SupplierDTO;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
@@ -71,7 +71,7 @@ public class ProductAndSupplierTest {
         // jadi setelah kita hapus product macbook, hanya hanya tinggal berelasi dengan redmibook dan ipad
         // sehingga total product nya tinggal 2
         String supplierIdBayu = "bayu";
-        final SupplierResponseDto supplier = supplierService.getSupplierById(supplierIdBayu);
+        final SupplierDTO supplier = supplierService.getSupplierById(supplierIdBayu);
         assertEquals(2, supplier.getProducts().size());
         for (ProductDTO product : supplier.getProducts()) {
             log.info("Product: {}", product.getId());
@@ -80,7 +80,7 @@ public class ProductAndSupplierTest {
 
         // supplier tesla [legion, macbook]
         String supplierIdTesla = "tesla";
-        final SupplierResponseDto supplier1 = supplierService.getSupplierById(supplierIdTesla);
+        final SupplierDTO supplier1 = supplierService.getSupplierById(supplierIdTesla);
         assertEquals(1, supplier1.getProducts().size());
         for (ProductDTO product : supplier1.getProducts()) {
             assertEquals("legion", product.getId());
@@ -88,7 +88,7 @@ public class ProductAndSupplierTest {
 
         // supplier albert [iphone, canon, macbook]
         String supplierIdAlbert = "albert";
-        final SupplierResponseDto supplier2 = supplierService.getSupplierById(supplierIdAlbert);
+        final SupplierDTO supplier2 = supplierService.getSupplierById(supplierIdAlbert);
         assertEquals(2, supplier2.getProducts().size());
     }
 
@@ -99,7 +99,7 @@ public class ProductAndSupplierTest {
         String supplierId = "albert";
         supplierService.deleteSupplier(supplierId);
         assertThrows(SupplierNotFoundException.class, () -> {
-            final SupplierResponseDto supplier = supplierService.getSupplierById(supplierId);
+            final SupplierDTO supplier = supplierService.getSupplierById(supplierId);
         });
         // cek bahwa product sudah tidak memiliki relasi dengan supplier
 
@@ -117,7 +117,7 @@ public class ProductAndSupplierTest {
         String productIdIphone = "iphone";
         final ProductDTO product2 = productService.getProductById(productIdIphone);
         assertEquals(1, product2.getSuppliers().size());
-        for (SupplierResponseDto supplier : product2.getSuppliers()) {
+        for (SupplierDTO supplier : product2.getSuppliers()) {
             assertEquals("newton", supplier.getId());
         }
     }

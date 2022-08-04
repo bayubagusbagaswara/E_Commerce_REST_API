@@ -24,9 +24,9 @@ public class SupplierController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierResponseDto> createSupplier(@RequestBody CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException {
-        final SupplierResponseDto supplierResponse = supplierService.createSupplier(createSupplierRequest);
-        return WebResponseDTO.<SupplierResponseDto>builder()
+    public WebResponseDTO<SupplierDTO> createSupplier(@RequestBody CreateSupplierRequestDTO createSupplierRequest) throws KelurahanNotFoundException {
+        final SupplierDTO supplierResponse = supplierService.createSupplier(createSupplierRequest);
+        return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.CREATED.value())
                 .status(HttpStatus.CREATED.getReasonPhrase())
                 .data(supplierResponse)
@@ -34,9 +34,9 @@ public class SupplierController {
     }
 
     @GetMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierResponseDto> getSupplierById(@PathVariable("idSupplier") String id) throws SupplierNotFoundException {
-        final SupplierResponseDto supplierResponse = supplierService.getSupplierById(id);
-        return WebResponseDTO.<SupplierResponseDto>builder()
+    public WebResponseDTO<SupplierDTO> getSupplierById(@PathVariable("idSupplier") String id) throws SupplierNotFoundException {
+        final SupplierDTO supplierResponse = supplierService.getSupplierById(id);
+        return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(supplierResponse)
@@ -65,9 +65,9 @@ public class SupplierController {
     }
 
     @PutMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierResponseDto> updateSupplier(@PathVariable("idSupplier") String id, @RequestBody UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
-        final SupplierResponseDto supplierResponse = supplierService.updateSupplier(id, updateSupplierRequest);
-        return WebResponseDTO.<SupplierResponseDto>builder()
+    public WebResponseDTO<SupplierDTO> updateSupplier(@PathVariable("idSupplier") String id, @RequestBody UpdateSupplierRequestDto updateSupplierRequest) throws SupplierNotFoundException, KelurahanNotFoundException {
+        final SupplierDTO supplierResponse = supplierService.updateSupplier(id, updateSupplierRequest);
+        return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(supplierResponse)
@@ -85,9 +85,9 @@ public class SupplierController {
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierResponseDto> getSupplierByName(@RequestParam("name") String name) throws SupplierNotFoundException {
-        final SupplierResponseDto supplierResponse = supplierService.getSupplierByName(name);
-        return WebResponseDTO.<SupplierResponseDto>builder()
+    public WebResponseDTO<SupplierDTO> getSupplierByName(@RequestParam("name") String name) throws SupplierNotFoundException {
+        final SupplierDTO supplierResponse = supplierService.getSupplierByName(name);
+        return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(supplierResponse)
@@ -95,9 +95,9 @@ public class SupplierController {
     }
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<List<SupplierResponseDto>> getSupplierByNameContains(@RequestParam("name") String name) {
-        final List<SupplierResponseDto> supplierResponse = supplierService.getSupplierByNameContains(name);
-        return WebResponseDTO.<List<SupplierResponseDto>>builder()
+    public WebResponseDTO<List<SupplierDTO>> getSupplierByNameContains(@RequestParam("name") String name) {
+        final List<SupplierDTO> supplierResponse = supplierService.getSupplierByNameContains(name);
+        return WebResponseDTO.<List<SupplierDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(supplierResponse)
@@ -105,9 +105,9 @@ public class SupplierController {
     }
 
     @GetMapping(value = "/email", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierResponseDto> getSupplierByEmail(@RequestParam("email") String email) throws SupplierNotFoundException {
-        final SupplierResponseDto supplierResponse = supplierService.getSupplierByEmail(email);
-        return WebResponseDTO.<SupplierResponseDto>builder()
+    public WebResponseDTO<SupplierDTO> getSupplierByEmail(@RequestParam("email") String email) throws SupplierNotFoundException {
+        final SupplierDTO supplierResponse = supplierService.getSupplierByEmail(email);
+        return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(supplierResponse)
@@ -115,9 +115,9 @@ public class SupplierController {
     }
 
     @GetMapping(value = "/product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<List<SupplierResponseDto>> getSupplierByProductId(@PathVariable("idProduct") String idProduct) {
-        final List<SupplierResponseDto> supplierResponseList = supplierService.getSupplierByProductsId(idProduct);
-        return WebResponseDTO.<List<SupplierResponseDto>>builder()
+    public WebResponseDTO<List<SupplierDTO>> getSupplierByProductId(@PathVariable("idProduct") String idProduct) {
+        final List<SupplierDTO> supplierResponseList = supplierService.getSupplierByProductsId(idProduct);
+        return WebResponseDTO.<List<SupplierDTO>>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(supplierResponseList)
@@ -125,9 +125,9 @@ public class SupplierController {
     }
 
     @PostMapping(value = "/{idSupplier}/product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierResponseDto> addProductToSupplier(@PathVariable("idSupplier") String idSupplier, @PathVariable("idProduct") String idProduct) throws SupplierNotFoundException, ProductNotFoundException {
-        final SupplierResponseDto supplierResponse = supplierService.addProductToSupplier(idSupplier, idProduct);
-        return WebResponseDTO.<SupplierResponseDto>builder()
+    public WebResponseDTO<SupplierDTO> addProductToSupplier(@PathVariable("idSupplier") String idSupplier, @PathVariable("idProduct") String idProduct) throws SupplierNotFoundException, ProductNotFoundException {
+        final SupplierDTO supplierResponse = supplierService.addProductToSupplier(idSupplier, idProduct);
+        return WebResponseDTO.<SupplierDTO>builder()
                 .code(HttpStatus.OK.value())
                 .status(HttpStatus.OK.getReasonPhrase())
                 .data(supplierResponse)
