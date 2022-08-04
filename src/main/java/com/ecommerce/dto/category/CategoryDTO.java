@@ -1,10 +1,10 @@
 package com.ecommerce.dto.category;
 
-import com.ecommerce.dto.product.ProductDTO;
+import com.ecommerce.entity.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,6 @@ public class CategoryDTO {
     private String id;
     private String name;
     private String description;
-    private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
-    private List<ProductDTO> productList = new ArrayList<>();
+    private Instant createdAt;
+    private List<Product> productList = new ArrayList<>();
 }
