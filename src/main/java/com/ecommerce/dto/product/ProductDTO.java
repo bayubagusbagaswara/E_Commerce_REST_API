@@ -1,6 +1,6 @@
 package com.ecommerce.dto.product;
 
-import com.ecommerce.dto.category.CategoryDTO;
+import com.ecommerce.entity.Category;
 import com.ecommerce.entity.ProductDetail;
 import com.ecommerce.entity.Supplier;
 import lombok.Data;
@@ -21,6 +21,6 @@ public class ProductDTO {
     private Integer quantity;
     private Instant createdAt;
     private ProductDetail productDetail;
-    private CategoryDTO category;
+    private Category category;
     private Set<Supplier> suppliers = new HashSet<>();
 }
