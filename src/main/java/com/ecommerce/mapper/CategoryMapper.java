@@ -12,11 +12,6 @@ import java.util.stream.Collectors;
 @Component
 public class CategoryMapper {
 
-    private final ProductDetailMapper productDetailMapper;
-
-    public CategoryMapper(ProductDetailMapper productDetailMapper) {
-        this.productDetailMapper = productDetailMapper;
-    }
 
     public ProductDTO fromEntity(Product product) {
         ProductDTO productDTO = new ProductDTO();
@@ -24,7 +19,7 @@ public class CategoryMapper {
         productDTO.setName(product.getName());
         productDTO.setPrice(product.getPrice());
         productDTO.setQuantity(product.getQuantity());
-        productDTO.setProductDetail(productDetailMapper.mapToProductDetailResponse(product.getProductDetail()));
+        productDTO.setProductDetail(product.getProductDetail());
         return productDTO;
     }
 
