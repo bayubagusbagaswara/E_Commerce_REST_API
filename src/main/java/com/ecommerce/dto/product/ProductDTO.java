@@ -1,9 +1,8 @@
 package com.ecommerce.dto.product;
 
-
 import com.ecommerce.dto.category.CategoryDTO;
-import com.ecommerce.dto.productdetail.ProductDetailDTO;
 import com.ecommerce.dto.supplier.SupplierDTO;
+import com.ecommerce.entity.ProductDetail;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +20,7 @@ public class ProductDTO {
     private BigDecimal price;
     private Integer quantity;
     private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
-    private ProductDetailDTO productDetail;
+    private ProductDetail productDetail;
     private CategoryDTO category;
     private Set<SupplierDTO> suppliers = new HashSet<>();
 }
