@@ -28,9 +28,8 @@ public class CategoryMapper {
         categoryDTO.setId(category.getId());
         categoryDTO.setName(category.getName());
         categoryDTO.setDescription(category.getDescription());
-        categoryDTO.setProductList(category.getProducts().stream()
-                .map(this::fromEntity)
-                .collect(Collectors.toList()));
+        categoryDTO.setCreatedAt(category.getCreatedAt());
+        categoryDTO.setProductList(category.getProducts());
         return categoryDTO;
     }
 
