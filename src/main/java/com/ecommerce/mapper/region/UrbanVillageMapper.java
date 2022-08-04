@@ -4,6 +4,9 @@ import com.ecommerce.dto.region.urbanVillage.UrbanVillageDTO;
 import com.ecommerce.entity.region.UrbanVillage;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class UrbanVillageMapper {
 
@@ -15,5 +18,11 @@ public class UrbanVillageMapper {
         dto.setCreatedAt(urbanVillage.getCreatedAt());
         dto.setSubDistrict(urbanVillage.getSubDistrict());
         return dto;
+    }
+
+    public List<UrbanVillageDTO> fromUrbanVillageList(List<UrbanVillage> urbanVillageList) {
+        return urbanVillageList.stream()
+                .map(this::fromUrbanVillage)
+                .collect(Collectors.toList());
     }
 }
