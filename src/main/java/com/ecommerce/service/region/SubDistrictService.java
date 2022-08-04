@@ -22,5 +22,5 @@ public interface SubDistrictService {
 
     SubDistrictDTO getSubDistrictByCode(String code);
 
-    List<SubDistrictDTO> getAllSubDistrictsByDistrictId(String subDistrictId);
+    List<SubDistrictDTO> getAllSubDistrictsByDistrictId(String districtId);
 }
