@@ -1,6 +1,6 @@
 package com.ecommerce.dto.region.district;
 
-import com.ecommerce.dto.region.province.ProvinceDTO;
+import com.ecommerce.entity.region.Province;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,5 +14,5 @@ public class DistrictDTO {
     private String code;
     private String name;
     private Instant createdAt;
-    private ProvinceDTO provinceDTO;
+    private Province province;
 }
