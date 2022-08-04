@@ -1,11 +1,13 @@
 package com.ecommerce.exception;
 
 import com.ecommerce.dto.ApiResponse;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.persistence.Transient;
 
+@Setter
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ProvinceNotFoundException extends RuntimeException {
     @Transient
