@@ -14,6 +14,6 @@ public class UpdateUrbanVillageRequestDTO {
     @NotBlank(message = "Name must not be blank")
     private String name;
 
-    @NotBlank(message = "Urban Village ID must not be blank")
-    private String urbanVillageId;
+    @NotBlank(message = "Sub District ID must not be blank")
+    private String subDistrictId;
 }
