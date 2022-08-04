@@ -1,29 +1,26 @@
 package com.ecommerce.service.region;
 
-import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
-import com.ecommerce.exception.SubDistrictNotFoundException;
-import com.ecommerce.exception.UrbanVillageNotFoundException;
 
 import java.util.List;
 
 public interface UrbanVillageService {
 
-    UrbanVillageDTO createKelurahan(CreateUrbanVillageRequestDTO createKelurahanRequest) throws SubDistrictNotFoundException;
+    UrbanVillageDTO createUrbanVillage(CreateUrbanVillageRequestDTO createUrbanVillageRequestDTO);
 
-    UrbanVillageDTO getKelurahanById(String id) throws UrbanVillageNotFoundException;
+    UrbanVillageDTO getUrbanVillageById(String urbanVillageId);
 
-    ListUrbanVillageResponseDTO getAllKelurahan(ListUrbanVillageRequestDTO listKelurahanRequest);
+    ListUrbanVillageResponseDTO getAllUrbanVillages(ListUrbanVillageRequestDTO listUrbanVillageRequestDTO);
 
-    UrbanVillageDTO updateKelurahan(String id, UpdateUrbanVillageRequestDTO updateKelurahanRequest) throws UrbanVillageNotFoundException, SubDistrictNotFoundException;
+    UrbanVillageDTO updateUrbanVillage(String urbanVillageId, UpdateUrbanVillageRequestDTO updateUrbanVillageRequestDTO);
 
-    void deleteKelurahan(String id) throws UrbanVillageNotFoundException;
+    void deleteUrbanVillage(String urbanVillageId);
 
-    UrbanVillageDTO getKelurahanByName(String name) throws UrbanVillageNotFoundException;
+    UrbanVillageDTO getUrbanVillageByName(String name);
 
-    List<UrbanVillageDTO> getKelurahanByNameContains(String name);
+    List<UrbanVillageDTO> getUrbanVillageByNameContains(String name);
 
-    UrbanVillageDTO getKelurahanByCode(String code) throws UrbanVillageNotFoundException;
+    UrbanVillageDTO getUrbanVillageByCode(String code);
 
-    List<UrbanVillageDTO> getKelurahanByKecamatanId(String kecamatanId);
+    List<UrbanVillageDTO> getAllUrbanVillagesBySubDistrictId(String subDistrictId);
 }
