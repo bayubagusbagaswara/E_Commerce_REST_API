@@ -1,12 +1,13 @@
 package com.ecommerce.dto.supplier;
 
-import com.ecommerce.dto.product.ProductDTO;
+import com.ecommerce.entity.Product;
 import com.ecommerce.entity.SupplierAddress;
 import com.ecommerce.entity.enumerator.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +26,9 @@ public class SupplierDTO {
 
     private Gender gender;
 
+    private Instant createdAt;
+
     private SupplierAddress supplierAddress;
 
-    private Set<ProductDTO> productDTOSet = new HashSet<>();
+    private Set<Product> productSet = new HashSet<>();
 }
