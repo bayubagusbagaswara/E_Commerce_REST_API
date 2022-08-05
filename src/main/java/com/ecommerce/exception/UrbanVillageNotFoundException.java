@@ -1,18 +1,19 @@
 package com.ecommerce.exception;
 
-import com.ecommerce.dto.ApiResponse;
+import com.ecommerce.dto.MessageResponse;
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.persistence.Transient;
 
-@Setter
+@AllArgsConstructor
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class UrbanVillageNotFoundException extends RuntimeException {
 
     @Transient
-    private transient ApiResponse apiResponse;
+    private transient MessageResponse messageResponse;
 
     private final String resourceName = "Urban Village";
     private String fieldName;
@@ -35,12 +36,12 @@ public class UrbanVillageNotFoundException extends RuntimeException {
         return fieldValue;
     }
 
-    public ApiResponse getApiResponse() {
-        return apiResponse;
+    public MessageResponse getMessageResponse() {
+        return messageResponse;
     }
 
-    private void setApiResponse() {
+    private void setMessageResponse() {
         String message = String.format("%s not found with %s: '%s'", resourceName, fieldName, fieldValue);
-        apiResponse = new ApiResponse(Boolean.FALSE, message);
+        messageResponse = new MessageResponse(404, message);
     }
 }
