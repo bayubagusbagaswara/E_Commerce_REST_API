@@ -27,4 +27,9 @@ public class ProductDetail {
     @MapsId
     @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "fk_product_detail_product_id"))
     private Product product;
+
+    public ProductDetail(String sku, String description) {
+        this.sku = sku;
+        this.description = description;
+    }
 }
