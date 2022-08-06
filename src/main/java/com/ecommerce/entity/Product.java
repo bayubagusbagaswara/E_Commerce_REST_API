@@ -15,6 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "products")
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
