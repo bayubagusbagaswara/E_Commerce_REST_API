@@ -9,11 +9,11 @@ import com.ecommerce.entity.Supplier;
 import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
-import com.ecommerce.repository.AddressRepository;
 import com.ecommerce.repository.region.UrbanVillageRepository;
 import com.ecommerce.repository.ProductRepository;
 import com.ecommerce.repository.SupplierRepository;
 import com.ecommerce.service.SupplierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,45 +32,40 @@ public class SupplierServiceImpl implements SupplierService {
     private final SupplierRepository supplierRepository;
     private final ProductRepository productRepository;
     private final UrbanVillageRepository urbanVillageRepository;
-    private final AddressRepository addressRepository;
     private final SupplierMapper supplierMapper;
 
-    public SupplierServiceImpl(SupplierRepository supplierRepository, ProductRepository productRepository, UrbanVillageRepository urbanVillageRepository, AddressRepository addressRepository, SupplierMapper supplierMapper) {
+    @Autowired
+    public SupplierServiceImpl(SupplierRepository supplierRepository, ProductRepository productRepository, UrbanVillageRepository urbanVillageRepository, SupplierMapper supplierMapper) {
         this.supplierRepository = supplierRepository;
         this.productRepository = productRepository;
         this.urbanVillageRepository = urbanVillageRepository;
-        this.addressRepository = addressRepository;
         this.supplierMapper = supplierMapper;
     }
 
     @Override
-    public SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws UrbanVillageNotFoundException {
+    public SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest) {
+        UrbanVillage urbanVillage = urbanVillageRepository.findById(createSupplierRequest.getUrbanVillageId()).orElseThrow(() -> new UrbanVillageNotFoundException("id", createSupplierRequest.getUrbanVillageId()));
 
-        UrbanVillage urbanVillage = urbanVillageRepository.findById(createSupplierRequest.getKelurahanId())
-                .orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan ID [" + createSupplierRequest.getKelurahanId() + "] not found"));
+        SupplierAddress supplierAddress = SupplierAddress.builder()
+                .fullAddress(createSupplierRequest.getStreet())
+                .urbanVillage(urbanVillage)
+                .build();
 
-        SupplierAddress supplierAddress = new SupplierAddress();
-        supplierAddress.setStreet(createSupplierRequest.getStreet());
-        supplierAddress.setPostalCode(createSupplierRequest.getPostalCode());
-        supplierAddress.setUrbanVillage(urbanVillage);
-
-        Supplier supplier = new Supplier();
-        supplier.setName(createSupplierRequest.getName());
-        supplier.setEmail(createSupplierRequest.getEmail());
-        supplier.setGender(createSupplierRequest.getGender());
-        supplier.setMobilePhone(createSupplierRequest.getMobilePhone());
-        supplier.setSupplierAddress(supplierAddress);
-        supplier.setCreatedDate(LocalDateTime.now());
-
-        addressRepository.save(supplierAddress);
+        Supplier supplier = Supplier.builder()
+                .name(createSupplierRequest.getName())
+                .email(createSupplierRequest.getEmail())
+                .mobilePhone(createSupplierRequest.getMobilePhone())
+                .gender(createSupplierRequest.getGender())
+                .supplierAddress(supplierAddress)
+                .build();
         supplierRepository.save(supplier);
-        return supplierMapper.mapToSupplierResponse(supplier);
+        return supplierMapper.fromSupplier(supplier);
     }
 
     @Override
-    public SupplierDTO getSupplierById(String id) throws SupplierNotFoundException {
-        Supplier supplier = getSupplier(id);
-        return supplierMapper.mapToSupplierResponse(supplier);
+    public SupplierDTO getSupplierById(String supplierId) {
+        Supplier supplier = getSupplier(supplierId);
+        return supplierMapper.fromSupplier(supplier);
     }
 
     @Override
@@ -85,28 +80,26 @@ public class SupplierServiceImpl implements SupplierService {
         Page<Supplier> supplierPage = supplierRepository.findAll(pageable);
         List<Supplier> supplierList = supplierPage.getContent();
 
-        List<SupplierDTO> supplierResponseList = supplierMapper.mapToSupplierResponseList(supplierList);
+        List<SupplierDTO> supplierDTOList = supplierMapper.fromSupplierList(supplierList);
 
-        ListSupplierResponseDTO listSupplierResponse = new ListSupplierResponseDTO();
-        listSupplierResponse.setSupplierList(supplierResponseList);
-        listSupplierResponse.setPageNo(supplierPage.getNumber());
-        listSupplierResponse.setPageSize(supplierPage.getSize());
-        listSupplierResponse.setTotalElements(supplierPage.getTotalElements());
-        listSupplierResponse.setTotalPages(supplierPage.getTotalPages());
-        listSupplierResponse.setLast(supplierPage.isLast());
-        return listSupplierResponse;
+        return ListSupplierResponseDTO.builder()
+                .supplierDTOList(supplierDTOList)
+                .pageNo(supplierPage.getNumber())
+                .pageSize(supplierPage.getSize())
+                .totalElements(supplierPage.getTotalElements())
+                .totalPages(supplierPage.getTotalPages())
+                .last(supplierPage.isLast())
+                .build();
     }
 
     @Override
-    public SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, UrbanVillageNotFoundException {
-
-        Supplier supplier = getSupplier(id);
-        UrbanVillage urbanVillage = urbanVillageRepository.findById(updateSupplierRequest.getKelurahanId())
-                .orElseThrow(() -> new UrbanVillageNotFoundException("Kelurahan ID [" + updateSupplierRequest.getKelurahanId() + "] not found"));
+    public SupplierDTO updateSupplier(String supplierId, UpdateSupplierRequestDTO updateSupplierRequest) {
+        Supplier supplier = getSupplier(supplierId);
+        UrbanVillage urbanVillage = urbanVillageRepository.findById(updateSupplierRequest.getUrbanVillageId())
+                .orElseThrow(() -> new UrbanVillageNotFoundException("id", updateSupplierRequest.getUrbanVillageId()));
 
         SupplierAddress supplierAddress = supplier.getSupplierAddress();
-        supplierAddress.setStreet(updateSupplierRequest.getStreet());
-        supplierAddress.setPostalCode(updateSupplierRequest.getPostalCode());
+        supplierAddress.setFullAddress(updateSupplierRequest.getStreet());
         supplierAddress.setUrbanVillage(urbanVillage);
 
         supplier.setName(updateSupplierRequest.getName());
@@ -114,63 +107,60 @@ public class SupplierServiceImpl implements SupplierService {
         supplier.setGender(updateSupplierRequest.getGender());
         supplier.setMobilePhone(updateSupplierRequest.getMobilePhone());
         supplier.setSupplierAddress(supplierAddress);
-        supplier.setUpdatedDate(LocalDateTime.now());
+        supplier.setCreatedAt(Instant.now());
 
-        addressRepository.save(supplierAddress);
         supplierRepository.save(supplier);
-        return supplierMapper.mapToSupplierResponse(supplier);
+        return supplierMapper.fromSupplier(supplier);
     }
 
     @Override
-    public void deleteSupplier(String id) throws SupplierNotFoundException {
-        Optional<Supplier> supplier = supplierRepository.findById(id);
+    public void deleteSupplier(String supplierId) {
+        Optional<Supplier> supplier = supplierRepository.findById(supplierId);
         if (supplier.isEmpty()) {
-            throw new SupplierNotFoundException("Supplier ID: [" + id + "] not found");
+            throw new SupplierNotFoundException("id", supplierId);
         }
         supplier.get().removeProducts();
         supplierRepository.deleteById(supplier.get().getId());
     }
 
     @Override
-    public SupplierDTO getSupplierByName(String name) throws SupplierNotFoundException {
-        Supplier supplier = supplierRepository.findAllByNameIgnoreCase(name)
-                .orElseThrow(() -> new SupplierNotFoundException("Supplier name [" + name + "] not found"));
-        return supplierMapper.mapToSupplierResponse(supplier);
+    public SupplierDTO getSupplierByName(String name) {
+        Supplier supplier = supplierRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new SupplierNotFoundException("name", name));
+        return supplierMapper.fromSupplier(supplier);
     }
 
     @Override
-    public SupplierDTO getSupplierByEmail(String email) throws SupplierNotFoundException {
-        Supplier supplier = supplierRepository.findAllByEmail(email)
-                .orElseThrow(() -> new SupplierNotFoundException("Supplier email [" + email + "] not found"));
-        return supplierMapper.mapToSupplierResponse(supplier);
+    public SupplierDTO getSupplierByEmail(String email) {
+        Supplier supplier = supplierRepository.findAllByEmail(email).orElseThrow(() -> new SupplierNotFoundException("email", email));
+        return supplierMapper.fromSupplier(supplier);
     }
 
     @Override
     public List<SupplierDTO> getSupplierByNameContains(String name) {
         List<Supplier> supplierList = supplierRepository.findAllByNameContainingIgnoreCase(name);
-        return supplierMapper.mapToSupplierResponseList(supplierList);
+        return supplierMapper.fromSupplierList(supplierList);
     }
 
     @Override
-    public List<SupplierDTO> getSupplierByProductsId(String productId) {
+    public List<SupplierDTO> getAllSuppliersByProductId(String productId) {
         List<Supplier> supplierList = supplierRepository.findAllByProductsId(productId);
-        return supplierMapper.mapToSupplierResponseList(supplierList);
+        return supplierMapper.fromSupplierList(supplierList);
     }
 
     @Override
-    public SupplierDTO addProductToSupplier(String supplierId, String productId) throws SupplierNotFoundException, ProductNotFoundException {
+    public SupplierDTO addProductToSupplier(String supplierId, String productId) {
         Product product = getProduct(productId);
         Supplier supplier = getSupplier(supplierId);
         supplier.addProduct(product);
         supplierRepository.save(supplier);
-        return supplierMapper.mapToSupplierResponse(supplier);
+        return supplierMapper.fromSupplier(supplier);
     }
 
-    private Supplier getSupplier(String supplierId) throws SupplierNotFoundException {
-        return supplierRepository.findById(supplierId).orElseThrow(() -> new SupplierNotFoundException("Supplier ID [" + supplierId + "] not found"));
+    private Supplier getSupplier(String supplierId) {
+        return supplierRepository.findById(supplierId).orElseThrow(() -> new SupplierNotFoundException("id", supplierId));
     }
 
-    private Product getProduct(String productId) throws ProductNotFoundException {
-        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product ID [" + productId + "] not found"));
+    private Product getProduct(String productId) {
+        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("id", productId));
     }
 }
