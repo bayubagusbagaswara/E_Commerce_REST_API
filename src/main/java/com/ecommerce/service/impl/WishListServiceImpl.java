@@ -1,9 +1,11 @@
-package com.ecommerce.service;
+package com.ecommerce.service.impl;
+
+import com.ecommerce.service.ProductService;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class WishListService {
+public class WishListServiceImpl {
 
     private final WishListRepository wishListRepository;
     private final WishListItemRepository wishListItemRepository;

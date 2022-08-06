@@ -1,7 +1,8 @@
-package com.ecommerce.service;
+package com.ecommerce.service.impl;
 
 import com.ecommerce.entity.CartItem;
 import com.ecommerce.entity.ShoppingCart;
+import com.ecommerce.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.Date;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ShoppingCartService {
+public class ShoppingCartServiceImpl {
 
     private final ShoppingCartRepository shoppingCartRepository;
     private final ProductService productService;
