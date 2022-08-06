@@ -16,6 +16,7 @@ public class SubDistrictMapper {
         dto.setCode(subDistrict.getCode());
         dto.setName(subDistrict.getName());
         dto.setCreatedAt(subDistrict.getCreatedAt());
+        dto.setUpdatedAt(subDistrict.getUpdatedAt());
         dto.setDistrict(subDistrict.getDistrict());
         return dto;
     }
@@ -25,5 +26,4 @@ public class SubDistrictMapper {
                 .map(this::fromSubDistrict)
                 .collect(Collectors.toList());
     }
-
 }
