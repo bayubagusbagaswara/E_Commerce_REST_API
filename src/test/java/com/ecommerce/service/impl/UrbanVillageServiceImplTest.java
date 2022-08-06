@@ -1,10 +1,8 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.dto.kelurahan.*;
 import com.ecommerce.dto.region.urbanVillage.*;
-import com.ecommerce.exception.SubDistrictNotFoundException;
 import com.ecommerce.exception.UrbanVillageNotFoundException;
-import com.ecommerce.service.impl.region.UrbanVillageServiceImpl;
+import com.ecommerce.service.region.UrbanVillageService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -36,124 +34,119 @@ class UrbanVillageServiceImplTest {
     private final static Logger log = LoggerFactory.getLogger(UrbanVillageServiceImplTest.class);
 
     @Autowired
-    UrbanVillageServiceImpl kelurahanService;
+    UrbanVillageService urbanVillageService;
 
     @Test
     @Order(1)
-    void createKelurahan() throws SubDistrictNotFoundException {
+    void createUrbanVillage() {
         CreateUrbanVillageRequestDTO requestDto = new CreateUrbanVillageRequestDTO();
         requestDto.setCode("3571038899");
         requestDto.setName("Kelurahan di Pesantren");
-        // id kecamatan Pesantren
-        requestDto.setKecamatanId("357103");
+        requestDto.setSubDistrictId("357103");
 
-        final UrbanVillageDTO responseDto = kelurahanService.createKelurahan(requestDto);
+        final UrbanVillageDTO responseDto = urbanVillageService.createUrbanVillage(requestDto);
         assertNotNull(responseDto.getId());
-        assertNotNull(responseDto.getCreatedDate());
+        assertNotNull(responseDto.getCreatedAt());
         assertEquals(requestDto.getName(), responseDto.getName());
     }
 
     @Test
     @Order(2)
-    void getKelurahanById() throws UrbanVillageNotFoundException {
+    void getUrbanVillageById() {
         // id kelurahan Singonegaran, Kecamatan Pesantren
         String id = "3571031005";
-        final UrbanVillageDTO responseDto = kelurahanService.getKelurahanById(id);
+        final UrbanVillageDTO responseDto = urbanVillageService.getUrbanVillageById(id);
         assertEquals(id, responseDto.getId());
     }
 
     @Test
     @Order(3)
-    void getAllKelurahan() {
-        int totalSampleKelurahan = 18;
+    void getAllUrbanVillages() {
+        int totalSampleData = 18;
         int pageNo = 0;
         int pageSize = 5;
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListUrbanVillageRequestDTO requestDto = new ListUrbanVillageRequestDTO();
-        requestDto.setPageNo(pageNo);
-        requestDto.setPageSize(pageSize);
-        requestDto.setSortBy(sortBy);
-        requestDto.setSortDir(sortDir);
+        ListUrbanVillageRequestDTO requestDto = new ListUrbanVillageRequestDTO(pageNo, pageSize, sortBy, sortDir);
 
-        final ListUrbanVillageResponseDTO responseDto = kelurahanService.getAllKelurahan(requestDto);
-        assertEquals(totalSampleKelurahan, responseDto.getTotalElements());
-        assertEquals(pageSize, responseDto.getKelurahanList().size());
+        ListUrbanVillageResponseDTO allUrbanVillages = urbanVillageService.getAllUrbanVillages(requestDto);
+        assertEquals(totalSampleData, allUrbanVillages.getTotalElements());
+        assertEquals(pageSize, allUrbanVillages.getUrbanVillageDTOList().size());
     }
 
     @Test
     @Order(4)
-    void updateKelurahan() throws UrbanVillageNotFoundException, SubDistrictNotFoundException {
+    void updateKelurahan() {
         // id kelurahan balowerti
         String id = "3571021002";
         UpdateUrbanVillageRequestDTO requestDto = new UpdateUrbanVillageRequestDTO();
         requestDto.setCode("3571021002");
         requestDto.setName("Balowerti Update");
         // pindah ke kecamatan Pesantren
-        requestDto.setKecamatanId("357103");
+        requestDto.setSubDistrictId("357103");
 
-        final UrbanVillageDTO responseDto = kelurahanService.updateKelurahan(id, requestDto);
+        UrbanVillageDTO responseDto = urbanVillageService.updateUrbanVillage(id, requestDto);
 
         assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedDate());
-        assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
+        assertNotNull(responseDto.getUpdatedAt());
+        assertNotEquals(responseDto.getCreatedAt(), responseDto.getUpdatedAt());
         assertEquals(requestDto.getName(), responseDto.getName());
     }
 
     @Test
     @Order(5)
-    void deleteKelurahan() throws UrbanVillageNotFoundException {
+    void deleteUrbanVillage() {
         // id kelurahan Ngronggo
         String id = "3571021014";
-        kelurahanService.deleteKelurahan(id);
+        urbanVillageService.deleteUrbanVillage(id);
         assertThrows(UrbanVillageNotFoundException.class, () -> {
-            final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanById(id);
+            UrbanVillageDTO urbanVillageById = urbanVillageService.getUrbanVillageById(id);
         });
     }
 
     @Test
     @Order(6)
-    void getKelurahanByName() throws UrbanVillageNotFoundException {
+    void getUrbanVillageByName() {
         // kelurahan singonegaran
         String name = "singonegaran";
-        final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanByName(name);
-        assertEquals(name, kelurahan.getName().toLowerCase());
-        log.info("Name: {}", kelurahan.getName());
+        UrbanVillageDTO urbanVillageDTO = urbanVillageService.getUrbanVillageByName(name);
+        assertEquals(name, urbanVillageDTO.getName().toLowerCase());
+        log.info("Name: {}", urbanVillageDTO.getName());
     }
 
     @Test
     @Order(7)
-    void getKelurahanByCode() throws UrbanVillageNotFoundException {
+    void getUrbanVillageByCode() {
         // code singonegaran
         String code = "3571031005";
-        final UrbanVillageDTO kelurahan = kelurahanService.getKelurahanByCode(code);
-        assertEquals(code, kelurahan.getCode());
-        log.info("Code: {}", kelurahan.getCode());
+        UrbanVillageDTO urbanVillageDTO = urbanVillageService.getUrbanVillageByCode(code);
+        assertEquals(code, urbanVillageDTO.getCode());
+        log.info("Code: {}", urbanVillageDTO.getCode());
     }
 
     @Test
     @Order(8)
-    void getKelurahanByNameContains() {
+    void getAllUrbanVillagesByNameContains() {
         // name "ma" [Manggarai, Kemayoran, Manyar Sabrangan]
         String name = "ma";
-        final List<UrbanVillageDTO> kelurahanList = kelurahanService.getKelurahanByNameContains(name);
-        assertEquals(3, kelurahanList.size());
-        for (UrbanVillageDTO kelurahan : kelurahanList) {
-            log.info("Name: {}", kelurahan.getName());
+        List<UrbanVillageDTO> urbanVillageByNameContains = urbanVillageService.getUrbanVillageByNameContains(name);
+        assertEquals(3, urbanVillageByNameContains.size());
+        for (UrbanVillageDTO urbanVillageDTO : urbanVillageByNameContains) {
+            log.info("Name: {}", urbanVillageDTO.getName());
             log.info("========");
         }
     }
 
     @Test
     @Order(9)
-    void getKelurahanByKecamatanId() {
+    void getAllUrbanVillagesBySubDistrictId() {
         // id kecamatan Pesantren
-        String kecamatanId = "357103";
-        final List<UrbanVillageDTO> kelurahanList = kelurahanService.getKelurahanByKecamatanId(kecamatanId);
-        assertEquals(2, kelurahanList.size());
-        for (UrbanVillageDTO kelurahan : kelurahanList) {
-            log.info("Name: {}", kelurahan.getName());
+        String subDistrictId = "357103";
+        List<UrbanVillageDTO> urbanVillageDTOList = urbanVillageService.getAllUrbanVillagesBySubDistrictId(subDistrictId);
+        assertEquals(2, urbanVillageDTOList.size());
+        for (UrbanVillageDTO urbanVillageDTO : urbanVillageDTOList) {
+            log.info("Name: {}", urbanVillageDTO.getName());
             log.info("==========");
         }
     }
