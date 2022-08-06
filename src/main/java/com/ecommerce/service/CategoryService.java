@@ -1,7 +1,6 @@
 package com.ecommerce.service;
 
 import com.ecommerce.dto.category.*;
-import com.ecommerce.exception.CategoryNotFoundException;
 
 import java.util.List;
 
@@ -9,19 +8,19 @@ public interface CategoryService {
 
     CategoryDTO createCategory(CreateCategoryRequestDTO createCategoryRequest);
 
-    CategoryDTO getCategoryById(String id) throws CategoryNotFoundException;
+    CategoryDTO getCategoryById(String categoryId);
 
     ListCategoryResponseDTO getAllCategories(ListCategoryRequestDTO listCategoryRequest);
 
-    CategoryDTO updateCategory(String id, UpdateCategoryRequestDTO updateCategoryRequest) throws CategoryNotFoundException;
+    CategoryDTO updateCategory(String categoryId, UpdateCategoryRequestDTO updateCategoryRequest);
 
-    void deleteCategory(String id) throws CategoryNotFoundException;
+    void deleteCategory(String categoryId);
 
-    CategoryDTO getCategoryByName(String name) throws CategoryNotFoundException;
+    CategoryDTO getCategoryByName(String name);
 
     List<CategoryDTO> getCategoryByNameContains(String name);
 
     List<CategoryDTO> getCategoryStartingWithName(String name);
 
-    CategoryDTO getCategoryByProductId(String idProduct) throws CategoryNotFoundException;
+    CategoryDTO getCategoryByProductId(String productId);
 }
