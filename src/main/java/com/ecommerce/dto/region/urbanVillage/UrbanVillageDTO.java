@@ -14,5 +14,6 @@ public class UrbanVillageDTO {
     private String code;
     private String name;
     private Instant createdAt;
+    private Instant updatedAt;
     private SubDistrict subDistrict;
 }
