@@ -1,32 +1,29 @@
 package com.ecommerce.service;
 
 import com.ecommerce.dto.product.*;
-import com.ecommerce.exception.CategoryNotFoundException;
-import com.ecommerce.exception.ProductNotFoundException;
 
 import java.util.List;
 
 public interface ProductService {
 
-    ProductDTO createProduct(CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException;
+    ProductDTO createProduct(CreateProductRequestDTO createProductRequest);
 
-    ProductDTO getProductById(String id) throws ProductNotFoundException;
+    ProductDTO updateProduct(String productId, UpdateProductRequestDTO updateProductRequest);
+
+    void deleteProduct(String productId);
+
+    ProductDTO getProductById(String productId);
 
     ListProductResponseDTO getAllProducts(ListProductRequestDTO listProductRequest);
 
-    ProductDTO updateProduct(String id, UpdateProductRequestDTO updateProductRequest) throws ProductNotFoundException, CategoryNotFoundException;
-
-    void deleteProduct(String id) throws ProductNotFoundException;
-
-    ProductDTO getProductByName(String name) throws ProductNotFoundException;
+    ProductDTO getProductByName(String name);
 
     List<ProductDTO> getProductByContainingName(String name);
 
-    ProductDTO getProductBySku(String sku) throws ProductNotFoundException;
+    ProductDTO getProductBySku(String sku);
 
     List<ProductDTO> getProductByCategoryId(String categoryId);
 
     List<ProductDTO> getProductBySuppliersId(String supplierId);
 
-    // save product to database
 }
