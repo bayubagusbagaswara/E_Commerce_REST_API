@@ -6,6 +6,7 @@ import com.ecommerce.entity.Category;
 import com.ecommerce.exception.CategoryNotFoundException;
 import com.ecommerce.repository.CategoryRepository;
 import com.ecommerce.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
 
+    @Autowired
     public CategoryServiceImpl(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
         this.categoryRepository = categoryRepository;
         this.categoryMapper = categoryMapper;
@@ -59,20 +61,15 @@ public class CategoryServiceImpl implements CategoryService {
 
         List<CategoryDTO> categoryDTOList = categoryMapper.fromCategoryList(categoryList);
 
-        ListCategoryResponseDTO listCategoryResponse = new ListCategoryResponseDTO();
-        listCategoryResponse.setCategoryDTOList(categoryDTOList);
-        listCategoryResponse.setPageNo(categories.getNumber());
-        listCategoryResponse.setPageSize(categories.getSize());
-        listCategoryResponse.setTotalElements(categories.getTotalElements());
-        listCategoryResponse.setTotalPages(categories.getTotalPages());
-        listCategoryResponse.setLast(categories.isLast());
-        return listCategoryResponse;
+        return new ListCategoryResponseDTO(
+                categoryDTOList, categories.getNumber(), categories.getSize(),
+                categories.getTotalElements(), categories.getTotalPages(), categories.isLast()
+        );
     }
 
     @Override
     public CategoryDTO updateCategory(String categoryId, UpdateCategoryRequestDTO categoryDTO) {
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new CategoryNotFoundException("id", categoryId));
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("id", categoryId));
         category.setName(categoryDTO.getName());
         category.setDescription(categoryDTO.getDescription());
         category.setUpdatedAt(Instant.now());
@@ -82,8 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDTO getCategoryByName(String name) {
-        Category category = categoryRepository.findAllByNameIgnoreCase(name)
-                .orElseThrow(() -> new CategoryNotFoundException("name", name));
+        Category category = categoryRepository.findAllByNameIgnoreCase(name).orElseThrow(() -> new CategoryNotFoundException("name", name));
         return categoryMapper.fromCategory(category);
     }
 
@@ -107,8 +103,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDTO getCategoryByProductId(String productId) {
-        final Category category = categoryRepository.findAllByProductsId(productId)
-                .orElseThrow(() -> new CategoryNotFoundException("product", productId));
+        final Category category = categoryRepository.findAllByProductsId(productId).orElseThrow(() -> new CategoryNotFoundException("product", productId));
         return categoryMapper.fromCategory(category);
     }
 }
