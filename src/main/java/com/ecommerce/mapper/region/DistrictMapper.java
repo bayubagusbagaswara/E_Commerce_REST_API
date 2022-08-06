@@ -16,6 +16,7 @@ public class DistrictMapper {
         districtDTO.setCode(district.getCode());
         districtDTO.setName(district.getName());
         districtDTO.setCreatedAt(district.getCreatedAt());
+        districtDTO.setUpdatedAt(district.getUpdatedAt());
         districtDTO.setProvince(district.getProvince());
         return districtDTO;
     }
