@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/sub/districts")
+@RequestMapping("/api/sub-districts")
 public class SubDistrictController {
 
     private final SubDistrictService subDistrictService;
