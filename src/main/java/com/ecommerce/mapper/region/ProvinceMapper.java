@@ -16,6 +16,7 @@ public class ProvinceMapper {
         provinceDTO.setCode(province.getCode());
         provinceDTO.setName(province.getName());
         provinceDTO.setCreatedAt(province.getCreatedAt());
+        provinceDTO.setUpdatedAt(province.getUpdatedAt());
         return provinceDTO;
     }
 
