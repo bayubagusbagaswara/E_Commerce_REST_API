@@ -1,10 +1,9 @@
-package com.ecommerce.service.impl;
+package com.ecommerce.service.impl.region;
 
 import com.ecommerce.dto.kota.*;
 import com.ecommerce.dto.region.district.*;
 import com.ecommerce.exception.DistrictNotFoundException;
 import com.ecommerce.exception.ProvinceNotFoundException;
-import com.ecommerce.service.impl.region.DistrictServiceImpl;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

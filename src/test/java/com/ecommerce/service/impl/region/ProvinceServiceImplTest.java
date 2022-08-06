@@ -1,9 +1,8 @@
-package com.ecommerce.service.impl;
+package com.ecommerce.service.impl.region;
 
 import com.ecommerce.dto.provinsi.*;
 import com.ecommerce.dto.region.province.*;
 import com.ecommerce.exception.ProvinceNotFoundException;
-import com.ecommerce.service.impl.region.ProvinceServiceImpl;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
