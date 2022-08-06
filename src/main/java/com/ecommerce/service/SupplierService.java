@@ -1,31 +1,28 @@
 package com.ecommerce.service;
 
 import com.ecommerce.dto.supplier.*;
-import com.ecommerce.exception.UrbanVillageNotFoundException;
-import com.ecommerce.exception.ProductNotFoundException;
-import com.ecommerce.exception.SupplierNotFoundException;
 
 import java.util.List;
 
 public interface SupplierService {
 
-    SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest) throws UrbanVillageNotFoundException;
+    SupplierDTO createSupplier(CreateSupplierRequestDTO createSupplierRequest);
 
-    SupplierDTO getSupplierById(String id) throws SupplierNotFoundException;
+    SupplierDTO updateSupplier(String supplierId, UpdateSupplierRequestDTO updateSupplierRequest);
+
+    void deleteSupplier(String supplierId);
+
+    SupplierDTO getSupplierById(String supplierId);
 
     ListSupplierResponseDTO getAllSuppliers(ListSupplierRequestDTO listSupplierRequest);
 
-    SupplierDTO updateSupplier(String id, UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, UrbanVillageNotFoundException;
-
-    void deleteSupplier(String id) throws SupplierNotFoundException;
-
-    SupplierDTO getSupplierByName(String name) throws SupplierNotFoundException;
+    SupplierDTO getSupplierByName(String name);
 
     List<SupplierDTO> getSupplierByNameContains(String name);
 
-    SupplierDTO getSupplierByEmail(String email) throws SupplierNotFoundException;
+    SupplierDTO getSupplierByEmail(String email);
 
-    List<SupplierDTO> getSupplierByProductsId(String productId);
+    List<SupplierDTO> getAllSuppliersByProductId(String productId);
 
-    SupplierDTO addProductToSupplier(String supplierId, String productId) throws SupplierNotFoundException, ProductNotFoundException;
+    SupplierDTO addProductToSupplier(String supplierId, String productId);
 }
