@@ -1,10 +1,8 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.dto.kecamatan.*;
 import com.ecommerce.dto.region.subDistrict.*;
 import com.ecommerce.exception.SubDistrictNotFoundException;
-import com.ecommerce.exception.DistrictNotFoundException;
-import com.ecommerce.service.impl.region.SubDistrictServiceImpl;
+import com.ecommerce.service.region.SubDistrictService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -34,122 +32,118 @@ class SubDistrictServiceImplTest {
     private final static Logger log = LoggerFactory.getLogger(SubDistrictServiceImplTest.class);
 
     @Autowired
-    SubDistrictServiceImpl kecamatanService;
+    SubDistrictService subDistrictService;
 
     @Test
     @Order(1)
-    void createKecamatan() throws DistrictNotFoundException {
+    void createSubDistrict() {
         CreateSubDistrictRequestDTO requestDto = new CreateSubDistrictRequestDTO();
         requestDto.setCode("3571890");
         requestDto.setName("Kecamatan Kediri");
         // kota Kediri id 3571
-        requestDto.setKotaId("3571");
+        requestDto.setDistrictId("3571");
 
-        final SubDistrictDTO responseDto = kecamatanService.createKecamatan(requestDto);
-        assertNotNull(responseDto.getId());
-        assertNotNull(responseDto.getCreatedDate());
-        assertEquals(requestDto.getName(), responseDto.getName());
+        SubDistrictDTO subDistrict = subDistrictService.createSubDistrict(requestDto);
+        assertNotNull(subDistrict.getId());
+        assertNotNull(subDistrict.getCreatedAt());
+        assertEquals(requestDto.getName(), subDistrict.getName());
     }
 
     @Test
     @Order(2)
-    void getKecamatanById() throws SubDistrictNotFoundException {
+    void getSubDistrictById() {
         // id kecamatan Pesantren, Kota Kediri
         String id = "357103";
-        final SubDistrictDTO responseDto = kecamatanService.getKecamatanById(id);
-        assertEquals(id, responseDto.getId());
+        SubDistrictDTO subDistrictDTO = subDistrictService.getSubDistrictById(id);
+        assertEquals(id, subDistrictDTO.getId());
     }
 
     @Test
     @Order(3)
-    void getAllKecamatan() {
-        int totalSampleKecamatan = 18;
+    void getAllSubDistricts() {
+        int totalSample = 18;
         int pageNo = 0;
         int pageSize = 5;
         String sortBy = "name";
         String sortDir = "asc";
 
-        ListSubDistrictRequestDTO requestDto = new ListSubDistrictRequestDTO();
-        requestDto.setPageNo(pageNo);
-        requestDto.setPageSize(pageSize);
-        requestDto.setSortBy(sortBy);
-        requestDto.setSortDir(sortDir);
+        ListSubDistrictRequestDTO requestDto = new ListSubDistrictRequestDTO(pageNo, pageSize, sortBy, sortDir);
 
-        final ListSubDistrictResponseDTO responseDto = kecamatanService.getAllKecamatan(requestDto);
-        assertEquals(totalSampleKecamatan, responseDto.getTotalElements());
-        assertEquals(pageSize, responseDto.getKecamatanList().size());
+        ListSubDistrictResponseDTO allSubDistricts = subDistrictService.getAllSubDistricts(requestDto);
+        assertEquals(totalSample, allSubDistricts.getTotalElements());
+        assertEquals(pageSize, allSubDistricts.getSubDistrictDTOList().size());
     }
 
     @Test
     @Order(4)
-    void updateKecamatan() throws SubDistrictNotFoundException, DistrictNotFoundException {
+    void updateSubDistrict() {
         // update kecamatan Mojoroto id 357101
         String id = "357101";
         UpdateSubDistrictRequestDTO requestDto = new UpdateSubDistrictRequestDTO();
         requestDto.setCode("357101");
         requestDto.setName("Mojoroto Update");
         // pindah ke kota Surabaya id 3578
-        requestDto.setKotaId("3578");
+        requestDto.setDistrictId("3578");
 
-        final SubDistrictDTO responseDto = kecamatanService.updateKecamatan(id, requestDto);
-        assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedDate());
-        assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
-        assertEquals(requestDto.getName(), responseDto.getName());
+        SubDistrictDTO subDistrictDTO = subDistrictService.updateSubDistrict(id, requestDto);
+        assertEquals(id, subDistrictDTO.getId());
+        assertNotNull(subDistrictDTO.getUpdatedAt());
+        assertNotEquals(subDistrictDTO.getCreatedAt(), subDistrictDTO.getUpdatedAt());
+        assertEquals(requestDto.getName(), subDistrictDTO.getName());
     }
 
     @Test
     @Order(5)
-    void deleteKecamatan() throws SubDistrictNotFoundException {
+    void deleteSubDistrict() {
         // delete kecamatan Mojoroto
         String id = "357101";
-        kecamatanService.deleteKecamatan(id);
+        subDistrictService.deleteSubDistrict(id);
         assertThrows(SubDistrictNotFoundException.class, () -> {
-            final SubDistrictDTO kecamatan = kecamatanService.getKecamatanById(id);
+            SubDistrictDTO subDistrictById = subDistrictService.getSubDistrictById(id);
         });
     }
 
     @Test
     @Order(6)
-    void getKecamatanByName() throws SubDistrictNotFoundException {
+    void getSubDistrictByName() {
         String name = "pesantren";
-        final SubDistrictDTO kecamatan = kecamatanService.getKecamatanByName(name);
-        assertEquals(name, kecamatan.getName().toLowerCase());
-        log.info("Name: {}", kecamatan.getName());
+        SubDistrictDTO subDistrictDTO = subDistrictService.getSubDistrictByName(name);
+        assertEquals(name, subDistrictDTO.getName().toLowerCase());
+        log.info("Name: {}", subDistrictDTO.getName());
     }
 
     @Test
     @Order(7)
-    void getKecamatanByCode() throws SubDistrictNotFoundException {
+    void getSubDistrictByCode() {
         // code kecamatan Pesantren 357103
         String code = "357103";
-        final SubDistrictDTO kecamatan = kecamatanService.getKecamatanByCode(code);
-        assertEquals(code, kecamatan.getCode());
-        log.info("Code: {}", kecamatan.getCode());
+        SubDistrictDTO subDistrictDTO = subDistrictService.getSubDistrictByCode(code);
+        assertEquals(code, subDistrictDTO.getCode());
+        log.info("Code: {}", subDistrictDTO.getCode());
     }
 
     @Test
     @Order(8)
-    void getKecamatanByNameContains() {
+    void getSubDistrictByNameContains() {
         // name 'ke' [Kemayoran, Kebayoran Lama, Kebayoran Baru, Simokerto, Kenjeran, Sambikerep]
         String name = "ke";
-        final List<SubDistrictDTO> kecamatanList = kecamatanService.getKecamatanByNameContains(name);
-        assertEquals(6, kecamatanList.size());
-        for (SubDistrictDTO kecamatan : kecamatanList) {
-            log.info("Name: {}", kecamatan.getName());
+        List<SubDistrictDTO> subDistrictDTOList = subDistrictService.getSubDistrictByNameContains(name);
+        assertEquals(6, subDistrictDTOList.size());
+        for (SubDistrictDTO subDistrictDTO : subDistrictDTOList) {
+            log.info("Name: {}", subDistrictDTO.getName());
             log.info("==========");
         }
     }
 
     @Test
     @Order(9)
-    void getKecamatanByKotaId() {
+    void getAllSubDistrictsByDistrictId() {
         // id kota Kediri [Kota, Pesantren, Mojoroto]
-        String kotaId = "3571";
-        final List<SubDistrictDTO> kecamatanList = kecamatanService.getKecamatanByKotaId(kotaId);
-        assertEquals(3, kecamatanList.size());
-        for (SubDistrictDTO kecamatan : kecamatanList) {
-            log.info("Name: {}", kecamatan.getName());
+        String districtId = "3571";
+        List<SubDistrictDTO> subDistrictDTOList = subDistrictService.getAllSubDistrictsByDistrictId(districtId);
+        assertEquals(3, subDistrictDTOList.size());
+        for (SubDistrictDTO subDistrictDTO : subDistrictDTOList) {
+            log.info("Name: {}", subDistrictDTO.getName());
             log.info("==========");
         }
     }
