@@ -18,6 +18,7 @@ import java.util.Set;
         @UniqueConstraint(name = "supplier_unique_mobile_phone", columnNames = "mobile_phone")
 })
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
