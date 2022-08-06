@@ -16,5 +16,6 @@ public class SubDistrictDTO {
     private String code;
     private String name;
     private Instant createdAt;
+    private Instant updatedAt;
     private District district;
 }
