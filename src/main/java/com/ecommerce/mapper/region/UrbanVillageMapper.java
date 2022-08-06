@@ -16,6 +16,7 @@ public class UrbanVillageMapper {
         dto.setCode(urbanVillage.getCode());
         dto.setName(urbanVillage.getName());
         dto.setCreatedAt(urbanVillage.getCreatedAt());
+        dto.setUpdatedAt(urbanVillage.getUpdatedAt());
         dto.setSubDistrict(urbanVillage.getSubDistrict());
         return dto;
     }
