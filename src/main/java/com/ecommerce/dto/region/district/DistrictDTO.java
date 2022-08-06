@@ -14,5 +14,6 @@ public class DistrictDTO {
     private String code;
     private String name;
     private Instant createdAt;
+    private Instant updatedAt;
     private Province province;
 }
