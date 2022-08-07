@@ -34,11 +34,12 @@ public class Product extends BaseEntity {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private Coupon discount;
-//    @Lob
-//    @Column(columnDefinition = "MEDIUMBLOB")
-//    private String image;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Coupon discount;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
