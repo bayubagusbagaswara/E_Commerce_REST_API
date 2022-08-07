@@ -1,14 +1,10 @@
 package com.ecommerce.entity;
 
-import com.ecommerce.entity.base.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Instant;
 
 /**
  * Table Kupon ini berisi tentang nilai diskon dari sebuah produk
@@ -18,10 +14,9 @@ import java.time.Instant;
 @Entity
 @Table(name = "coupons")
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Coupon extends BaseEntity {
+public class Coupon {
 
     @Column(name = "discount")
     private int discount;
@@ -29,28 +24,4 @@ public class Coupon extends BaseEntity {
     // ini hanya untuk cek apakah diskon tersedia atau tidak
     @Transient
     private boolean isDiscount;
-
-    @JsonIgnore
-    @Override
-    public Instant getCreatedAt() {
-        return super.getCreatedAt();
-    }
-
-    @JsonIgnore
-    @Override
-    public Instant getUpdatedAt() {
-        return super.getUpdatedAt();
-    }
-
-    @JsonIgnore
-    @Override
-    public String getCreatedBy() {
-        return super.getCreatedBy();
-    }
-
-    @JsonIgnore
-    @Override
-    public String getUpdatedBy() {
-        return super.getUpdatedBy();
-    }
 }
