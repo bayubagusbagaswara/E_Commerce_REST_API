@@ -1,6 +1,7 @@
 package com.ecommerce.service;
 
 import com.ecommerce.dto.product.*;
+import com.ecommerce.entity.Product;
 
 import java.util.List;
 
@@ -25,5 +26,7 @@ public interface ProductService {
     List<ProductDTO> getProductByCategoryId(String categoryId);
 
     List<ProductDTO> getProductBySuppliersId(String supplierId);
+
+    Product getProductId(String productId);
 
 }
