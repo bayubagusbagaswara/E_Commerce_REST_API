@@ -1,6 +1,6 @@
 package com.ecommerce.service.impl;
 
-public class ProductServiceNewImpl {
+public class ProductServiceNewLamaImpl {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final CouponRepository couponRepository;
