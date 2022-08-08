@@ -11,16 +11,17 @@ import java.util.stream.Collectors;
 public class SupplierMapper {
 
     public SupplierDTO fromSupplier(Supplier supplier) {
-        SupplierDTO supplierResponse = new SupplierDTO();
-        supplierResponse.setId(supplier.getId());
-        supplierResponse.setName(supplier.getName());
-        supplierResponse.setEmail(supplier.getEmail());
-        supplierResponse.setMobilePhone(supplier.getMobilePhone());
-        supplierResponse.setGender(supplier.getGender());
-        supplierResponse.setSupplierAddress(supplier.getSupplierAddress());
-        supplierResponse.setProducts(supplier.getProducts());
-        supplierResponse.setCreatedAt(supplier.getCreatedAt());
-        return supplierResponse;
+        SupplierDTO supplierDTO = new SupplierDTO();
+        supplierDTO.setId(supplier.getId());
+        supplierDTO.setName(supplier.getName());
+        supplierDTO.setEmail(supplier.getEmail());
+        supplierDTO.setMobilePhone(supplier.getMobilePhone());
+        supplierDTO.setGender(supplier.getGender());
+        supplierDTO.setSupplierAddress(supplier.getSupplierAddress());
+        supplierDTO.setProducts(supplier.getProducts());
+        supplierDTO.setCreatedAt(supplier.getCreatedAt());
+        supplierDTO.setUpdatedAt(supplier.getUpdatedAt());
+        return supplierDTO;
     }
 
     public List<SupplierDTO> fromSupplierList(List<Supplier> supplierList) {
