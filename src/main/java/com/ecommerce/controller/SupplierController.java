@@ -86,13 +86,9 @@ public class SupplierController {
         return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplierDTOList), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{idSupplier}/product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> addProductToSupplier(@PathVariable("idSupplier") String idSupplier, @PathVariable("idProduct") String idProduct) throws SupplierNotFoundException, ProductNotFoundException {
-        final SupplierDTO supplierResponse = supplierService.addProductToSupplier(idSupplier, idProduct);
-        return WebResponseDTO.<SupplierDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(supplierResponse)
-                .build();
+    @PostMapping(value = "/{supplierId}/add/product/{productId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<SupplierDTO>> addProductToSupplier(@PathVariable(name = "supplierId") String supplierId, @PathVariable(name = "productId") String productId) {
+        SupplierDTO supplierDTO = supplierService.addProductToSupplier(supplierId, productId);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplierDTO), HttpStatus.OK);
     }
 }
