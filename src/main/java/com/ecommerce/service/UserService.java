@@ -2,6 +2,7 @@ package com.ecommerce.service;
 
 import com.ecommerce.dto.MessageResponse;
 import com.ecommerce.dto.user.CreateUserRequest;
+import com.ecommerce.dto.user.UpdateUserRequest;
 import com.ecommerce.dto.user.UserDTO;
 
 public interface UserService {
@@ -17,4 +18,8 @@ public interface UserService {
     MessageResponse removeAdmin(String username);
 
     void verifyUserByUsernameOrEmail(String usernameOrEmail);
+
+    UserDTO updateUser(String userId, UpdateUserRequest updateUserRequest);
+
+
 }
