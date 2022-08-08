@@ -2,6 +2,8 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.SupplierDTO;
+import com.ecommerce.entity.Product;
+import com.ecommerce.entity.Supplier;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import org.junit.jupiter.api.MethodOrderer;
@@ -73,7 +75,7 @@ public class ProductAndSupplierTest {
         String supplierIdBayu = "bayu";
         final SupplierDTO supplier = supplierService.getSupplierById(supplierIdBayu);
         assertEquals(2, supplier.getProducts().size());
-        for (ProductDTO product : supplier.getProducts()) {
+        for (Product product : supplier.getProducts()) {
             log.info("Product: {}", product.getId());
             log.info("======");
         }
@@ -82,7 +84,7 @@ public class ProductAndSupplierTest {
         String supplierIdTesla = "tesla";
         final SupplierDTO supplier1 = supplierService.getSupplierById(supplierIdTesla);
         assertEquals(1, supplier1.getProducts().size());
-        for (ProductDTO product : supplier1.getProducts()) {
+        for (Product product : supplier1.getProducts()) {
             assertEquals("legion", product.getId());
         }
 
@@ -117,7 +119,7 @@ public class ProductAndSupplierTest {
         String productIdIphone = "iphone";
         final ProductDTO product2 = productService.getProductById(productIdIphone);
         assertEquals(1, product2.getSuppliers().size());
-        for (SupplierDTO supplier : product2.getSuppliers()) {
+        for (Supplier supplier : product2.getSuppliers()) {
             assertEquals("newton", supplier.getId());
         }
     }
