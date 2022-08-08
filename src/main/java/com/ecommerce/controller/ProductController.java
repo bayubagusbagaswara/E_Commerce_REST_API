@@ -31,49 +31,32 @@ public class ProductController {
         return new ResponseEntity<>(new WebResponseDTO<>(201, "CREATED", product), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<ProductDTO> getProductById(@PathVariable("idProduct") String id) throws ProductNotFoundException {
-        final ProductDTO productResponse = productService.getProductById(id);
-        return WebResponseDTO.<ProductDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(productResponse)
-                .build();
+    @GetMapping(value = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<ProductDTO>> getProductById(@PathVariable(name = "productId") String id) {
+        ProductDTO productDTO = productService.getProductById(id);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", productDTO), HttpStatus.OK);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<ListProductResponseDTO> getAllProducts(
+    public ResponseEntity<WebResponseDTO<ListProductResponseDTO>> getAllProducts(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
 
-        ListProductRequestDTO requestDto = new ListProductRequestDTO();
-        requestDto.setPageNo(pageNo);
-        requestDto.setPageSize(pageSize);
-        requestDto.setSortBy(sortBy);
-        requestDto.setSortDir(sortDir);
-
-        final ListProductResponseDTO productResponseList = productService.getAllProducts(requestDto);
-        return WebResponseDTO.<ListProductResponseDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(productResponseList)
-                .build();
+        ListProductRequestDTO listProductRequestDTO = new ListProductRequestDTO(pageNo, pageSize, sortBy, sortDir);
+        ListProductResponseDTO allProducts = productService.getAllProducts(listProductRequestDTO);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", allProducts), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<ProductDTO> updateProduct(@PathVariable("idProduct") String id, @RequestBody UpdateProductRequestDTO updateProductRequest) throws CategoryNotFoundException, ProductNotFoundException {
-        final ProductDTO productResponse = productService.updateProduct(id, updateProductRequest);
-        return WebResponseDTO.<ProductDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(productResponse)
-                .build();
+    @PutMapping(value = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<ProductDTO>> updateProduct(@PathVariable(name = "productId") String id, @RequestBody UpdateProductRequestDTO updateProductRequest) {
+        ProductDTO productDTO = productService.updateProduct(id, updateProductRequest);
+        return new ResponseEntity<>(new WebResponseDTO<>(201, "CREATED", productDTO), HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<String> deleteProduct(@PathVariable("idProduct") String id) throws ProductNotFoundException {
+    @DeleteMapping(value = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public WebResponseDTO<String> deleteProduct(@PathVariable(name = "productId") String id) {
         productService.deleteProduct(id);
         return WebResponseDTO.<String>builder()
                 .code(HttpStatus.OK.value())
