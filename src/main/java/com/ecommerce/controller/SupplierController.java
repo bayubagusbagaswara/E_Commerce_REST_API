@@ -56,14 +56,10 @@ public class SupplierController {
         return new ResponseEntity<>(new WebResponseDTO<>(201, "CREATED", supplierDTO), HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<String> deleteSupplier(@PathVariable("idSupplier") String id) throws SupplierNotFoundException {
+    @DeleteMapping(value = "/{supplierId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<String>> deleteSupplier(@PathVariable(name = "supplierId") String id) {
         supplierService.deleteSupplier(id);
-        return WebResponseDTO.<String>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(null)
-                .build();
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", "Successfully deleted."), HttpStatus.OK);
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
