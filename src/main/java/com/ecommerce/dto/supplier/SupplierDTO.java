@@ -28,6 +28,8 @@ public class SupplierDTO {
 
     private Instant createdAt;
 
+    private Instant updatedAt;
+
     private SupplierAddress supplierAddress;
 
     private Set<Product> products = new HashSet<>();
