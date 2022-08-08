@@ -2,8 +2,6 @@ package com.ecommerce.controller;
 
 import com.ecommerce.dto.WebResponseDTO;
 import com.ecommerce.dto.product.*;
-import com.ecommerce.exception.CategoryNotFoundException;
-import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.service.ProductService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,13 +83,9 @@ public class ProductController {
         return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", productDTOList), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/supplier/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<List<ProductDTO>> getProductsBySupplierId(@PathVariable("idSupplier") String idSupplier) {
-        final List<ProductDTO> productResponseList = productService.getProductBySuppliersId(idSupplier);
-        return WebResponseDTO.<List<ProductDTO>>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(productResponseList)
-                .build();
+    @GetMapping(value = "/supplier/{supplierId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<List<ProductDTO>>> getAllProductsBySupplierId(@PathVariable(name = "supplierId") String supplierId) {
+        List<ProductDTO> productDTOList = productService.getProductBySuppliersId(supplierId);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", productDTOList), HttpStatus.OK);
     }
 }
