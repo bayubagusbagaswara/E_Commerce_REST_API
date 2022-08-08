@@ -17,6 +17,7 @@ public class ProductMapper {
         productDTO.setPrice(product.getPrice());
         productDTO.setQuantity(product.getQuantity());
         productDTO.setCreatedAt(product.getCreatedAt());
+        productDTO.setUpdatedAt(product.getUpdatedAt());
         productDTO.setProductDetail(product.getProductDetail());
         productDTO.setCategory(product.getCategory());
         productDTO.setSuppliers(product.getSuppliers());

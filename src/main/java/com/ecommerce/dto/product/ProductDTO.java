@@ -20,6 +20,7 @@ public class ProductDTO {
     private BigDecimal price;
     private Integer quantity;
     private Instant createdAt;
+    private Instant updatedAt;
     private ProductDetail productDetail;
     private Category category;
     private Set<Supplier> suppliers = new HashSet<>();
