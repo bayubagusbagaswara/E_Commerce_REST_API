@@ -68,17 +68,13 @@ public class ProductController {
     }
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<List<ProductDTO>> getProductByNameContains(@RequestParam("name") String name) {
-        final List<ProductDTO> productResponseList = productService.getProductByContainingName(name);
-        return WebResponseDTO.<List<ProductDTO>>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(productResponseList)
-                .build();
+    public ResponseEntity<WebResponseDTO<List<ProductDTO>>> getAllProductsByNameContaining(@RequestParam(name = "name") String name) {
+        List<ProductDTO> productDTOList = productService.getProductByContainingName(name);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", productDTOList), HttpStatus.OK);
     }
 
     @GetMapping(value = "/sku", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<ProductDTO> getProductBySku(@RequestParam("sku") String sku) throws ProductNotFoundException {
+    public WebResponseDTO<ProductDTO> getProductBySku(@RequestParam(name = "sku") String sku) {
         final ProductDTO productResponse = productService.getProductBySku(sku);
         return WebResponseDTO.<ProductDTO>builder()
                 .code(HttpStatus.OK.value())
