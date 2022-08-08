@@ -56,13 +56,9 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<String> deleteProduct(@PathVariable(name = "productId") String id) {
+    public ResponseEntity<WebResponseDTO<String>> deleteProduct(@PathVariable(name = "productId") String id) {
         productService.deleteProduct(id);
-        return WebResponseDTO.<String>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(null)
-                .build();
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", "Successfully deleted."), HttpStatus.OK);
     }
 
     @GetMapping(value = "/name", produces = MediaType.APPLICATION_JSON_VALUE)
