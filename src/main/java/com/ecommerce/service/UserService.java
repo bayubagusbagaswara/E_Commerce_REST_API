@@ -1,5 +1,6 @@
 package com.ecommerce.service;
 
+import com.ecommerce.dto.MessageResponse;
 import com.ecommerce.dto.user.CreateUserRequest;
 import com.ecommerce.dto.user.UserDTO;
 
@@ -12,5 +13,6 @@ public interface UserService {
 
     UserDTO createAdmin(CreateUserRequest createUserRequest);
 
-
+    MessageResponse giveAdmin(String username);
+    MessageResponse removeAdmin(String username);
 }
