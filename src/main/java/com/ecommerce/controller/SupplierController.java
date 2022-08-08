@@ -25,13 +25,9 @@ public class SupplierController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> createSupplier(@RequestBody CreateSupplierRequestDTO createSupplierRequest) throws UrbanVillageNotFoundException {
-        final SupplierDTO supplierResponse = supplierService.createSupplier(createSupplierRequest);
-        return WebResponseDTO.<SupplierDTO>builder()
-                .code(HttpStatus.CREATED.value())
-                .status(HttpStatus.CREATED.getReasonPhrase())
-                .data(supplierResponse)
-                .build();
+    public ResponseEntity<WebResponseDTO<SupplierDTO>> createSupplier(@RequestBody CreateSupplierRequestDTO createSupplierRequest) {
+        SupplierDTO supplier = supplierService.createSupplier(createSupplierRequest);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplier), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
