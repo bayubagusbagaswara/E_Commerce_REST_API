@@ -6,30 +6,29 @@ import com.ecommerce.exception.CategoryNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.service.ProductService;
 import com.ecommerce.util.AppConstants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductController {
 
     private final ProductService productService;
 
+    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<ProductDTO> createProduct(@RequestBody CreateProductRequestDTO createProductRequest) throws CategoryNotFoundException {
-        final ProductDTO productResponse = productService.createProduct(createProductRequest);
-        return WebResponseDTO.<ProductDTO>builder()
-                .code(HttpStatus.CREATED.value())
-                .status(HttpStatus.CREATED.getReasonPhrase())
-                .data(productResponse)
-                .build();
+    public ResponseEntity<WebResponseDTO<ProductDTO>> createProduct(@RequestBody CreateProductRequestDTO createProductRequest) {
+        ProductDTO product = productService.createProduct(createProductRequest);
+        return new ResponseEntity<>(new WebResponseDTO<>(201, "CREATED", product), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
