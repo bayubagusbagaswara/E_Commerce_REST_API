@@ -39,24 +39,15 @@ public class SupplierController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<ListSupplierResponseDTO> getAllSuppliers(
+    public ResponseEntity<WebResponseDTO<ListSupplierResponseDTO>> getAllSuppliers(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) Integer pageNo,
             @RequestParam(value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) Integer pageSize,
             @RequestParam(value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir) {
 
-        ListSupplierRequestDTO requestDto = new ListSupplierRequestDTO();
-        requestDto.setPageNo(pageNo);
-        requestDto.setPageSize(pageSize);
-        requestDto.setSortBy(sortBy);
-        requestDto.setSortDir(sortDir);
-
-        final ListSupplierResponseDTO supplierResponse = supplierService.getAllSuppliers(requestDto);
-        return WebResponseDTO.<ListSupplierResponseDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(supplierResponse)
-                .build();
+        ListSupplierRequestDTO listSupplierRequestDTO = new ListSupplierRequestDTO(pageNo, pageSize, sortBy, sortDir);
+        ListSupplierResponseDTO allSuppliers = supplierService.getAllSuppliers(listSupplierRequestDTO);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", allSuppliers), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
