@@ -69,13 +69,9 @@ public class SupplierController {
     }
 
     @GetMapping(value = "/name/contains", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<List<SupplierDTO>> getSupplierByNameContains(@RequestParam("name") String name) {
-        final List<SupplierDTO> supplierResponse = supplierService.getSupplierByNameContains(name);
-        return WebResponseDTO.<List<SupplierDTO>>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(supplierResponse)
-                .build();
+    public ResponseEntity<WebResponseDTO<List<SupplierDTO>>> getAllSuppliersByNameContaining(@RequestParam(name = "name") String name) {
+        List<SupplierDTO> supplierDTOList = supplierService.getSupplierByNameContains(name);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplierDTOList), HttpStatus.OK);
     }
 
     @GetMapping(value = "/email", produces = MediaType.APPLICATION_JSON_VALUE)
