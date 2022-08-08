@@ -4,6 +4,7 @@ import com.ecommerce.dto.MessageResponse;
 import com.ecommerce.dto.user.CreateUserRequest;
 import com.ecommerce.dto.user.UpdateUserRequest;
 import com.ecommerce.dto.user.UserDTO;
+import com.ecommerce.exception.BadRequestException;
 import com.ecommerce.repository.RoleRepository;
 import com.ecommerce.repository.UserRepository;
 import com.ecommerce.service.UserService;
@@ -29,7 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void checkUsernameIsExists(String username) {
-
+        if (userRepository.existsByUsername(username)) {
+            throw new BadRequestException(new MessageResponse("Username is already taken"));
+        }
     }
 
     @Override
