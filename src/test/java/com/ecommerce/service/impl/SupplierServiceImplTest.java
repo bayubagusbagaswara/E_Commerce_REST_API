@@ -1,7 +1,7 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.*;
+import com.ecommerce.entity.Product;
 import com.ecommerce.entity.enumerator.Gender;
 import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
@@ -48,13 +48,12 @@ class SupplierServiceImplTest {
         requestDto.setGender(Gender.MALE);
         requestDto.setMobilePhone("089777444222");
         requestDto.setStreet("Jalan Kapten Tendean");
-        requestDto.setPostalCode("64132");
         // misal kelurahan singonegaran
-        requestDto.setKelurahanId("3571031005");
+        requestDto.setUrbanVillageId("3571031005");
 
         final SupplierDTO responseDto = supplierService.createSupplier(requestDto);
         assertNotNull(responseDto.getId());
-        assertNotNull(responseDto.getCreatedDate());
+        assertNotNull(responseDto.getCreatedAt());
         assertEquals("Supplier", responseDto.getName());
     }
 
@@ -83,7 +82,7 @@ class SupplierServiceImplTest {
 
         final ListSupplierResponseDTO responseDto = supplierService.getAllSuppliers(requestDto);
         assertEquals(totalSampleData, responseDto.getTotalElements().intValue());
-        assertEquals(pageSize, responseDto.getSupplierList().size());
+        assertEquals(pageSize, responseDto.getSupplierDTOList().size());
     }
 
     @Test
@@ -96,14 +95,13 @@ class SupplierServiceImplTest {
         requestDto.setGender(Gender.MALE);
         requestDto.setMobilePhone("089777444222");
         requestDto.setStreet("Jalan Kapten Tendean");
-        requestDto.setPostalCode("64132");
         // misal kita pindah kelurahan
-        requestDto.setKelurahanId("3571031005");
+        requestDto.setUrbanVillageId("3571031005");
 
         final SupplierDTO responseDto = supplierService.updateSupplier(id, requestDto);
         assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedDate());
-        assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
+        assertNotNull(responseDto.getUpdatedAt());
+        assertNotEquals(responseDto.getCreatedAt(), responseDto.getUpdatedAt());
         assertEquals("", responseDto.getName());
     }
 
@@ -147,7 +145,7 @@ class SupplierServiceImplTest {
     void getSupplierByProductsId() {
         String productId = "";
         int totalExpectedData = 0;
-        final List<SupplierDTO> supplier = supplierService.getSupplierByProductsId(productId);
+        final List<SupplierDTO> supplier = supplierService.getAllSuppliersByProductId(productId);
         assertEquals(totalExpectedData, supplier.size());
     }
 
@@ -157,7 +155,7 @@ class SupplierServiceImplTest {
         String productId = "";
         String supplierId = "";
         final SupplierDTO supplier = supplierService.addProductToSupplier(supplierId, productId);
-        for (ProductDTO product : supplier.getProducts()) {
+        for (Product product : supplier.getProducts()) {
             if (product.getId().equals(productId)) {
             }
         }
