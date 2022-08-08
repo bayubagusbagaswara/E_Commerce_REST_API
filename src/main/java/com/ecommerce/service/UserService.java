@@ -21,5 +21,6 @@ public interface UserService {
 
     UserDTO updateUser(String userId, UpdateUserRequest updateUserRequest);
 
+    MessageResponse deleteUser(String userId);
 
 }
