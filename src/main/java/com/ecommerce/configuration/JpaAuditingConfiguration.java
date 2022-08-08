@@ -13,6 +13,6 @@ public class JpaAuditingConfiguration {
 
     @Bean
     public AuditorAware<String> auditorProvider() {
-        return () -> Optional.of("Current User");
+        return new SpringSecurityAuditAwareImpl();
     }
 }
