@@ -16,5 +16,6 @@ public class CategoryDTO {
     private String name;
     private String description;
     private Instant createdAt;
+    private Instant updatedAt;
     private List<Product> productList = new ArrayList<>();
 }
