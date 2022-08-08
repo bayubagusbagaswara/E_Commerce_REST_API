@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 public interface ProductServiceNew {
 
     void saveProductToDatabase(MultipartFile file, String name, String description, int quantity, Double price, String brand, String categories);
+
     Product addCategoriesToProduct(Product p, String categories);
 
     void addImageToProduct(MultipartFile file, String productId);
