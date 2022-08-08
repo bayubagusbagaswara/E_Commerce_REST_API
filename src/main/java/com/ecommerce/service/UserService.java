@@ -10,4 +10,7 @@ public interface UserService {
 
     UserDTO createNewUser(CreateUserRequest createUserRequest);
 
+    UserDTO createAdmin(CreateUserRequest createUserRequest);
+
+
 }
