@@ -7,6 +7,7 @@ import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;
 import com.ecommerce.service.SupplierService;
 import com.ecommerce.util.AppConstants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class SupplierController {
 
     private final SupplierService supplierService;
 
+    @Autowired
     public SupplierController(SupplierService supplierService) {
         this.supplierService = supplierService;
     }
@@ -30,14 +32,10 @@ public class SupplierController {
         return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplier), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> getSupplierById(@PathVariable("idSupplier") String id) throws SupplierNotFoundException {
-        final SupplierDTO supplierResponse = supplierService.getSupplierById(id);
-        return WebResponseDTO.<SupplierDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(supplierResponse)
-                .build();
+    @GetMapping(value = "/{supplierId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<SupplierDTO>> getSupplierById(@PathVariable(name = "supplierId") String id) {
+        SupplierDTO supplier = supplierService.getSupplierById(id);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplier), HttpStatus.OK);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
