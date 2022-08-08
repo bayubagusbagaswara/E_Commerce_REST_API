@@ -74,13 +74,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "/sku", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<ProductDTO> getProductBySku(@RequestParam(name = "sku") String sku) {
-        final ProductDTO productResponse = productService.getProductBySku(sku);
-        return WebResponseDTO.<ProductDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(productResponse)
-                .build();
+    public ResponseEntity<WebResponseDTO<ProductDTO>> getProductBySku(@RequestParam(name = "sku") String sku) {
+        ProductDTO productDTO = productService.getProductBySku(sku);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", productDTO), HttpStatus.OK);
     }
 
     @GetMapping(value = "/category/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
