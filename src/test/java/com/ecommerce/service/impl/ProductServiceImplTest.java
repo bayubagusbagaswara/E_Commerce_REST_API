@@ -54,10 +54,9 @@ class ProductServiceImplTest {
 
         final ProductDTO responseDto = productService.createProduct(requestDto);
         assertNotNull(responseDto.getId());
-        assertNotNull(responseDto.getUpdatedDate());
+        assertNotNull(responseDto.getUpdatedAt());
         assertEquals("Asus test", responseDto.getName());
         assertEquals("SKU-Asus", responseDto.getProductDetail().getSku());
-        assertNotNull(responseDto.getProductDetail().getCreatedAt());
     }
 
     @Test
@@ -86,7 +85,7 @@ class ProductServiceImplTest {
 
         final ListProductResponseDTO products = productService.getAllProducts(requestDto);
         assertEquals(11, products.getTotalElements());
-        assertEquals(5, products.getProductList().size());
+        assertEquals(5, products.getProductDTOList().size());
     }
 
     @Test
@@ -104,8 +103,7 @@ class ProductServiceImplTest {
 
         final ProductDTO responseDto = productService.updateProduct(id, requestDto);
         assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedDate());
-        assertNotNull(responseDto.getProductDetail().getUpdatedAt());
+        assertNotNull(responseDto.getUpdatedAt());
     }
 
     @Test
