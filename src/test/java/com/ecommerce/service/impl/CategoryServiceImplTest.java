@@ -38,7 +38,7 @@ class CategoryServiceImplTest {
 
         final CategoryDTO responseDto = categoryService.createCategory(requestDto);
         assertNotNull(responseDto.getId());
-        assertNotNull(responseDto.getCreatedDate());
+        assertNotNull(responseDto.getCreatedAt());
         assertEquals(requestDto.getName(), responseDto.getName());
         log.info("Name: {}", responseDto.getName());
     }
@@ -58,17 +58,13 @@ class CategoryServiceImplTest {
         int pageNo = 0;
         int pageSize = 5;
         String sortBy = "name";
-        String sordDir = "asc";
+        String sortDir = "asc";
 
-        ListCategoryRequestDTO requestDto = new ListCategoryRequestDTO();
-        requestDto.setPageNo(pageNo);
-        requestDto.setPageSize(pageSize);
-        requestDto.setSortBy(sortBy);
-        requestDto.setSortDir(sordDir);
+        ListCategoryRequestDTO requestDto = new ListCategoryRequestDTO(pageNo, pageSize, sortBy, sortDir);
 
         final ListCategoryResponseDTO responseDto = categoryService.getAllCategories(requestDto);
         assertEquals(totalSampleData, responseDto.getTotalElements());
-        assertEquals(pageSize, responseDto.getCategoryResponseList().size());
+        assertEquals(pageSize, responseDto.getCategoryDTOList().size());
     }
 
     @Test
@@ -81,8 +77,8 @@ class CategoryServiceImplTest {
 
         final CategoryDTO responseDto = categoryService.updateCategory(id, requestDto);
         assertEquals(id, responseDto.getId());
-        assertNotNull(responseDto.getUpdatedDate());
-        assertNotEquals(responseDto.getCreatedDate(), responseDto.getUpdatedDate());
+        assertNotNull(responseDto.getUpdatedAt());
+        assertNotEquals(responseDto.getCreatedAt(), responseDto.getUpdatedAt());
     }
 
     @Test
