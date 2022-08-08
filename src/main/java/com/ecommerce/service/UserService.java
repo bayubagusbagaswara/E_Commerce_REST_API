@@ -15,4 +15,6 @@ public interface UserService {
 
     MessageResponse giveAdmin(String username);
     MessageResponse removeAdmin(String username);
+
+    void verifyUserByUsernameOrEmail(String usernameOrEmail);
 }
