@@ -9,6 +9,7 @@ import com.ecommerce.service.SupplierService;
 import com.ecommerce.util.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -114,14 +115,10 @@ public class SupplierController {
                 .build();
     }
 
-    @GetMapping(value = "/product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<List<SupplierDTO>> getSupplierByProductId(@PathVariable("idProduct") String idProduct) {
-        final List<SupplierDTO> supplierResponseList = supplierService.getSupplierByProductsId(idProduct);
-        return WebResponseDTO.<List<SupplierDTO>>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(supplierResponseList)
-                .build();
+    @GetMapping(value = "/product/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<List<SupplierDTO>>> getAllSuppliersByProductId(@PathVariable(name = "productId") String id) {
+        List<SupplierDTO> supplierDTOList = supplierService.getAllSuppliersByProductId(id);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplierDTOList), HttpStatus.OK);
     }
 
     @PostMapping(value = "/{idSupplier}/product/{idProduct}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
