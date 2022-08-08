@@ -1,14 +1,10 @@
 package com.ecommerce.service;
 
+import com.ecommerce.dto.user.CreateUserRequest;
+import com.ecommerce.dto.user.UserDTO;
+
 public interface UserService {
 
-    // create new user
+    UserDTO createNewUser(CreateUserRequest createUserRequest);
 
-    // get user by id
-
-    // get all user
-
-    // update user
-
-    // delete user
 }
