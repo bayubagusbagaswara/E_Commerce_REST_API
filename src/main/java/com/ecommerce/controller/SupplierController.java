@@ -75,13 +75,9 @@ public class SupplierController {
     }
 
     @GetMapping(value = "/email", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> getSupplierByEmail(@RequestParam("email") String email) throws SupplierNotFoundException {
-        final SupplierDTO supplierResponse = supplierService.getSupplierByEmail(email);
-        return WebResponseDTO.<SupplierDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(supplierResponse)
-                .build();
+    public ResponseEntity<WebResponseDTO<SupplierDTO>> getSupplierByEmail(@RequestParam(name = "email") String email) {
+        SupplierDTO supplier = supplierService.getSupplierByEmail(email);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", supplier), HttpStatus.OK);
     }
 
     @GetMapping(value = "/product/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
