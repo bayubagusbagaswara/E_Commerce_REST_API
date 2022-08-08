@@ -79,14 +79,10 @@ public class ProductController {
         return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", productDTO), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/category/{idCategory}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<List<ProductDTO>> getProductByCategoryId(@PathVariable("idCategory") String idCategory) {
-        final List<ProductDTO> productResponseList = productService.getProductByCategoryId(idCategory);
-        return WebResponseDTO.<List<ProductDTO>>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(productResponseList)
-                .build();
+    @GetMapping(value = "/category/{categoryId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<List<ProductDTO>>> getAllProductsByCategoryId(@PathVariable(name = "categoryId") String categoryId) {
+        List<ProductDTO> productDTOList = productService.getProductByCategoryId(categoryId);
+        return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", productDTOList), HttpStatus.OK);
     }
 
     @GetMapping(value = "/supplier/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
