@@ -50,14 +50,10 @@ public class SupplierController {
         return new ResponseEntity<>(new WebResponseDTO<>(200, "OK", allSuppliers), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public WebResponseDTO<SupplierDTO> updateSupplier(@PathVariable("idSupplier") String id, @RequestBody UpdateSupplierRequestDTO updateSupplierRequest) throws SupplierNotFoundException, UrbanVillageNotFoundException {
-        final SupplierDTO supplierResponse = supplierService.updateSupplier(id, updateSupplierRequest);
-        return WebResponseDTO.<SupplierDTO>builder()
-                .code(HttpStatus.OK.value())
-                .status(HttpStatus.OK.getReasonPhrase())
-                .data(supplierResponse)
-                .build();
+    @PutMapping(value = "/{supplierId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WebResponseDTO<SupplierDTO>> updateSupplier(@PathVariable(name = "supplierId") String id, @RequestBody UpdateSupplierRequestDTO updateSupplierRequest) {
+        SupplierDTO supplierDTO = supplierService.updateSupplier(id, updateSupplierRequest);
+        return new ResponseEntity<>(new WebResponseDTO<>(201, "CREATED", supplierDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{idSupplier}", produces = MediaType.APPLICATION_JSON_VALUE)
