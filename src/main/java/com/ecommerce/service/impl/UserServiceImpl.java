@@ -4,11 +4,28 @@ import com.ecommerce.dto.MessageResponse;
 import com.ecommerce.dto.user.CreateUserRequest;
 import com.ecommerce.dto.user.UpdateUserRequest;
 import com.ecommerce.dto.user.UserDTO;
+import com.ecommerce.repository.RoleRepository;
+import com.ecommerce.repository.UserRepository;
 import com.ecommerce.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final String USER_ROLE_NOT_SET = "User role not set";
+
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public void checkUsernameIsExists(String username) {
