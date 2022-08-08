@@ -22,4 +22,8 @@ public class MessageResponse {
 
     @JsonProperty("message")
     private String message;
+
+    public MessageResponse(String message) {
+        this.message = message;
+    }
 }
