@@ -19,3 +19,8 @@
 - Spring Security
 - Json Web Token (JWT)
 - PostgreSQL
+
+# Noted
+
+- Kurang melengkapi Security dan JWT
+- Tentukan JWT nya pake OAuth2 atau Auth0
