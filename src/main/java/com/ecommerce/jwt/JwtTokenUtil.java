@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Class ini berfungsi sebagai penyedia token JWT (membuat token dan memvalidasi token dari request)
+ */
 @Component
 public class JwtTokenUtil {
 
