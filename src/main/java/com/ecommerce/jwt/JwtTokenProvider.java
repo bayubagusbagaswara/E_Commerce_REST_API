@@ -17,7 +17,7 @@ import java.util.function.Function;
  * Class ini berfungsi sebagai penyedia token JWT (membuat token dan memvalidasi token dari request)
  */
 @Component
-public class JwtTokenUtil {
+public class JwtTokenProvider {
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
