@@ -37,7 +37,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void checkEmailIsExists(String email) {
-
+        if (userRepository.existsByEmail(email)) {
+            throw new BadRequestException(new MessageResponse("Email is already taken"));
+        }
     }
 
     @Override
