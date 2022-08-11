@@ -7,6 +7,7 @@ import com.ecommerce.dto.user.UserDTO;
 import com.ecommerce.entity.enumerator.RoleName;
 import com.ecommerce.entity.role.Role;
 import com.ecommerce.entity.user.User;
+import com.ecommerce.entity.user.UserPassword;
 import com.ecommerce.exception.AppException;
 import com.ecommerce.exception.BadRequestException;
 import com.ecommerce.repository.RoleRepository;
@@ -61,8 +62,11 @@ public class UserServiceImpl implements UserService {
                 .lastName(userRequest.getLastName())
                 .email(userRequest.getEmail())
                 .username(userRequest.getUsername())
-                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .build();
+
+        UserPassword userPassword = new UserPassword();
+        userPassword.setUser(user);
+        userPassword.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
         Set<Role> roleSet = new HashSet<>();
 
@@ -92,8 +96,11 @@ public class UserServiceImpl implements UserService {
                 .lastName(userRequest.getLastName())
                 .email(userRequest.getEmail())
                 .username(userRequest.getUsername())
-                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .build();
+
+        UserPassword userPassword = new UserPassword();
+        userPassword.setUser(user);
+        userPassword.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
         user.setRoles(new HashSet<>(Collections.singleton(
                 roleRepository.getByName(RoleName.ADMIN.name())
