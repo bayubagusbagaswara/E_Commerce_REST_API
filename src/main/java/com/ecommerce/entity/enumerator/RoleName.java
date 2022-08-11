@@ -3,8 +3,7 @@ package com.ecommerce.entity.enumerator;
 public enum RoleName {
 
     ADMIN("ADMIN"),
-    CONSUMER("CONSUMER"),
-    SUPPLIER("SUPPLIER");
+    USER("USER");
 
     public final String roleName;
 
