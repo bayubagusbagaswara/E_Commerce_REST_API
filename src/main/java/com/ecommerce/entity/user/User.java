@@ -34,8 +34,8 @@ public class User extends BaseEntity {
     @Column(name = "username", length = 20, nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @OneToOne(mappedBy = "user")
+    private UserPassword userPassword;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
