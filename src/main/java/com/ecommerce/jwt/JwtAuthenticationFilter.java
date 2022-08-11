@@ -34,30 +34,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request,
-                                    @NonNull HttpServletResponse response,
-                                    @NonNull FilterChain filterChain) throws ServletException, IOException {
-
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         String jwtToken = getJwtFromRequest(request);
         try {
             String username = jwtTokenProvider.getUsernameFromToken(jwtToken);
             if (StringUtils.hasText(username) && null == SecurityContextHolder.getContext().getAuthentication()) {
                 UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-
                 if (jwtTokenProvider.validateToken(jwtToken, userDetails)) {
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                            new UsernamePasswordAuthenticationToken(
-                                    userDetails, null, userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }
         } catch (IllegalArgumentException e) {
-            logger.error("Unable to fetch JWT Token");
+            LOGGER.error("Unable to fetch JWT Token");
         } catch (ExpiredJwtException e) {
-            logger.error("JWT Token is expired");
+            LOGGER.error("JWT Token is expired");
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            LOGGER.error(e.getMessage());
         }
         filterChain.doFilter(request, response);
     }
