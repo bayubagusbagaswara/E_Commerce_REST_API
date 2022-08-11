@@ -4,6 +4,10 @@ import com.ecommerce.dto.MessageResponse;
 import com.ecommerce.dto.user.CreateUserRequest;
 import com.ecommerce.dto.user.UpdateUserRequest;
 import com.ecommerce.dto.user.UserDTO;
+import com.ecommerce.entity.enumerator.RoleName;
+import com.ecommerce.entity.role.Role;
+import com.ecommerce.entity.user.User;
+import com.ecommerce.exception.AppException;
 import com.ecommerce.exception.BadRequestException;
 import com.ecommerce.repository.RoleRepository;
 import com.ecommerce.repository.UserRepository;
@@ -11,6 +15,9 @@ import com.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,8 +50,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO createNewUser(CreateUserRequest createUserRequest) {
-        return null;
+    public UserDTO createNewUser(CreateUserRequest userRequest) {
+        checkUsernameIsExists(userRequest.getUsername());
+        checkEmailIsExists(userRequest.getEmail());
+
+        User user = User.builder()
+                .firstName(userRequest.getFirstName())
+                .lastName(userRequest.getLastName())
+                .email(userRequest.getEmail())
+                .username(userRequest.getUsername())
+                .password(userRequest.getPassword())
+                .build();
+
+        Set<Role> roleSet = new HashSet<>();
+
+        if (userRepository.count() == 0) {
+            roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
+                    .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+            roleSet.add(roleRepository.getByName(RoleName.USER.name())
+                    .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+        }
+
+        roleSet.add(roleRepository.getByName(RoleName.USER.name())
+                .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+
+        user.setRoles(roleSet);
+        userRepository.save(user);
+
+        return UserDTO.fromUser(user);
     }
 
     @Override
