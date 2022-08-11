@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userRequest.getLastName())
                 .email(userRequest.getEmail())
                 .username(userRequest.getUsername())
-                .password(userRequest.getPassword())
+                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .build();
 
         Set<Role> roleSet = new HashSet<>();
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
                 .lastName(userRequest.getLastName())
                 .email(userRequest.getEmail())
                 .username(userRequest.getUsername())
-                .password(userRequest.getPassword())
+                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .build();
 
         user.setRoles(new HashSet<>(Collections.singleton(
