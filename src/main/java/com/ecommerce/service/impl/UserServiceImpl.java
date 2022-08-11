@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -81,8 +83,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO createAdmin(CreateUserRequest createUserRequest) {
-        return null;
+    public UserDTO createAdmin(CreateUserRequest userRequest) {
+        checkUsernameIsExists(userRequest.getUsername());
+        checkEmailIsExists(userRequest.getEmail());
+
+        User user = User.builder()
+                .firstName(userRequest.getFirstName())
+                .lastName(userRequest.getLastName())
+                .email(userRequest.getEmail())
+                .username(userRequest.getUsername())
+                .password(userRequest.getPassword())
+                .build();
+
+        user.setRoles(new HashSet<>(Collections.singleton(
+                roleRepository.getByName(RoleName.ADMIN.name())
+                        .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)))));
+
+        userRepository.save(user);
+        return UserDTO.fromUser(user);
     }
 
     @Override
