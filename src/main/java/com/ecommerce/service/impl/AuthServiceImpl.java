@@ -5,6 +5,7 @@ import com.ecommerce.dto.auth.LoginRequest;
 import com.ecommerce.dto.auth.LogoutRequest;
 import com.ecommerce.dto.auth.RegisterRequest;
 import com.ecommerce.dto.refreshToken.RefreshTokenRequest;
+import com.ecommerce.dto.user.CreateUserRequest;
 import com.ecommerce.dto.user.UserDTO;
 import com.ecommerce.jwt.JwtTokenProvider;
 import com.ecommerce.service.AuthService;
@@ -38,7 +39,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserDTO registerNewUser(RegisterRequest registerRequest) {
-        return null;
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .firstName(registerRequest.getFirstName())
+                .lastName(registerRequest.getLastName())
+                .email(registerRequest.getEmail())
+                .username(registerRequest.getUsername())
+                .password(registerRequest.getPassword())
+                .build();
+        return userService.createNewUser(createUserRequest);
     }
 
     @Override
