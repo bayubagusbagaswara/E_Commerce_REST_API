@@ -1,35 +1,34 @@
 package com.ecommerce.entity.product;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "product_details", uniqueConstraints = {
-        @UniqueConstraint(name = "product_detail_unique_sku", columnNames = "sku")
-})
+@Table(name = "product_detail")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDetail {
 
     @Id
-    @Column(name = "product_id")
+    @Column(name = "id_product")
     private String id;
-
-    @Column(name = "sku", nullable = false, length = 50)
-    private String sku;
-
-    @Column(name = "description", nullable = false, length = 500)
-    private String description;
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "fk_product_detail_product_id"))
+    @JoinColumn(name = "id_product", foreignKey = @ForeignKey(name = "fk_product_detail_product_id"))
     private Product product;
 
-    public ProductDetail(String sku, String description) {
-        this.sku = sku;
-        this.description = description;
-    }
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 }
