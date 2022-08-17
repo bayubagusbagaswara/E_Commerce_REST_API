@@ -4,6 +4,7 @@ import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Coupon;
 import com.ecommerce.entity.Supplier;
 import com.ecommerce.entity.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
@@ -26,8 +27,11 @@ import java.util.Set;
 @Where(clause = "status_record = 'ACTIVE'")
 public class Product extends BaseEntity {
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false, length = 30)
     private String name;
+
+    @Column(name = "sku", nullable = false, length = 50)
+    private String sku;
 
     @Min(1)
     @Column(name = "price", nullable = false)
@@ -44,11 +48,8 @@ public class Product extends BaseEntity {
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @FieldNameConstants.Exclude
-    @OneToOne
-    @JoinColumn(name = "product_detail_id", foreignKey = @ForeignKey(name = "fk_product_product_detail_id"), referencedColumnName = "id")
+    @JsonIgnore
+    @OneToOne(mappedBy = "product")
     private ProductDetail productDetail;
 
     @ToString.Exclude
