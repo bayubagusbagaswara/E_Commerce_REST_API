@@ -13,8 +13,8 @@
 # Technologies
 
 - Java JDK 17
-- Maven version 3.8.5 
-- Spring Boot version 2.7.1
+- Maven version 3.8.6
+- Spring Boot version 2.7.2
 - Spring JPA
 - Spring Security
 - Json Web Token (JWT)
