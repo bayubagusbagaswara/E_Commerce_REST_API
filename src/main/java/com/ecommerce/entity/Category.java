@@ -1,6 +1,7 @@
 package com.ecommerce.entity;
 
 import com.ecommerce.entity.base.BaseEntity;
+import com.ecommerce.entity.product.Product;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.SQLDelete;

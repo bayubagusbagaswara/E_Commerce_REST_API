@@ -1,6 +1,7 @@
 package com.ecommerce.entity;
 
 import com.ecommerce.entity.base.BaseEntity;
+import com.ecommerce.entity.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;

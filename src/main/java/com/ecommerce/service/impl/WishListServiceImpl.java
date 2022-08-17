@@ -1,6 +1,6 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.entity.Product;
+import com.ecommerce.entity.product.Product;
 import com.ecommerce.entity.WishList;
 import com.ecommerce.entity.WishListItem;
 import com.ecommerce.repository.WishListItemRepository;

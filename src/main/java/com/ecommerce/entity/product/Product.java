@@ -1,5 +1,8 @@
-package com.ecommerce.entity;
+package com.ecommerce.entity.product;
 
+import com.ecommerce.entity.Category;
+import com.ecommerce.entity.Coupon;
+import com.ecommerce.entity.Supplier;
 import com.ecommerce.entity.base.BaseEntity;
 import jakarta.validation.constraints.Min;
 import lombok.*;

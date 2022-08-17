@@ -1,7 +1,7 @@
 package com.ecommerce.service;
 
 import com.ecommerce.dto.product.*;
-import com.ecommerce.entity.Product;
+import com.ecommerce.entity.product.Product;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.image.BufferedImage;

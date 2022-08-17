@@ -1,7 +1,7 @@
 package com.ecommerce.dto.product;
 
 import com.ecommerce.entity.Category;
-import com.ecommerce.entity.ProductDetail;
+import com.ecommerce.entity.product.ProductDetail;
 import com.ecommerce.entity.Supplier;
 import lombok.Data;
 import lombok.NoArgsConstructor;

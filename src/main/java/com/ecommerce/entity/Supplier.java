@@ -2,6 +2,7 @@ package com.ecommerce.entity;
 
 import com.ecommerce.entity.base.BaseEntity;
 import com.ecommerce.entity.enumerator.Gender;
+import com.ecommerce.entity.product.Product;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 import lombok.experimental.FieldNameConstants;

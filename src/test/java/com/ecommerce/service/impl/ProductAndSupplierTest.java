@@ -2,7 +2,7 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.dto.supplier.SupplierDTO;
-import com.ecommerce.entity.Product;
+import com.ecommerce.entity.product.Product;
 import com.ecommerce.entity.Supplier;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.exception.SupplierNotFoundException;

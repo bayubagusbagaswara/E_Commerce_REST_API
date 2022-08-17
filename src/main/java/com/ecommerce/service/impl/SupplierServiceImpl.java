@@ -4,7 +4,7 @@ import com.ecommerce.entity.SupplierAddress;
 import com.ecommerce.entity.region.UrbanVillage;
 import com.ecommerce.mapper.SupplierMapper;
 import com.ecommerce.dto.supplier.*;
-import com.ecommerce.entity.Product;
+import com.ecommerce.entity.product.Product;
 import com.ecommerce.entity.Supplier;
 import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;

@@ -1,9 +1,7 @@
 package com.ecommerce.mapper;
 
 import com.ecommerce.dto.category.CategoryDTO;
-import com.ecommerce.dto.product.ProductDTO;
 import com.ecommerce.entity.Category;
-import com.ecommerce.entity.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

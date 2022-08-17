@@ -1,6 +1,6 @@
 package com.ecommerce.dto.supplier;
 
-import com.ecommerce.entity.Product;
+import com.ecommerce.entity.product.Product;
 import com.ecommerce.entity.SupplierAddress;
 import com.ecommerce.entity.enumerator.Gender;
 import lombok.AllArgsConstructor;

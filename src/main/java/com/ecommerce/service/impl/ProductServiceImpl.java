@@ -1,11 +1,10 @@
 package com.ecommerce.service.impl;
 
-import com.ecommerce.entity.Coupon;
 import com.ecommerce.mapper.ProductMapper;
 import com.ecommerce.dto.product.*;
 import com.ecommerce.entity.Category;
-import com.ecommerce.entity.Product;
-import com.ecommerce.entity.ProductDetail;
+import com.ecommerce.entity.product.Product;
+import com.ecommerce.entity.product.ProductDetail;
 import com.ecommerce.exception.CategoryNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;
 import com.ecommerce.repository.CategoryRepository;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -30,7 +28,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service

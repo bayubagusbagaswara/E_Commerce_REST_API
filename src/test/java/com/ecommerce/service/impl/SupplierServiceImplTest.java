@@ -1,7 +1,7 @@
 package com.ecommerce.service.impl;
 
 import com.ecommerce.dto.supplier.*;
-import com.ecommerce.entity.Product;
+import com.ecommerce.entity.product.Product;
 import com.ecommerce.entity.enumerator.Gender;
 import com.ecommerce.exception.UrbanVillageNotFoundException;
 import com.ecommerce.exception.ProductNotFoundException;

@@ -2,8 +2,8 @@ package com.ecommerce.service.impl;
 
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Coupon;
-import com.ecommerce.entity.Product;
-import com.ecommerce.entity.ProductDetail;
+import com.ecommerce.entity.product.Product;
+import com.ecommerce.entity.product.ProductDetail;
 import com.ecommerce.repository.CategoryRepository;
 import com.ecommerce.repository.CouponRepository;
 import com.ecommerce.repository.ProductRepository;
