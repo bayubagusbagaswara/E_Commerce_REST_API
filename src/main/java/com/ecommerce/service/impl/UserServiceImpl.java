@@ -10,6 +10,7 @@ import com.ecommerce.entity.user.User;
 import com.ecommerce.entity.user.UserPassword;
 import com.ecommerce.exception.AppException;
 import com.ecommerce.exception.BadRequestException;
+import com.ecommerce.mapper.UserMapper;
 import com.ecommerce.repository.RoleRepository;
 import com.ecommerce.repository.UserPasswordRepository;
 import com.ecommerce.repository.UserRepository;
@@ -31,13 +32,15 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserPasswordRepository userPasswordRepository;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, UserPasswordRepository userPasswordRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, UserPasswordRepository userPasswordRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.userPasswordRepository = userPasswordRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -85,7 +88,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         userPasswordRepository.save(userPassword);
 
-        return UserDTO.fromUser(user);
+        return userMapper.fromUser(user);
     }
 
     @Override
@@ -109,7 +112,7 @@ public class UserServiceImpl implements UserService {
                         .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)))));
 
         userRepository.save(user);
-        return UserDTO.fromUser(user);
+        return userMapper.fromUser(user);
     }
 
     @Override
