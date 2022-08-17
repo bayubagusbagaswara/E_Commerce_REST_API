@@ -10,6 +10,7 @@ import com.ecommerce.entity.user.User;
 import com.ecommerce.entity.user.UserPassword;
 import com.ecommerce.exception.AppException;
 import com.ecommerce.exception.BadRequestException;
+import com.ecommerce.exception.ResourceNotFoundException;
 import com.ecommerce.mapper.UserMapper;
 import com.ecommerce.repository.RoleRepository;
 import com.ecommerce.repository.UserPasswordRepository;
@@ -138,7 +139,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO updateUser(String userId, UpdateUserRequest updateUserRequest) {
-        return null;
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+        user.setFirstName(updateUserRequest.getFirstName());
+        user.setLastName(updateUserRequest.getLastName());
+        user.setUsername(updateUserRequest.getUsername());
+        user.setEmail(updateUserRequest.getEmail());
+        userRepository.save(user);
+        return userMapper.fromUser(user);
     }
 
     @Override
