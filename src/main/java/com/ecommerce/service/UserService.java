@@ -14,7 +14,7 @@ public interface UserService {
 
     UserDTO createAdmin(CreateUserRequest createUserRequest);
 
-    MessageResponse giveAdmin(String username);
+    void giveAdmin(String username);
     MessageResponse removeAdmin(String username);
 
     void verifyUserByUsernameOrEmail(String usernameOrEmail);
