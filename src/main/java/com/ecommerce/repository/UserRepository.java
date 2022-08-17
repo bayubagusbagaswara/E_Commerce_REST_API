@@ -1,7 +1,7 @@
 package com.ecommerce.repository;
 
 import com.ecommerce.entity.user.User;
-import com.ecommerce.entity.user.UserPrincipal;
+import com.ecommerce.entity.user.CustomUserDetails;
 import com.ecommerce.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Optional<User> findByUsernameOrEmail(String username, String email);
 
-    default User getUser(UserPrincipal currentUser) {
+    default User getUser(CustomUserDetails currentUser) {
         return getUserByName(currentUser.getUsername());
     }
 
