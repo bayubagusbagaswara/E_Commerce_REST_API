@@ -123,8 +123,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public MessageResponse removeAdmin(String username) {
-        return null;
+    public void removeAdmin(String username) {
+        User user = userRepository.getUserByName(username);
+        user.removeRole(roleRepository.getByName(RoleName.ADMIN.name()).orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+        userRepository.save(user);
     }
 
     @Override
