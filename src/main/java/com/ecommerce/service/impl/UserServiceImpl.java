@@ -11,13 +11,13 @@ import com.ecommerce.entity.user.UserPassword;
 import com.ecommerce.exception.AppException;
 import com.ecommerce.exception.BadRequestException;
 import com.ecommerce.repository.RoleRepository;
+import com.ecommerce.repository.UserPasswordRepository;
 import com.ecommerce.repository.UserRepository;
 import com.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,12 +30,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserPasswordRepository userPasswordRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, UserPasswordRepository userPasswordRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userPasswordRepository = userPasswordRepository;
     }
 
     @Override
@@ -64,24 +66,24 @@ public class UserServiceImpl implements UserService {
                 .username(userRequest.getUsername())
                 .build();
 
-        UserPassword userPassword = new UserPassword();
-        userPassword.setUser(user);
-        userPassword.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-
         Set<Role> roleSet = new HashSet<>();
-
         if (userRepository.count() == 0) {
             roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
                     .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
             roleSet.add(roleRepository.getByName(RoleName.USER.name())
                     .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
         }
-
         roleSet.add(roleRepository.getByName(RoleName.USER.name())
                 .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
 
         user.setRoles(roleSet);
+
+        UserPassword userPassword = new UserPassword();
+        userPassword.setUser(user);
+        userPassword.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+
         userRepository.save(user);
+        userPasswordRepository.save(userPassword);
 
         return UserDTO.fromUser(user);
     }
