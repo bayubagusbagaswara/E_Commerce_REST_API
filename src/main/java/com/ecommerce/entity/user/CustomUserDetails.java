@@ -4,18 +4,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
 @NoArgsConstructor
-public class UserPrincipal implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private String id;
     private String firstName;
@@ -26,8 +23,8 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(String id, String firstName, String lastName, String email, String username, String password,
-                         Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(String id, String firstName, String lastName, String email, String username, String password,
+                             Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,16 +32,6 @@ public class UserPrincipal implements UserDetails {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
-    }
-
-    public static UserPrincipal createUser(User user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                .collect(Collectors.toList())
-                ;
-
-        return new UserPrincipal(user.getId(), user.getFirstName(), user.getLastName(),
-                user.getEmail(), user.getUsername(), user.getPassword(), authorities);
     }
 
     @Override
@@ -87,7 +74,7 @@ public class UserPrincipal implements UserDetails {
             return true;
         if (object == null || getClass() != object.getClass())
             return false;
-        UserPrincipal that = (UserPrincipal) object;
+        CustomUserDetails that = (CustomUserDetails) object;
         return Objects.equals(id, that.id);
     }
 
